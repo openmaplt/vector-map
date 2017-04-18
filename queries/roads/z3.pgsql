@@ -16,4 +16,4 @@ WHERE
               'service',
               'footway',
               'path')
-  and !bbox!
+  and way && !bbox!

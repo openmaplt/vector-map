@@ -6,4 +6,4 @@ FROM
   planet_osm_line
 WHERE
   highway IN ('motorway', 'trunk')
-  and !bbox!
+  and way && !bbox!

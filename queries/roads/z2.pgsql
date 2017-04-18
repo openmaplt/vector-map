@@ -13,4 +13,4 @@ WHERE
               'tertiary', 'tertiary_link',
               'unclassified',
               'residential')
-  and !bbox!
+  and way && !bbox!
