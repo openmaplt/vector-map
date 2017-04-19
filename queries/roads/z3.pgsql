@@ -25,6 +25,7 @@ WHERE
               'residential',
               'living_street,
               'service',
+              'track',
               'footway',
               'path')
   and way && !bbox!
