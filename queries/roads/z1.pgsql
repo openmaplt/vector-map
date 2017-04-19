@@ -5,5 +5,5 @@ SELECT
 FROM
   planet_osm_line
 WHERE
-  highway IN ('motorway', 'trunk')
+  highway IN ('motorway', 'trunk', 'primary')
   and way && !bbox!

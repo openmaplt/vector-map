@@ -10,7 +10,7 @@ SELECT
     END
   )   AS kind
 FROM
-  planet_osm_polygon
+  planet_osm_line
 WHERE
   boundary IN ('administrative') AND admin_level IN ('2', '4')
   OR boundary = 'protected_area'
