@@ -23,7 +23,7 @@ WHERE
               'tertiary', 'tertiary_link',
               'unclassified',
               'residential',
-              'living_street,
+              'living_street',
               'service',
               'track',
               'footway',
