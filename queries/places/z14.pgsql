@@ -15,4 +15,4 @@ FROM
   planet_osm_point
 WHERE
   name IS NOT NULL AND
-  (place IN ('city', 'town', 'village', 'hamlet', 'locality')
+  (place IN ('city', 'town', 'village', 'hamlet', 'locality'))
