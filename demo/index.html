@@ -53,6 +53,9 @@
     map.addControl(new mapboxgl.NavigationControl(), 'top-left');
 
     $('#layers button').on('click', function(e) {
+        if ($(this).hasClass('active')) {
+            return false;
+        }
         $('#layers button').removeClass('active');
         $(this).addClass('active');
         map.setStyle($(e.target).data('style') + '.json');
