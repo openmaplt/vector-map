@@ -1,0 +1,24 @@
+{
+  "version": 8,
+  "metadata": {
+    "maputnik:renderer": "mbgljs"
+  },
+  "sources": {
+    "orto": {
+      "type": "raster",
+      "tiles": [
+        "http://tiles.osm.pauliaus.com/orto/{z}/{x}/{y}.png"
+      ]
+    }
+  },
+  "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
+  "layers": [
+    {
+      "id": "orto",
+      "source": "orto",
+      "type": "raster"
+    }
+  ],
+  "id": "orto-style",
+  "name": "openmap.lt"
+}
