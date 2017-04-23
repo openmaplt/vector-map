@@ -24,6 +24,7 @@ WHERE
               'unclassified',
               'residential',
               'living_street',
+              'pedestrian',
               'service',
               'track',
               'footway',

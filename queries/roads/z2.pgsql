@@ -13,5 +13,6 @@ WHERE
               'tertiary', 'tertiary_link',
               'unclassified',
               'living_street',
-              'residential')
+              'residential',
+              'pedestrian')
   and way && !bbox!
