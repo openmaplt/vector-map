@@ -9,7 +9,8 @@ SELECT
     WHEN waterway = 'river'
       THEN 'river'
     END
-  )   AS kind
+  ) AS kind,
+  name
 FROM
   planet_osm_line
 WHERE
@@ -36,7 +37,8 @@ SELECT
       WHEN amenity = 'swimming_pool' OR leisure = 'swimming_pool'
         THEN 'swimming_pool'
     END
-  )   AS kind
+  ) AS kind,
+  name
 FROM
   planet_osm_polygon
 WHERE

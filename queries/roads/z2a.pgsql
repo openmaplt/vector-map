@@ -14,5 +14,6 @@ WHERE
               'unclassified',
               'living_street',
               'residential',
-              'pedestrian')
+              'pedestrian',
+              'track')
   and way && !bbox!

@@ -12,7 +12,8 @@ SELECT
       THEN 'bar'
     WHEN tourism = 'museum'
       THEN 'museum'
-  END AS kind
+  END AS kind,
+  opening_hours
 FROM
   planet_osm_point
 WHERE
@@ -35,7 +36,8 @@ SELECT
       THEN 'bar'
     WHEN tourism = 'museum'
       THEN 'museum'
-  END AS kind
+  END AS kind,
+  opening_hours
 FROM
   planet_osm_polygon
 WHERE
