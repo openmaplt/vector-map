@@ -20,8 +20,10 @@ SELECT
         THEN 'cemetery'
       WHEN landuse = 'garages'
         THEN 'garages'
-      WHEN "natural" = 'wetland'
-        THEN 'wetland'
+      WHEN "natural" = 'wetland' and "wetland" = 'marsh'
+        THEN 'marsh'
+      WHEN "natural" = 'wetland' and "wetland" = 'swamp'
+        THEN 'swamp'
     END
   )   AS kind
 FROM
