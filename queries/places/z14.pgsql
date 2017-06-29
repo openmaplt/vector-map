@@ -16,7 +16,9 @@ FROM
 WHERE
   name IS NOT NULL AND
   (place IN ('city', 'town', 'village', 'hamlet', 'locality'))
-union all
+
+UNION ALL
+
 SELECT
   ST_PointOnSurface(way) AS __geometry__,
   name,
@@ -26,4 +28,4 @@ FROM
   planet_osm_polygon
 WHERE
   name IS NOT NULL AND
-  (natural = 'water' or landuse = 'reservoir')
+  ("natural" = 'water' OR landuse = 'reservoir')
