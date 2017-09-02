@@ -10,15 +10,24 @@ SELECT
       THEN 'pub'
     WHEN amenity = 'bar'
       THEN 'bar'
+    WHEN amenity = 'bank'
+      THEN 'bank'
     WHEN tourism = 'museum'
       THEN 'museum'
+    WHEN tourism = 'attraction'
+      THEN 'attraction'
+    WHEN shop = 'alcohol'
+      THEN 'alcohol_shop'
+    WHEN shop = 'bakery'
+      THEN 'bakery'
   END AS kind,
   opening_hours
 FROM
   planet_osm_point
 WHERE
-  amenity in ('cafe', 'restaurant', 'pub', 'bar') or
-  tourism in ('museum')
+  amenity in ('cafe', 'restaurant', 'pub', 'bar', 'bank') or
+  tourism in ('museum', 'attraction') or
+  shop in ('alcohol', 'bakery')
 
 UNION ALL
 
@@ -34,12 +43,21 @@ SELECT
       THEN 'pub'
     WHEN amenity = 'bar'
       THEN 'bar'
+    WHEN amenity = 'bank'
+      THEN 'bank'
     WHEN tourism = 'museum'
       THEN 'museum'
+    WHEN tourism = 'attraction'
+      THEN 'attraction'
+    WHEN shop = 'alcohol'
+      THEN 'alcohol_shop'
+    WHEN shop = 'bakery'
+      THEN 'bakery'
   END AS kind,
   opening_hours
 FROM
   planet_osm_polygon
 WHERE
-  amenity in ('cafe', 'restaurant', 'pub', 'bar') or
-  tourism in ('museum')
+  amenity in ('cafe', 'restaurant', 'pub', 'bar', 'bank') or
+  tourism in ('museum', 'attraction') or
+  shop in ('alcohol', 'bakery')
