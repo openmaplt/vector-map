@@ -52,6 +52,30 @@
     });
     map.addControl(new mapboxgl.NavigationControl(), 'top-left');
 
+    map.on('load', function () {
+        map.on('mouseenter', 'label-amenity', function () {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        map.on('mouseleave', 'label-amenity', function () {
+            map.getCanvas().style.cursor = '';
+        });
+
+        map.on('click', 'label-amenity', function (e) {
+            var poi = e.features[0];
+
+            var html = "<strong>Pavadinimas:</strong> " + poi.properties.name;
+            if (poi.properties.opening_hours) {
+                html += "<br><strong>Darbo laikas:</strong> " + poi.properties.opening_hours;
+            }
+
+            new mapboxgl.Popup()
+                .setLngLat(poi.geometry.coordinates)
+                .setHTML(html)
+                .addTo(map);
+        });
+    });
+
     $('#layers button').on('click', function(e) {
         if ($(this).hasClass('active')) {
             return false;
