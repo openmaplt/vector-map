@@ -10,7 +10,7 @@ SELECT
       THEN 'river'
     END
   ) AS kind,
-  name
+  coalesce("name:lt", name) AS name
 FROM
   planet_osm_line
 WHERE
@@ -38,7 +38,7 @@ SELECT
         THEN 'swimming_pool'
     END
   ) AS kind,
-  name
+  coalesce("name:lt", name) AS name
 FROM
   planet_osm_polygon
 WHERE

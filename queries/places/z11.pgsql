@@ -1,6 +1,6 @@
 SELECT
   way AS __geometry__,
-  name,
+  coalesce("name:lt", name) AS name,
   CASE
     WHEN place='town' and rank='0'
       THEN 'town'
@@ -21,7 +21,7 @@ WHERE
 
 SELECT
   ST_PointOnSurface(way) AS __geometry__,
-  name,
+  coalesce("name:lt", name) AS name,
   'water' AS kind,
   null AS population
 FROM
