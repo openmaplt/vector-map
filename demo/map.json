@@ -12,7 +12,7 @@
       ]
     }
   },
-  "sprite": "https://dev.openmap.lt/webgl/osm-liberty",
+  "sprite": "https://osm.pauliaus.com/demo/sprites/osm-liberty",
   "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
   "layers": [
     {
