@@ -10,10 +10,6 @@
       "tiles": [
         "https://tiles.osm.pauliaus.com/all/{z}/{x}/{y}.pbf"
       ]
-    },
-    "coastline": {
-      "type": "vector",
-      "data": "http://tiles.osm.pauliaus.com/coastline/{z}/{x}/{y}.json"
     }
   },
   "sprite": "https://osm.pauliaus.com/demo/sprites/osm-liberty",
@@ -1317,20 +1313,6 @@
           0.6
         ],
         "icon-image": "{kind}"
-      }
-    },
-    {
-      "id": "coastline-water-polygon",
-      "type": "fill",
-      "source": "coastline",
-      "source-layer": "coastline",
-      "filter": [
-        "==",
-        "$type",
-        "Polygon"
-      ],
-      "paint": {
-        "fill-color": "#7acad0"
       }
     }
   ],
