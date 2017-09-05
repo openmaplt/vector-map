@@ -3,3 +3,5 @@ SELECT
   'coastline' AS kind
 FROM
   coastline
+WHERE
+  geom && !bbox!
