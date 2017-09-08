@@ -1314,6 +1314,20 @@
         ],
         "icon-image": "{kind}"
       }
+    },
+    {
+      "id": "coastline",
+      "type": "fill",
+      "source": "tilezen",
+      "source-layer": "coastline",
+      "filter": [
+        "==",
+        "kind",
+        "coastline"
+      ],
+      "paint": {
+        "fill-color": "#7acad0"
+      }
     }
   ],
   "id": "asgr00hhi",

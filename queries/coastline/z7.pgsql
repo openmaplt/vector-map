@@ -1,5 +1,7 @@
 SELECT
-  way AS __geometry__,
+  geom AS __geometry__,
   'coastline' AS kind
 FROM
   coastline
+WHERE
+  geom && !bbox!
