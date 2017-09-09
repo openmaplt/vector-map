@@ -1,6 +1,9 @@
 SELECT
   way AS __geometry__,
-  highway AS kind,
+  CASE
+    WHEN highway is not null THEN highway
+    WHEN railway is not null THEN coalesce(service, railway)
+  END AS kind,
   name,
   ref,
   CASE
@@ -16,17 +19,19 @@ SELECT
 FROM
   planet_osm_line
 WHERE
-  highway IN ('motorway', 'motorway_link',
-              'trunk', 'trunk_link',
-              'primary','primary_link',
-              'secondary', 'secondary_link',
-              'tertiary', 'tertiary_link',
-              'unclassified',
-              'residential',
-              'living_street',
-              'pedestrian',
-              'service',
-              'track',
-              'footway',
-              'path')
+  (highway IN ('motorway', 'motorway_link',
+               'trunk', 'trunk_link',
+               'primary','primary_link',
+               'secondary', 'secondary_link',
+               'tertiary', 'tertiary_link',
+               'unclassified',
+               'residential',
+               'living_street',
+               'pedestrian',
+               'service',
+               'track',
+               'footway',
+               'path')
+   or
+   railway IN ('rail'))
   and way && !bbox!
