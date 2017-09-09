@@ -97,7 +97,7 @@
         ]
       ],
       "paint": {
-        "fill-color": "rgba(198, 198, 247, 1)",
+        "fill-color": "rgba(208, 208, 255, 1)",
         "fill-opacity": 1
       }
     },
@@ -116,7 +116,7 @@
         ]
       ],
       "paint": {
-        "fill-color": "rgba(236, 199, 203, 1)",
+        "fill-color": "rgba(239, 215, 215, 1)",
         "fill-opacity": 1
       }
     },
@@ -636,10 +636,11 @@
       ],
       "layout": {
         "line-join": "round",
-        "line-cap": "round"
+        "line-cap": "round",
+        "visibility": "visible"
       },
       "paint": {
-        "line-color": "rgba(204, 204, 204, 1)",
+        "line-color": "rgba(170, 170, 170, 1)",
         "line-width": {
           "base": 1.55,
           "stops": [
@@ -674,7 +675,8 @@
       ],
       "layout": {
         "line-join": "round",
-        "line-cap": "round"
+        "line-cap": "round",
+        "visibility": "visible"
       },
       "paint": {
         "line-color": "rgba(238, 238, 238, 1)",
@@ -874,6 +876,87 @@
         "line-dasharray": [
           2,
           2
+        ]
+      }
+    },
+    {
+      "id": "railway-casing",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "minzoom": 9,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "rail"
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-color": "rgba(0, 0, 0, 1)",
+        "line-width": {
+          "base": 1.8,
+          "stops": [
+            [
+              9,
+              2
+            ],
+            [
+              20,
+              15
+            ]
+          ]
+        },
+        "line-dasharray": [
+          2,
+          0
+        ]
+      }
+    },
+    {
+      "id": "railway-rail",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "minzoom": 9,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "rail"
+        ]
+      ],
+      "layout": {
+        "line-join": "bevel",
+        "line-cap": "butt",
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-color": "rgba(255, 255, 255, 1)",
+        "line-width": {
+          "base": 1.8,
+          "stops": [
+            [
+              9,
+              1.5
+            ],
+            [
+              20,
+              12
+            ]
+          ]
+        },
+        "line-dasharray": [
+          3,
+          4
         ]
       }
     },
