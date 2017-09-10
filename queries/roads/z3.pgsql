@@ -3,6 +3,7 @@ SELECT
   CASE
     WHEN highway is not null THEN highway
     WHEN railway is not null THEN coalesce(service, railway)
+    WHEN aeroway is not null THEN aeroway
   END AS kind,
   name,
   ref,
@@ -33,5 +34,7 @@ WHERE
                'footway',
                'path')
    or
-   railway IN ('rail'))
+   railway IN ('rail')
+   or
+   aeroway IN ('runway'))
   and way && !bbox!
