@@ -22,6 +22,7 @@
             font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
             font-size: 11px;
         }
+        .mapboxgl-popup-content img {max-width: 400px; max-height: 400px;}
     </style>
 </head>
 <body>
@@ -36,51 +37,6 @@
     © <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script>
-    mapboxgl.accessToken = 'pk.eyJ1IjoiYmNhbXBlciIsImEiOiJWUmh3anY0In0.1fgSTNWpQV8-5sBjGbBzGg';
-    var map = new mapboxgl.Map({
-        container: 'map',
-        style: 'map.json',
-        zoom: 8,
-        minZoom: 8,
-        maxZoom: 18,
-        center: [24.07, 54.96],
-        hash: true
-    });
-    map.addControl(new mapboxgl.NavigationControl(), 'top-left');
-
-    map.on('load', function () {
-        map.on('mouseenter', 'label-amenity', function () {
-            map.getCanvas().style.cursor = 'pointer';
-        });
-
-        map.on('mouseleave', 'label-amenity', function () {
-            map.getCanvas().style.cursor = '';
-        });
-
-        map.on('click', 'label-amenity', function (e) {
-            var poi = e.features[0];
-
-            var html = "<strong>Pavadinimas:</strong> " + poi.properties.name;
-            if (poi.properties.opening_hours) {
-                html += "<br><strong>Darbo laikas:</strong> " + poi.properties.opening_hours;
-            }
-
-            new mapboxgl.Popup()
-                .setLngLat(poi.geometry.coordinates)
-                .setHTML(html)
-                .addTo(map);
-        });
-    });
-
-    $('#layers button').on('click', function(e) {
-        if ($(this).hasClass('active')) {
-            return false;
-        }
-        $('#layers button').removeClass('active');
-        $(this).addClass('active');
-        map.setStyle($(e.target).data('style') + '.json');
-    });
-</script>
+<script src="/map.js"></script>
 </body>
 </html>

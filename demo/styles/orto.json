@@ -7,7 +7,7 @@
     "orto": {
       "type": "raster",
       "tiles": [
-        "http://tiles.osm.pauliaus.com/orto/{z}/{x}/{y}.png"
+        "http://ort10lt.openmap.lt/g16/{z}/{x}/{y}.jpeg"
       ]
     }
   },
