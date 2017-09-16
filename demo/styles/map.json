@@ -24,6 +24,20 @@
       }
     },
     {
+      "id": "coastline",
+      "type": "fill",
+      "source": "tilezen",
+      "source-layer": "coastline",
+      "filter": [
+        "==",
+        "kind",
+        "coastline"
+      ],
+      "paint": {
+        "fill-color": "#7acad0"
+      }
+    },
+    {
       "id": "water-line",
       "type": "line",
       "source": "tilezen",
@@ -1400,20 +1414,6 @@
           0.6
         ],
         "icon-image": "{kind}"
-      }
-    },
-    {
-      "id": "coastline",
-      "type": "fill",
-      "source": "tilezen",
-      "source-layer": "coastline",
-      "filter": [
-        "==",
-        "kind",
-        "coastline"
-      ],
-      "paint": {
-        "fill-color": "#7acad0"
       }
     }
   ],
