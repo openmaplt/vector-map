@@ -58,18 +58,17 @@ $('#layers button').on('click', function(e) {
 
 function poiInteractive()
 {
-    var poiLayer = map.getLayer('label-amenity');
-    if (!poiLayer) {
-        map.off('mouseenter', 'label-amenity', addMousePointerCursor);
-        map.off('mouseleave', 'label-amenity', removeMousePointerCursor);
-        map.off('click', 'label-amenity', poiOnClick);
+    var poiLayerName = 'label-amenity';
 
-        return false;
+    map.off('mouseenter', poiLayerName, addMousePointerCursor);
+    map.off('mouseleave', poiLayerName, removeMousePointerCursor);
+    map.off('click', poiLayerName, poiOnClick);
+
+    if (map.getLayer(poiLayerName)) {
+        map.on('mouseenter', poiLayerName, addMousePointerCursor);
+        map.on('mouseleave', poiLayerName, removeMousePointerCursor);
+        map.on('click', poiLayerName, poiOnClick);
     }
-
-    map.on('mouseenter', 'label-amenity', addMousePointerCursor);
-    map.on('mouseleave', 'label-amenity', removeMousePointerCursor);
-    map.on('click', 'label-amenity', poiOnClick);
 }
 
 function addMousePointerCursor()
@@ -87,10 +86,12 @@ function poiOnClick(e)
     var poi = e.features[0];
     var html = getHtml(poi).join('<br />');
 
-    new mapboxgl.Popup()
-        .setLngLat(poi.geometry.coordinates)
-        .setHTML(html)
-        .addTo(map);
+    if(html.length) {
+        new mapboxgl.Popup()
+            .setLngLat(poi.geometry.coordinates)
+            .setHTML(html)
+            .addTo(map);
+    }
 }
 
 function getHtml(poi)
