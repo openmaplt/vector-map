@@ -17,7 +17,8 @@
       "type": "vector",
       "tiles": [
         "https://openmap.lt/hybrid/{z}/{x}/{y}.pbf"
-      ]
+      ],
+      "attribution": "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>"
     }
   },
   "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",

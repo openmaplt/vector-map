@@ -9,7 +9,8 @@
       "type": "vector",
       "tiles": [
         "https://openmap.lt/all/{z}/{x}/{y}.pbf"
-      ]
+      ],
+      "attribution": "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>"
     }
   },
   "sprite": "https://openmap.lt/sprites/osm-liberty",

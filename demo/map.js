@@ -24,22 +24,21 @@ var attributeType = {
 };
 
 var map = new mapboxgl.Map({
-    container: 'map',
-    style: 'styles/map.json',
-    zoom: 8,
-    minZoom: 8,
-    maxZoom: 18,
-    center: [24.07, 54.96],
-    hash: true
-});
-
-map.addControl(new mapboxgl.NavigationControl(), 'top-left');
-map.addControl(new mapboxgl.GeolocateControl({
-    positionOptions: {
-        enableHighAccuracy: true
-    },
-    trackUserLocation: true
-}), 'top-left');
+        container: 'map',
+        style: 'styles/map.json',
+        zoom: 8,
+        minZoom: 8,
+        maxZoom: 18,
+        center: [24.07, 54.96],
+        hash: true
+    })
+    .addControl(new mapboxgl.NavigationControl(), 'top-left')
+    .addControl(new mapboxgl.GeolocateControl({
+        positionOptions: {
+            enableHighAccuracy: true
+        },
+        trackUserLocation: true
+    }), 'top-left');
 
 map.on('data', function () {
     if(map.isStyleLoaded()) {
