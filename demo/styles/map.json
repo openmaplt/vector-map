@@ -8,11 +8,11 @@
     "tilezen": {
       "type": "vector",
       "tiles": [
-        "https://tiles.osm.pauliaus.com/all/{z}/{x}/{y}.pbf"
+        "https://www.opemap.lt/all/{z}/{x}/{y}.pbf"
       ]
     }
   },
-  "sprite": "https://osm.pauliaus.com/demo/sprites/osm-liberty",
+  "sprite": "https://www.opemap.lt/sprites/osm-liberty",
   "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
   "layers": [
     {

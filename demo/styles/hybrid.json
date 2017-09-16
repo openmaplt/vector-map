@@ -15,7 +15,7 @@
     "osm": {
       "type": "vector",
       "tiles": [
-        "http://tiles.osm.pauliaus.com/hybrid/{z}/{x}/{y}.pbf"
+        "https://www.opemap.lt/hybrid/{z}/{x}/{y}.pbf"
       ]
     }
   },
