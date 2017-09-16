@@ -41,24 +41,10 @@ map.addControl(new mapboxgl.GeolocateControl({
     trackUserLocation: true
 }), 'top-left');
 
-map.on('load', function () {
-    map.on('mouseenter', 'label-amenity', function () {
-        map.getCanvas().style.cursor = 'pointer';
-    });
-
-    map.on('mouseleave', 'label-amenity', function () {
-        map.getCanvas().style.cursor = '';
-    });
-
-    map.on('click', 'label-amenity', function (e) {
-        var poi = e.features[0];
-        var html = getHtml(poi).join('<br />');
-
-        new mapboxgl.Popup()
-            .setLngLat(poi.geometry.coordinates)
-            .setHTML(html)
-            .addTo(map);
-    });
+map.on('data', function () {
+    if(map.isStyleLoaded()) {
+        poiInteractive();
+    }
 });
 
 $('#layers button').on('click', function(e) {
@@ -69,6 +55,43 @@ $('#layers button').on('click', function(e) {
     $(this).addClass('active');
     map.setStyle('styles/' + $(e.target).data('style') + '.json');
 });
+
+function poiInteractive()
+{
+    var poiLayer = map.getLayer('label-amenity');
+    if (!poiLayer) {
+        map.off('mouseenter', 'label-amenity', addMousePointerCursor);
+        map.off('mouseleave', 'label-amenity', removeMousePointerCursor);
+        map.off('click', 'label-amenity', poiOnClick);
+
+        return false;
+    }
+
+    map.on('mouseenter', 'label-amenity', addMousePointerCursor);
+    map.on('mouseleave', 'label-amenity', removeMousePointerCursor);
+    map.on('click', 'label-amenity', poiOnClick);
+}
+
+function addMousePointerCursor()
+{
+    map.getCanvas().style.cursor = 'pointer';
+}
+
+function removeMousePointerCursor()
+{
+    map.getCanvas().style.cursor = '';
+}
+
+function poiOnClick(e)
+{
+    var poi = e.features[0];
+    var html = getHtml(poi).join('<br />');
+
+    new mapboxgl.Popup()
+        .setLngLat(poi.geometry.coordinates)
+        .setHTML(html)
+        .addTo(map);
+}
 
 function getHtml(poi)
 {
