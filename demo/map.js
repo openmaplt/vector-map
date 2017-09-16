@@ -67,7 +67,7 @@ $('#layers button').on('click', function(e) {
     }
     $('#layers button').removeClass('active');
     $(this).addClass('active');
-    map.setStyle('/styles/' + $(e.target).data('style') + '.json');
+    map.setStyle('styles/' + $(e.target).data('style') + '.json');
 });
 
 function getHtml(poi)
