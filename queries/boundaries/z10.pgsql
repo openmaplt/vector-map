@@ -16,5 +16,6 @@ SELECT
 FROM
   planet_osm_line
 WHERE
-  boundary IN ('administrative') AND admin_level IN ('2', '4', '6', '8')
-  OR boundary = 'protected_area'
+  (boundary IN ('administrative') AND admin_level IN ('2', '4', '6', '8')
+  OR boundary = 'protected_area')
+  and way && !bbox!

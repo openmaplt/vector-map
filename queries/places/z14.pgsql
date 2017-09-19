@@ -14,8 +14,9 @@ SELECT
 FROM
   planet_osm_point
 WHERE
-  name IS NOT NULL AND
-  (place IN ('city', 'town', 'village', 'hamlet', 'locality'))
+  (name IS NOT NULL AND
+  (place IN ('city', 'town', 'village', 'hamlet', 'locality')))
+  and way && !bbox!
 
 UNION ALL
 

@@ -6,3 +6,4 @@ FROM
   planet_osm_polygon
 WHERE
   boundary = 'national_park'
+  and way && !bbox!

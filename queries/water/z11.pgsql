@@ -17,6 +17,7 @@ FROM
   planet_osm_line
 WHERE
   waterway IN ('dock', 'canal', 'river', 'stream')
+  and way && !bbox!
 
 UNION ALL
 
@@ -44,7 +45,8 @@ SELECT
 FROM
   planet_osm_polygon
 WHERE
-  waterway IN ('riverbank', 'dock')
+  (waterway IN ('riverbank', 'dock')
   OR "natural" IN ('water', 'bay')
   OR landuse IN ('basin', 'reservoir')
-  OR amenity = 'swimming_pool' OR leisure = 'swimming_pool'
+  OR amenity = 'swimming_pool' OR leisure = 'swimming_pool')
+  and way && !bbox!

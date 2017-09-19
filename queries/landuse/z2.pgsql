@@ -29,6 +29,7 @@ SELECT
 FROM
   planet_osm_polygon
 WHERE
-  landuse IN ('forest', 'residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages')
+  (landuse IN ('forest', 'residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages')
   OR "natural" IN ('wetland')
-  OR leisure IN ('park')
+  OR leisure IN ('park'))
+  and way && !bbox!

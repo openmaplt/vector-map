@@ -38,9 +38,10 @@ SELECT
 FROM
   planet_osm_point
 WHERE
-  amenity in ('bank', 'bar', 'cafe', 'cinema', 'fast_food', 'fire_station', 'fuel', 'restaurant', 'pub', 'bar', 'bank') or
+  (amenity in ('bank', 'bar', 'cafe', 'cinema', 'fast_food', 'fire_station', 'fuel', 'restaurant', 'pub', 'bar', 'bank') or
   tourism in ('museum', 'attraction', 'camp_site') or
-  shop in ('alcohol', 'bakery')
+  shop in ('alcohol', 'bakery'))
+  and way && !bbox!
 
 UNION ALL
 
@@ -84,6 +85,7 @@ SELECT
 FROM
   planet_osm_polygon
 WHERE
-  amenity in ('bank', 'bar', 'cafe', 'cinema', 'fast_food', 'fire_station', 'fuel', 'restaurant', 'pub') or
+  (amenity in ('bank', 'bar', 'cafe', 'cinema', 'fast_food', 'fire_station', 'fuel', 'restaurant', 'pub') or
   tourism in ('museum', 'attraction', 'camp_site') or
-  shop in ('alcohol', 'bakery')
+  shop in ('alcohol', 'bakery'))
+  and way && !bbox!

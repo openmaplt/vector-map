@@ -10,3 +10,4 @@ FROM
   planet_osm_polygon
 WHERE
   landuse = 'forest'
+  and way && !bbox!
