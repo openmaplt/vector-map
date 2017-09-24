@@ -9,7 +9,8 @@
       "type": "raster",
       "tiles": [
         "http://ort10lt.openmap.lt/g16/{z}/{x}/{y}.jpeg"
-      ]
+      ],
+      "tileSize": 256
     },
     "osm": {
       "type": "vector",
