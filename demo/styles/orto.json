@@ -8,7 +8,7 @@
       "type": "raster",
       "attribution": "© NŽT ORT10LT",
       "tiles": [
-        "http://ort10lt.openmap.lt/g16/{z}/{x}/{y}.jpeg"
+        "https://ort10lt.openmap.lt/g16/{z}/{x}/{y}.jpeg"
       ],
       "tileSize": 256
     }
