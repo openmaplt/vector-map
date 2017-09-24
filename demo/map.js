@@ -30,7 +30,8 @@ var map = new mapboxgl.Map({
         minZoom: 8,
         maxZoom: 18,
         center: [24.07, 54.96],
-        hash: true
+        hash: true,
+        maxBounds: [20.880, 53.888, 26.862, 56.453]
     })
     .addControl(new mapboxgl.NavigationControl(), 'top-left')
     .addControl(new mapboxgl.GeolocateControl({
