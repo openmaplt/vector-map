@@ -5,5 +5,5 @@ SELECT
 FROM
   planet_osm_polygon
 WHERE
-  building is not null
-  and way && !bbox!
+  way && !bbox! AND
+  building IS NOT NULL

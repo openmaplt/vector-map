@@ -2,20 +2,20 @@ SELECT
   way AS __geometry__,
   (
     CASE
-    WHEN waterway = 'dock'
-      THEN 'dock'
-    WHEN waterway = 'canal'
-      THEN 'canal'
-    WHEN waterway = 'river'
-      THEN 'river'
+      WHEN waterway = 'dock'
+        THEN 'dock'
+      WHEN waterway = 'canal'
+        THEN 'canal'
+      WHEN waterway = 'river'
+        THEN 'river'
     END
   ) AS kind,
   coalesce("name:lt", name) AS name
 FROM
   planet_osm_line
 WHERE
+  way && !bbox! AND
   waterway IN ('dock', 'canal', 'river')
-  and way && !bbox!
 
 UNION ALL
 
@@ -43,8 +43,11 @@ SELECT
 FROM
   planet_osm_polygon
 WHERE
-  (waterway IN ('riverbank', 'dock')
-  OR "natural" IN ('water', 'bay')
-  OR landuse IN ('basin', 'reservoir')
-  OR amenity = 'swimming_pool' OR leisure = 'swimming_pool')
-  and way && !bbox!
+  way && !bbox! AND
+  (
+    waterway IN ('riverbank', 'dock') OR
+    "natural" IN ('water', 'bay') OR
+    landuse IN ('basin', 'reservoir') OR
+    amenity = 'swimming_pool' OR
+    leisure = 'swimming_pool'
+  )

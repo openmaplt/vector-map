@@ -25,11 +25,13 @@ SELECT
       WHEN leisure = 'park'
         THEN 'park'
     END
-  )   AS kind
+  ) AS kind
 FROM
   planet_osm_polygon
 WHERE
-  (landuse IN ('forest', 'residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages')
-  OR "natural" IN ('wetland')
-  OR leisure IN ('park'))
-  and way && !bbox!
+  way && !bbox! AND
+  (
+    landuse IN ('forest', 'residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages') OR
+   "natural" = 'wetland' OR
+   leisure = 'park'
+  )

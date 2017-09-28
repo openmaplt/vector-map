@@ -5,5 +5,5 @@ SELECT
 FROM
   planet_osm_polygon
 WHERE
+  way && !bbox! AND
   boundary = 'national_park'
-  and way && !bbox!

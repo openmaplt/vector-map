@@ -1,13 +1,8 @@
 SELECT
   way AS __geometry__,
-  (
-    CASE
-      WHEN landuse = 'forest'
-        THEN 'forest'
-    END
-  )   AS kind
+  landuse AS kind
 FROM
   planet_osm_polygon
 WHERE
+  way && !bbox! AND
   landuse = 'forest'
-  and way && !bbox!

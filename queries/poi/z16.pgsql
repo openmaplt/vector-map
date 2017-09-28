@@ -1,7 +1,8 @@
 SELECT
   way AS __geometry__,
   name,
-  CASE
+  (
+    CASE
     WHEN amenity = 'bank'
       THEN 'bank'
     WHEN amenity = 'bar'
@@ -30,7 +31,8 @@ SELECT
       THEN 'alcohol_shop'
     WHEN shop = 'bakery'
       THEN 'bakery'
-  END AS kind,
+    END
+  ) AS kind,
   official_name,
   opening_hours,
   website,
@@ -38,17 +40,20 @@ SELECT
 FROM
   planet_osm_point
 WHERE
-  (amenity in ('bank', 'bar', 'cafe', 'cinema', 'fast_food', 'fire_station', 'fuel', 'restaurant', 'pub', 'bar', 'bank') or
-  tourism in ('museum', 'attraction', 'camp_site') or
-  shop in ('alcohol', 'bakery'))
-  and way && !bbox!
+  way && !bbox! AND
+  (
+    amenity IN ('bank', 'bar', 'cafe', 'cinema', 'fast_food', 'fire_station', 'fuel', 'restaurant', 'pub', 'bar', 'bank') OR
+    tourism IN ('museum', 'attraction', 'camp_site') OR
+    shop IN ('alcohol', 'bakery')
+  )
 
 UNION ALL
 
 SELECT
   st_centroid(way) AS __geometry__,
   name,
-  CASE
+  (
+    CASE
     WHEN amenity = 'bank'
       THEN 'bank'
     WHEN amenity = 'bar'
@@ -77,7 +82,8 @@ SELECT
       THEN 'alcohol_shop'
     WHEN shop = 'bakery'
       THEN 'bakery'
-  END AS kind,
+    END
+  ) AS kind,
   official_name,
   opening_hours,
   website,
@@ -85,7 +91,9 @@ SELECT
 FROM
   planet_osm_polygon
 WHERE
-  (amenity in ('bank', 'bar', 'cafe', 'cinema', 'fast_food', 'fire_station', 'fuel', 'restaurant', 'pub') or
-  tourism in ('museum', 'attraction', 'camp_site') or
-  shop in ('alcohol', 'bakery'))
-  and way && !bbox!
+  way && !bbox! AND
+  (
+    amenity IN ('bank', 'bar', 'cafe', 'cinema', 'fast_food', 'fire_station', 'fuel', 'restaurant', 'pub') OR
+    tourism IN ('museum', 'attraction', 'camp_site') OR
+    shop IN ('alcohol', 'bakery')
+  )

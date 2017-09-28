@@ -17,7 +17,7 @@
       "type": "vector",
       "attribution": "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>",
       "tiles": [
-        "https://openmap.lt/hybrid/{z}/{x}/{y}.pbf"
+        "https://openmap.lt/all/{z}/{x}/{y}.pbf"
       ]
     }
   },

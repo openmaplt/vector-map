@@ -1,26 +1,37 @@
 SELECT
   way AS __geometry__,
-  CASE
-    WHEN highway is not null THEN highway
-    WHEN railway is not null THEN coalesce(service, railway)
-    WHEN aeroway is not null THEN aeroway
-  END AS kind,
+  (
+    CASE
+      WHEN highway IS NOT NULL
+        THEN highway
+      WHEN railway IS NOT NULL
+        THEN coalesce(service, railway)
+      WHEN aeroway IS NOT NULL
+        THEN aeroway
+    END
+  ) AS kind,
   name,
   ref,
-  CASE
-    WHEN tunnel is not null
-      THEN 'yes'
-    ELSE 'no'
-  END as is_tunnel,
-  CASE
-    WHEN bridge is not null
-      THEN 'yes'
-    ELSE 'no'
-  END as is_bridge
+  (
+    CASE
+      WHEN tunnel IS NOT NULL
+        THEN 'yes'
+      ELSE 'no'
+    END
+  ) as is_tunnel,
+  (
+    CASE
+      WHEN bridge IS NOT NULL
+        THEN 'yes'
+      ELSE 'no'
+    END
+  ) as is_bridge
 FROM
   planet_osm_line
 WHERE
-  (highway IN ('motorway', 'motorway_link',
+  way && !bbox! AND
+  (
+    highway IN ('motorway', 'motorway_link',
                'trunk', 'trunk_link',
                'primary','primary_link',
                'secondary', 'secondary_link',
@@ -33,8 +44,7 @@ WHERE
                'track',
                'footway',
                'path')
-   or
-   railway IN ('rail')
-   or
-   aeroway IN ('runway'))
-  and way && !bbox!
+   OR
+   railway = 'rail' OR
+   aeroway = 'runway'
+  )

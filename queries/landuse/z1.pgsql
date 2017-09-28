@@ -20,15 +20,17 @@ SELECT
         THEN 'cemetery'
       WHEN landuse = 'garages'
         THEN 'garages'
-      WHEN "natural" = 'wetland' and "wetland" = 'marsh'
+      WHEN "natural" = 'wetland' AND "wetland" = 'marsh'
         THEN 'marsh'
-      WHEN "natural" = 'wetland' and "wetland" = 'swamp'
+      WHEN "natural" = 'wetland' AND "wetland" = 'swamp'
         THEN 'swamp'
     END
-  )   AS kind
+  ) AS kind
 FROM
   planet_osm_polygon
 WHERE
-  (landuse IN ('forest', 'residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages')
-  OR "natural" IN ('wetland'))
-  and way && !bbox!
+  way && !bbox! AND
+  (
+    landuse IN ('forest', 'residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages') OR
+   "natural" = 'wetland'
+  )

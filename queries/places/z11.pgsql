@@ -1,32 +1,33 @@
 SELECT
   way AS __geometry__,
   coalesce("name:lt", name) AS name,
-  CASE
-    WHEN place='town' and rank='0'
-      THEN 'town'
-    WHEN place='town' and rank='10'
-      THEN 'little_town'
-    WHEN place='town' and rank='20'
-      THEN 'railway_station'
-    ELSE place
-  END AS kind,
-  population
+  (
+    CASE
+      WHEN place = 'town' AND rank = '0'
+        THEN 'town'
+      WHEN place = 'town' AND rank = '10'
+        THEN 'little_town'
+      WHEN place = 'town' AND rank = '20'
+        THEN 'railway_station'
+      ELSE place
+    END
+  ) AS kind
 FROM
   planet_osm_point
 WHERE
-  (name IS NOT NULL AND
-  (place IN ('city', 'town', 'village')))
-  and way && !bbox!
+  way && !bbox! AND
+  name IS NOT NULL AND
+  place IN ('city', 'town', 'village')
 
-  UNION ALL
+UNION ALL
 
 SELECT
   ST_PointOnSurface(way) AS __geometry__,
   coalesce("name:lt", name) AS name,
-  'water' AS kind,
-  null AS population
+  'water' AS kind
 FROM
   planet_osm_polygon
 WHERE
+  way && !bbox! AND
   name IS NOT NULL AND
   ("natural" = 'water' OR landuse = 'reservoir')
