@@ -39,6 +39,7 @@ WHERE
                'unclassified',
                'residential',
                'living_street',
+               'proposed',
                'pedestrian',
                'service',
                'track',
