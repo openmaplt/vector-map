@@ -17,20 +17,48 @@ SELECT
       THEN 'fire-station'
     WHEN amenity = 'fuel'
       THEN 'fuel'
+    WHEN amenity = 'hospital'
+      THEN 'hospital'
+    WHEN amenity = 'library'
+      THEN 'library'
+    WHEN amenity = 'pharmacy'
+      THEN 'pharmacy'
+    WHEN amenity = 'place_of_worship'
+      THEN 'place_of_worship'
+    WHEN amenity = 'police'
+      THEN 'police'
     WHEN amenity = 'pub'
       THEN 'pub'
     WHEN amenity = 'restaurant'
       THEN 'restaurant'
-    WHEN tourism = 'museum'
-      THEN 'museum'
+    WHEN amenity = 'school'
+      THEN 'school'
+    WHEN amenity = 'shelter'
+      THEN 'shelter'
+    WHEN amenity = 'theatre'
+      THEN 'theatre'
     WHEN tourism = 'attraction'
       THEN 'attraction'
+    WHEN tourism = 'information'
+      THEN 'information'
     WHEN tourism = 'camp_site'
       THEN 'campsite'
+    WHEN tourism = 'museum'
+      THEN 'museum'
+    WHEN tourism = 'picnic_site'
+      THEN 'picnic_site'
     WHEN shop = 'alcohol'
       THEN 'alcohol_shop'
     WHEN shop = 'bakery'
       THEN 'bakery'
+    WHEN shop = 'bicycle'
+      THEN 'bicycle'
+    WHEN shop = 'clothes'
+      THEN 'clothing_store'
+    WHEN shop in ('supermarket', 'convenience')
+      THEN 'grocery'
+    WHEN shop = 'hairdresser'
+      THEN 'hairdresser'
     END
   ) AS kind,
   official_name,
@@ -42,9 +70,10 @@ FROM
 WHERE
   way && !bbox! AND
   (
-    amenity IN ('bank', 'bar', 'cafe', 'cinema', 'fast_food', 'fire_station', 'fuel', 'restaurant', 'pub', 'bar', 'bank') OR
-    tourism IN ('museum', 'attraction', 'camp_site') OR
-    shop IN ('alcohol', 'bakery')
+    amenity IN ('bank', 'bar', 'cafe', 'cinema', 'fast_food', 'fire_station', 'fuel', 'restaurant', 'pub', 'hospital', 'library', 'pharmacy', 'place_of_worship', 'police', 'school', 'shelter', 'theatre') OR
+    tourism IN ('museum', 'attraction', 'camp_site', 'picnic_site') OR
+    (tourism = 'information' and information = 'office') OR
+    shop IN ('alcohol', 'bakery', 'bicycle', 'clothes', 'supermarket', 'convenience', 'hairdresser')
   )
 
 UNION ALL
@@ -68,20 +97,48 @@ SELECT
       THEN 'fire-station'
     WHEN amenity = 'fuel'
       THEN 'fuel'
+    WHEN amenity = 'hospital'
+      THEN 'hospital'
+    WHEN amenity = 'library'
+      THEN 'library'
+    WHEN amenity = 'pharmacy'
+      THEN 'pharmacy'
+    WHEN amenity = 'place_of_worship'
+      THEN 'place_of_worship'
+    WHEN amenity = 'police'
+      THEN 'police'
     WHEN amenity = 'pub'
       THEN 'pub'
     WHEN amenity = 'restaurant'
       THEN 'restaurant'
-    WHEN tourism = 'museum'
-      THEN 'museum'
+    WHEN amenity = 'school'
+      THEN 'school'
+    WHEN amenity = 'shelter'
+      THEN 'shelter'
+    WHEN amenity = 'theatre'
+      THEN 'theatre'
     WHEN tourism = 'attraction'
       THEN 'attraction'
+    WHEN tourism = 'information'
+      THEN 'information'
     WHEN tourism = 'camp_site'
       THEN 'campsite'
+    WHEN tourism = 'museum'
+      THEN 'museum'
+    WHEN tourism = 'picnic_site'
+      THEN 'picnic_site'
     WHEN shop = 'alcohol'
       THEN 'alcohol_shop'
     WHEN shop = 'bakery'
       THEN 'bakery'
+    WHEN shop = 'bicycle'
+      THEN 'bicycle'
+    WHEN shop = 'clothes'
+      THEN 'clothing_store'
+    WHEN shop in ('supermarket', 'convenience')
+      THEN 'grocery'
+    WHEN shop = 'hairdresser'
+      THEN 'hairdresser'
     END
   ) AS kind,
   official_name,
@@ -93,7 +150,8 @@ FROM
 WHERE
   way && !bbox! AND
   (
-    amenity IN ('bank', 'bar', 'cafe', 'cinema', 'fast_food', 'fire_station', 'fuel', 'restaurant', 'pub') OR
-    tourism IN ('museum', 'attraction', 'camp_site') OR
-    shop IN ('alcohol', 'bakery')
+    amenity IN ('bank', 'bar', 'cafe', 'cinema', 'fast_food', 'fire_station', 'fuel', 'restaurant', 'pub', 'hospital', 'library', 'pharmacy', 'place_of_worship', 'police', 'school', 'shelter', 'theatre') OR
+    tourism IN ('museum', 'attraction', 'camp_site', 'picnic_site') OR
+    (tourism = 'information' and information = 'office') OR
+    shop IN ('alcohol', 'bakery', 'bicycle', 'clothes', 'supermarket', 'convenience', 'hairdresser')
   )
