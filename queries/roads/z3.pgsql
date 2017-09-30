@@ -40,6 +40,7 @@ WHERE
                'residential',
                'living_street',
                'proposed',
+               'construction',
                'pedestrian',
                'service',
                'track',
