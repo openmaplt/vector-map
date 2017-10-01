@@ -1,5 +1,5 @@
 SELECT
-  way AS __geometry__,
+  st_linemerge(st_collect(way)) AS __geometry__,
   (
     CASE
       WHEN highway IS NOT NULL
@@ -49,4 +49,31 @@ WHERE
    OR
    railway = 'rail' OR
    aeroway = 'runway'
+  )
+GROUP BY
+  (
+    CASE
+      WHEN highway IS NOT NULL
+        THEN highway
+      WHEN railway IS NOT NULL
+        THEN coalesce(service, railway)
+      WHEN aeroway IS NOT NULL
+        THEN aeroway
+    END
+  ),
+  name,
+  ref,
+  (
+    CASE
+      WHEN tunnel IS NOT NULL
+        THEN 'yes'
+      ELSE 'no'
+    END
+  ),
+  (
+    CASE
+      WHEN bridge IS NOT NULL
+        THEN 'yes'
+      ELSE 'no'
+    END
   )
