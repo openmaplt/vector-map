@@ -142,5 +142,7 @@ node,way   opening_hours text        linear
 node,way   official_name text        linear
 node,way   website       text        linear
 node,way   image         text        linear
+way        proposed     text         linear
+node,way   information  text         linear
 node,way   z_order      int4         linear # This is calculated during import
 way        way_area     real                # This is calculated during import
