@@ -1,5 +1,5 @@
 SELECT
-  st_union(way) AS __geometry__,
+  st_linemerge(st_collect(way)) AS __geometry__,
   highway AS kind,
   ref
 FROM
