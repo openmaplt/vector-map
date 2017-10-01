@@ -1,5 +1,5 @@
 SELECT
-  way AS __geometry__,
+  st_union(way) AS __geometry__,
   highway AS kind,
   ref
 FROM
@@ -7,3 +7,5 @@ FROM
 WHERE
   way && !bbox! AND
   highway IN ('motorway', 'trunk', 'primary')
+GROUP BY
+  highway, ref

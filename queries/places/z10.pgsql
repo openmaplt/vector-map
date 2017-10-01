@@ -17,7 +17,7 @@ FROM
 WHERE
   way && !bbox! AND
   name IS NOT NULL AND
-  place IN ('city', 'town', 'village', 'hamlet', 'locality')
+  place IN ('city', 'town', 'village')
 
 UNION ALL
 
@@ -31,4 +31,4 @@ WHERE
   way && !bbox! AND
   name IS NOT NULL AND
   ("natural" = 'water' OR landuse = 'reservoir') AND
-  way_area >= 50000
+  way_area >= 1000000

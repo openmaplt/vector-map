@@ -15,8 +15,7 @@ FROM
   planet_osm_line
 WHERE
   way && !bbox! AND
-  waterway IN ('dock', 'canal', 'river') AND
-  way_area >= 5000000
+  waterway IN ('dock', 'canal', 'river')
 
 UNION ALL
 
@@ -52,4 +51,4 @@ WHERE
     amenity = 'swimming_pool' OR
     leisure = 'swimming_pool'
   ) AND
-  way_area >= 5000000
+  way_area >= 1000000

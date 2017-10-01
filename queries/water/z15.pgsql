@@ -8,6 +8,8 @@ SELECT
         THEN 'canal'
       WHEN waterway = 'river'
         THEN 'river'
+      WHEN waterway = 'stream'
+        THEN 'stream'
     END
   ) AS kind,
   coalesce("name:lt", name) AS name
@@ -15,8 +17,7 @@ FROM
   planet_osm_line
 WHERE
   way && !bbox! AND
-  waterway IN ('dock', 'canal', 'river') AND
-  way_area >= 5000000
+  waterway IN ('dock', 'canal', 'river', 'stream')
 
 UNION ALL
 
@@ -52,4 +53,4 @@ WHERE
     amenity = 'swimming_pool' OR
     leisure = 'swimming_pool'
   ) AND
-  way_area >= 5000000
+  way_area >= 2000
