@@ -26,8 +26,8 @@ var attributeType = {
 var map = new mapboxgl.Map({
         container: 'map',
         style: 'styles/map.json',
-        zoom: 8,
-        minZoom: 8,
+        zoom: 7,
+        minZoom: 7,
         maxZoom: 18,
         center: [24.07, 54.96],
         hash: true,
