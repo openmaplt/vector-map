@@ -42,6 +42,6 @@ GROUP BY
       WHEN aeroway IS NOT NULL
         THEN aeroway
     END
-  ) AS kind,
+  ),
   name,
   ref

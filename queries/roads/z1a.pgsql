@@ -34,5 +34,5 @@ GROUP BY
       WHEN railway IS NOT NULL
         THEN coalesce(service, railway)
     END
-  ) AS kind,
+  ),
   ref
