@@ -51,4 +51,4 @@ WHERE
     amenity = 'swimming_pool' OR
     leisure = 'swimming_pool'
   ) AND
-  way_area >= 1000000
+  way_area >= 500000

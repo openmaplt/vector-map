@@ -90,6 +90,7 @@ node,way   brand        text         linear
 node,way   bridge       text         linear
 node,way   boundary     text         linear
 node,way   building     text         polygon
+node,way   building:levels text      polygon
 node       capital      text         linear
 node,way   construction text         linear
 node,way   covered      text         linear
