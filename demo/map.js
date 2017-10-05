@@ -23,37 +23,43 @@ var attributeType = {
     image: 'image'
 };
 
-var map = new mapboxgl.Map({
-        container: 'map',
-        style: 'styles/map.json',
-        zoom: 7,
-        minZoom: 7,
-        maxZoom: 18,
-        center: [24.07, 54.96],
-        hash: true,
-        maxBounds: [20.880, 53.888, 26.862, 56.453]
+if (!mapboxgl.supported()) {
+  $('#layers').remove();
+  alert('Jūsų naršyklė nepalaiko Mapbox GL. Prašome atsinaujinti naršyklę.');
+} else {
+  var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'styles/map.json',
+      zoom: 7,
+      minZoom: 7,
+      maxZoom: 18,
+      center: [24.07, 54.96],
+      hash: true,
+      maxBounds: [20.880, 53.888, 26.862, 56.453]
     })
-    .addControl(new mapboxgl.NavigationControl(), 'top-left')
-    .addControl(new mapboxgl.GeolocateControl({
+      .addControl(new mapboxgl.NavigationControl(), 'top-left')
+      .addControl(new mapboxgl.GeolocateControl({
         positionOptions: {
-            enableHighAccuracy: true
+          enableHighAccuracy: true
         },
         trackUserLocation: true
-    }), 'top-left');
+      }), 'top-left')
+  ;
 
-map.on('data', function () {
-    if(map.isStyleLoaded()) {
-        poiInteractive();
+  map.on('data', function () {
+    if (map.isStyleLoaded()) {
+      poiInteractive();
     }
-});
+  });
+}
 
-$('#layers button').on('click', function(e) {
-    if ($(this).hasClass('active')) {
-        return false;
-    }
-    $('#layers button').removeClass('active');
-    $(this).addClass('active');
-    map.setStyle('styles/' + $(e.target).data('style') + '.json');
+$('#layers button').on('click', function (e) {
+  if ($(this).hasClass('active')) {
+    return false;
+  }
+  $('#layers button').removeClass('active');
+  $(this).addClass('active');
+  map.setStyle('styles/' + $(e.target).data('style') + '.json');
 });
 
 function poiInteractive()
