@@ -15,13 +15,12 @@ FROM
   planet_osm_line
 WHERE
   way && !bbox! AND
-  waterway IN ('dock', 'canal', 'river') AND
-  way_area >= 5000000
+  waterway IN ('dock', 'canal', 'river')
 
 UNION ALL
 
 SELECT
-  way AS __geometry__,
+  st_union(way) AS __geometry__,
   (
     CASE
       WHEN waterway = 'riverbank'
@@ -53,3 +52,6 @@ WHERE
     leisure = 'swimming_pool'
   ) AND
   way_area >= 5000000
+GROUP BY
+  kind,
+  coalesce("name:lt", name)
