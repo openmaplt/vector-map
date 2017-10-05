@@ -98,18 +98,22 @@
       }
     },
     {
-      "id": "water-polygon",
+      "id": "landuse-meadow",
       "type": "fill",
       "source": "tilezen",
-      "source-layer": "water",
+      "source-layer": "landuse",
+      "minzoom": 6,
       "filter": [
-        "==",
-        "$type",
-        "Polygon"
+        "all",
+        [
+          "in",
+          "kind",
+          "meadow"
+        ]
       ],
       "paint": {
-        "fill-color": "#7acad0",
-        "fill-outline-color": "rgba(149, 154, 212, 0.6)"
+        "fill-color": "rgba(196, 243, 189, 1)",
+        "fill-opacity": 1
       }
     },
     {
@@ -170,25 +174,6 @@
       }
     },
     {
-      "id": "landuse-meadow",
-      "type": "fill",
-      "source": "tilezen",
-      "source-layer": "landuse",
-      "minzoom": 6,
-      "filter": [
-        "all",
-        [
-          "in",
-          "kind",
-          "meadow"
-        ]
-      ],
-      "paint": {
-        "fill-color": "rgba(196, 243, 189, 1)",
-        "fill-opacity": 1
-      }
-    },
-    {
       "id": "landuse-park",
       "type": "fill",
       "source": "tilezen",
@@ -205,6 +190,36 @@
       "paint": {
         "fill-color": "rgba(122, 220, 125, 1)",
         "fill-opacity": 0.5
+      }
+    },
+    {
+      "id": "water-polygon",
+      "type": "fill",
+      "source": "tilezen",
+      "source-layer": "water",
+      "filter": [
+        "==",
+        "$type",
+        "Polygon"
+      ],
+      "paint": {
+        "fill-color": "#7acad0"
+      }
+    },
+    {
+      "id": "water-outline",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "water",
+      "filter": [
+        "==",
+        "$type",
+        "Polygon"
+      ],
+      "layout": {},
+      "paint": {
+        "line-color": "rgba(149, 154, 212, 0.8)",
+        "line-width": 1.5
       }
     },
     {
@@ -434,7 +449,7 @@
       "type": "fill-extrusion",
       "source": "tilezen",
       "source-layer": "buildings",
-      "minzoom": 15,
+      "minzoom": 18,
       "maxzoom": 20,
       "layout": {},
       "paint": {
