@@ -1,7 +1,8 @@
 SELECT
   way AS __geometry__,
   building AS kind,
-  coalesce(name, "addr:housename", "addr:housenumber") AS name
+  coalesce(name, "addr:housename", "addr:housenumber") AS name,
+  coalesce(cast(height as integer), coalesce(cast("building:levels" as integer), 2) * 3) AS height
 FROM
   planet_osm_polygon
 WHERE
