@@ -22,7 +22,7 @@ WHERE
 UNION ALL
 
 SELECT
-  way AS __geometry__,
+  st_union(way) AS __geometry__,
   (
     CASE
       WHEN waterway = 'riverbank'
@@ -54,3 +54,6 @@ WHERE
     leisure = 'swimming_pool'
   ) AND
   way_area >= 2000
+GROUP BY
+  kind,
+  coalesce("name:lt", name)
