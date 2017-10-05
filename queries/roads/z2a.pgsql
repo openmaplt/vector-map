@@ -32,16 +32,4 @@ WHERE
    OR
    aeroway IN ('runway', 'taxiway', 'parking_position')
   )
-GROUP BY
-  (
-    CASE
-      WHEN highway IS NOT NULL
-        THEN highway
-      WHEN railway IS NOT NULL
-        THEN coalesce(service, railway)
-      WHEN aeroway IS NOT NULL
-        THEN aeroway
-    END
-  ),
-  name,
-  ref
+GROUP BY kind, name, ref

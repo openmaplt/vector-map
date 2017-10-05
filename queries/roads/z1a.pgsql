@@ -26,13 +26,4 @@ WHERE
    OR
    (railway = 'rail' AND service IS NULL)
   )
-GROUP BY
-  (
-    CASE
-      WHEN highway IS NOT NULL
-        THEN highway
-      WHEN railway IS NOT NULL
-        THEN coalesce(service, railway)
-    END
-  ),
-  ref
+GROUP BY kind, ref
