@@ -336,6 +336,77 @@
       }
     },
     {
+      "id": "boundary-national-park-outline",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "protected",
+      "minzoom": 0,
+      "maxzoom": 20,
+      "filter": [
+        "all",
+        [
+          "==",
+          "kind",
+          "national_park"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-color": "rgba(11, 119, 14, 1)",
+        "line-dasharray": [
+          2,
+          4
+        ],
+        "line-width": {
+          "stops": [
+            [
+              8,
+              1
+            ],
+            [
+              18,
+              3
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "boundary-national-park",
+      "type": "fill",
+      "source": "tilezen",
+      "source-layer": "protected",
+      "minzoom": 7,
+      "maxzoom": 12,
+      "filter": [
+        "all",
+        [
+          "==",
+          "kind",
+          "national_park"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-color": {
+          "stops": [
+            [
+              7,
+              "rgba(34, 183, 44, 0.2)"
+            ],
+            [
+              12,
+              "rgba(34, 183, 44, 0)"
+            ]
+          ]
+        }
+      }
+    },
+    {
       "id": "boundary-country",
       "type": "line",
       "source": "tilezen",
