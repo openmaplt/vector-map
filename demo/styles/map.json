@@ -14,7 +14,7 @@
     }
   },
   "sprite": "https://openmap.lt/sprites/osm-liberty",
-  "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
+  "glyphs": "https://orangemug.github.io/font-glyphs/glyphs/{fontstack}/{range}.pbf",
   "layers": [
     {
       "id": "background",
@@ -520,11 +520,14 @@
       "type": "fill-extrusion",
       "source": "tilezen",
       "source-layer": "buildings",
-      "minzoom": 18,
+      "minzoom": 17,
       "maxzoom": 20,
       "layout": {},
       "paint": {
-        "fill-extrusion-height": 7,
+        "fill-extrusion-height": {
+          "property": "height",
+          "type": "identity"
+        },
         "fill-extrusion-base": 0,
         "fill-extrusion-opacity": 0.7,
         "fill-extrusion-color": {
@@ -1163,8 +1166,7 @@
       "layout": {
         "text-field": "{name}",
         "text-font": [
-          "Open Sans Italic",
-          "Arial Unicode MS Bold"
+          "Roboto Condensed Italic"
         ],
         "text-max-width": 4,
         "text-size": {
@@ -1208,8 +1210,7 @@
       "layout": {
         "text-field": "{name}",
         "text-font": [
-          "Open Sans Italic",
-          "Arial Unicode MS Regular"
+          "Roboto Condensed Italic"
         ],
         "text-max-width": 8,
         "text-size": {
@@ -1248,8 +1249,7 @@
       "layout": {
         "text-field": "{name}",
         "text-font": [
-          "Open Sans Bold",
-          "Arial Unicode MS Bold"
+          "Roboto Medium"
         ],
         "text-max-width": 10,
         "text-letter-spacing": 0.1,
@@ -1282,8 +1282,7 @@
       "layout": {
         "text-field": "{name}",
         "text-font": [
-          "Open Sans Semibold",
-          "Arial Unicode MS Bold"
+          "Roboto Regular"
         ],
         "text-max-width": 10,
         "text-letter-spacing": 0.1,
@@ -1327,8 +1326,7 @@
       "layout": {
         "text-field": "{name}",
         "text-font": [
-          "Open Sans Regular",
-          "Arial Unicode MS Bold"
+          "Roboto Regular"
         ],
         "text-max-width": 10,
         "text-letter-spacing": 0.1,
@@ -1372,8 +1370,7 @@
       "layout": {
         "text-field": "{name}",
         "text-font": [
-          "Open Sans Italic",
-          "Arial Unicode MS Bold"
+          "Roboto Condensed Italic"
         ],
         "text-max-width": 10,
         "text-letter-spacing": 0.1,
@@ -1425,8 +1422,7 @@
       "layout": {
         "text-field": "{name}",
         "text-font": [
-          "Open Sans Italic",
-          "Arial Unicode MS Bold"
+          "Roboto Condensed Italic"
         ],
         "text-max-width": 10,
         "text-size": {
@@ -1471,8 +1467,7 @@
         "symbol-placement": "point",
         "text-rotation-alignment": "auto",
         "text-font": [
-          "Open Sans Italic",
-          "Arial Unicode MS Regular"
+          "Roboto Condensed Italic"
         ],
         "text-allow-overlap": false,
         "text-ignore-placement": false,
@@ -1516,8 +1511,7 @@
         "symbol-placement": "line",
         "text-rotation-alignment": "auto",
         "text-font": [
-          "Open Sans Italic",
-          "Arial Unicode MS Regular"
+          "Roboto Condensed Italic"
         ],
         "text-padding": 5,
         "text-allow-overlap": false,
@@ -1555,7 +1549,10 @@
             ]
           ]
         },
-        "text-allow-overlap": false
+        "text-allow-overlap": false,
+        "text-font": [
+          "Roboto Regular"
+        ]
       },
       "paint": {
         "text-halo-width": 2,
@@ -1578,7 +1575,10 @@
           0,
           0.6
         ],
-        "icon-image": "{kind}"
+        "icon-image": "{kind}",
+        "text-font": [
+          "Roboto Regular"
+        ]
       }
     }
   ],
