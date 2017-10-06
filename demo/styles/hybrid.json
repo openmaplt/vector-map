@@ -306,7 +306,7 @@
       }
     },
     {
-      "id": "country-label",
+      "id": "label-country",
       "type": "symbol",
       "source": "osm",
       "source-layer": "places",
@@ -349,7 +349,7 @@
       }
     },
     {
-      "id": "state-label",
+      "id": "label-state",
       "type": "symbol",
       "source": "osm",
       "source-layer": "places",
@@ -393,7 +393,7 @@
       }
     },
     {
-      "id": "city-label",
+      "id": "label-city",
       "type": "symbol",
       "source": "osm",
       "source-layer": "places",
@@ -442,7 +442,7 @@
       }
     },
     {
-      "id": "other-label",
+      "id": "label-other",
       "type": "symbol",
       "source": "osm",
       "source-layer": "places",
@@ -488,23 +488,37 @@
       }
     },
     {
-      "id": "water-label",
+      "id": "label-water",
       "type": "symbol",
       "source": "osm",
       "source-layer": "water",
-      "minzoom": 10,
+      "minzoom": 8,
       "maxzoom": 20,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ]
+      ],
       "layout": {
         "text-field": "{name}",
         "text-font": [
-          "Roboto Regular"
+          "Roboto Condensed Italic"
         ],
         "symbol-placement": "line",
-        "text-rotation-alignment": "auto"
+        "text-rotation-alignment": "auto",
+        "text-size": 14
+      },
+      "paint": {
+        "text-color": "rgba(51, 51, 255, 1)",
+        "text-halo-width": 1,
+        "text-halo-color": "rgba(255, 255, 255, 0.5)"
       }
     },
     {
-      "id": "road-label",
+      "id": "label-road",
       "type": "symbol",
       "source": "osm",
       "source-layer": "roads",
@@ -526,7 +540,7 @@
       }
     },
     {
-      "id": "poi",
+      "id": "label-amenity",
       "type": "symbol",
       "source": "osm",
       "source-layer": "poi",
