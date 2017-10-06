@@ -1,6 +1,6 @@
-
 {
   "version": 8,
+  "name": "openmap.lt",
   "metadata": {
     "maputnik:renderer": "mbgljs"
   },
@@ -21,18 +21,22 @@
       ]
     }
   },
-  "glyphs": "mapbox://fonts/mapbox/{fontstack}/{range}.pbf",
+  "sprite": "https://openmap.lt/sprites/osm-liberty",
+  "glyphs": "https://orangemug.github.io/font-glyphs/glyphs/{fontstack}/{range}.pbf",
   "layers": [
     {
       "id": "overlay",
+      "type": "raster",
       "source": "orto",
-      "type": "raster"
+      "minzoom": 0,
+      "maxzoom": 18
     },
     {
       "id": "country-boundary",
       "type": "line",
       "source": "osm",
       "source-layer": "boundaries",
+      "minzoom": 0,
       "maxzoom": 20,
       "filter": [
         "all",
@@ -62,14 +66,14 @@
           ]
         },
         "line-translate-anchor": "map"
-      },
-      "minzoom": 0
+      }
     },
     {
       "id": "state-boundary",
       "type": "line",
       "source": "osm",
       "source-layer": "boundaries",
+      "minzoom": 6,
       "maxzoom": 20,
       "filter": [
         "all",
@@ -83,8 +87,7 @@
       "paint": {
         "line-color": "rgba(211, 175, 175, 1)",
         "line-width": 3
-      },
-      "minzoom": 6
+      }
     },
     {
       "id": "link-tunnel",
@@ -129,6 +132,7 @@
       "type": "line",
       "source": "osm",
       "source-layer": "roads",
+      "minzoom": 8,
       "filter": [
         "any",
         [
@@ -170,9 +174,9 @@
               30
             ]
           ]
-        }
-      },
-      "minzoom": 8
+        },
+        "line-opacity": 0.5
+      }
     },
     {
       "id": "link-bridge",
@@ -214,7 +218,8 @@
               40
             ]
           ]
-        }
+        },
+        "line-opacity": 0.5
       }
     },
     {
@@ -253,7 +258,8 @@
               40
             ]
           ]
-        }
+        },
+        "line-opacity": 0.5
       }
     },
     {
@@ -262,6 +268,7 @@
       "source": "osm",
       "source-layer": "roads",
       "minzoom": 12,
+      "maxzoom": 24,
       "filter": [
         "all",
         [
@@ -294,9 +301,9 @@
         "line-dasharray": [
           2,
           2
-        ]
-      },
-      "maxzoom": 24
+        ],
+        "line-opacity": 0.7
+      }
     },
     {
       "id": "country-label",
@@ -320,8 +327,7 @@
       "layout": {
         "text-field": "{name}",
         "text-font": [
-          "Open Sans Semibold",
-          "Arial Unicode MS Bold"
+          "Roboto Condensed Italic"
         ],
         "text-max-width": 4,
         "text-size": {
@@ -365,8 +371,7 @@
       "layout": {
         "text-field": "{name}",
         "text-font": [
-          "Open Sans Regular",
-          "Arial Unicode MS Regular"
+          "Roboto Condensed Italic"
         ],
         "text-max-width": 8,
         "text-size": {
@@ -414,8 +419,7 @@
       "layout": {
         "text-field": "{name}",
         "text-font": [
-          "Open Sans Semibold",
-          "Arial Unicode MS Bold"
+          "Roboto Medium"
         ],
         "text-max-width": 10,
         "text-letter-spacing": 0.1,
@@ -461,8 +465,7 @@
       "layout": {
         "text-field": "{name}",
         "text-font": [
-          "Open Sans Semibold",
-          "Arial Unicode MS Bold"
+          "Roboto Regular"
         ],
         "text-max-width": 10,
         "text-size": {
@@ -485,44 +488,6 @@
       }
     },
     {
-      "id": "ocean-label",
-      "type": "symbol",
-      "source": "osm",
-      "source-layer": "places",
-      "minzoom": 2,
-      "maxzoom": 6,
-      "filter": [
-        "==",
-        "kind",
-        "ocean"
-      ],
-      "layout": {
-        "text-field": "{name}",
-        "text-font": [
-          "Open Sans Italic",
-          "Arial Unicode MS Regular"
-        ],
-        "text-max-width": 14,
-        "text-letter-spacing": 0.1,
-        "text-size": {
-          "stops": [
-            [
-              2,
-              28
-            ],
-            [
-              6,
-              32
-            ]
-          ]
-        }
-      },
-      "paint": {
-        "text-color": "#ededed",
-        "text-halo-color": "rgba(0,0,0,0.2)"
-      }
-    },
-    {
       "id": "water-label",
       "type": "symbol",
       "source": "osm",
@@ -531,6 +496,9 @@
       "maxzoom": 20,
       "layout": {
         "text-field": "{name}",
+        "text-font": [
+          "Roboto Regular"
+        ],
         "symbol-placement": "line",
         "text-rotation-alignment": "auto"
       }
@@ -544,11 +512,48 @@
       "maxzoom": 20,
       "layout": {
         "text-field": "{name}",
+        "text-font": [
+          "Roboto Regular"
+        ],
         "symbol-placement": "line",
-        "text-rotation-alignment": "auto"
+        "text-rotation-alignment": "auto",
+        "text-size": 13
+      },
+      "paint": {
+        "text-color": "rgba(0, 0, 0, 1)",
+        "text-halo-width": 2,
+        "text-halo-color": "rgba(255, 255, 255, 0.7)"
+      }
+    },
+    {
+      "id": "poi",
+      "type": "symbol",
+      "source": "osm",
+      "source-layer": "poi",
+      "minzoom": 14,
+      "maxzoom": 20,
+      "layout": {
+        "text-field": "{name}",
+        "text-font": [
+          "Roboto Regular"
+        ],
+        "symbol-placement": "point",
+        "text-rotation-alignment": "auto",
+        "text-size": 12,
+        "text-max-width": 9,
+        "text-anchor": "top",
+        "text-offset": [
+          0,
+          0.6
+        ],
+        "icon-image": "{kind}"
+      },
+      "paint": {
+        "text-color": "rgba(0, 0, 0, 1)",
+        "text-halo-width": 2,
+        "text-halo-color": "rgba(255, 255, 255, 0.7)"
       }
     }
   ],
-  "id": "hybrid-style",
-  "name": "openmap.lt"
+  "id": "hybrid-style"
 }
