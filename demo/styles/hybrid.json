@@ -29,7 +29,7 @@
       "type": "raster",
       "source": "orto",
       "minzoom": 0,
-      "maxzoom": 18
+      "maxzoom": 20
     },
     {
       "id": "country-boundary",
