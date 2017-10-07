@@ -1,5 +1,5 @@
 SELECT
-  way AS __geometry__,
+  st_linemerge(st_collect(way)) AS __geometry__,
   admin_level,
   (
     CASE
@@ -18,3 +18,4 @@ FROM
 WHERE
   way && !bbox! AND
   boundary IN ('administrative') AND admin_level IN ('2', '4', '6', '8')
+GROUP BY admin_level, kind
