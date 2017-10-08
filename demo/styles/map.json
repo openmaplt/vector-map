@@ -1232,6 +1232,37 @@
       }
     },
     {
+      "id": "label-national-park",
+      "type": "symbol",
+      "source": "tilezen",
+      "source-layer": "protected",
+      "minzoom": 0,
+      "maxzoom": 20,
+      "filter": [
+        "all",
+        [
+          "==",
+          "kind",
+          "national_park"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "symbol-placement": "line",
+        "text-field": "{name}",
+        "text-font": [
+          "Roboto Regular"
+        ],
+        "text-size": 13,
+        "text-anchor": "top"
+      },
+      "paint": {
+        "text-color": "rgba(11, 119, 14, 1)",
+        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 1.5
+      }
+    },
+    {
       "id": "label-city",
       "type": "symbol",
       "source": "tilezen",
