@@ -1,56 +1,89 @@
-mapboxgl.accessToken = 'pk.eyJ1IjoiYmNhbXBlciIsImEiOiJWUmh3anY0In0.1fgSTNWpQV8-5sBjGbBzGg';
+var cookieName = 'mapData';
+var interactiveLayerId = 'label-amenity';
+var defaultType = 'map';
+var mapTypes = {
+  map: 'm',
+  orto: 'o',
+  hybrid: 'h'
+};
+var mapData = {
+  type: 'map',
+  zoom: 7,
+  lat: 55.19114,
+  lng: 23.87100,
+  bearing: 0,
+  pitch: 0
+};
 
 var showAttributes = [
-    'name',
-    'official_name',
-    'opening_hours',
-    'website',
-    'image'
+  'name',
+  'official_name',
+  'opening_hours',
+  'website',
+  'image'
 ];
 
 var label = {
-    official_name: 'Oficialus pavadinimas'
+  official_name: 'Oficialus pavadinimas'
 };
 
 var icons = {
-    opening_hours: "glyphicon glyphicon-time",
-    website: 'glyphicon glyphicon-globe'
+  opening_hours: "glyphicon glyphicon-time",
+  website: 'glyphicon glyphicon-globe'
 };
 
 var attributeType = {
-    name: 'bold',
-    website: 'link',
-    image: 'image'
+  name: 'bold',
+  website: 'link',
+  image: 'image'
 };
 
 if (!mapboxgl.supported()) {
-  $('#layers').remove();
   alert('Jūsų naršyklė nepalaiko Mapbox GL. Prašome atsinaujinti naršyklę.');
 } else {
-  var map = new mapboxgl.Map({
-      container: 'map',
-      style: 'styles/map.json',
-      zoom: 7,
-      minZoom: 7,
-      maxZoom: 18,
-      center: [24.07, 54.96],
-      hash: true,
-      maxBounds: [20.880, 53.888, 26.862, 56.453]
-    })
-      .addControl(new mapboxgl.NavigationControl(), 'top-left')
-      .addControl(new mapboxgl.GeolocateControl({
-        positionOptions: {
-          enableHighAccuracy: true
-        },
-        trackUserLocation: true
-      }), 'top-left')
-  ;
+  if (hashData = getMapDataFromHashUrl()) {
+    mapData = hashData;
+  }
 
-  map.on('data', function () {
-    if (map.isStyleLoaded()) {
-      poiInteractive();
-    }
-  });
+  if (!hashData && (cookieData = readCookie(cookieName))) {
+    mapData = cookieData;
+  }
+
+  $("button[data-style='" + mapData.type + "']").addClass('active');
+  $('#layers').removeClass('hidden');
+
+  if (window.location.hash.length === 0) {
+    changeHashUrl();
+  }
+
+  var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'styles/' + mapData.type + '.json',
+    zoom: mapData.zoom,
+    minZoom: 7,
+    maxZoom: 18,
+    center: [mapData.lng, mapData.lat],
+    hash: false,
+    maxBounds: [20.880, 53.888, 26.862, 56.453],
+    bearing: mapData.bearing,
+    pitch: mapData.pitch
+  })
+    .addControl(new mapboxgl.NavigationControl(), 'top-left')
+    .addControl(new mapboxgl.GeolocateControl({
+      positionOptions: {
+        enableHighAccuracy: true
+      },
+      trackUserLocation: true
+    }), 'top-left')
+    .on('sourcedata', function () {
+      if (map.isStyleLoaded()) {
+        poiInteractive();
+      }
+    })
+    .on('moveend', function () {
+      setMapData();
+      changeHashUrl();
+    });
 }
 
 $('#layers button').on('click', function (e) {
@@ -59,78 +92,137 @@ $('#layers button').on('click', function (e) {
   }
   $('#layers button').removeClass('active');
   $(this).addClass('active');
-  map.setStyle('styles/' + $(e.target).data('style') + '.json');
+
+  var selectLayer = $(e.target).data('style');
+  map.setStyle('styles/' + selectLayer + '.json');
+
+  mapData.type = selectLayer;
+  changeHashUrl(mapData);
 });
 
-function poiInteractive()
-{
-    var poiLayerName = 'label-amenity';
-
-    map.off('mouseenter', poiLayerName, addMousePointerCursor);
-    map.off('mouseleave', poiLayerName, removeMousePointerCursor);
-    map.off('click', poiLayerName, poiOnClick);
-
-    if (map.getLayer(poiLayerName)) {
-        map.on('mouseenter', poiLayerName, addMousePointerCursor);
-        map.on('mouseleave', poiLayerName, removeMousePointerCursor);
-        map.on('click', poiLayerName, poiOnClick);
+function changeHashUrl() {
+  var formatHash = [];
+  for (var key in mapData) {
+    var value = mapData[key];
+    if (key === 'type') {
+      value = mapTypes[mapData.type]
     }
+    formatHash.push(value);
+  }
+  window.location.hash = '#' + formatHash.join('/');
+  storeCookie(cookieName, mapData);
 }
 
-function addMousePointerCursor()
-{
-    map.getCanvas().style.cursor = 'pointer';
-}
+function getMapDataFromHashUrl() {
+  var hash = window.location.hash;
+  if (hash.length > 0) {
+    var mapQueries = hash.replace('#', '').split('/');
 
-function removeMousePointerCursor()
-{
-    map.getCanvas().style.cursor = '';
-}
-
-function poiOnClick(e)
-{
-    var poi = e.features[0];
-    var html = getHtml(poi).join('<br />');
-
-    if(html.length) {
-        new mapboxgl.Popup()
-            .setLngLat(poi.geometry.coordinates)
-            .setHTML(html)
-            .addTo(map);
-    }
-}
-
-function getHtml(poi)
-{
-    return showAttributes
-        .filter(function (prop_name) {
-            return poi.properties[prop_name];
-        })
-        .map(function (prop_name) {
-            var formatedValue = getFomatedValue(prop_name, poi.properties[prop_name]);
-
-            if (icons[prop_name]) {
-                return '<i class="' + icons[prop_name] + '"></i> ' + formatedValue;
-            }
-
-            if (label[prop_name]) {
-                return '<strong>' + label[prop_name] + ':</strong> ' + formatedValue;
-            }
-
-            return formatedValue;
-        });
-}
-
-function getFomatedValue(attribute, value)
-{
-    switch (attributeType[attribute]) {
-        case 'bold':
-            return '<strong>' + value + '</strong>';
-        case 'link':
-            return '<a href="' + value + '" target="_blank">' + value + '</a>';
-        case 'image':
-            return '<img src="' + value + '" />';
+    var type = defaultType;
+    for (var key in mapTypes) {
+      if (mapTypes[key] === mapQueries[0]) {
+        type = key;
+        break;
+      }
     }
 
-    return value;
+    var parseData = {};
+    parseData.type = type;
+    parseData.zoom = parseFloat(mapQueries[1]);
+    parseData.lat = parseFloat(mapQueries[2]);
+    parseData.lng = parseFloat(mapQueries[3]);
+    parseData.bearing = parseInt(mapQueries[4]);
+    parseData.pitch = parseInt(mapQueries[5]);
+
+    return parseData;
+  }
+  return null;
+}
+
+function setMapData() {
+  mapData.zoom = Number(map.getZoom().toFixed(2));
+  mapData.lat = Number(map.getCenter().lat.toFixed(5));
+  mapData.lng = Number(map.getCenter().lng.toFixed(5));
+  mapData.bearing = parseInt(map.getBearing());
+  mapData.pitch = parseInt(map.getPitch());
+}
+
+function storeCookie(name, value) {
+  var date = new Date();
+  date.setDate(date.getDate() + 365);
+  var expires = "expires=" + date.toUTCString();
+  document.cookie = name + '=' + JSON.stringify(value) + ';domain=.' + window.location.host.toString() + ';path=/;' + expires;
+}
+
+function readCookie(name) {
+  var result = document.cookie.match(new RegExp(name + '=([^;]+)'));
+  if (result) {
+    return JSON.parse(result[1]);
+  }
+  return null;
+}
+
+function poiInteractive() {
+  map.off('mouseenter', interactiveLayerId, addMousePointerCursor);
+  map.off('mouseleave', interactiveLayerId, removeMousePointerCursor);
+  map.off('click', interactiveLayerId, poiOnClick);
+
+  if (map.getLayer(interactiveLayerId)) {
+    map.on('mouseenter', interactiveLayerId, addMousePointerCursor);
+    map.on('mouseleave', interactiveLayerId, removeMousePointerCursor);
+    map.on('click', interactiveLayerId, poiOnClick);
+  }
+}
+
+function addMousePointerCursor() {
+  map.getCanvas().style.cursor = 'pointer';
+}
+
+function removeMousePointerCursor() {
+  map.getCanvas().style.cursor = '';
+}
+
+function poiOnClick(e) {
+  var poi = e.features[0];
+  var html = getHtml(poi).join('<br />');
+
+  if (html.length) {
+    new mapboxgl.Popup()
+      .setLngLat(poi.geometry.coordinates)
+      .setHTML(html)
+      .addTo(map);
+  }
+}
+
+function getHtml(poi) {
+  return showAttributes
+    .filter(function (prop_name) {
+      return poi.properties[prop_name];
+    })
+    .map(function (prop_name) {
+      var formatedValue = getFomatedValue(prop_name, poi.properties[prop_name]);
+
+      if (icons[prop_name]) {
+        return '<i class="' + icons[prop_name] + '"></i> ' + formatedValue;
+      }
+
+      if (label[prop_name]) {
+        return '<strong>' + label[prop_name] + ':</strong> ' + formatedValue;
+      }
+
+      return formatedValue;
+    });
+}
+
+function getFomatedValue(attribute, value) {
+  switch (attributeType[attribute]) {
+    case 'bold':
+      return '<strong>' + value + '</strong>';
+    case 'link':
+      return '<a href="' + value + '" target="_blank">' + value + '</a>';
+    case 'image':
+      return '<img src="' + value + '" />';
+  }
+
+  return value;
 }
