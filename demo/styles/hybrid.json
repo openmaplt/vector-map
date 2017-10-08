@@ -426,6 +426,39 @@
       }
     },
     {
+      "id": "label-national-park",
+      "type": "symbol",
+      "source": "osm",
+      "source-layer": "protected",
+      "minzoom": 0,
+      "maxzoom": 20,
+      "filter": [
+        "all",
+        [
+          "==",
+          "kind",
+          "national_park"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible",
+        "symbol-placement": "line",
+        "text-field": "{name}",
+        "text-font": [
+          "Roboto Regular"
+        ],
+        "text-size": 13,
+        "text-anchor": "top",
+        "text-rotation-alignment": "map",
+        "text-pitch-alignment": "auto"
+      },
+      "paint": {
+        "text-color": "rgba(11, 119, 14, 1)",
+        "text-halo-color": "rgba(255, 255, 255, 0.7)",
+        "text-halo-width": 1.7
+      }
+    },
+    {
       "id": "label-city",
       "type": "symbol",
       "source": "osm",
