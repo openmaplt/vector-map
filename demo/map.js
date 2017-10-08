@@ -42,19 +42,17 @@ if (!mapboxgl.supported()) {
   alert('Jūsų naršyklė nepalaiko Mapbox GL. Prašome atsinaujinti naršyklę.');
 } else {
   if (hashData = getMapDataFromHashUrl()) {
-    mapData = hashData;
+    $.extend(mapData, hashData);
   }
 
   if (!hashData && (cookieData = readCookie(cookieName))) {
-    mapData = cookieData;
+    $.extend(mapData, cookieData);
   }
 
   $("button[data-style='" + mapData.type + "']").addClass('active');
   $('#layers').removeClass('hidden');
 
-  if (window.location.hash.length === 0) {
-    changeHashUrl();
-  }
+  changeHashUrl();
 
   var map = new mapboxgl.Map({
     container: 'map',
@@ -116,7 +114,33 @@ function changeHashUrl() {
 function getMapDataFromHashUrl() {
   var hash = window.location.hash;
   if (hash.length > 0) {
-    var mapQueries = hash.replace('#', '').split('/');
+    hash = hash.replace('#', '');
+
+    // Add support old hash format: #l=55.23777,23.871,8,L
+    var result = hash.match(new RegExp('l=([^]+)'));
+    if (result) {
+      var mapQueries = result[1].split(',');
+      return {
+        lat: parseFloat(mapQueries[0]),
+        lng: parseFloat(mapQueries[1]),
+        zoom: parseInt(mapQueries[2])
+      };
+    }
+
+    var mapQueries = hash.split('/');
+
+    // Add support old hash format: #8/55.23777/23.871
+    if (mapQueries.length === 3) {
+      return {
+        zoom: parseFloat(mapQueries[0]),
+        lat: parseFloat(mapQueries[1]),
+        lng: parseFloat(mapQueries[2])
+      }
+    }
+
+    if (mapQueries.length < 6) {
+      return null;
+    }
 
     var type = defaultType;
     for (var key in mapTypes) {
@@ -126,15 +150,14 @@ function getMapDataFromHashUrl() {
       }
     }
 
-    var parseData = {};
-    parseData.type = type;
-    parseData.zoom = parseFloat(mapQueries[1]);
-    parseData.lat = parseFloat(mapQueries[2]);
-    parseData.lng = parseFloat(mapQueries[3]);
-    parseData.bearing = parseInt(mapQueries[4]);
-    parseData.pitch = parseInt(mapQueries[5]);
-
-    return parseData;
+    return {
+      type: type,
+      zoom: parseFloat(mapQueries[1]),
+      lat: parseFloat(mapQueries[2]),
+      lng: parseFloat(mapQueries[3]),
+      bearing: parseInt(mapQueries[4]),
+      pitch: parseInt(mapQueries[5])
+    };
   }
   return null;
 }
