@@ -21,7 +21,7 @@
       ]
     }
   },
-  "sprite": "https://openmap.lt/sprites/osm-liberty",
+  "sprite": "https://openmap.lt/sprites/openmaplt",
   "glyphs": "https://orangemug.github.io/font-glyphs/glyphs/{fontstack}/{range}.pbf",
   "layers": [
     {

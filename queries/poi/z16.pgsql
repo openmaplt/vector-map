@@ -78,14 +78,14 @@ SELECT
     WHEN tourism = 'picnic_site'
       THEN 'picnic_site'
     WHEN tourism = 'viewpoint'
-      THEN 'marker' -- TODO: viewpoint
+      THEN 'viewpoint'
 
     WHEN historic = 'archaeological_site' and site_type = 'fortification'
-      THEN 'marker' -- TODO: hillfort
+      THEN 'hillfort'
     WHEN historic in ('monument', 'memorial')
       THEN 'marker' -- TODO: memorial
     WHEN historic = 'archaeological_site' and site_type = 'tumulus'
-      THEN 'marker' -- TODO: tumulus
+      THEN 'tumulus'
     WHEN historic = 'manor'
       THEN 'marker' -- TODO: manor
     WHEN historic = 'monastery'
@@ -133,10 +133,60 @@ FROM
 WHERE
   way && !bbox! AND
   (
-    amenity IN ('bank', 'bar', 'cafe', 'cinema', 'fast_food', 'fire_station', 'fuel', 'restaurant', 'pub', 'hospital', 'library', 'pharmacy', 'place_of_worship', 'police', 'school', 'shelter', 'theatre') OR
-    tourism IN ('museum', 'attraction', 'camp_site', 'picnic_site') OR
+    amenity IN ('arts_centre',
+                'atm'
+                'bank',
+                'bar',
+                'cafe',
+                'car_wash',
+                'cinema',
+                'clinic',
+                'college',
+                'courthouse',
+                'dentist',
+                'doctors',
+                'fast_food',
+                'fire_station',
+                'fuel',
+                'hospital',
+                'kindergarten',
+                'library',
+                'pharmacy',
+                'place_of_worship',
+                'police',
+                'post_office',
+                'pub',
+                'restaurant',
+                'school',
+                'shelter',
+                'theatre',
+                'universite') OR
+    tourism IN ('attraction',
+                'camp_site',
+                'caravan_site',
+                'chalet',
+                'hostel',
+                'motel',
+                'guest_house',
+                'hotel',
+                'museum',
+                'picnic_site',
+                'viewpoint') OR
     (tourism = 'information' and information = 'office') OR
-    shop IN ('alcohol', 'bakery', 'bicycle', 'clothes', 'supermarket', 'convenience', 'hairdresser')
+    shop IN ('alcohol',
+             'bakery',
+             'bicycle',
+             'car_repair',
+             'convenience',
+             'clothes',
+             'hairdresser',
+             'mall',
+             'supermarket') OR
+    historic IN ('archaeological_site',
+                 'monument',
+                 'memorial',
+                 'manor',
+                 'monastery')
   )
 
 UNION ALL
@@ -221,7 +271,7 @@ SELECT
     WHEN tourism = 'picnic_site'
       THEN 'picnic_site'
     WHEN tourism = 'viewpoint'
-      THEN 'marker' -- TODO: viewpoint
+      THEN 'viewpoint'
 
     WHEN historic = 'archaeological_site' and site_type = 'fortification'
       THEN 'marker' -- TODO: hillfort
@@ -276,8 +326,58 @@ FROM
 WHERE
   way && !bbox! AND
   (
-    amenity IN ('bank', 'bar', 'cafe', 'cinema', 'fast_food', 'fire_station', 'fuel', 'restaurant', 'pub', 'hospital', 'library', 'pharmacy', 'place_of_worship', 'police', 'school', 'shelter', 'theatre') OR
-    tourism IN ('museum', 'attraction', 'camp_site', 'picnic_site') OR
+    amenity IN ('arts_centre',
+                'atm'
+                'bank',
+                'bar',
+                'cafe',
+                'car_wash',
+                'cinema',
+                'clinic',
+                'college',
+                'courthouse',
+                'dentist',
+                'doctors',
+                'fast_food',
+                'fire_station',
+                'fuel',
+                'hospital',
+                'kindergarten',
+                'library',
+                'pharmacy',
+                'place_of_worship',
+                'police',
+                'post_office',
+                'pub',
+                'restaurant',
+                'school',
+                'shelter',
+                'theatre',
+                'universite') OR
+    tourism IN ('attraction',
+                'camp_site',
+                'caravan_site',
+                'chalet',
+                'hostel',
+                'motel',
+                'guest_house',
+                'hotel',
+                'museum',
+                'picnic_site',
+                'viewpoint') OR
     (tourism = 'information' and information = 'office') OR
-    shop IN ('alcohol', 'bakery', 'bicycle', 'clothes', 'supermarket', 'convenience', 'hairdresser')
+    shop IN ('alcohol',
+             'bakery',
+             'bicycle',
+             'car_repair',
+             'convenience',
+             'clothes',
+             'hairdresser',
+             'mall',
+             'supermarket') OR
+    historic IN ('archaeological_site',
+                 'monument',
+                 'memorial',
+                 'manor',
+                 'monastery')
   )
