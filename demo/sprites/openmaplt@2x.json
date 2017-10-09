@@ -377,6 +377,13 @@
     "x": 263,
     "y": 84
   },
+  "hillfort": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 282,
+    "y": 84
+  },
   "home": {
     "height": 21,
     "pixelRatio": 1,
@@ -395,15 +402,15 @@
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 282,
+    "x": 301,
     "y": 84
   },
   "ice-cream": {
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 301,
-    "y": 84
+    "x": 168,
+    "y": 105
   },
   "industry": {
     "height": 21,
@@ -416,7 +423,7 @@
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 168,
+    "x": 187,
     "y": 105
   },
   "landmark": {
@@ -437,7 +444,7 @@
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 187,
+    "x": 206,
     "y": 105
   },
   "lighthouse": {
@@ -451,7 +458,7 @@
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 206,
+    "x": 225,
     "y": 105
   },
   "marker": {
@@ -472,14 +479,14 @@
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 225,
+    "x": 244,
     "y": 105
   },
   "monument": {
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 244,
+    "x": 263,
     "y": 105
   },
   "mountain": {
@@ -493,14 +500,14 @@
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 263,
+    "x": 282,
     "y": 105
   },
   "music": {
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 282,
+    "x": 301,
     "y": 105
   },
   "natural": {
@@ -542,14 +549,14 @@
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 301,
-    "y": 105
+    "x": 168,
+    "y": 126
   },
   "picnic-site": {
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 168,
+    "x": 187,
     "y": 126
   },
   "pitch": {
@@ -563,7 +570,7 @@
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 187,
+    "x": 206,
     "y": 126
   },
   "playground": {
@@ -577,7 +584,7 @@
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 206,
+    "x": 225,
     "y": 126
   },
   "post": {
@@ -598,7 +605,7 @@
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 225,
+    "x": 244,
     "y": 126
   },
   "ranger-station": {
@@ -619,21 +626,21 @@
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 244,
+    "x": 263,
     "y": 126
   },
   "religious-jewish": {
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 263,
+    "x": 282,
     "y": 126
   },
   "religious-muslim": {
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 282,
+    "x": 301,
     "y": 126
   },
   "residential-community": {
@@ -647,8 +654,8 @@
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 301,
-    "y": 126
+    "x": 168,
+    "y": 147
   },
   "roadblock": {
     "height": 21,
@@ -682,14 +689,14 @@
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 168,
+    "x": 187,
     "y": 147
   },
   "shop": {
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 187,
+    "x": 206,
     "y": 147
   },
   "skiing": {
@@ -703,7 +710,7 @@
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 206,
+    "x": 225,
     "y": 147
   },
   "soccer": {
@@ -759,7 +766,7 @@
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 225,
+    "x": 244,
     "y": 147
   },
   "swimming": {
@@ -787,7 +794,7 @@
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 244,
+    "x": 263,
     "y": 147
   },
   "toilet": {
@@ -825,11 +832,25 @@
     "x": 21,
     "y": 147
   },
+  "tumulus": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 282,
+    "y": 147
+  },
   "veterinary": {
     "height": 21,
     "pixelRatio": 1,
     "width": 21,
     "x": 42,
+    "y": 147
+  },
+  "viewpoint": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 301,
     "y": 147
   },
   "village": {
@@ -878,7 +899,7 @@
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 263,
-    "y": 147
+    "x": 0,
+    "y": 168
   }
 }
