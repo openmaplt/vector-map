@@ -27,13 +27,6 @@
     "x": 38,
     "y": 169
   },
-  "america-football": {
-    "height": 15,
-    "pixelRatio": 1,
-    "width": 15,
-    "x": 456,
-    "y": 169
-  },
   "amusement-park": {
     "height": 19,
     "pixelRatio": 1,
@@ -83,20 +76,6 @@
     "x": 171,
     "y": 169
   },
-  "barrier": {
-    "height": 15,
-    "pixelRatio": 1,
-    "width": 15,
-    "x": 471,
-    "y": 169
-  },
-  "baseball": {
-    "height": 15,
-    "pixelRatio": 1,
-    "width": 15,
-    "x": 486,
-    "y": 169
-  },
   "basketball": {
     "height": 21,
     "pixelRatio": 1,
@@ -131,13 +110,6 @@
     "width": 19,
     "x": 228,
     "y": 169
-  },
-  "blood-bank": {
-    "height": 15,
-    "pixelRatio": 1,
-    "width": 15,
-    "x": 247,
-    "y": 188
   },
   "buddhism": {
     "height": 19,
@@ -251,13 +223,6 @@
     "x": 209,
     "y": 188
   },
-  "cricket": {
-    "height": 15,
-    "pixelRatio": 1,
-    "width": 15,
-    "x": 262,
-    "y": 188
-  },
   "cross": {
     "height": 21,
     "pixelRatio": 1,
@@ -278,13 +243,6 @@
     "width": 21,
     "x": 42,
     "y": 85
-  },
-  "defibrillator": {
-    "height": 15,
-    "pixelRatio": 1,
-    "width": 15,
-    "x": 277,
-    "y": 188
   },
   "dentist": {
     "height": 19,
@@ -321,47 +279,12 @@
     "x": 105,
     "y": 85
   },
-  "emergency-phone": {
-    "height": 15,
-    "pixelRatio": 1,
-    "width": 15,
-    "x": 292,
-    "y": 188
-  },
-  "entrance": {
-    "height": 15,
-    "pixelRatio": 1,
-    "width": 15,
-    "x": 307,
-    "y": 188
-  },
-  "entrance-alt1": {
-    "height": 15,
-    "pixelRatio": 1,
-    "width": 15,
-    "x": 322,
-    "y": 188
-  },
-  "farm": {
-    "height": 15,
-    "pixelRatio": 1,
-    "width": 15,
-    "x": 337,
-    "y": 188
-  },
   "fast-food": {
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
     "x": 19,
     "y": 207
-  },
-  "fence": {
-    "height": 15,
-    "pixelRatio": 1,
-    "width": 15,
-    "x": 352,
-    "y": 188
   },
   "ferry": {
     "height": 19,
@@ -390,13 +313,6 @@
     "width": 19,
     "x": 95,
     "y": 207
-  },
-  "gaming": {
-    "height": 15,
-    "pixelRatio": 1,
-    "width": 15,
-    "x": 367,
-    "y": 188
   },
   "garden": {
     "height": 21,
@@ -510,13 +426,6 @@
     "x": 0,
     "y": 226
   },
-  "karaoke": {
-    "height": 15,
-    "pixelRatio": 1,
-    "width": 15,
-    "x": 382,
-    "y": 188
-  },
   "landmark": {
     "height": 21,
     "pixelRatio": 1,
@@ -530,13 +439,6 @@
     "width": 21,
     "x": 189,
     "y": 64
-  },
-  "laundry": {
-    "height": 15,
-    "pixelRatio": 1,
-    "width": 15,
-    "x": 397,
-    "y": 188
   },
   "library": {
     "height": 19,
@@ -558,13 +460,6 @@
     "width": 19,
     "x": 38,
     "y": 226
-  },
-  "logging": {
-    "height": 15,
-    "pixelRatio": 1,
-    "width": 15,
-    "x": 412,
-    "y": 188
   },
   "marker": {
     "height": 21,
@@ -633,15 +528,15 @@
     "height": 10,
     "pixelRatio": 1,
     "width": 104,
-    "x": 291,
-    "y": 207
+    "x": 247,
+    "y": 188
   },
   "oneway_large": {
     "height": 14,
     "pixelRatio": 1,
     "width": 44,
-    "x": 247,
-    "y": 207
+    "x": 456,
+    "y": 169
   },
   "park": {
     "height": 21,
@@ -733,20 +628,6 @@
     "width": 19,
     "x": 209,
     "y": 226
-  },
-  "rail-light": {
-    "height": 15,
-    "pixelRatio": 1,
-    "width": 15,
-    "x": 427,
-    "y": 188
-  },
-  "rail-metro": {
-    "height": 15,
-    "pixelRatio": 1,
-    "width": 15,
-    "x": 442,
-    "y": 188
   },
   "ranger-station": {
     "height": 21,
@@ -853,13 +734,6 @@
     "x": 342,
     "y": 169
   },
-  "snowmobile": {
-    "height": 15,
-    "pixelRatio": 1,
-    "width": 15,
-    "x": 457,
-    "y": 188
-  },
   "soccer": {
     "height": 21,
     "pixelRatio": 1,
@@ -937,13 +811,6 @@
     "x": 189,
     "y": 127
   },
-  "telephone": {
-    "height": 15,
-    "pixelRatio": 1,
-    "width": 15,
-    "x": 472,
-    "y": 188
-  },
   "tennis": {
     "height": 21,
     "pixelRatio": 1,
@@ -1020,13 +887,6 @@
     "width": 21,
     "x": 105,
     "y": 148
-  },
-  "volcano": {
-    "height": 15,
-    "pixelRatio": 1,
-    "width": 15,
-    "x": 487,
-    "y": 188
   },
   "warehouse": {
     "height": 21,
