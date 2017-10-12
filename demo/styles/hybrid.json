@@ -212,6 +212,58 @@
       }
     },
     {
+      "id": "road-oneway",
+      "type": "line",
+      "source": "osm",
+      "source-layer": "roads",
+      "minzoom": 8,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "residential",
+          "unclassified",
+          "living_street",
+          "service",
+          "trunk",
+          "trunk_link",
+          "primary",
+          "primary_link",
+          "secondary",
+          "secondary_link",
+          "tertiary",
+          "tertiary_link"
+        ],
+        [
+          "==",
+          "oneway",
+          "yes"
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-width": {
+          "base": 1.55,
+          "stops": [
+            [
+              4,
+              0.25
+            ],
+            [
+              20,
+              30
+            ]
+          ]
+        },
+        "line-opacity": 0.5,
+        "line-pattern": "oneway"
+      }
+    },
+    {
       "id": "link-bridge",
       "type": "line",
       "source": "osm",
