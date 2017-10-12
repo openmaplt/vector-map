@@ -63,8 +63,6 @@ SELECT
 
     WHEN tourism = 'attraction' and "attraction:type" = 'hiking_route'
       THEN 'marker' -- TODO: hiking route
-    WHEN tourism = 'attraction'
-      THEN 'attraction'
     WHEN tourism = 'information'
       THEN 'information'
     WHEN tourism in ('camp_site', 'caravan_site')
@@ -90,6 +88,9 @@ SELECT
       THEN 'marker' -- TODO: manor
     WHEN historic = 'monastery'
       THEN 'marker' -- TODO: monastery
+
+    WHEN tourism = 'attraction'
+      THEN 'attraction'
 
     WHEN shop = 'alcohol'
       THEN 'alcohol_shop'
@@ -160,7 +161,8 @@ WHERE
                 'school',
                 'shelter',
                 'theatre',
-                'universite') OR
+                'townhall',
+                'university') OR
     tourism IN ('attraction',
                 'camp_site',
                 'caravan_site',
@@ -186,7 +188,12 @@ WHERE
                  'monument',
                  'memorial',
                  'manor',
-                 'monastery')
+                 'monastery') OR
+    office IN (
+              'government',
+              'notary',
+              'lawyer'
+    )
   )
 
 UNION ALL
@@ -256,8 +263,6 @@ SELECT
 
     WHEN tourism = 'attraction' and "attraction:type" = 'hiking_route'
       THEN 'marker' -- TODO: hiking route
-    WHEN tourism = 'attraction'
-      THEN 'attraction'
     WHEN tourism = 'information'
       THEN 'information'
     WHEN tourism in ('camp_site', 'caravan_site')
@@ -283,6 +288,9 @@ SELECT
       THEN 'marker' -- TODO: manor
     WHEN historic = 'monastery'
       THEN 'marker' -- TODO: monastery
+
+    WHEN tourism = 'attraction'
+      THEN 'attraction'
 
     WHEN shop = 'alcohol'
       THEN 'alcohol_shop'
@@ -353,7 +361,8 @@ WHERE
                 'school',
                 'shelter',
                 'theatre',
-                'universite') OR
+                'townhall',
+                'university') OR
     tourism IN ('attraction',
                 'camp_site',
                 'caravan_site',
@@ -379,5 +388,10 @@ WHERE
                  'monument',
                  'memorial',
                  'manor',
-                 'monastery')
+                 'monastery') OR
+    office IN (
+              'government',
+              'notary',
+              'lawyer'
+    )
   )

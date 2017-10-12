@@ -934,8 +934,9 @@
       "source": "tilezen",
       "source-layer": "roads",
       "minzoom": 16,
+      "maxzoom": 24,
       "filter": [
-        "any",
+        "all",
         [
           "in",
           "kind",
