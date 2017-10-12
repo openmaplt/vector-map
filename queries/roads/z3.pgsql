@@ -25,7 +25,8 @@ SELECT
         THEN 'yes'
       ELSE 'no'
     END
-  ) as is_bridge
+  ) as is_bridge,
+  coalesce(oneway, 'no') AS oneway
 FROM
   planet_osm_line
 WHERE
@@ -50,4 +51,4 @@ WHERE
    railway = 'rail' OR
    aeroway = 'runway'
   )
-GROUP BY kind, name, ref, is_tunnel, is_bridge
+GROUP BY kind, name, ref, is_tunnel, is_bridge, oneway
