@@ -929,50 +929,6 @@
       }
     },
     {
-      "id": "road-road-oneway",
-      "type": "line",
-      "source": "tilezen",
-      "source-layer": "roads",
-      "minzoom": 16,
-      "maxzoom": 24,
-      "filter": [
-        "all",
-        [
-          "in",
-          "kind",
-          "residential",
-          "unclassified",
-          "living_street"
-        ],
-        [
-          "==",
-          "oneway",
-          "yes"
-        ]
-      ],
-      "layout": {
-        "line-join": "round",
-        "line-cap": "round",
-        "visibility": "visible"
-      },
-      "paint": {
-        "line-width": {
-          "base": 1.55,
-          "stops": [
-            [
-              4,
-              0.25
-            ],
-            [
-              20,
-              30
-            ]
-          ]
-        },
-        "line-pattern": "oneway"
-      }
-    },
-    {
       "id": "road-tertiary",
       "type": "line",
       "source": "tilezen",
@@ -1154,6 +1110,61 @@
           2
         ],
         "line-opacity": 0.5
+      }
+    },
+    {
+      "id": "road-oneway",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "minzoom": 16,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "residential",
+          "unclassified",
+          "living_street",
+          "service",
+          "tertiary",
+          "tertiary_link",
+          "secondary",
+          "secondary_link",
+          "primary",
+          "primary_link",
+          "trunk",
+          "trunk_link",
+          "motorway",
+          "motorway_link"
+        ],
+        [
+          "==",
+          "oneway",
+          "yes"
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round",
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-width": {
+          "base": 1.55,
+          "stops": [
+            [
+              4,
+              0.25
+            ],
+            [
+              20,
+              30
+            ]
+          ]
+        },
+        "line-pattern": "oneway"
       }
     },
     {
