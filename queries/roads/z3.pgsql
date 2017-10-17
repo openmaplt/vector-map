@@ -46,6 +46,7 @@ WHERE
                'service',
                'track',
                'footway',
+               'steps',
                'path')
    OR
    railway = 'rail' OR

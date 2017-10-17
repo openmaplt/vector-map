@@ -226,14 +226,16 @@
           "unclassified",
           "living_street",
           "service",
-          "trunk",
-          "trunk_link",
-          "primary",
-          "primary_link",
+          "tertiary",
+          "tertiary_link",
           "secondary",
           "secondary_link",
-          "tertiary",
-          "tertiary_link"
+          "primary",
+          "primary_link",
+          "trunk",
+          "trunk_link",
+          "motorway",
+          "motorway_link"
         ],
         [
           "==",
@@ -695,7 +697,8 @@
         ],
         "symbol-placement": "line",
         "text-rotation-alignment": "auto",
-        "text-size": 13
+        "text-size": 13,
+        "visibility": "visible"
       },
       "paint": {
         "text-color": "rgba(0, 0, 0, 1)",
