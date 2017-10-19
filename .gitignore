@@ -1,2 +1,9 @@
 .idea
-/cache/*
+/cache
+/bin
+/include
+/lib
+/local
+/share
+pip-selfcheck.json
+*.pbf
