@@ -19,7 +19,7 @@ WHERE
   name IS NOT NULL AND
   place IN ('city', 'town', 'village')
 ORDER BY
-  coalesce(population, 0) desc
+  cast(coalesce(population, '0') as int) desc
 
 UNION ALL
 
