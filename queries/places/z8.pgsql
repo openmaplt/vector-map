@@ -19,5 +19,7 @@ WHERE
   name IS NOT NULL AND
   (
     place IN ('country', 'state', 'city') OR
-    (place = 'town' AND rank = '0')
+    (place = 'town' AND rank in ('0', '10'))
   )
+ORDER BY
+  coalesce(population, 0) desc
