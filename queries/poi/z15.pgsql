@@ -129,6 +129,9 @@ SELECT
     WHEN tourism = 'attraction'
       THEN 'attraction'
 
+    WHEN leisure = 'park'
+      THEN 'park'
+
     END
   ) AS kind,
   official_name,
@@ -168,5 +171,6 @@ WHERE
                  'monument',
                  'memorial',
                  'manor',
-                 'monastery')
+                 'monastery') OR
+    leisure = 'park'
   )

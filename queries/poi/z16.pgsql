@@ -313,6 +313,10 @@ SELECT
       THEN 'town-hall'
     WHEN office in ('notary', 'lawyer')
       THEN 'marker' -- TODO notary
+
+    WHEN leisure = 'park'
+      THEN 'park'
+
     END
   ) AS kind,
   official_name,
@@ -393,5 +397,6 @@ WHERE
               'government',
               'notary',
               'lawyer'
-    )
+    ) OR
+    leisure = 'park'
   )
