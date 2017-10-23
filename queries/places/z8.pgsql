@@ -22,4 +22,4 @@ WHERE
     (place = 'town' AND rank in ('0', '10'))
   )
 ORDER BY
-  coalesce(population, 0) desc
+  coalesce(population::int, 0) desc

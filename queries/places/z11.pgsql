@@ -33,4 +33,4 @@ WHERE
   ("natural" = 'water' OR landuse = 'reservoir') AND
   way_area >= 500000
 ORDER BY
-  coalesce(population, 0) desc
+  coalesce(population::int, 0) desc
