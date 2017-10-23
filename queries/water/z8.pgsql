@@ -32,7 +32,7 @@ WHERE
   way && !bbox! AND
   (
     "natural" = 'water' OR
-    landuse = 'reservoir' OR
+    landuse = 'reservoir'
   ) AND
   way_area >= 10000000
 GROUP BY
