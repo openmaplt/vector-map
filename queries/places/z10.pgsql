@@ -18,6 +18,8 @@ WHERE
   way && !bbox! AND
   name IS NOT NULL AND
   place IN ('city', 'town', 'village')
+ORDER BY
+  coalesce(population::int, 0) desc
 
 UNION ALL
 
@@ -32,5 +34,3 @@ WHERE
   name IS NOT NULL AND
   ("natural" = 'water' OR landuse = 'reservoir') AND
   way_area >= 1000000
-ORDER BY
-  coalesce(population::int, 0) desc
