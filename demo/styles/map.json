@@ -1696,6 +1696,33 @@
       }
     },
     {
+      "id": "label-park",
+      "type": "symbol",
+      "source": "tilezen",
+      "source-layer": "poi",
+      "minzoom": 7,
+      "maxzoom": 11,
+      "layout": {
+        "text-field": "{name}",
+        "text-size": 12,
+        "text-max-width": 9,
+        "text-anchor": "top",
+        "text-offset": [
+          0,
+          0.6
+        ],
+        "icon-image": "park",
+        "text-font": [
+          "Roboto Condensed Italic"
+        ]
+      },
+      "paint": {
+        "text-color": "rgba(26, 92, 0, 1)",
+        "text-halo-width": 1,
+        "text-halo-color": "rgba(255, 255, 255, 0.7)"
+      }
+    },
+    {
       "id": "label-amenity",
       "type": "symbol",
       "source": "tilezen",

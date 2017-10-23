@@ -1,7 +1,7 @@
 SELECT
   ST_PointOnSurface(way) AS __geometry__,
   coalesce("name:lt", name) AS name,
-  'national_park' AS kind,
+  'park' AS kind,
   website,
   wikipedia
 FROM
