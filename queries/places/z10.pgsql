@@ -32,3 +32,5 @@ WHERE
   name IS NOT NULL AND
   ("natural" = 'water' OR landuse = 'reservoir') AND
   way_area >= 1000000
+ORDER BY
+  coalesce(population, 0) desc

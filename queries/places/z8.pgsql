@@ -19,5 +19,21 @@ WHERE
   name IS NOT NULL AND
   (
     place IN ('country', 'state', 'city') OR
-    (place = 'town' AND rank = '0')
+    (place = 'town' AND rank in ('0', '10'))
   )
+ORDER BY
+  coalesce(population, 0) desc
+
+UNION ALL
+
+SELECT
+  ST_PointOnSurface(way) AS __geometry__,
+  coalesce("name:lt", name) AS name,
+  website AS website
+FROM
+  planet_osm_polygon
+WHERE
+  way && !bbox! AND
+  name IS NOT NULL AND
+  boundary = 'national_park' AND
+  way_area >= 1000000
