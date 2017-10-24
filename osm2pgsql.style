@@ -157,5 +157,6 @@ node,way   ref:lt:kpd   text         linear
 node,way   site_type    text         linear
 node,way   attraction:type   text    linear
 node,way   network      text         linear
+node,way   distance     text         linear
 node,way   z_order      int4         linear # This is calculated during import
 way        way_area     real                # This is calculated during import
