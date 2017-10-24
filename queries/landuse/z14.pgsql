@@ -33,4 +33,5 @@ WHERE
   (
     landuse IN ('forest', 'residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages') OR
    "natural" = 'wetland'
-  )
+  ) AND
+  way_area >= 50000
