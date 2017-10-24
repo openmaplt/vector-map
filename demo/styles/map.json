@@ -1310,50 +1310,6 @@
       }
     },
     {
-      "id": "label-state",
-      "type": "symbol",
-      "source": "tilezen",
-      "source-layer": "places",
-      "minzoom": 7,
-      "maxzoom": 10,
-      "filter": [
-        "all",
-        [
-          "==",
-          "$type",
-          "Point"
-        ],
-        [
-          "==",
-          "kind",
-          "state"
-        ]
-      ],
-      "layout": {
-        "text-field": "{name}",
-        "text-font": [
-          "Roboto Condensed Italic"
-        ],
-        "text-max-width": 8,
-        "text-size": {
-          "stops": [
-            [
-              7,
-              16
-            ],
-            [
-              10,
-              20
-            ]
-          ]
-        }
-      },
-      "paint": {
-        "text-color": "rgba(136, 136, 136, 1)",
-        "text-halo-color": "rgba(255,255, 255, 1)"
-      }
-    },
-    {
       "id": "label-national-park",
       "type": "symbol",
       "source": "tilezen",
