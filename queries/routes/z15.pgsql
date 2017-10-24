@@ -11,4 +11,4 @@ WHERE
   route IN ('hiking') AND
   network = 'lwn'
 GROUP BY
-  highway, ref
+  route, network, name, distance
