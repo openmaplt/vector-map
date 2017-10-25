@@ -26,6 +26,8 @@ SELECT
         THEN 'swamp'
       WHEN "natural" in ('beach', 'sand')
         THEN 'sand'
+      WHEN "natural" = 'scrub'
+        THEN 'scrub'
     END
   ) AS kind
 FROM
@@ -34,6 +36,6 @@ WHERE
   way && !bbox! AND
   (
     landuse IN ('forest', 'residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages') OR
-   "natural" in ('wetland', 'sand', 'beach')
+   "natural" in ('wetland', 'sand', 'beach', 'scrub')
   ) AND
   way_area >= 2000

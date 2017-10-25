@@ -53,7 +53,7 @@ WHERE
     amenity = 'swimming_pool' OR
     leisure = 'swimming_pool'
   ) AND
-  way_area >= 100000
+  way_area >= 75000
 GROUP BY
   kind,
   coalesce("name:lt", name)

@@ -26,6 +26,8 @@ SELECT
         THEN 'swamp'
       WHEN "natural" in ('beach', 'sand')
         THEN 'sand'
+      WHEN "natural" = 'scrub'
+        THEN 'scrub'
       WHEN leisure = 'park'
         THEN 'park'
     END
@@ -36,6 +38,6 @@ WHERE
   way && !bbox! AND
   (
     landuse IN ('forest', 'residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages') OR
-   "natural" in ('wetland', 'sand', 'beach') OR
+   "natural" in ('wetland', 'sand', 'beach', 'scrub') OR
    leisure = 'park'
   )
