@@ -32,6 +32,6 @@ WHERE
   way && !bbox! AND
   (
     landuse IN ('forest', 'residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages') OR
-   "natural" = 'wetland'
+   "natural" in ('wetland', 'sand', 'beach')
   ) AND
   way_area >= 2000

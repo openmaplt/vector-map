@@ -34,6 +34,6 @@ WHERE
   way && !bbox! AND
   (
     landuse IN ('forest', 'residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages') OR
-   "natural" = 'wetland' OR
+   "natural" in ('wetland', 'sand', 'beach') OR
    leisure = 'park'
   )
