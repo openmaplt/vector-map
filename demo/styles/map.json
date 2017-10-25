@@ -1207,8 +1207,7 @@
       "layout": {
         "line-join": "round",
         "line-cap": "round",
-        "visibility": "visible",
-        "line-miter-limit": 2
+        "visibility": "visible"
       },
       "paint": {
         "line-width": {
