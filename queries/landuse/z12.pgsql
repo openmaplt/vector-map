@@ -24,6 +24,10 @@ SELECT
         THEN 'marsh'
       WHEN "natural" = 'wetland' AND "wetland" = 'swamp'
         THEN 'swamp'
+      WHEN "natural" in ('beach', 'sand')
+        THEN 'sand'
+      WHEN "natural" = 'scrub'
+        THEN 'scrub'
     END
   ) AS kind
 FROM
@@ -32,6 +36,6 @@ WHERE
   way && !bbox! AND
   (
     landuse IN ('forest', 'residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages') OR
-   "natural" = 'wetland'
+   "natural" in ('wetland', 'beach', 'sand', 'scrub')
   ) AND
-  way_area >= 500000
+  way_area >= 100000

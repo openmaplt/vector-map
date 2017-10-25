@@ -117,6 +117,29 @@
       }
     },
     {
+      "id": "landuse-sand",
+      "type": "fill",
+      "source": "tilezen",
+      "source-layer": "landuse",
+      "minzoom": 12,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "sand"
+        ]
+      ],
+      "layout": {
+        "visibility": "none"
+      },
+      "paint": {
+        "fill-color": "rgba(242, 232, 141, 1)",
+        "fill-opacity": 1
+      }
+    },
+    {
       "id": "landuse-marsh",
       "type": "fill",
       "source": "tilezen",
@@ -132,6 +155,25 @@
       ],
       "paint": {
         "fill-color": "rgba(196, 243, 189, 1)",
+        "fill-opacity": 1
+      }
+    },
+    {
+      "id": "landuse-scrub",
+      "type": "fill",
+      "source": "tilezen",
+      "source-layer": "landuse",
+      "minzoom": 6,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "scrub"
+        ]
+      ],
+      "paint": {
+        "fill-color": "rgba(146, 223, 134, 1)",
         "fill-opacity": 1
       }
     },
@@ -246,6 +288,25 @@
       }
     },
     {
+      "id": "landuse-allotments",
+      "type": "fill",
+      "source": "tilezen",
+      "source-layer": "landuse",
+      "minzoom": 6,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "allotments"
+        ]
+      ],
+      "paint": {
+        "fill-color": "rgba(226, 211, 197, 1)",
+        "fill-opacity": 1
+      }
+    },
+    {
       "id": "landuse-commercial",
       "type": "fill",
       "source": "tilezen",
@@ -310,7 +371,18 @@
       "layout": {},
       "paint": {
         "line-color": "rgba(149, 154, 212, 0.8)",
-        "line-width": 1
+        "line-width": {
+          "stops": [
+            [
+              7,
+              0
+            ],
+            [
+              12,
+              1
+            ]
+          ]
+        }
       }
     },
     {
@@ -392,38 +464,6 @@
             ]
           ]
         }
-      }
-    },
-    {
-      "id": "boundary-state",
-      "type": "line",
-      "source": "tilezen",
-      "source-layer": "boundaries",
-      "minzoom": 6,
-      "maxzoom": 20,
-      "filter": [
-        "all",
-        [
-          "==",
-          "kind",
-          "region"
-        ]
-      ],
-      "layout": {
-        "line-cap": "butt",
-        "line-join": "round",
-        "line-miter-limit": 1,
-        "line-round-limit": 1.05
-      },
-      "paint": {
-        "line-color": "rgba(119, 119, 119, 1)",
-        "line-width": 1,
-        "line-translate-anchor": "map",
-        "line-blur": 0,
-        "line-dasharray": [
-          1,
-          7
-        ]
       }
     },
     {
@@ -1248,7 +1288,7 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "rgba(0, 0, 0, 1)",
+        "line-color": "rgba(100, 100, 100, 1)",
         "line-width": {
           "base": 1.8,
           "stops": [
