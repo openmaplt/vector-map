@@ -24,6 +24,8 @@ SELECT
         THEN 'marsh'
       WHEN "natural" = 'wetland' AND "wetland" = 'swamp'
         THEN 'swamp'
+      WHEN "natural" in ('beach', 'sand')
+        THEN 'sand'
     END
   ) AS kind
 FROM
