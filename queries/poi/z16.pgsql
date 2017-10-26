@@ -11,6 +11,8 @@ SELECT
       THEN 'bank'
     WHEN amenity = 'bar'
       THEN 'bar'
+    WHEN amenity = 'bicycle_parking'
+      THEN 'bicycle_parking'
     WHEN amenity = 'cafe'
       THEN 'cafe'
     WHEN amenity = 'car_wash'
@@ -21,6 +23,8 @@ SELECT
       THEN 'marker' -- TODO: clinic
     WHEN amenity = 'courthouse'
       THEN 'marker' -- TODO: courthouse
+    WHEN amenity = 'compressed_air'
+      THEN 'compressed_air'
     WHEN amenity = 'dentist'
       THEN 'dentist'
     WHEN amenity = 'doctors'
@@ -138,11 +142,13 @@ WHERE
                 'atm'
                 'bank',
                 'bar',
+                'bicycle_parking',
                 'cafe',
                 'car_wash',
                 'cinema',
                 'clinic',
                 'college',
+                'compressed_air',
                 'courthouse',
                 'dentist',
                 'doctors',
@@ -211,6 +217,8 @@ SELECT
       THEN 'bank'
     WHEN amenity = 'bar'
       THEN 'bar'
+    WHEN amenity = 'bicycle_parking'
+      THEN 'bicycle_parking'
     WHEN amenity = 'cafe'
       THEN 'cafe'
     WHEN amenity = 'car_wash'
@@ -219,6 +227,8 @@ SELECT
       THEN 'cinema'
     WHEN amenity = 'clinic'
       THEN 'marker' -- TODO: clinic
+    WHEN amenity = 'compressed_air'
+      THEN 'compressed_air'
     WHEN amenity = 'courthouse'
       THEN 'marker' -- TODO: courthouse
     WHEN amenity = 'dentist'
@@ -342,11 +352,13 @@ WHERE
                 'atm'
                 'bank',
                 'bar',
+                'bicycle_parking',
                 'cafe',
                 'car_wash',
                 'cinema',
                 'clinic',
                 'college',
+                'compressed_air',
                 'courthouse',
                 'dentist',
                 'doctors',
