@@ -19,6 +19,13 @@
       "tiles": [
         "https://openmap.lt/all/{z}/{x}/{y}.pbf"
       ]
+    },
+    "bicycle": {
+      "type": "vector",
+      "attribution": "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>",
+      "tiles": [
+        "https://openmap.lt/bicycle/{z}/{x}/{y}.pbf"
+      ]
     }
   },
   "sprite": "https://openmap.lt/sprites/openmaplt",
@@ -32,69 +39,6 @@
       "maxzoom": 20,
       "layout": {
         "visibility": "visible"
-      }
-    },
-    {
-      "id": "boundary-state",
-      "type": "line",
-      "source": "osm",
-      "source-layer": "boundaries",
-      "minzoom": 6,
-      "maxzoom": 20,
-      "filter": [
-        "all",
-        [
-          "==",
-          "kind",
-          "region"
-        ]
-      ],
-      "layout": {},
-      "paint": {
-        "line-color": "rgba(175, 175, 175, 1)",
-        "line-width": 1,
-        "line-dasharray": [
-          3,
-          7
-        ]
-      }
-    },
-    {
-      "id": "boundary-national-park-outline",
-      "type": "line",
-      "source": "osm",
-      "source-layer": "protected",
-      "minzoom": 0,
-      "maxzoom": 20,
-      "filter": [
-        "all",
-        [
-          "==",
-          "kind",
-          "national_park"
-        ]
-      ],
-      "layout": {
-        "visibility": "visible"
-      },
-      "paint": {
-        "line-color": "rgba(135, 199, 137, 1)",
-        "line-dasharray": [
-          2,
-          2
-        ],
-        "line-width": {
-          "stops": [
-            [
-              8,
-              2
-            ],
-            [
-              18,
-              4
-            ]
-          ]
-        }
       }
     },
     {
@@ -120,44 +64,6 @@
         "line-color": "rgba(204, 98, 98, 1)",
         "line-width": 1,
         "line-translate-anchor": "map"
-      }
-    },
-    {
-      "id": "link-tunnel",
-      "type": "line",
-      "source": "osm",
-      "source-layer": "roads",
-      "filter": [
-        "any",
-        [
-          "==",
-          "is_tunnel",
-          "yes"
-        ]
-      ],
-      "layout": {
-        "line-join": "round",
-        "line-cap": "round"
-      },
-      "paint": {
-        "line-color": "#afd3d3",
-        "line-width": {
-          "base": 1.55,
-          "stops": [
-            [
-              4,
-              0.25
-            ],
-            [
-              20,
-              30
-            ]
-          ]
-        },
-        "line-dasharray": [
-          1,
-          2
-        ]
       }
     },
     {
@@ -393,123 +299,192 @@
       }
     },
     {
-      "id": "label-country",
-      "type": "symbol",
-      "source": "osm",
-      "source-layer": "places",
-      "maxzoom": 7,
+      "id": "bicycle-yes",
+      "type": "line",
+      "source": "bicycle",
+      "source-layer": "bicycle",
+      "minzoom": 11,
+      "maxzoom": 24,
       "filter": [
         "all",
         [
           "==",
-          "$type",
-          "Point"
-        ],
-        [
-          "==",
           "kind",
-          "country"
+          "yes"
         ]
       ],
       "layout": {
-        "text-field": "{name}",
-        "text-font": [
-          "Roboto Condensed Italic"
-        ],
-        "text-max-width": 4,
-        "text-size": {
-          "stops": [
-            [
-              2,
-              24
-            ],
-            [
-              6,
-              21
-            ]
-          ]
-        }
+        "line-join": "round",
+        "line-cap": "square"
       },
       "paint": {
-        "text-color": "#cb4b49",
-        "text-halo-color": "rgba(255,255,255,0.5)"
+        "line-color": "rgba(254, 175, 103, 1)",
+        "line-width": {
+          "stops": [
+            [
+              12,
+              2
+            ],
+            [
+              14,
+              5
+            ]
+          ]
+        },
+        "line-dasharray": [
+          1,
+          2
+        ]
       }
     },
     {
-      "id": "label-state",
-      "type": "symbol",
-      "source": "osm",
-      "source-layer": "places",
-      "minzoom": 6,
-      "maxzoom": 12,
+      "id": "bicycle-lane",
+      "type": "line",
+      "source": "bicycle",
+      "source-layer": "bicycle",
+      "minzoom": 11,
+      "maxzoom": 24,
       "filter": [
         "all",
         [
           "==",
-          "$type",
-          "Point"
-        ],
-        [
-          "==",
           "kind",
-          "state"
+          "lane"
         ]
       ],
       "layout": {
-        "text-field": "{name}",
-        "text-font": [
-          "Roboto Condensed Italic"
-        ],
-        "text-max-width": 8,
-        "text-size": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-color": "rgba(241, 254, 103, 0.8)",
+        "line-width": {
           "stops": [
             [
-              7,
-              18
+              12,
+              2
             ],
+            [
+              14,
+              5
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "bicycle-track",
+      "type": "line",
+      "source": "bicycle",
+      "source-layer": "bicycle",
+      "minzoom": 11,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "==",
+          "kind",
+          "track"
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-color": "rgba(122, 102, 255, 1)",
+        "line-width": {
+          "stops": [
+            [
+              12,
+              2
+            ],
+            [
+              14,
+              5
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "bicycle-cycleway",
+      "type": "line",
+      "source": "bicycle",
+      "source-layer": "bicycle",
+      "minzoom": 11,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "==",
+          "kind",
+          "cycleway"
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-color": "rgba(76, 254, 81, 0.8)",
+        "line-width": {
+          "stops": [
+            [
+              12,
+              2
+            ],
+            [
+              14,
+              5
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "bicycle-routes",
+      "type": "line",
+      "source": "bicycle",
+      "source-layer": "bicycle",
+      "minzoom": 11,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "==",
+          "kind",
+          "bicycle"
+        ],
+        [
+          "==",
+          "network",
+          "lcn"
+        ],
+        [
+          "!=",
+          "name",
+          "Vilniaus dviračių trasos"
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-color": "rgba(252, 128, 255, 0.5)",
+        "line-width": {
+          "stops": [
             [
               10,
-              30
+              3
+            ],
+            [
+              14,
+              5
             ]
           ]
         }
-      },
-      "paint": {
-        "text-color": "rgba(204, 204, 204, 1)",
-        "text-halo-color": "rgba(255,255,255,0.5)"
-      }
-    },
-    {
-      "id": "label-national-park",
-      "type": "symbol",
-      "source": "osm",
-      "source-layer": "protected",
-      "minzoom": 0,
-      "maxzoom": 20,
-      "filter": [
-        "all",
-        [
-          "==",
-          "kind",
-          "national_park"
-        ]
-      ],
-      "layout": {
-        "visibility": "visible",
-        "symbol-placement": "line",
-        "text-field": "{name}",
-        "text-font": [
-          "Roboto Regular"
-        ],
-        "text-size": 13,
-        "text-anchor": "top",
-        "text-rotation-alignment": "map",
-        "text-pitch-alignment": "auto"
-      },
-      "paint": {
-        "text-color": "rgba(11, 119, 14, 1)",
-        "text-halo-color": "rgba(255, 255, 255, 0.7)",
-        "text-halo-width": 1.7
       }
     },
     {
@@ -713,6 +688,30 @@
       "source-layer": "poi",
       "minzoom": 14,
       "maxzoom": 20,
+      "filter": [
+        "all",
+        [
+          "!in",
+          "kind",
+          "lodging",
+          "home",
+          "hairdresser",
+          "pharmacy",
+          "grocery",
+          "bakery",
+          "shop",
+          "convenience",
+          "library",
+          "town-hall",
+          "cinema",
+          "scooter",
+          "post",
+          "college",
+          "school",
+          "theatre",
+          "dentist"
+        ]
+      ],
       "layout": {
         "text-field": "{name}",
         "text-font": [

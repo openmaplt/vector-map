@@ -1,0 +1,268 @@
+{
+  "aerialway": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 21,
+    "y": 0
+  },
+  "airfield": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 0,
+    "y": 21
+  },
+  "airport": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 19,
+    "y": 21
+  },
+  "amusement-park": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 38,
+    "y": 21
+  },
+  "aquarium": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 57,
+    "y": 21
+  },
+  "attraction": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 40,
+    "y": 0
+  },
+  "bar": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 59,
+    "y": 0
+  },
+  "bbq": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 0,
+    "y": 40
+  },
+  "beer": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 19,
+    "y": 40
+  },
+  "bicycle": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 38,
+    "y": 40
+  },
+  "bus": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 57,
+    "y": 40
+  },
+  "cafe": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 0,
+    "y": 59
+  },
+  "car": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 19,
+    "y": 59
+  },
+  "castle": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 38,
+    "y": 59
+  },
+  "fast-food": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 57,
+    "y": 59
+  },
+  "ferry": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 76,
+    "y": 21
+  },
+  "forest": {
+    "height": 16,
+    "pixelRatio": 1,
+    "width": 16,
+    "x": 152,
+    "y": 21
+  },
+  "fuel": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 95,
+    "y": 21
+  },
+  "harbor": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 114,
+    "y": 21
+  },
+  "heliport": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 133,
+    "y": 21
+  },
+  "hillfort": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 76,
+    "y": 40
+  },
+  "information": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 95,
+    "y": 40
+  },
+  "monument": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 114,
+    "y": 40
+  },
+  "museum": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 133,
+    "y": 40
+  },
+  "oneway": {
+    "height": 10,
+    "pixelRatio": 1,
+    "width": 104,
+    "x": 57,
+    "y": 78
+  },
+  "park": {
+    "height": 21,
+    "pixelRatio": 1,
+    "width": 21,
+    "x": 0,
+    "y": 0
+  },
+  "bicycle_parking": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 76,
+    "y": 59
+  },
+  "picnic-site": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 95,
+    "y": 59
+  },
+  "rail": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 114,
+    "y": 59
+  },
+  "restaurant": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 133,
+    "y": 59
+  },
+  "shelter": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 78,
+    "y": 0
+  },
+  "compressed_air": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 97,
+    "y": 0
+  },
+  "bicycle_rent": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 116,
+    "y": 0
+  },
+  "sushi": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 135,
+    "y": 0
+  },
+  "tumulus": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 0,
+    "y": 78
+  },
+  "viewpoint": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 19,
+    "y": 78
+  },
+  "water": {
+    "height": 16,
+    "pixelRatio": 1,
+    "width": 16,
+    "x": 152,
+    "y": 40
+  },
+  "zoo": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 38,
+    "y": 78
+  }
+}
