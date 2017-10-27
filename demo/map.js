@@ -8,7 +8,7 @@ var mapTypes = {
   hybrid: 'h'
 };
 var mapData = {
-  type: 'map',
+  type: defaultType,
   zoom: 7,
   lat: 55.19114,
   lng: 23.87100,
