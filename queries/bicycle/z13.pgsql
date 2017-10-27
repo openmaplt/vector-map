@@ -16,7 +16,14 @@ UNION ALL
 
 SELECT
   st_linemerge(st_collect(way)) AS __geometry__,
-  coalesce(cycleway, "cycleway:both", "cycleway:left", "cycleway:right", bicycle) AS kind,
+  (
+  CASE
+    WHEN (highway = 'cycleway') or (highway = 'path' and bicycle = 'designated')
+      THEN 'cycleway'
+    ELSE
+      coalesce(cycleway, "cycleway:both", "cycleway:left", "cycleway:right", bicycle)
+  END
+  ) AS kind,
   'ways' AS network,
   name,
   null AS distance
@@ -27,7 +34,9 @@ WHERE
   (cycleway is not null OR
    "cycleway:left" is not null OR
    "cycleway:right" is not null OR
-   bicycle = 'yes'
+   bicycle = 'yes' OR
+   highway = 'cycleway' OR
+   (highway = 'path' and bicycle = 'designated')
   )
 GROUP BY
-  name, cycleway, "cycleway:both", "cycleway:left", "cycleway:right", bicycle
+  name, cycleway, "cycleway:both", "cycleway:left", "cycleway:right", bicycle, highway
