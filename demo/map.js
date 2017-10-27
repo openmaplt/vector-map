@@ -5,7 +5,9 @@ var defaultType = defaultType || 'map';
 var mapTypes = {
   map: 'm',
   orto: 'o',
-  hybrid: 'h'
+  hybrid: 'h',
+  bicycle: 'b',
+  bicycle_hybrid: 'bh'
 };
 var mapData = {
   type: defaultType,
