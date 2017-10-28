@@ -20,7 +20,7 @@
       ]
     }
   },
-  "sprite": "https://openmap.lt/sprites/openmaplt",
+  "sprite": "https://openmap.lt/sprites/openmapcycle",
   "glyphs": "https://orangemug.github.io/font-glyphs/glyphs/{fontstack}/{range}.pbf",
   "layers": [
     {
@@ -42,6 +42,21 @@
       ],
       "paint": {
         "fill-color": "rgba(121, 121, 121, 1)"
+      }
+    },
+    {
+      "id": "coastline-pattern",
+      "type": "fill",
+      "source": "tilezen",
+      "source-layer": "coastline",
+      "filter": [
+        "==",
+        "kind",
+        "coastline"
+      ],
+      "paint": {
+        "fill-pattern": "water",
+        "fill-opacity": 0.1
       }
     },
     {
@@ -100,8 +115,29 @@
               "rgba(84, 84, 84, 1)"
             ]
           ]
-        },
-        "fill-opacity": 1
+        }
+      }
+    },
+    {
+      "id": "landuse-forest-pattern",
+      "type": "fill",
+      "source": "tilezen",
+      "source-layer": "landuse",
+      "minzoom": 7,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "forest"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-pattern": "forest",
+        "fill-opacity": 0.8
       }
     },
     {
@@ -114,6 +150,9 @@
         "$type",
         "Polygon"
       ],
+      "layout": {
+        "visibility": "visible"
+      },
       "paint": {
         "fill-color": "rgba(121, 121, 121, 1)"
       }
@@ -227,6 +266,24 @@
       }
     },
     {
+      "id": "water-polygon-pattern",
+      "type": "fill",
+      "source": "tilezen",
+      "source-layer": "water",
+      "filter": [
+        "==",
+        "$type",
+        "Polygon"
+      ],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-pattern": "water",
+        "fill-opacity": 0.2
+      }
+    },
+    {
       "id": "boundary-country",
       "type": "line",
       "source": "tilezen",
@@ -264,44 +321,6 @@
       }
     },
     {
-      "id": "link-tunnel",
-      "type": "line",
-      "source": "tilezen",
-      "source-layer": "roads",
-      "filter": [
-        "any",
-        [
-          "==",
-          "is_tunnel",
-          "yes"
-        ]
-      ],
-      "layout": {
-        "line-join": "round",
-        "line-cap": "round"
-      },
-      "paint": {
-        "line-color": "#afd3d3",
-        "line-width": {
-          "base": 1.55,
-          "stops": [
-            [
-              4,
-              0.25
-            ],
-            [
-              20,
-              30
-            ]
-          ]
-        },
-        "line-dasharray": [
-          1,
-          2
-        ]
-      }
-    },
-    {
       "id": "buildings",
       "type": "fill",
       "source": "tilezen",
@@ -313,11 +332,11 @@
           "stops": [
             [
               15,
-              "rgba(149, 149, 149, 1)"
+              "rgba(60, 60, 60, 1)"
             ],
             [
               20,
-              "#333333"
+              "#AAAAAA"
             ]
           ]
         },
@@ -573,7 +592,18 @@
         "visibility": "visible"
       },
       "paint": {
-        "line-color": "rgba(173, 173, 173, 1)",
+        "line-color": {
+          "stops": [
+            [
+              8,
+              "rgba(40, 40, 40, 1)"
+            ],
+            [
+              14,
+              "rgba(140, 140, 140, 1)"
+            ]
+          ]
+        },
         "line-width": {
           "base": 1.55,
           "stops": [
@@ -612,7 +642,7 @@
         "visibility": "visible"
       },
       "paint": {
-        "line-color": "rgba(37, 37, 37, 1)",
+        "line-color": "rgba(40, 40, 40, 1)",
         "line-width": {
           "base": 1.55,
           "stops": [
@@ -647,7 +677,7 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "rgba(6, 6, 4, 1)",
+        "line-color": "rgba(40, 40, 40, 1)",
         "line-width": {
           "base": 1.55,
           "stops": [
@@ -682,7 +712,7 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "rgba(21, 21, 19, 1)",
+        "line-color": "rgba(40, 40, 40, 1)",
         "line-width": {
           "base": 1.55,
           "stops": [
@@ -717,7 +747,7 @@
         "line-cap": "butt"
       },
       "paint": {
-        "line-color": "rgba(33, 33, 33, 1)",
+        "line-color": "rgba(40, 40, 40, 1)",
         "line-width": {
           "base": 1.55,
           "stops": [
@@ -754,7 +784,7 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "rgba(0, 0, 0, 1)",
+        "line-color": "rgba(40, 40, 40, 1)",
         "line-width": {
           "base": 1.55,
           "stops": [
@@ -928,8 +958,19 @@
         "line-cap": "square"
       },
       "paint": {
-        "line-color": "rgba(254, 170, 103, 1)",
-        "line-width": 5,
+        "line-color": "rgba(254, 175, 103, 1)",
+        "line-width": {
+          "stops": [
+            [
+              12,
+              2
+            ],
+            [
+              14,
+              5
+            ]
+          ]
+        },
         "line-dasharray": [
           1,
           2
@@ -956,8 +997,19 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "rgba(245, 254, 76, 0.8)",
-        "line-width": 5
+        "line-color": "rgba(241, 254, 103, 0.8)",
+        "line-width": {
+          "stops": [
+            [
+              12,
+              2
+            ],
+            [
+              14,
+              5
+            ]
+          ]
+        }
       }
     },
     {
@@ -981,7 +1033,18 @@
       },
       "paint": {
         "line-color": "rgba(122, 102, 255, 1)",
-        "line-width": 5
+        "line-width": {
+          "stops": [
+            [
+              12,
+              2
+            ],
+            [
+              14,
+              5
+            ]
+          ]
+        }
       }
     },
     {
@@ -1005,7 +1068,18 @@
       },
       "paint": {
         "line-color": "rgba(76, 254, 81, 0.8)",
-        "line-width": 5
+        "line-width": {
+          "stops": [
+            [
+              12,
+              2
+            ],
+            [
+              14,
+              5
+            ]
+          ]
+        }
       }
     },
     {
@@ -1039,7 +1113,18 @@
       },
       "paint": {
         "line-color": "rgba(252, 128, 255, 0.5)",
-        "line-width": 5
+        "line-width": {
+          "stops": [
+            [
+              10,
+              3
+            ],
+            [
+              14,
+              5
+            ]
+          ]
+        }
       }
     },
     {
@@ -1459,30 +1544,6 @@
       "paint": {
         "text-halo-width": 2,
         "text-halo-color": "rgba(192, 191, 191, 1)"
-      }
-    },
-    {
-      "id": "label-hiking",
-      "type": "symbol",
-      "source": "tilezen",
-      "source-layer": "routes",
-      "minzoom": 15,
-      "maxzoom": 20,
-      "layout": {
-        "text-field": "{name}",
-        "symbol-placement": "line",
-        "text-rotation-alignment": "auto",
-        "text-anchor": "bottom",
-        "text-size": 12,
-        "text-allow-overlap": false,
-        "text-font": [
-          "Roboto Italic"
-        ]
-      },
-      "paint": {
-        "text-halo-width": 2,
-        "text-halo-color": "rgba(23, 23, 23, 0.8)",
-        "text-color": "rgba(122, 250, 121, 1)"
       }
     },
     {
