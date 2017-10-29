@@ -13,6 +13,8 @@ SELECT
       THEN 'bar'
     WHEN amenity = 'bicycle_parking'
       THEN 'bicycle_parking'
+    WHEN amenity = 'bicycle_rental'
+      THEN 'bicycle_rental'
     WHEN amenity = 'cafe'
       THEN 'cafe'
     WHEN amenity = 'car_wash'
@@ -143,6 +145,7 @@ WHERE
                 'bank',
                 'bar',
                 'bicycle_parking',
+                'bicycle_rental',
                 'cafe',
                 'car_wash',
                 'cinema',
@@ -219,6 +222,8 @@ SELECT
       THEN 'bar'
     WHEN amenity = 'bicycle_parking'
       THEN 'bicycle_parking'
+    WHEN amenity = 'bicycle_rental'
+      THEN 'bicycle_rental'
     WHEN amenity = 'cafe'
       THEN 'cafe'
     WHEN amenity = 'car_wash'
@@ -353,6 +358,7 @@ WHERE
                 'bank',
                 'bar',
                 'bicycle_parking',
+                'bicycle_rental',
                 'cafe',
                 'car_wash',
                 'cinema',
