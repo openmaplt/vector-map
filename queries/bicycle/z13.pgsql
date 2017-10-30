@@ -34,6 +34,7 @@ WHERE
   (cycleway is not null OR
    "cycleway:left" is not null OR
    "cycleway:right" is not null OR
+   "cycleway:both" is not null OR
    bicycle = 'yes' OR
    highway = 'cycleway' OR
    (highway = 'path' and bicycle = 'designated')
