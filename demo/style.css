@@ -1,0 +1,80 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+#layers {
+    right: 5px;
+    top: 5px;
+}
+
+.mapboxgl-popup-content img {
+    max-width: 400px;
+    max-height: 400px;
+}
+
+.icon {
+    width: 15px;
+    display: inline-block;
+    text-align: center;
+}
+
+.map-overlay {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.8);
+    margin-right: 5px;
+    overflow: auto;
+    border-radius: 3px;
+}
+
+#legend {
+    background: rgba(255, 255, 255, 0.5);
+    padding: 5px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    line-height: 18px;
+    margin-bottom: 20px;
+    margin-right: 0;
+    border-radius: 0;
+}
+#legend.active .legend-items, #legend.active .legend-doc {
+    display: block;
+}
+#legend .legend-header {
+    cursor: pointer;
+}
+#legend .legend-items {
+    list-style-type: none;
+    padding: 0;
+    display: none;
+}
+#legend .legend-items li {
+    line-height: 20px;
+}
+#legend .label-item {
+    width: 50px;
+    margin-right: 5px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: text-bottom;
+}
+#legend .legend-doc {
+    display: none;
+}
+@media screen and (max-width: 640px) {
+    #legend {
+        margin-bottom: 34px;
+        margin-right: 10px;
+    }
+    #legend.active {
+        background: rgba(255, 255, 255, 1);
+    }
+}

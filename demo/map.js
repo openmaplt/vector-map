@@ -61,6 +61,8 @@ var attributeType = {
   height: 'height',
   fee: 'fee'
 };
+var legendData = legendData || {};
+var legendTechUrl = legendTechUrl || null;
 
 if (!mapboxgl.supported()) {
   alert('Jūsų naršyklė nepalaiko Mapbox GL. Prašome atsinaujinti naršyklę.');
@@ -105,6 +107,9 @@ if (!mapboxgl.supported()) {
     .on('moveend', function () {
       setMapData();
       changeHashUrl();
+    })
+    .on('load', function() {
+      showLegend();
     });
 }
 
@@ -284,4 +289,73 @@ function getFomatedValue(attribute, properties) {
   }
 
   return value;
+}
+
+function showLegend() {
+  if (Object.keys(legendData).length === 0) {
+    return;
+  }
+
+  var legendBlock = document.createElement('div');;
+  legendBlock.id = 'legend';
+  legendBlock.classList.add('map-overlay');
+
+  var legendHeader = document.createElement('strong');
+  legendHeader.classList.add('legend-header');
+  legendHeader.innerHTML = 'Sutartiniai ženklai';
+  legendHeader.addEventListener('click', function (e) {
+    e.stopPropagation();
+    legendBlock.classList.toggle('active');
+  });
+  legendBlock.addEventListener('click', function(e) {
+    e.stopPropagation();
+    legendBlock.classList.add('active');
+  });
+  document.body.addEventListener('click', function() {
+    if (legendBlock.classList.contains('active')) {
+      legendBlock.classList.remove('active');
+    }
+  });
+
+  legendBlock.appendChild(legendHeader);
+
+  var ul = document.createElement('ul');
+  ul.classList.add('legend-items');
+
+  for (var key in legendData) {
+    if (!legendData.hasOwnProperty(key)) {
+      continue;
+    }
+
+    var legend = legendData[key];
+
+    if (!legend.type) {
+      continue;
+    }
+
+    var legendSymbolIcon = document.createElement('span');
+    legendSymbolIcon.classList.add('label-' + legend.type, key);
+
+    var legendSymbol = document.createElement('span');
+    legendSymbol.classList.add('label-item');
+    legendSymbol.appendChild(legendSymbolIcon);
+
+    var legendItem = document.createElement('li');
+    legendItem.appendChild(legendSymbol);
+    legendItem.insertAdjacentHTML('beforeend', legend.label);
+
+    ul.appendChild(legendItem);
+  }
+  legendBlock.appendChild(ul);
+
+  if (legendTechUrl) {
+    var legendUrl = document.createElement('a');
+    legendUrl.classList.add('legend-doc');
+    legendUrl.setAttribute('href', legendTechUrl);
+    legendUrl.setAttribute('target', '_blank');
+    legendUrl.innerHTML = 'Techninė informaciją';
+    legendBlock.appendChild(legendUrl);
+  }
+
+  document.body.appendChild(legendBlock);
 }

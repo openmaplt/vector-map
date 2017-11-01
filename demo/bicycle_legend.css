@@ -1,0 +1,41 @@
+.label-line {
+    width: 50px;
+    height: 5px;
+    display: inline-block;
+}
+.label-icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+    width: 19px;
+    height: 19px;
+    background: url('sprites/openmapcycle.png');
+}
+
+.leg1 {
+    background: rgba(252, 128, 255, 0.5);
+}
+.leg2 {
+    background: rgba(76,  254, 81, 0.8);
+}
+.leg3 {
+    background: rgba(122, 102, 255, 1);
+}
+.leg4 {
+    background: rgba(241, 254, 103, 0.8);
+}
+.leg5 {
+    background: repeating-linear-gradient(to right, rgba(254, 175, 103, 1), rgba(254, 175, 103, 1) 10px, rgba(0,0,0,0) 10px, rgba(0,0,0,0) 20px);
+}
+.leg6 {
+    background-position: -76px -59px;
+}
+.leg7 {
+    background-position: -38px -40px;
+}
+.leg8 {
+    background-position: -97px 0;
+}
+.leg9 {
+    background-position: -116px 0;
+}
