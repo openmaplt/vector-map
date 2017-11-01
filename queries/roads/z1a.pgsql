@@ -19,10 +19,7 @@ WHERE
                'primary', 'primary_link',
                'secondary', 'secondary_link',
                'tertiary', 'tertiary_link',
-               'unclassified',
-               'living_street',
-               'residential',
-               'pedestrian')
+               'unclassified')
    OR
    (railway = 'rail' AND service IS NULL)
   )
