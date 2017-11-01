@@ -2,6 +2,7 @@
 
 DATAFILE=${DATAFILE:=data.pbf}
 DIRTY_FILE=dirty_tiles_`date +%s`
+TILESTACHE_CONFIG_FILE=$(readlink -f ./../tiles.cfg)
 
 echo "----------"
 echo "Update started: `date +%c`"
@@ -50,11 +51,11 @@ if [ -s dirty_tiles ]; then
     grep -E "^(10|11|12|13|14|15)" dirty_tiles > generate_bicycle_$DIRTY_FILE
 
     echo "OpenMap.lt render expired"
-	tilestache-clean -c ./../tiles.cfg -l all -e pbf --tile-list delete_openmap_$DIRTY_FILE
-	tilestache-seed -c ./../tiles.cfg -x -l all -e pbf --tile-list generate_openmap_$DIRTY_FILE
+	tilestache-clean -c $TILESTACHE_CONFIG_FILE -l all -e pbf --tile-list delete_openmap_$DIRTY_FILE
+	tilestache-seed -c $TILESTACHE_CONFIG_FILE -x -l all -e pbf --tile-list generate_openmap_$DIRTY_FILE
 
-    tilestache-clean -c ./../tiles.cfg -l bicycle -e pbf --tile-list delete_openmap_$DIRTY_FILE
-    tilestache-seed -c ./../tiles.cfg -x -l bicycle -e pbf --tile-list generate_bicycle_$DIRTY_FILE
+    tilestache-clean -c $TILESTACHE_CONFIG_FILE -l bicycle -e pbf --tile-list delete_openmap_$DIRTY_FILE
+    tilestache-seed -c $TILESTACHE_CONFIG_FILE -x -l bicycle -e pbf --tile-list generate_bicycle_$DIRTY_FILE
 
     rm delete_openmap_$DIRTY_FILE generate_openmap_$DIRTY_FILE
     rm generate_bicycle_$DIRTY_FILE
