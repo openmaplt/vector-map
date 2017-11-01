@@ -21,24 +21,47 @@ var mapData = {
 var showAttributes = [
   'name',
   'official_name',
+  'alt_name',
+  'street',
   'opening_hours',
+  'email',
+  'phone',
   'website',
+  'heritage',
+  'wikipedia',
+  'height',
+  'fee',
   'image'
 ];
 
 var label = {
-  official_name: 'Oficialus pavadinimas'
+  official_name: 'Oficialus pavadinimas',
+  alt_name: 'Kiti pavadinimai',
+  street: 'Adresas',
+  email: 'E-paštas',
+  phone: 'Telefono nr.',
+  fee: 'Mokestis'
 };
 
 var icons = {
-  opening_hours: "glyphicon glyphicon-time",
-  website: 'glyphicon glyphicon-globe'
+  opening_hours: "fa fa-clock-o",
+  email: 'fa fa-envelope-o',
+  phone: 'fa fa-phone',
+  website: 'fa fa-globe',
+  heritage: 'fa fa-globe',
+  wikipedia: 'fa fa-wikipedia-w',
+  height: 'fa fa-arrows-v',
 };
 
 var attributeType = {
   name: 'bold',
   website: 'link',
-  image: 'image'
+  image: 'image',
+  street: 'address',
+  heritage: 'kvr_link',
+  wikipedia: 'wikipedia',
+  height: 'height',
+  fee: 'fee'
 };
 
 if (!mapboxgl.supported()) {
@@ -226,10 +249,10 @@ function getHtml(poi) {
       return poi.properties[prop_name];
     })
     .map(function (prop_name) {
-      var formatedValue = getFomatedValue(prop_name, poi.properties[prop_name]);
+      var formatedValue = getFomatedValue(prop_name, poi.properties);
 
       if (icons[prop_name]) {
-        return '<i class="' + icons[prop_name] + '"></i> ' + formatedValue;
+        return '<span class="icon"><i class="' + icons[prop_name] + '"></i></span> ' + formatedValue;
       }
 
       if (label[prop_name]) {
@@ -240,14 +263,26 @@ function getHtml(poi) {
     });
 }
 
-function getFomatedValue(attribute, value) {
+function getFomatedValue(attribute, properties) {
+  var value = properties[attribute];
   switch (attributeType[attribute]) {
     case 'bold':
       return '<strong>' + value + '</strong>';
+    case 'height':
+      return value + ' m.';
+    case 'fee':
+      return value === 'yes' ? 'Yra' : 'Nėra';
     case 'link':
       return '<a href="' + value + '" target="_blank">' + value + '</a>';
+    case 'kvr_link':
+      return '<a href="https://kvr.kpd.lt/heritage/Pages/KVRDetail.aspx?lang=lt&MC=' + value + '" target="_blank">Kultūros vertybių registras</a>';
     case 'image':
       return '<img src="' + value + '" />';
+    case 'address':
+      return [properties['city'], properties['street'], properties['housenumber']].join(' ');
+    case 'wikipedia':
+      var splitValue = value.split(':');
+      return '<a href="https://' + splitValue[0] + '.wikipedia.org/wiki/' + splitValue[1].replace(/\s/g, '_') + '" target="_blank">' + splitValue[1] + '</a>';
   }
 
   return value;
