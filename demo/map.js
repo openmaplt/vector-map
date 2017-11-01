@@ -1,6 +1,6 @@
-var cookieName = 'mapData';
 var interactiveLayerId = 'label-amenity';
 var defaultType = defaultType || 'map';
+var cookieName = defaultType + 'Data';
 
 var mapTypes = {
   map: 'm',
