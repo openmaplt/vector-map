@@ -13,7 +13,7 @@ fi
 
 # update
 rm change.osc.gz
-osmupdate $DATAFILE change.osc.gz
+./osmupdate $DATAFILE change.osc.gz
 if [ ! -s change.osc.gz ]; then
 	echo "Failed to update data"
 	exit
