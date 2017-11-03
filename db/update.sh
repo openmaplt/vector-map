@@ -8,8 +8,8 @@ echo "----------"
 echo "Update started: `date +%c`"
 
 # download data
-if [ ! -e data.pbf ]; then
-	wget -O data.pbf http://osm.ramuno.lt/lithuania.pbf
+if [ ! -e $DATAFILE ]; then
+	wget -O $DATAFILE http://osm.ramuno.lt/lithuania.pbf
 fi
 
 # update
