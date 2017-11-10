@@ -98,6 +98,28 @@
       }
     },
     {
+      "id": "landuse-cemetery",
+      "type": "fill",
+      "source": "tilezen",
+      "source-layer": "landuse",
+      "minzoom": 7,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "cemetery"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-color": "rgba(121, 185, 150, 1)",
+        "fill-opacity": 1
+      }
+    },
+    {
       "id": "landuse-meadow",
       "type": "fill",
       "source": "tilezen",
@@ -1295,11 +1317,11 @@
           "stops": [
             [
               10,
-              0.15
+              0.5
             ],
             [
               20,
-              8
+              3
             ]
           ]
         },
@@ -1843,6 +1865,38 @@
         "text-halo-width": 2,
         "text-halo-color": "rgba(255, 255, 255, 0.5)",
         "text-color": "rgba(141, 36, 119, 1)"
+      }
+    },
+    {
+      "id": "label-cemetery",
+      "type": "symbol",
+      "source": "tilezen",
+      "source-layer": "names",
+      "minzoom": 14,
+      "maxzoom": 20,
+      "filter": [
+        "all",
+        [
+          "==",
+          "kind",
+          "cemetery"
+        ]
+      ],
+      "layout": {
+        "text-field": "{name}",
+        "text-size": 12,
+        "text-max-width": 9,
+        "text-anchor": "top",
+        "text-font": [
+          "Roboto Condensed Italic"
+        ],
+        "visibility": "visible",
+        "text-padding": 1
+      },
+      "paint": {
+        "text-color": "rgba(26, 92, 0, 1)",
+        "text-halo-width": 1,
+        "text-halo-color": "rgba(255, 255, 255, 0.7)"
       }
     },
     {

@@ -174,7 +174,7 @@
     "x": 0,
     "y": 80
   },
-  "cemetery_pattern": {
+  "cemetery": {
     "height": 21,
     "pixelRatio": 1,
     "width": 21,
