@@ -31,13 +31,15 @@ SELECT
     WHEN historic = 'archaeological_site' and site_type = 'fortification'
       THEN 'hillfort'
     WHEN historic in ('monument', 'memorial')
-      THEN 'marker' -- TODO: memorial
+      THEN 'memorial'
     WHEN historic = 'archaeological_site' and site_type = 'tumulus'
       THEN 'tumulus'
     WHEN historic = 'manor'
       THEN 'marker' -- TODO: manor
     WHEN historic = 'monastery'
       THEN 'marker' -- TODO: monastery
+    WHEN historic = 'castle'
+      THEN 'castle'
 
     WHEN tourism = 'attraction'
       THEN 'attraction'
@@ -77,6 +79,7 @@ WHERE
                 'viewpoint') OR
     (tourism = 'information' and information = 'office') OR
     historic IN ('archaeological_site',
+                 'castle',
                  'monument',
                  'memorial',
                  'manor',
@@ -118,13 +121,15 @@ SELECT
     WHEN historic = 'archaeological_site' and site_type = 'fortification'
       THEN 'marker' -- TODO: hillfort
     WHEN historic in ('monument', 'memorial')
-      THEN 'marker' -- TODO: memorial
+      THEN 'memorial'
     WHEN historic = 'archaeological_site' and site_type = 'tumulus'
       THEN 'marker' -- TODO: tumulus
     WHEN historic = 'manor'
       THEN 'marker' -- TODO: manor
     WHEN historic = 'monastery'
       THEN 'marker' -- TODO: monastery
+    WHEN historic = 'castle'
+      THEN 'castle'
 
     WHEN tourism = 'attraction'
       THEN 'attraction'
@@ -168,6 +173,7 @@ WHERE
                 'viewpoint') OR
     (tourism = 'information' and information = 'office') OR
     historic IN ('archaeological_site',
+                 'castle',
                  'monument',
                  'memorial',
                  'manor',

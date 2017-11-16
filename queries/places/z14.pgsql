@@ -17,7 +17,7 @@ FROM
 WHERE
   way && !bbox! AND
   name IS NOT NULL AND
-  place IN ('city', 'town', 'village', 'hamlet', 'locality')
+  place IN ('city', 'town', 'village', 'hamlet', 'locality', 'neighbourhood', 'suburb')
 
 UNION ALL
 
