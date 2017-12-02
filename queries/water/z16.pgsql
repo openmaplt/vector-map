@@ -45,7 +45,7 @@ SELECT
         THEN 'swimming_pool'
     END
   ) AS kind,
-  coalesce("name:lt", name) AS name
+  null AS name
 FROM
   planet_osm_polygon
 WHERE
@@ -58,5 +58,4 @@ WHERE
     leisure = 'swimming_pool'
   )
 GROUP BY
-  kind,
-  coalesce("name:lt", name)
+  kind

@@ -41,7 +41,7 @@ SELECT
         THEN 'swimming_pool'
     END
   ) AS kind,
-  coalesce("name:lt", name) AS name
+  null AS name
 FROM
   planet_osm_polygon
 WHERE
@@ -55,5 +55,4 @@ WHERE
   ) AND
   way_area >= 75000
 GROUP BY
-  kind,
-  coalesce("name:lt", name)
+  kind

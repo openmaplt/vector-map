@@ -25,7 +25,7 @@ SELECT
         THEN 'lake'
     END
   ) AS kind,
-  coalesce("name:lt", name) AS name
+  null AS name
 FROM
   planet_osm_polygon
 WHERE
@@ -36,5 +36,4 @@ WHERE
   ) AND
   way_area >= 10000000
 GROUP BY
-  kind,
-  coalesce("name:lt", name)
+  kind
