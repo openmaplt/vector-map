@@ -1,0 +1,92 @@
+<html>
+<head>
+    <title>Dviračių infrastruktūros žymėjimo informacija</title>
+</head>
+<body>
+<a class="back-to-map" href="/">Grįžti į žemėlapį</a>
+<h1>Techninė dviračių infrastruktūros žymėjimo informacija</h1>
+<p>Čia pateikiama techninė informacija <b>žymėtojams</b>, norintiems teisingai pažymėti objektus OpenStreetMap, kad jie būtų rodomi šiame dviračių žemėlapyje.</p>
+<p>Informacija paimta iš <a href="https://lt.wikibooks.org/wiki/Atviro_%C5%BEem%C4%97lapio_vadovas/Redagavimas/Dvira%C4%8Diai" target="_blank">Dviračių infrastruktūros žymėjimo puslapio</a>
+
+<h2>Dviračių maršrutai</h2>
+
+<p>Dviračių maršrutai ir rekreacinės trasos - specialūs dviračių eismui maršrutai, turintys savo maršrutą nepriklausomą nuo kelių tinklo, tiesiami per želdynus, rekreacines zonas, jungiantys lankytinus objektus, vietas. Dviračių trasos nuo dviračių maršrutų skiriasi tuo, kad trasoms privaloma tokia infrastruktūra kaip ženklai, žymėjimas, poilsio aikštelės, ir t.t.</p>
+<p>Dviračių maršrutai žymimi ryšiu (visi maršruto keliai sudedami į ryšį) su tokiomis žymomis:</p>
+<ul>
+    <li><i>type=route</i></li>
+    <li><i>route=bicycle</i></li>
+    <li><i>network=lcn</i></li>
+</ul>
+
+<h2>Dviračių takai atskirti nuo gatvių</h2>
+
+<p>Dviračių eismui skirtas takas, pažymėtas kelio ženklu Nr. 411 <img src="img/lt411.png"> ir nuo važiuojamosios kelio dalies ir pėsčiųjų eismo fiziškai atskirtas šonine skiriamąja juosta, apsauginių atitvarų sistemomis arba bordiūru žymimas:</p>
+<ul>
+    <li><i>highway=cycleway</i>.</li>
+</ul>
+
+<p>Dviračių ir pėsčiųjų takai atskirti ir neatskriti vienas nuo kito, pažymėti ženklais <img src="img/lt413a.png"> arba <img src="img/lt413b.png"> žymimi:</p>
+<ul>
+    <li><i>highway=path</i> (!!!nepainioti su highway=cycleway ar highway=footway)</li>
+    <li><i>bicycle=designated</i></li>
+    <li><i>foot=designated</i></li>
+    <li><i>segregated=yes|no</i> - „yes“ - kai dviračių ir pėsčiųjų takai atskirti, „no“ - kai neatskirti</li>
+</ul>
+
+<h2>Dviračių takai šalia gatvių</h2>
+
+<p>Jei dviračių takas eina šalia gatvės, jis nebraižomas kaip atskiras vektorius. Esamam keliui uždedama žyma:</p>
+
+<ul>
+    <li><i>cycleway=track</i> - jei dviračių takai yra abiejose kelio pusėse</li>
+    <li><i>cycleway:left=track</i> - jei dviračių takas yra kairėje kelio pusėje (žiūrint pagal vektoriaus kryptį</li>
+    <li><i>cycleway:right=track</i> - jei dviračių takas yra dešinėje kelio pusėje (žiūrint pagal vektoriaus kryptį</li>
+</ul>
+
+<h2>Dviračių juostos gatvėse</h2>
+
+<p>Gatvėje esančios dviračių juostos (pažymėtos atitinkamu horizontaliuoju žymėjimu). Atskiras vektorius nebraižomas. Esamam keliui uždedama žyma:</p>
+
+<ul>
+    <li><i>cycleway=lane</i> - jei dviračių juostos yra abiejose kelio pusėse</li>
+    <li><i>cycleway:left=lane</i> - jei dviračių juosta yra kairėje kelio pusėje (žiūrint pagal vektoriaus kryptį</li>
+    <li><i>cycleway:right=lane</i> - jei dviračių juosta yra dešinėje kelio pusėje (žiūrint pagal vektoriaus kryptį</li>
+</ul>
+
+<h2>Siūlomos jungtys tarp dviračių takų</h2>
+
+<p>Kelias nėra skirtas išimtinai dviračiams, bet juo siūloma važiuoti dviračiu, kai nėra galimybės važiuoti konkrečiai dviračiams skirtu keliu. Siūloma taip žymėti tik tokias atkarpas, kuriomis siūloma „užpildyti“ dviračių infrastruktūros spragas, t.y. nurodoma, kaip iš vieno dviračių tako ar juostos patekti prie kito. Žymėjimas:</p>
+<ul>
+    <li><i>bicycle=yes</i></li>
+</ul>
+
+<h2>Dviračių stovėjimo vietos</h2>
+
+<p>Tai specialiai dviračiams pritaikytos stovėjimo vietos, paprastai su dviračių stovais, kur dviračius galima pastatyti ir prirakinti. Žymima:</p>
+<ul>
+    <li><i>amenity=bicycle_parking</i></li>
+</ul>
+
+<h2>Dviračių parduotuvės</h2>
+
+<p>Dviračių ir jų reikmenų parduotuvės. Žymima:</p>
+<ul>
+    <li><i>shop=bicycle</i></li>
+    <li><i>name=Parduotuvės pavadinimas</i></li>
+</ul>
+
+<h2>Suspaustas oras</h2>
+
+<p>Vieta, kur galima prisipūsti padangą. Žymima:</p>
+<ul>
+    <li><i>amenity=compressed_air</i></li>
+</ul>
+
+<h2>Dviračių nuomos punktas</h2>
+
+<p>Vieta, kur galima išsinuomoti dviratį. Žymima:</p>
+<ul>
+    <li><i>amenity=bicycle_rental</i></li>
+</ul>
+</body>
+</html>
