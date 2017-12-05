@@ -30,17 +30,13 @@ SELECT
   (
     CASE
       WHEN waterway = 'riverbank'
-        THEN 'riverbank'
-      WHEN waterway = 'dock'
-        THEN 'dock'
+        THEN 'water'
       WHEN "natural" = 'water'
         THEN 'water'
-      WHEN "natural" = 'bay'
-        THEN 'bay'
       WHEN landuse = 'basin'
         THEN 'basin'
       WHEN landuse = 'reservoir'
-        THEN 'lake'
+        THEN 'water'
       WHEN amenity = 'swimming_pool' OR leisure = 'swimming_pool'
         THEN 'swimming_pool'
     END
@@ -51,8 +47,8 @@ FROM
 WHERE
   way && !bbox! AND
   (
-    waterway IN ('riverbank', 'dock') OR
-    "natural" IN ('water', 'bay') OR
+    waterway = 'riverbank' OR
+    "natural" = 'water' OR
     landuse IN ('basin', 'reservoir') OR
     amenity = 'swimming_pool' OR
     leisure = 'swimming_pool'
