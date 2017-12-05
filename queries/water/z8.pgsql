@@ -22,7 +22,7 @@ SELECT
       WHEN "natural" = 'water'
         THEN 'water'
       WHEN landuse = 'reservoir'
-        THEN 'lake'
+        THEN 'water'
     END
   ) AS kind,
   null AS name
