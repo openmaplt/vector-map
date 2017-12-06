@@ -318,7 +318,7 @@
         "line-cap": "square"
       },
       "paint": {
-        "line-color": "rgba(254, 175, 103, 1)",
+        "line-color": "rgba(204, 122, 50, 0.8)",
         "line-width": {
           "stops": [
             [
@@ -357,7 +357,7 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "rgba(241, 254, 103, 0.8)",
+        "line-color": "rgba(230, 0, 18, 0.8)",
         "line-width": {
           "stops": [
             [
@@ -392,7 +392,7 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "rgba(122, 102, 255, 1)",
+        "line-color": "rgba(38, 0, 255, 0.8)",
         "line-width": {
           "stops": [
             [
@@ -427,7 +427,7 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "rgba(76, 254, 81, 0.8)",
+        "line-color": "rgba(71, 179, 50, 0.8)",
         "line-width": {
           "stops": [
             [
@@ -472,7 +472,7 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "rgba(252, 128, 255, 0.5)",
+        "line-color": "rgba(250, 51, 255, 0.5)",
         "line-width": {
           "stops": [
             [
@@ -485,57 +485,6 @@
             ]
           ]
         }
-      }
-    },
-    {
-      "id": "label-city",
-      "type": "symbol",
-      "source": "osm",
-      "source-layer": "places",
-      "minzoom": 10,
-      "maxzoom": 14,
-      "filter": [
-        "all",
-        [
-          "==",
-          "$type",
-          "Point"
-        ],
-        [
-          "in",
-          "kind",
-          "city",
-          "county",
-          "district",
-          "town",
-          "village"
-        ]
-      ],
-      "layout": {
-        "text-field": "{name}",
-        "text-font": [
-          "Roboto Medium"
-        ],
-        "text-max-width": 10,
-        "text-letter-spacing": 0.1,
-        "text-size": {
-          "stops": [
-            [
-              8,
-              12
-            ],
-            [
-              12,
-              13
-            ]
-          ]
-        },
-        "visibility": "visible",
-        "text-allow-overlap": false
-      },
-      "paint": {
-        "text-color": "#f7f9f9",
-        "text-halo-color": "rgba(255,255,255,0.5)"
       }
     },
     {
@@ -604,7 +553,7 @@
         "symbol-placement": "point",
         "text-rotation-alignment": "auto",
         "text-font": [
-          "Roboto Italic"
+          "Roboto Condensed Italic"
         ],
         "text-allow-overlap": false,
         "text-ignore-placement": false,
@@ -646,11 +595,11 @@
       "layout": {
         "text-field": "{name}",
         "text-font": [
-          "Roboto Italic"
+          "Roboto Condensed Italic"
         ],
         "symbol-placement": "line",
         "text-rotation-alignment": "auto",
-        "text-size": 14
+        "text-size": 12
       },
       "paint": {
         "text-color": "rgba(51, 51, 255, 1)",
@@ -672,13 +621,65 @@
         ],
         "symbol-placement": "line",
         "text-rotation-alignment": "auto",
-        "text-size": 13,
+        "text-size": {
+          "stops": [
+            [
+              10,
+              8
+            ],
+            [
+              20,
+              16
+            ]
+          ]
+        },
         "visibility": "visible"
       },
       "paint": {
         "text-color": "rgba(0, 0, 0, 1)",
         "text-halo-width": 2,
         "text-halo-color": "rgba(255, 255, 255, 0.7)"
+      }
+    },
+    {
+      "id": "label-city",
+      "type": "symbol",
+      "source": "osm",
+      "source-layer": "places",
+      "minzoom": 10,
+      "maxzoom": 14,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "Point"
+        ],
+        [
+          "in",
+          "kind",
+          "city",
+          "county",
+          "district",
+          "town",
+          "village"
+        ]
+      ],
+      "layout": {
+        "text-field": "{name}",
+        "text-font": [
+          "Roboto Medium"
+        ],
+        "text-max-width": 10,
+        "text-letter-spacing": 0.1,
+        "text-size": 18,
+        "visibility": "visible",
+        "text-allow-overlap": false
+      },
+      "paint": {
+        "text-color": "rgba(30, 30, 30, 1)",
+        "text-halo-color": "rgba(220, 220, 220, 0.7)",
+        "text-halo-width": 3
       }
     },
     {
@@ -723,17 +724,17 @@
         ],
         "symbol-placement": "point",
         "text-rotation-alignment": "auto",
-        "text-size": 12,
+        "text-size": 11,
         "text-max-width": 9,
         "text-anchor": "top",
         "text-offset": [
           0,
-          0.6
+          0.8
         ],
         "icon-image": "{kind}"
       },
       "paint": {
-        "text-color": "rgba(0, 0, 0, 1)",
+        "text-color": "rgba(20, 20, 20, 1)",
         "text-halo-width": 2,
         "text-halo-color": "rgba(255, 255, 255, 0.7)"
       }

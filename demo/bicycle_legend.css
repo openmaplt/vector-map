@@ -13,19 +13,19 @@
 }
 
 .leg1 {
-    background: rgba(252, 128, 255, 0.5);
+    background: rgba(250, 51, 255, 0.6);
 }
 .leg2 {
-    background: rgba(76,  254, 81, 0.8);
+    background: rgba(71,  179, 0, 0.7);
 }
 .leg3 {
-    background: rgba(122, 102, 255, 1);
+    background: rgba(38, 0, 255, 0.7);
 }
 .leg4 {
-    background: rgba(241, 254, 103, 0.8);
+    background: rgba(255, 0, 0, 0.7);
 }
 .leg5 {
-    background: repeating-linear-gradient(to right, rgba(254, 175, 103, 1), rgba(254, 175, 103, 1) 10px, rgba(0,0,0,0) 10px, rgba(0,0,0,0) 20px);
+    background: repeating-linear-gradient(to right, rgba(204, 122, 0, 0.7), rgba(204, 122, 0, 0.7) 10px, rgba(0,0,0,0) 10px, rgba(0,0,0,0) 20px);
 }
 .leg6 {
     background-position: -76px -59px;
