@@ -27,7 +27,7 @@
       "id": "background",
       "type": "background",
       "paint": {
-        "background-color": "rgba(34, 34, 34, 1)"
+        "background-color": "rgba(250, 250, 250, 1)"
       }
     },
     {
@@ -41,7 +41,7 @@
         "coastline"
       ],
       "paint": {
-        "fill-color": "rgba(121, 121, 121, 1)"
+        "fill-color": "rgba(180, 180, 180, 1)"
       }
     },
     {
@@ -69,8 +69,11 @@
         "$type",
         "LineString"
       ],
+      "layout": {
+        "visibility": "visible"
+      },
       "paint": {
-        "line-color": "rgba(121, 121, 121, 1)",
+        "line-color": "rgba(179, 213, 230, 1)",
         "line-width": {
           "base": 1.2,
           "stops": [
@@ -108,11 +111,11 @@
           "stops": [
             [
               8,
-              "rgba(34, 34, 34, 1)"
+              "rgba(236, 248, 236, 1)"
             ],
             [
-              10,
-              "rgba(84, 84, 84, 1)"
+              14,
+              "rgba(179, 230, 179, 1)"
             ]
           ]
         }
@@ -133,11 +136,11 @@
         ]
       ],
       "layout": {
-        "visibility": "visible"
+        "visibility": "none"
       },
       "paint": {
         "fill-pattern": "forest",
-        "fill-opacity": 0.8
+        "fill-opacity": 0.3
       }
     },
     {
@@ -154,7 +157,7 @@
         "visibility": "visible"
       },
       "paint": {
-        "fill-color": "rgba(121, 121, 121, 1)"
+        "fill-color": "rgba(179, 213, 230, 1)"
       }
     },
     {
@@ -167,9 +170,11 @@
         "$type",
         "Polygon"
       ],
-      "layout": {},
+      "layout": {
+        "visibility": "visible"
+      },
       "paint": {
-        "line-color": "rgba(66, 66, 66, 1)",
+        "line-color": "rgba(190, 190, 255, 1)",
         "line-width": {
           "stops": [
             [
@@ -208,7 +213,7 @@
         "line-join": "round"
       },
       "paint": {
-        "line-color": "rgba(121, 121, 121, 1)",
+        "line-color": "rgba(179, 213, 230, 1)",
         "line-width": {
           "base": 1.2,
           "stops": [
@@ -249,7 +254,7 @@
         "line-join": "round"
       },
       "paint": {
-        "line-color": "rgba(121, 121, 121, 1)",
+        "line-color": "rgba(179, 213, 230, 1)",
         "line-width": {
           "base": 1.4,
           "stops": [
@@ -276,11 +281,11 @@
         "Polygon"
       ],
       "layout": {
-        "visibility": "visible"
+        "visibility": "none"
       },
       "paint": {
         "fill-pattern": "water",
-        "fill-opacity": 0.2
+        "fill-opacity": 0.1
       }
     },
     {
@@ -303,7 +308,7 @@
         "line-join": "round"
       },
       "paint": {
-        "line-color": "rgba(234, 234, 234, 1)",
+        "line-color": "rgba(60, 60, 60, 1)",
         "line-width": {
           "base": 2,
           "stops": [
@@ -332,11 +337,11 @@
           "stops": [
             [
               15,
-              "rgba(60, 60, 60, 1)"
+              "rgba(220, 220, 220, 1)"
             ],
             [
               20,
-              "#AAAAAA"
+              "rgba(100, 100, 100, 1)"
             ]
           ]
         },
@@ -344,11 +349,11 @@
           "stops": [
             [
               15,
-              "rgba(36, 36, 36, 1)"
+              "rgba(250, 250, 250, 1)"
             ],
             [
               20,
-              "rgba(74, 74, 74, 1)"
+              "rgba(200, 200, 200, 1)"
             ]
           ]
         }
@@ -377,7 +382,7 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "rgba(220, 220, 220, 1)",
+        "line-color": "rgba(170, 170, 170, 1)",
         "line-width": {
           "base": 1.55,
           "stops": [
@@ -412,7 +417,7 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "rgba(232, 232, 232, 1)",
+        "line-color": "rgba(170, 170, 170, 1)",
         "line-width": {
           "base": 1.55,
           "stops": [
@@ -447,7 +452,7 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "rgba(241, 241, 241, 1)",
+        "line-color": "rgba(170, 170, 170, 1)",
         "line-width": {
           "base": 1.55,
           "stops": [
@@ -473,6 +478,10 @@
         [
           "in",
           "kind",
+          "motorway",
+          "motorway_link",
+          "trunk",
+          "trunk_link",
           "primary",
           "primary_link"
         ]
@@ -482,44 +491,7 @@
         "line-cap": "butt"
       },
       "paint": {
-        "line-color": "rgba(210, 210, 210, 1)",
-        "line-width": {
-          "base": 1.55,
-          "stops": [
-            [
-              5,
-              1
-            ],
-            [
-              20,
-              40
-            ]
-          ]
-        }
-      }
-    },
-    {
-      "id": "casing-motorway",
-      "type": "line",
-      "source": "tilezen",
-      "source-layer": "roads",
-      "filter": [
-        "all",
-        [
-          "in",
-          "kind",
-          "motorway",
-          "motorway_link",
-          "trunk",
-          "trunk_link"
-        ]
-      ],
-      "layout": {
-        "line-join": "round",
-        "line-cap": "round"
-      },
-      "paint": {
-        "line-color": "rgba(241, 241, 241, 1)",
+        "line-color": "rgba(170, 170, 170, 1)",
         "line-width": {
           "base": 1.55,
           "stops": [
@@ -553,7 +525,7 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "rgba(123, 123, 123, 1)",
+        "line-color": "rgba(220, 220, 220, 1)",
         "line-width": {
           "base": 1.55,
           "stops": [
@@ -596,11 +568,11 @@
           "stops": [
             [
               8,
-              "rgba(40, 40, 40, 1)"
+              "rgba(215, 215, 215, 1)"
             ],
             [
               14,
-              "rgba(140, 140, 140, 1)"
+              "rgba(155, 155, 155, 1)"
             ]
           ]
         },
@@ -642,7 +614,7 @@
         "visibility": "visible"
       },
       "paint": {
-        "line-color": "rgba(40, 40, 40, 1)",
+        "line-color": "rgba(235, 235, 235, 1)",
         "line-width": {
           "base": 1.55,
           "stops": [
@@ -652,7 +624,7 @@
             ],
             [
               20,
-              30
+              27
             ]
           ]
         }
@@ -677,7 +649,7 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "rgba(40, 40, 40, 1)",
+        "line-color": "rgba(235, 235, 235, 1)",
         "line-width": {
           "base": 1.55,
           "stops": [
@@ -712,7 +684,7 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "rgba(40, 40, 40, 1)",
+        "line-color": "rgba(235, 235, 235, 1)",
         "line-width": {
           "base": 1.55,
           "stops": [
@@ -738,6 +710,10 @@
         [
           "in",
           "kind",
+          "motorway",
+          "motorway_link",
+          "trunk",
+          "trunk_link",
           "primary",
           "primary_link"
         ]
@@ -747,44 +723,7 @@
         "line-cap": "butt"
       },
       "paint": {
-        "line-color": "rgba(40, 40, 40, 1)",
-        "line-width": {
-          "base": 1.55,
-          "stops": [
-            [
-              5,
-              0.5
-            ],
-            [
-              20,
-              34
-            ]
-          ]
-        }
-      }
-    },
-    {
-      "id": "road-motorway",
-      "type": "line",
-      "source": "tilezen",
-      "source-layer": "roads",
-      "filter": [
-        "all",
-        [
-          "in",
-          "kind",
-          "motorway",
-          "motorway_link",
-          "trunk",
-          "trunk_link"
-        ]
-      ],
-      "layout": {
-        "line-join": "round",
-        "line-cap": "round"
-      },
-      "paint": {
-        "line-color": "rgba(40, 40, 40, 1)",
+        "line-color": "rgba(235, 235, 235, 1)",
         "line-width": {
           "base": 1.55,
           "stops": [
@@ -876,7 +815,7 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "rgba(93, 101, 101, 1)",
+        "line-color": "rgba(162, 162, 162, 1)",
         "line-width": {
           "base": 1.8,
           "stops": [
@@ -918,7 +857,7 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "#5d6765",
+        "line-color": "rgba(162, 162, 162, 1)",
         "line-width": {
           "base": 1.8,
           "stops": [
@@ -958,7 +897,7 @@
         "line-cap": "square"
       },
       "paint": {
-        "line-color": "rgba(254, 175, 103, 1)",
+        "line-color": "rgba(204, 122, 0, 0.7)",
         "line-width": {
           "stops": [
             [
@@ -973,7 +912,7 @@
         },
         "line-dasharray": [
           1,
-          2
+          1.5
         ]
       }
     },
@@ -997,7 +936,7 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "rgba(241, 254, 103, 0.8)",
+        "line-color": "rgba(255, 0, 0, 0.7)",
         "line-width": {
           "stops": [
             [
@@ -1032,7 +971,7 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "rgba(122, 102, 255, 1)",
+        "line-color": "rgba(38, 0, 255, 0.7)",
         "line-width": {
           "stops": [
             [
@@ -1067,7 +1006,7 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "rgba(76, 254, 81, 0.8)",
+        "line-color": "rgba(71, 179, 0, 0.7)",
         "line-width": {
           "stops": [
             [
@@ -1112,7 +1051,7 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "rgba(252, 128, 255, 0.5)",
+        "line-color": "rgba(250, 51, 255, 0.6)",
         "line-width": {
           "stops": [
             [
@@ -1147,7 +1086,7 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "rgba(208, 208, 208, 1)",
+        "line-color": "rgba(200, 200, 200, 1)",
         "line-width": {
           "base": 1.8,
           "stops": [
@@ -1188,7 +1127,7 @@
         "visibility": "visible"
       },
       "paint": {
-        "line-color": "rgba(8, 8, 8, 1)",
+        "line-color": "rgba(100, 100, 100, 1)",
         "line-width": {
           "base": 1.8,
           "stops": [
@@ -1296,8 +1235,8 @@
         "visibility": "visible"
       },
       "paint": {
-        "text-color": "rgba(245, 245, 245, 1)",
-        "text-halo-color": "rgba(38, 38, 38, 1)",
+        "text-color": "rgba(50, 50, 50, 1)",
+        "text-halo-color": "rgba(255, 255, 255, 0.7)",
         "icon-halo-width": 0,
         "icon-halo-color": "rgba(0, 0, 0, 0)",
         "text-halo-width": 2
@@ -1342,8 +1281,8 @@
         "text-padding": 5
       },
       "paint": {
-        "text-color": "rgba(251, 251, 251, 1)",
-        "text-halo-color": "rgba(50, 50, 50, 1)",
+        "text-color": "rgba(50, 50, 50, 1)",
+        "text-halo-color": "rgba(255, 255, 255, 0.7)",
         "icon-halo-width": 0,
         "icon-halo-color": "rgba(0, 0, 0, 0)",
         "text-halo-width": 2
@@ -1396,37 +1335,6 @@
       }
     },
     {
-      "id": "label-city",
-      "type": "symbol",
-      "source": "tilezen",
-      "source-layer": "places",
-      "minzoom": 7,
-      "maxzoom": 14,
-      "filter": [
-        "all",
-        [
-          "in",
-          "kind",
-          "city"
-        ]
-      ],
-      "layout": {
-        "text-field": "{name}",
-        "text-font": [
-          "Roboto Medium"
-        ],
-        "text-max-width": 10,
-        "text-letter-spacing": 0.1,
-        "text-size": 18
-      },
-      "paint": {
-        "text-color": "rgba(249, 249, 249, 1)",
-        "text-halo-color": "rgba(17, 17, 17, 0.5)",
-        "icon-halo-width": 2,
-        "icon-halo-color": "rgba(255, 255, 255, 1)"
-      }
-    },
-    {
       "id": "label-water-poly",
       "type": "symbol",
       "source": "tilezen",
@@ -1465,9 +1373,9 @@
         "visibility": "visible"
       },
       "paint": {
-        "text-color": "rgba(2, 2, 2, 1)",
-        "text-halo-width": 1,
-        "text-halo-color": "rgba(221, 221, 221, 0.8)"
+        "text-color": "rgba(63, 63, 192, 1)",
+        "text-halo-width": 1.5,
+        "text-halo-color": "rgba(255, 255, 255, 1)"
       }
     },
     {
@@ -1499,9 +1407,9 @@
         "text-size": 12
       },
       "paint": {
-        "text-color": "rgba(74, 73, 73, 1)",
+        "text-color": "rgba(63, 63, 192, 1)",
         "text-halo-width": 1.5,
-        "text-halo-color": "rgba(215, 215, 215, 0.8)"
+        "text-halo-color": "rgba(255, 255, 255, 1)"
       }
     },
     {
@@ -1543,7 +1451,8 @@
       },
       "paint": {
         "text-halo-width": 2,
-        "text-halo-color": "rgba(192, 191, 191, 1)"
+        "text-halo-color": "rgba(255, 255, 255, 0.6)",
+        "text-color": "rgba(90, 90, 90, 1)"
       }
     },
     {
@@ -1571,8 +1480,41 @@
       },
       "paint": {
         "text-color": "rgba(255, 255, 255, 1)",
-        "text-halo-width": 1,
-        "text-halo-color": "rgba(41, 41, 41, 0.7)"
+        "text-halo-width": 1.1,
+        "text-halo-color": "rgba(0, 0, 0, 0.6)"
+      }
+    },
+    {
+      "id": "label-city",
+      "type": "symbol",
+      "source": "tilezen",
+      "source-layer": "places",
+      "minzoom": 7,
+      "maxzoom": 14,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "city"
+        ]
+      ],
+      "layout": {
+        "text-field": "{name}",
+        "text-font": [
+          "Roboto Medium"
+        ],
+        "text-max-width": 10,
+        "text-letter-spacing": 0.1,
+        "text-size": 18,
+        "visibility": "visible"
+      },
+      "paint": {
+        "text-color": "rgba(30, 30, 30, 1)",
+        "text-halo-color": "rgba(220, 220, 220, 0.7)",
+        "icon-halo-width": 2,
+        "icon-halo-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 3
       }
     },
     {
@@ -1612,12 +1554,12 @@
       ],
       "layout": {
         "text-field": "{name}",
-        "text-size": 12,
+        "text-size": 11,
         "text-max-width": 9,
         "text-anchor": "top",
         "text-offset": [
           0,
-          0.6
+          0.8
         ],
         "icon-image": "{kind}",
         "text-font": [
@@ -1625,8 +1567,9 @@
         ]
       },
       "paint": {
-        "text-halo-width": 2,
-        "text-halo-color": "rgba(208, 207, 207, 0.7)"
+        "text-halo-width": 1.5,
+        "text-halo-color": "rgba(255, 255, 255, 0.7)",
+        "text-color": "rgba(90, 90, 90, 1)"
       }
     }
   ],
