@@ -41,7 +41,7 @@
         "coastline"
       ],
       "paint": {
-        "fill-color": "rgba(180, 180, 180, 1)"
+        "fill-color": "rgba(179, 213, 230, 1)"
       }
     },
     {
@@ -54,6 +54,9 @@
         "kind",
         "coastline"
       ],
+      "layout": {
+        "visibility": "none"
+      },
       "paint": {
         "fill-pattern": "water",
         "fill-opacity": 0.1
@@ -1469,19 +1472,20 @@
         "text-anchor": "top",
         "text-offset": [
           0,
-          0.6
+          0.8
         ],
         "icon-image": "park",
         "text-font": [
           "Roboto Condensed Italic"
         ],
         "visibility": "visible",
-        "text-padding": 1
+        "text-padding": 1,
+        "text-letter-spacing": 0.07
       },
       "paint": {
-        "text-color": "rgba(255, 255, 255, 1)",
-        "text-halo-width": 1.1,
-        "text-halo-color": "rgba(0, 0, 0, 0.6)"
+        "text-color": "rgba(0, 70, 0, 1)",
+        "text-halo-width": 1,
+        "text-halo-color": "rgba(250, 250, 250, 0.6)"
       }
     },
     {
