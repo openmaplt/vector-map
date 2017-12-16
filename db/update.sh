@@ -32,6 +32,8 @@ if [ $? -ne 0 ]; then
 	exit
 fi
 
+./update_search.sh
+
 ./osmconvert temp.o5m --out-pbf > temp.pbf
 mv temp.pbf data.pbf
 
