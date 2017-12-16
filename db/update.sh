@@ -45,20 +45,25 @@ md5sum $DATAFILE > $DATAFILE.md5
 # render expired
 if [ -s dirty_tiles ]; then
          
-	grep -E "^(16|17|18)" dirty_tiles > delete_openmap_$DIRTY_FILE
-	grep -E -v "^(16|17|18)" dirty_tiles > generate_openmap_$DIRTY_FILE
+    grep -E "^(16|17|18)" dirty_tiles > delete_openmap_$DIRTY_FILE
+    grep -E -v "^(16|17|18)" dirty_tiles > generate_openmap_$DIRTY_FILE
 
     grep -E "^(10|11|12|13|14|15)" dirty_tiles > generate_bicycle_$DIRTY_FILE
+    grep -E "^(10|11|12|13|14|15)" dirty_tiles > generate_craftbeer_$DIRTY_FILE
 
     echo "OpenMap.lt render expired"
-	tilestache-clean -c $TILESTACHE_CONFIG_FILE -l all -e pbf --tile-list delete_openmap_$DIRTY_FILE
-	tilestache-seed -c $TILESTACHE_CONFIG_FILE -x -l all -e pbf --tile-list generate_openmap_$DIRTY_FILE
+    tilestache-clean -c $TILESTACHE_CONFIG_FILE -l all -e pbf --tile-list delete_openmap_$DIRTY_FILE
+    tilestache-seed -c $TILESTACHE_CONFIG_FILE -x -l all -e pbf --tile-list generate_openmap_$DIRTY_FILE
 
     tilestache-clean -c $TILESTACHE_CONFIG_FILE -l bicycle -e pbf --tile-list delete_openmap_$DIRTY_FILE
     tilestache-seed -c $TILESTACHE_CONFIG_FILE -x -l bicycle -e pbf --tile-list generate_bicycle_$DIRTY_FILE
 
+    tilestache-clean -c $TILESTACHE_CONFIG_FILE -l craftbeer -e pbf --tile-list delete_openmap_$DIRTY_FILE
+    tilestache-seed -c $TILESTACHE_CONFIG_FILE -x -l craftbeer -e pbf --tile-list generate_craftbeer_$DIRTY_FILE
+
     rm delete_openmap_$DIRTY_FILE generate_openmap_$DIRTY_FILE
     rm generate_bicycle_$DIRTY_FILE
+    rm generate_craftbeer_$DIRTY_FILE
 fi
 
 echo "Update end: `date +%c`"
