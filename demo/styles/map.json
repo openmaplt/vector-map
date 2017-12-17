@@ -1929,6 +1929,32 @@
       }
     },
     {
+        "id": "label-building",
+        "type": "symbol",
+        "source": "tilezen",
+        "source-layer": "buildings",
+        "minzoom": 16,
+        "maxzoom": 20,
+        "layout": {
+            "text-field": "{number}",
+            "text-size": {
+                "stops": [[16, 10], [20, 14]]
+            },
+            "text-max-width": 10,
+            "text-anchor": "center",
+            "text-font": [
+                "Roboto Regular"
+            ]
+        },
+        "paint": {
+            "text-halo-width": 2,
+            "text-halo-color": "rgba(255, 255, 255, 0.5)",
+            "text-opacity": {
+                "stops": [[16, 0.3], [18, 1]]
+            }
+        }
+    },
+    {
       "id": "label-amenity",
       "type": "symbol",
       "source": "tilezen",
