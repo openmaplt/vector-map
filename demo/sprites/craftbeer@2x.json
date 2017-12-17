@@ -34,11 +34,25 @@
     "x": 42,
     "y": 0
   },
+  "forest": {
+    "height": 16,
+    "pixelRatio": 1,
+    "width": 16,
+    "x": 42,
+    "y": 21
+  },
   "restaurant": {
     "height": 21,
     "pixelRatio": 1,
     "width": 21,
     "x": 63,
     "y": 0
+  },
+  "water": {
+    "height": 16,
+    "pixelRatio": 1,
+    "width": 16,
+    "x": 58,
+    "y": 21
   }
 }
