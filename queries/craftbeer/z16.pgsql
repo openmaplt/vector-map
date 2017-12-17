@@ -1,6 +1,29 @@
 SELECT
   way AS __geometry__,
   name,
+  kind,
+  style_lager,
+  style_ale,
+  style_stout,
+  style_ipa,
+  official_name,
+  alt_name,
+  opening_hours,
+  website,
+  image,
+  heritage,
+  height,
+  wikipedia,
+  fee,
+  email,
+  phone,
+  city,
+  street,
+  housenumber
+FROM
+(SELECT
+  way,
+  name,
   (
     CASE
     WHEN amenity = 'bar'
@@ -53,7 +76,7 @@ WHERE
 UNION ALL
 
 SELECT
-  st_centroid(way) AS __geometry__,
+  st_centroid(way) AS way,
   name,
   (
     CASE
@@ -103,3 +126,10 @@ WHERE
     shop = 'alcohol'
   ) AND
   real_ale is not null
+) as craft
+ORDER BY
+  CASE WHEN kind in ('bar', 'beer') THEN 1 ELSE 2 END,
+  CASE WHEN style_lager = 'n' THEN 1 ELSE 0 END +
+  CASE WHEN style_ale   = 'n' THEN 1 ELSE 0 END +
+  CASE WHEN style_stout = 'n' THEN 1 ELSE 0 END +
+  CASE WHEN style_ipa   = 'n' THEN 1 ELSE 0 END
