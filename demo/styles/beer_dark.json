@@ -20,7 +20,7 @@
       ]
     }
   },
-  "sprite": "https://dev.openmap.lt/webgl/craftbeer",
+  "sprite": "https://openmap.lt/sprites/craftbeer",
   "glyphs": "https://orangemug.github.io/font-glyphs/glyphs/{fontstack}/{range}.pbf",
   "layers": [
     {
