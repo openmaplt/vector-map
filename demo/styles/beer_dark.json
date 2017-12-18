@@ -1266,14 +1266,6 @@
       "source-layer": "craftbeer",
       "minzoom": 10,
       "maxzoom": 24,
-      "filter": [
-        "all",
-        [
-          "==",
-          "style_ipa",
-          "y"
-        ]
-      ],
       "layout": {
         "text-field": "{name}",
         "text-size": 12,
