@@ -29,7 +29,8 @@ var showAttributes = [
   'wikipedia',
   'height',
   'fee',
-  'image'
+  'image',
+  'style_lager'
 ];
 
 var label = {
@@ -49,6 +50,7 @@ var icons = {
   heritage: 'fa fa-globe',
   wikipedia: 'fa fa-wikipedia-w',
   height: 'fa fa-arrows-v',
+  style_lager: 'fa fa-beer'
 };
 
 var attributeType = {
@@ -59,7 +61,8 @@ var attributeType = {
   heritage: 'kvr_link',
   wikipedia: 'wikipedia',
   height: 'height',
-  fee: 'fee'
+  fee: 'fee',
+  style_lager: 'beer_styles'
 };
 var legendData = legendData || {};
 var legendTechUrl = legendTechUrl || null;
@@ -286,6 +289,30 @@ function getFomatedValue(attribute, properties) {
     case 'wikipedia':
       var splitValue = value.split(':');
       return '<a href="https://' + splitValue[0] + '.wikipedia.org/wiki/' + splitValue[1].replace(/\s/g, '_') + '" target="_blank">' + splitValue[1] + '</a>';
+    case 'beer_styles':
+      var styles = '';
+      if (properties['style_lager'] == 'y') {
+        styles += 'lageris';
+      }
+      if (properties['style_ale'] == 'y') {
+        if (styles.length > 0) {
+          styles += ', ';
+        }
+        styles += 'elis';
+      }
+      if (properties['style_stout'] == 'y') {
+        if (styles.length > 0) {
+          styles += ', ';
+        }
+        styles += 'stautas';
+      }
+      if (properties['style_ipa'] == 'y') {
+        if (styles.length > 0) {
+          styles += ', ';
+        }
+        styles += 'IPA';
+      }
+      return '<b>Stiliai:</b> ' + styles;
   }
 
   return value;
