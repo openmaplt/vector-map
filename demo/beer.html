@@ -105,10 +105,7 @@
     if (document.getElementById("label-ipa").checked) {
       filters.push(['==', 'style_ipa', 'y']);
     }
-    map.setFilter('label-amenity', null);
-    if (filters.length > 1) {
-      map.setFilter('label-amenity', filters);
-    }
+    map.setFilter('label-amenity', filters.length > 1 ? filters : null);
   }
 </script>
 <script src="map.js"></script>
