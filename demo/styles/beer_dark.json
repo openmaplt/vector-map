@@ -1260,7 +1260,7 @@
       }
     },
     {
-      "id": "label-craftbeer",
+      "id": "label-amenity",
       "type": "symbol",
       "source": "beer",
       "source-layer": "craftbeer",

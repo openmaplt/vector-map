@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-106607459-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments)};
+        gtag('js', new Date());
+        gtag('config', 'UA-18331326-1');
+    </script>
+    <meta charset='utf-8' />
+    <title>Žemėlapis</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <style>
+        body { margin:0; padding:0; }
+        #map { position:absolute; top:0; bottom:0; width:100%; }
+        #layers {right: 5px; top: 5px;}
+        .mapboxgl-popup-content img {max-width: 400px; max-height: 400px;}
+        .icon {width: 15px; display: inline-block; text-align: center;}
+
+    .filter-group {
+        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+        font-weight: 600;
+        position: absolute;
+        top: 50px;
+        right: 10px;
+        z-index: 1;
+        border-radius: 3px;
+        width: 120px;
+        color: #fff;
+    }
+
+    .filter-group input[type=checkbox]:first-child + label {
+        border-radius: 3px 3px 0 0;
+    }
+
+    .filter-group label:last-child {
+        border-radius: 0 0 3px 3px;
+        border: none;
+    }
+
+    .filter-group input[type=checkbox] {
+        display: none;
+    }
+
+    .filter-group input[type=checkbox] + label {
+        background-color: #333333;
+        display: block;
+        cursor: pointer;
+        padding: 10px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    }
+
+    .filter-group input[type=checkbox] + label {
+        background-color: #333333;
+        text-transform: capitalize;
+    }
+
+    .filter-group input[type=checkbox] + label:hover,
+    .filter-group input[type=checkbox]:checked + label {
+        background-color: #fff480;
+        color: #000;
+    }
+
+    .filter-group input[type=checkbox]:checked + label:before {
+        content: '✔';
+        margin-right: 5px;
+    }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+<div id="layers" class="pull-right btn-group hidden">
+    <button type="button" class="btn btn-default" data-style="beer_dark">Craft-alus</button>
+</div>
+<nav id='filter-group' class='filter-group'>
+<input type="checkbox" id="label-lager" checked="true" onChange="change()"><label for="label-lager">Lager</label>
+<input type="checkbox" id="label-ale"   checked="true" onChange="change()"><label for="label-ale"  >Ale</label>
+<input type="checkbox" id="label-stout" checked="true" onChange="change()"><label for="label-stout">Stout</label>
+<input type="checkbox" id="label-ipa"   checked="true" onChange="change()"><label for="label-ipa"  >IPA</label>
+</nav>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.js'></script>
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-supported/v1.2.0/mapbox-gl-supported.js'></script>
+<script>
+  var defaultType = 'beer_dark';
+  var mapTypes = {
+    beer_dark: 'c'
+  };
+  function change() {
+    var filters = ['any'];
+    if (document.getElementById("label-lager").checked) {
+      filters.push(['==', 'style_lager', 'y']);
+    }
+    if (document.getElementById("label-ale").checked) {
+      filters.push(['==', 'style_ale', 'y']);
+    }
+    if (document.getElementById("label-stout").checked) {
+      filters.push(['==', 'style_stout', 'y']);
+    }
+    if (document.getElementById("label-ipa").checked) {
+      filters.push(['==', 'style_ipa', 'y']);
+    }
+    map.setFilter('label-amenity', filters.length > 1 ? filters : null);
+  }
+</script>
+<script src="map.js"></script>
+</body>
+</html>
