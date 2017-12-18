@@ -20,7 +20,7 @@
       ]
     }
   },
-  "sprite": "https://openmap.lt/sprites/craftbeer",
+  "sprite": "https://dev.openmap.lt/webgl/craftbeer",
   "glyphs": "https://orangemug.github.io/font-glyphs/glyphs/{fontstack}/{range}.pbf",
   "layers": [
     {
@@ -1266,14 +1266,6 @@
       "source-layer": "craftbeer",
       "minzoom": 10,
       "maxzoom": 24,
-      "filter": [
-        "all",
-        [
-          "==",
-          "style_ipa",
-          "y"
-        ]
-      ],
       "layout": {
         "text-field": "{name}",
         "text-size": 12,
