@@ -290,29 +290,20 @@ function getFomatedValue(attribute, properties) {
       var splitValue = value.split(':');
       return '<a href="https://' + splitValue[0] + '.wikipedia.org/wiki/' + splitValue[1].replace(/\s/g, '_') + '" target="_blank">' + splitValue[1] + '</a>';
     case 'beer_styles':
-      var styles = '';
+      var styles = [];
       if (properties['style_lager'] == 'y') {
-        styles += 'lageris';
+        styles.push('lageris');
       }
       if (properties['style_ale'] == 'y') {
-        if (styles.length > 0) {
-          styles += ', ';
-        }
-        styles += 'elis';
+        styles.push('elis');
       }
       if (properties['style_stout'] == 'y') {
-        if (styles.length > 0) {
-          styles += ', ';
-        }
-        styles += 'stautas';
+        styles.push('stautas');
       }
       if (properties['style_ipa'] == 'y') {
-        if (styles.length > 0) {
-          styles += ', ';
-        }
-        styles += 'IPA';
+        styles.push('IPA');
       }
-      return '<b>Stiliai:</b> ' + styles;
+      return '<b>Stiliai:</b> ' + styles.join(', ');
   }
 
   return value;
