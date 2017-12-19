@@ -1929,10 +1929,10 @@
       }
     },
     {
-        "id": "label-building",
+        "id": "label-address",
         "type": "symbol",
         "source": "tilezen",
-        "source-layer": "buildings",
+        "source-layer": "address",
         "minzoom": 16,
         "maxzoom": 20,
         "layout": {
