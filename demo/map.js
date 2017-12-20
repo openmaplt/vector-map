@@ -113,7 +113,11 @@ if (!mapboxgl.supported()) {
     })
     .on('load', function() {
       showLegend();
-    });
+    })
+    .on('click', 'label-address', showAddress)
+    .on('mouseenter', 'label-address', addMousePointerCursor)
+    .on('mouseleave', 'label-address', removeMousePointerCursor)
+  ;
 }
 
 $('#layers button').on('click', function (e) {
@@ -376,4 +380,31 @@ function showLegend() {
   }
 
   document.body.appendChild(legendBlock);
-}
+};
+
+function showAddress(e) {
+  var properties = e.features[0].properties;
+  var address = '';
+  if ('street' in properties) {
+    address += properties.street;
+  }
+  if ('number' in properties) {
+    address += ' ' + properties.number;
+  }
+  if ('city' in properties) {
+    address += ', ' + properties.city;
+  }
+  if ('post_code' in properties) {
+    var code = properties.post_code;
+    if (code.match(/\d+/)) {
+      code = 'LT-' + code;
+    }
+    address += ' ' + code;
+  }
+  var html = '<span class="icon"><i class="fa fa-address-card"></i></span>&nbsp;' + address;
+  new mapboxgl.Popup()
+    .setLngLat(e.features[0].geometry.coordinates)
+    .setHTML(html)
+    .addTo(map);
+};
+
