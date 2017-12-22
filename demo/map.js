@@ -375,7 +375,7 @@ function showLegend() {
     legendUrl.classList.add('legend-doc');
     legendUrl.setAttribute('href', legendTechUrl);
     legendUrl.setAttribute('target', '_blank');
-    legendUrl.innerHTML = 'Techninė informaciją';
+    legendUrl.innerHTML = 'Techninė informacija';
     legendBlock.appendChild(legendUrl);
   }
 
