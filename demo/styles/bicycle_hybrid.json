@@ -447,7 +447,7 @@
       "type": "line",
       "source": "bicycle",
       "source-layer": "bicycle",
-      "minzoom": 11,
+      "minzoom": 9,
       "maxzoom": 24,
       "filter": [
         "all",

@@ -83,6 +83,10 @@ SELECT
       THEN 'picnic_site'
     WHEN tourism = 'viewpoint'
       THEN 'viewpoint'
+    WHEN tourism = 'zoo'
+      THEN 'zoo'
+    WHEN tourism = 'theme_park'
+      THEN 'theme_park'
 
     WHEN historic = 'archaeological_site' and site_type = 'fortification'
       THEN 'hillfort'
@@ -176,13 +180,15 @@ WHERE
                 'camp_site',
                 'caravan_site',
                 'chalet',
-                'hostel',
-                'motel',
                 'guest_house',
+                'hostel',
                 'hotel',
+                'motel',
                 'museum',
                 'picnic_site',
-                'viewpoint') OR
+                'theme_park',
+                'viewpoint',
+                'zoo') OR
     (tourism = 'information' and information = 'office') OR
     shop IN ('alcohol',
              'bakery',
@@ -292,6 +298,10 @@ SELECT
       THEN 'picnic_site'
     WHEN tourism = 'viewpoint'
       THEN 'viewpoint'
+    WHEN tourism = 'zoo'
+      THEN 'zoo'
+    WHEN tourism = 'theme_park'
+      THEN 'theme_park'
 
     WHEN historic = 'archaeological_site' and site_type = 'fortification'
       THEN 'marker' -- TODO: hillfort
@@ -389,13 +399,15 @@ WHERE
                 'camp_site',
                 'caravan_site',
                 'chalet',
-                'hostel',
-                'motel',
                 'guest_house',
+                'hostel',
                 'hotel',
+                'motel',
                 'museum',
                 'picnic_site',
-                'viewpoint') OR
+                'theme_park',
+                'viewpoint',
+                'zoo') OR
     (tourism = 'information' and information = 'office') OR
     shop IN ('alcohol',
              'bakery',
