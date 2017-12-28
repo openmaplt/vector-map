@@ -1,4 +1,7 @@
 SELECT
+  osm_id AS id,
+  osm_id AS __id__,
+  'n' AS __type__,
   way AS __geometry__,
   name,
   (
@@ -138,7 +141,8 @@ SELECT
   phone,
   "addr:city" AS city,
   "addr:street" AS street,
-  "addr:housenumber" AS housenumber
+  "addr:housenumber" AS housenumber,
+  "addr:postcode" AS post_code
 FROM
   planet_osm_point
 WHERE
@@ -214,6 +218,9 @@ WHERE
 UNION ALL
 
 SELECT
+  ABS(osm_id) AS id,
+  ABS(osm_id) AS __id__,
+  CASE WHEN osm_id < 0 THEN 'r' ELSE 'w' END AS __type__,
   st_centroid(way) AS __geometry__,
   name,
   (
@@ -357,7 +364,8 @@ SELECT
   phone,
   "addr:city" AS city,
   "addr:street" AS street,
-  "addr:housenumber" AS housenumber
+  "addr:housenumber" AS housenumber,
+  "addr:postcode" AS post_code
 FROM
   planet_osm_polygon
 WHERE

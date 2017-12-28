@@ -1,6 +1,9 @@
 SELECT
+  ABS(osm_id) AS id,
+  ABS(osm_id) AS __id__,
+  CASE WHEN osm_id < 0 THEN 'r' ELSE 'w' END AS __type__,
   ST_PointOnSurface(way) AS __geometry__,
-  "addr:housenumber" as number,
+  "addr:housenumber" as housenumber,
   "addr:housename" as name,
   "addr:street" as street,
   "addr:city" as city,
@@ -12,8 +15,11 @@ WHERE
   "addr:housenumber" IS NOT NULL AND "addr:contact" IS NULL
 UNION
 SELECT
+  osm_id AS id,
+  osm_id AS __id__,
+  'n' AS __type__,
   way as __geometry__,
-  "addr:housenumber" as number,
+  "addr:housenumber" as housenumber,
   "addr:housename" as name,
   "addr:street" as street,
   "addr:city" as city,

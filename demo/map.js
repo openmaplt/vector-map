@@ -50,7 +50,8 @@ var icons = {
   heritage: 'fa fa-globe',
   wikipedia: 'fa fa-wikipedia-w',
   height: 'fa fa-arrows-v',
-  style_lager: 'fa fa-beer'
+  style_lager: 'fa fa-beer',
+  street: 'fa fa-address-card'
 };
 
 var attributeType = {
@@ -108,15 +109,17 @@ if (!mapboxgl.supported()) {
       }
     })
     .on('moveend', function () {
+      delete mapData.object;
       setMapData();
       changeHashUrl();
     })
     .on('load', function() {
       showLegend();
     })
-    .on('click', 'label-address', showAddress)
+    .on('click', 'label-address', poiOnClick)
     .on('mouseenter', 'label-address', addMousePointerCursor)
     .on('mouseleave', 'label-address', removeMousePointerCursor)
+    .once('data', showDirectObject)
   ;
 }
 
@@ -131,19 +134,25 @@ $('#layers button').on('click', function (e) {
   map.setStyle('styles/' + selectLayer + '.json');
 
   mapData.type = selectLayer;
+  mapData.id = null;
   changeHashUrl(mapData);
 });
 
-function changeHashUrl() {
-  var formatHash = [];
-  for (var key in mapData) {
-    var value = mapData[key];
+function getUrlHash(state) {
+  var hash = [];
+  for (var key in state) {
+    var value = state[key];
     if (key === 'type') {
-      value = mapTypes[mapData.type]
+      value = mapTypes[state.type]
     }
-    formatHash.push(value);
+    hash.push(value);
   }
-  window.location.hash = '#' + formatHash.join('/');
+  return hash.join('/');
+};
+
+function changeHashUrl() {
+  var hash = getUrlHash(mapData);
+  window.location.hash = '#' + hash;
   storeCookie(cookieName, mapData);
 }
 
@@ -192,7 +201,8 @@ function getMapDataFromHashUrl() {
       lat: parseFloat(mapQueries[2]),
       lng: parseFloat(mapQueries[3]),
       bearing: parseInt(mapQueries[4]),
-      pitch: parseInt(mapQueries[5])
+      pitch: parseInt(mapQueries[5]),
+      object: mapQueries[6] || null
     };
   }
   return null;
@@ -244,7 +254,7 @@ function removeMousePointerCursor() {
 function poiOnClick(e) {
   var poi = e.features[0];
   var html = getHtml(poi).join('<br />');
-
+  html += '<br />' + getDirectLink(poi);
   if (html.length) {
     new mapboxgl.Popup()
       .setLngLat(poi.geometry.coordinates)
@@ -289,7 +299,7 @@ function getFomatedValue(attribute, properties) {
     case 'image':
       return '<img src="' + value + '" />';
     case 'address':
-      return [properties['city'], properties['street'], properties['housenumber']].join(' ');
+      return getAddress(properties);
     case 'wikipedia':
       var splitValue = value.split(':');
       return '<a href="https://' + splitValue[0] + '.wikipedia.org/wiki/' + splitValue[1].replace(/\s/g, '_') + '" target="_blank">' + splitValue[1] + '</a>';
@@ -382,14 +392,13 @@ function showLegend() {
   document.body.appendChild(legendBlock);
 };
 
-function showAddress(e) {
-  var properties = e.features[0].properties;
+function getAddress(properties) {
   var address = '';
   if ('street' in properties) {
     address += properties.street;
   }
-  if ('number' in properties) {
-    address += ' ' + properties.number;
+  if ('housenumber' in properties) {
+    address += ' ' + properties.housenumber;
   }
   if ('city' in properties) {
     address += ', ' + properties.city;
@@ -401,10 +410,47 @@ function showAddress(e) {
     }
     address += ' ' + code;
   }
-  var html = '<span class="icon"><i class="fa fa-address-card"></i></span>&nbsp;' + address;
-  new mapboxgl.Popup()
-    .setLngLat(e.features[0].geometry.coordinates)
-    .setHTML(html)
-    .addTo(map);
+
+  return address;
 };
 
+function getDirectLink(feature) {
+  var coordinates = feature.geometry.coordinates;
+  var state = Object.assign({}, mapData);
+  state.lat = coordinates[1].toFixed(5);
+  state.lng = coordinates[0].toFixed(5);
+  var properties = feature.properties;
+  if (typeof properties.id !== "undefined") {
+    state.object = feature.layer.id + '.' + properties.id;
+  } else {
+    delete state.object;
+  }
+  var hash = getUrlHash(state);
+  var url = window.location.origin + '#' + hash;
+
+  return '<span class="icon"><i class="fa fa-link"></i></span>&nbsp;<a href="' + url + '">Tiesioginė nuoroda</a>';
+};
+
+function showDirectObject(e) {
+  if (typeof mapData.object !== "string") {
+    return;
+  }
+  // repeat until source is loaded
+  if (!e.isSourceLoaded) {
+    map.once('data', showDirectObject);
+    return;
+  }
+  var object = mapData.object.split('.');
+  if (object.length != 2) {
+    return;
+  }
+  // lookup for feature and trigger popup on success
+  var options = {
+      layers: [object[0]],
+      filter: ["==", "id", parseInt(object[1])]
+  };
+  var features = map.queryRenderedFeatures(options);
+  if (features.length > 0) {
+    poiOnClick({features: features});
+  }
+};
