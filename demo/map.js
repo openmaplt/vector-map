@@ -260,6 +260,11 @@ function poiOnClick(e) {
   var poi = e.features[0];
   var html = getHtml(poi).join('<br />');
   html += '<br />' + getDirectLink(poi);
+  try {
+    html += '<br />' + getOSMLink(poi);
+  } catch (err) {
+    console.error(err);
+  }
   if (html.length) {
     new mapboxgl.Popup()
       .setLngLat(poi.geometry.coordinates)
@@ -425,6 +430,7 @@ function getDirectLink(feature) {
   state.lat = coordinates[1].toFixed(5);
   state.lng = coordinates[0].toFixed(5);
   var properties = feature.properties;
+  console.log(properties);
   if (typeof properties.id !== "undefined") {
     var code = Object.keys(layerCode).filter(function(key) {return layerCode[key] === feature.layer.id})[0] || '';
     state.objectId = code + properties.id;
@@ -463,3 +469,28 @@ function showDirectObject(e) {
     poiOnClick({features: features});
   }
 };
+
+function getOSMLink(feature) {
+  var properties = feature.properties;
+  if (typeof properties.id === 'undefined' || typeof properties.__type__ === 'undefined') {
+    throw new Error('Cannot create OSM link');
+  }
+  var url = 'https://www.openstreetmap.org/';
+  switch (properties.__type__) {
+    case 'n':
+      url += 'node';
+      break;
+    case 'w':
+      url += 'way';
+      break;
+    case 'r':
+      url += 'relation';
+      break;
+    default:
+      throw new Error('Unknown object type ' + properties.__type__);
+  }
+  url += '/' + properties.id;
+
+  return '<span class="icon"><i class="fa fa-database"></i></span>&nbsp;<a href="' + url + '" target="_blank">OSM duomenys</a>';
+}
+
