@@ -87,7 +87,7 @@ if [ -s dirty_tiles ]; then
     tilestache-seed -c $TILESTACHE_CONFIG_FILE -x -l craftbeer -e pbf --tile-list generate_craftbeer_$DIRTY_FILE
 
     echo "Re-creating poi table " `date`
-    psql osm < table_poi.sql
+    psql -d osm -U postgres < table_poi.sql
     echo "Done " `date`
 
     rm delete_openmap_$DIRTY_FILE generate_openmap_$DIRTY_FILE
