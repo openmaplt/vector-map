@@ -68,6 +68,11 @@ var attributeType = {
 var legendData = legendData || {};
 var legendTechUrl = legendTechUrl || null;
 
+var layerCode = {
+  a: 'label-address',
+  p: 'label-amenity'
+};
+
 if (!mapboxgl.supported()) {
   alert('Jūsų naršyklė nepalaiko Mapbox GL. Prašome atsinaujinti naršyklę.');
 } else {
@@ -109,7 +114,7 @@ if (!mapboxgl.supported()) {
       }
     })
     .on('moveend', function () {
-      delete mapData.object;
+      delete mapData.objectId;
       setMapData();
       changeHashUrl();
     })
@@ -202,7 +207,7 @@ function getMapDataFromHashUrl() {
       lng: parseFloat(mapQueries[3]),
       bearing: parseInt(mapQueries[4]),
       pitch: parseInt(mapQueries[5]),
-      object: mapQueries[6] || null
+      objectId: mapQueries[6] || null
     };
   }
   return null;
@@ -421,9 +426,10 @@ function getDirectLink(feature) {
   state.lng = coordinates[0].toFixed(5);
   var properties = feature.properties;
   if (typeof properties.id !== "undefined") {
-    state.object = feature.layer.id + '.' + properties.id;
+    var code = Object.keys(layerCode).filter(function(key) {return layerCode[key] === feature.layer.id})[0] || '';
+    state.objectId = code + properties.id;
   } else {
-    delete state.object;
+    delete state.objectId;
   }
   var hash = getUrlHash(state);
   var url = window.location.origin + '#' + hash;
@@ -432,7 +438,7 @@ function getDirectLink(feature) {
 };
 
 function showDirectObject(e) {
-  if (typeof mapData.object !== "string") {
+  if (typeof mapData.objectId !== 'string') {
     return;
   }
   // repeat until source is loaded
@@ -440,14 +446,17 @@ function showDirectObject(e) {
     map.once('data', showDirectObject);
     return;
   }
-  var object = mapData.object.split('.');
-  if (object.length != 2) {
-    return;
+  var layers = [];
+  var objectId = mapData.objectId;
+  var code = objectId.charAt(0);
+  if (layerCode.hasOwnProperty(code)) {
+    layers.push(layerCode[code]);
+    objectId = objectId.substr(1);
   }
   // lookup for feature and trigger popup on success
   var options = {
-      layers: [object[0]],
-      filter: ["==", "id", parseInt(object[1])]
+      layers: layers,
+      filter: ['==', 'id', parseInt(objectId)]
   };
   var features = map.queryRenderedFeatures(options);
   if (features.length > 0) {
