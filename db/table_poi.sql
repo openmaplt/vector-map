@@ -25,6 +25,7 @@ create materialized view poi (
  ,"addr:city"
  ,"addr:street"
  ,"addr:housenumber"
+ ,real_ale
  ,way
 ) as
   select name
@@ -53,6 +54,7 @@ create materialized view poi (
         ,"addr:city"
         ,"addr:street"
         ,"addr:housenumber"
+        ,real_ale
         ,way
     from planet_osm_point
    where amenity is not null
@@ -88,6 +90,7 @@ create materialized view poi (
         ,"addr:city"
         ,"addr:street"
         ,"addr:housenumber"
+        ,real_ale
         ,st_centroid(way)
     from planet_osm_polygon
    where amenity is not null
