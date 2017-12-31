@@ -1,5 +1,7 @@
 create materialized view poi (
-  name
+  id
+ ,__type__
+ ,name
  ,amenity
  ,man_made
  ,"tower:type"
@@ -25,10 +27,14 @@ create materialized view poi (
  ,"addr:city"
  ,"addr:street"
  ,"addr:housenumber"
+ ,"addr:postcode"
  ,real_ale
  ,way
 ) as
-  select name
+  select
+        osm_id
+        ,'n' -- always node
+        ,name
         ,amenity
         ,man_made
         ,"tower:type"
@@ -54,6 +60,7 @@ create materialized view poi (
         ,"addr:city"
         ,"addr:street"
         ,"addr:housenumber"
+        ,"addr:postcode"
         ,real_ale
         ,way
     from planet_osm_point
@@ -64,7 +71,10 @@ create materialized view poi (
       or historic is not null
       or office is not null
   union
-  select name
+  select
+        ABS(osm_id)
+        ,CASE WHEN osm_id < 0 THEN 'r' ELSE 'w' END  -- r relation, w way
+        ,name
         ,amenity
         ,man_made
         ,"tower:type"
@@ -90,6 +100,7 @@ create materialized view poi (
         ,"addr:city"
         ,"addr:street"
         ,"addr:housenumber"
+        ,"addr:postcode"
         ,real_ale
         ,st_centroid(way)
     from planet_osm_polygon

@@ -1,1 +1,1 @@
-refresh materialized view poi;
+refresh materialized view concurrently poi;

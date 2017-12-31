@@ -1936,7 +1936,7 @@
         "minzoom": 16,
         "maxzoom": 20,
         "layout": {
-            "text-field": "{number}",
+            "text-field": "{housenumber}",
             "text-size": {
                 "stops": [[16, 10], [20, 14]]
             },

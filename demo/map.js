@@ -50,7 +50,8 @@ var icons = {
   heritage: 'fa fa-globe',
   wikipedia: 'fa fa-wikipedia-w',
   height: 'fa fa-arrows-v',
-  style_lager: 'fa fa-beer'
+  style_lager: 'fa fa-beer',
+  street: 'fa fa-address-card'
 };
 
 var attributeType = {
@@ -66,6 +67,11 @@ var attributeType = {
 };
 var legendData = legendData || {};
 var legendTechUrl = legendTechUrl || null;
+
+var layerCode = {
+  a: 'label-address',
+  p: 'label-amenity'
+};
 
 if (!mapboxgl.supported()) {
   alert('Jūsų naršyklė nepalaiko Mapbox GL. Prašome atsinaujinti naršyklę.');
@@ -108,15 +114,17 @@ if (!mapboxgl.supported()) {
       }
     })
     .on('moveend', function () {
+      delete mapData.objectId;
       setMapData();
       changeHashUrl();
     })
     .on('load', function() {
       showLegend();
     })
-    .on('click', 'label-address', showAddress)
+    .on('click', 'label-address', poiOnClick)
     .on('mouseenter', 'label-address', addMousePointerCursor)
     .on('mouseleave', 'label-address', removeMousePointerCursor)
+    .once('data', showDirectObject)
   ;
 }
 
@@ -131,19 +139,25 @@ $('#layers button').on('click', function (e) {
   map.setStyle('styles/' + selectLayer + '.json');
 
   mapData.type = selectLayer;
+  mapData.id = null;
   changeHashUrl(mapData);
 });
 
-function changeHashUrl() {
-  var formatHash = [];
-  for (var key in mapData) {
-    var value = mapData[key];
+function getUrlHash(state) {
+  var hash = [];
+  for (var key in state) {
+    var value = state[key];
     if (key === 'type') {
-      value = mapTypes[mapData.type]
+      value = mapTypes[state.type]
     }
-    formatHash.push(value);
+    hash.push(value);
   }
-  window.location.hash = '#' + formatHash.join('/');
+  return hash.join('/');
+};
+
+function changeHashUrl() {
+  var hash = getUrlHash(mapData);
+  window.location.hash = '#' + hash;
   storeCookie(cookieName, mapData);
 }
 
@@ -192,7 +206,8 @@ function getMapDataFromHashUrl() {
       lat: parseFloat(mapQueries[2]),
       lng: parseFloat(mapQueries[3]),
       bearing: parseInt(mapQueries[4]),
-      pitch: parseInt(mapQueries[5])
+      pitch: parseInt(mapQueries[5]),
+      objectId: mapQueries[6] || null
     };
   }
   return null;
@@ -244,7 +259,12 @@ function removeMousePointerCursor() {
 function poiOnClick(e) {
   var poi = e.features[0];
   var html = getHtml(poi).join('<br />');
-
+  html += '<br />' + getDirectLink(poi);
+  try {
+    html += '<br />' + getOSMLink(poi);
+  } catch (err) {
+    console.error(err);
+  }
   if (html.length) {
     new mapboxgl.Popup()
       .setLngLat(poi.geometry.coordinates)
@@ -289,7 +309,7 @@ function getFomatedValue(attribute, properties) {
     case 'image':
       return '<img src="' + value + '" />';
     case 'address':
-      return [properties['city'], properties['street'], properties['housenumber']].join(' ');
+      return getAddress(properties);
     case 'wikipedia':
       var splitValue = value.split(':');
       return '<a href="https://' + splitValue[0] + '.wikipedia.org/wiki/' + splitValue[1].replace(/\s/g, '_') + '" target="_blank">' + splitValue[1] + '</a>';
@@ -382,14 +402,13 @@ function showLegend() {
   document.body.appendChild(legendBlock);
 };
 
-function showAddress(e) {
-  var properties = e.features[0].properties;
+function getAddress(properties) {
   var address = '';
   if ('street' in properties) {
     address += properties.street;
   }
-  if ('number' in properties) {
-    address += ' ' + properties.number;
+  if ('housenumber' in properties) {
+    address += ' ' + properties.housenumber;
   }
   if ('city' in properties) {
     address += ', ' + properties.city;
@@ -401,10 +420,77 @@ function showAddress(e) {
     }
     address += ' ' + code;
   }
-  var html = '<span class="icon"><i class="fa fa-address-card"></i></span>&nbsp;' + address;
-  new mapboxgl.Popup()
-    .setLngLat(e.features[0].geometry.coordinates)
-    .setHTML(html)
-    .addTo(map);
+
+  return address;
 };
+
+function getDirectLink(feature) {
+  var coordinates = feature.geometry.coordinates;
+  var state = Object.assign({}, mapData);
+  state.lat = coordinates[1].toFixed(5);
+  state.lng = coordinates[0].toFixed(5);
+  var properties = feature.properties;
+  if (typeof properties.id !== "undefined") {
+    var code = Object.keys(layerCode).filter(function(key) {return layerCode[key] === feature.layer.id})[0] || '';
+    state.objectId = code + properties.id;
+  } else {
+    delete state.objectId;
+  }
+  var hash = getUrlHash(state);
+  var url = window.location.origin + '#' + hash;
+
+  return '<span class="icon"><i class="fa fa-link"></i></span>&nbsp;<a href="' + url + '">Tiesioginė nuoroda</a>';
+};
+
+function showDirectObject(e) {
+  if (typeof mapData.objectId !== 'string') {
+    return;
+  }
+  // repeat until source is loaded
+  if (!e.isSourceLoaded) {
+    map.once('data', showDirectObject);
+    return;
+  }
+  var layers = [];
+  var objectId = mapData.objectId;
+  var code = objectId.charAt(0);
+  if (layerCode.hasOwnProperty(code)) {
+    layers.push(layerCode[code]);
+    objectId = objectId.substr(1);
+  }
+  // lookup for feature and trigger popup on success
+  var options = {
+      layers: layers,
+      filter: ['==', 'id', parseInt(objectId)]
+  };
+  var features = map.queryRenderedFeatures(options);
+  if (features.length > 0) {
+    poiOnClick({features: features});
+  }
+};
+
+function getOSMLink(feature) {
+  var properties = feature.properties;
+  if (typeof properties.id === 'undefined' || typeof properties.__type__ === 'undefined') {
+    console.log(properties);
+    throw new Error('Cannot create OSM link');
+  }
+  var url = 'https://www.openstreetmap.org/';
+  switch (properties.__type__) {
+    case 'n':
+      url += 'node';
+      break;
+    case 'w':
+      url += 'way';
+      break;
+    case 'r':
+      url += 'relation';
+      break;
+    default:
+      throw new Error('Unknown object type ' + properties.__type__);
+  }
+  url += '/' + properties.id;
+
+  return '<span class="icon"><i class="fa fa-database"></i></span>&nbsp;<a href="' + url + '" target="_blank">OSM duomenys</a>';
+}
 

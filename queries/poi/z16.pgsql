@@ -1,4 +1,7 @@
 SELECT
+  id,
+  id AS __id__,
+  __type__,
   way AS __geometry__,
   name,
   (
@@ -138,7 +141,8 @@ SELECT
   phone,
   "addr:city" AS city,
   "addr:street" AS street,
-  "addr:housenumber" AS housenumber
+  "addr:housenumber" AS housenumber,
+  "addr:postcode" AS post_code
 FROM
   poi
 WHERE
