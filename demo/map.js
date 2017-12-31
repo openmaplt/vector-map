@@ -430,7 +430,6 @@ function getDirectLink(feature) {
   state.lat = coordinates[1].toFixed(5);
   state.lng = coordinates[0].toFixed(5);
   var properties = feature.properties;
-  console.log(properties);
   if (typeof properties.id !== "undefined") {
     var code = Object.keys(layerCode).filter(function(key) {return layerCode[key] === feature.layer.id})[0] || '';
     state.objectId = code + properties.id;
@@ -473,6 +472,7 @@ function showDirectObject(e) {
 function getOSMLink(feature) {
   var properties = feature.properties;
   if (typeof properties.id === 'undefined' || typeof properties.__type__ === 'undefined') {
+    console.log(properties);
     throw new Error('Cannot create OSM link');
   }
   var url = 'https://www.openstreetmap.org/';
