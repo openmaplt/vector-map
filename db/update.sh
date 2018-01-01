@@ -56,8 +56,8 @@ if [ -s dirty_tiles ]; then
     grep -E "^(9)"  dirty_tiles > generate_openmap_9_$DIRTY_FILE
     grep -E "^(8)"  dirty_tiles > generate_openmap_8_$DIRTY_FILE
 
-    grep -E "^(10|11|12|13|14)" dirty_tiles > generate_bicycle_$DIRTY_FILE
-    grep -E "^(10|11|12|13|14)" dirty_tiles > generate_craftbeer_$DIRTY_FILE
+    #grep -E "^(10|11|12|13|14)" dirty_tiles > generate_bicycle_$DIRTY_FILE
+    #grep -E "^(10|11|12|13|14)" dirty_tiles > generate_craftbeer_$DIRTY_FILE
 
     echo "Refreshing poi materialized view " `date`
     psql -d osm -U postgres < update_poi.sql
@@ -80,20 +80,21 @@ if [ -s dirty_tiles ]; then
     tilestache-seed -c $TILESTACHE_CONFIG_FILE -x -l all -e pbf --tile-list generate_openmap_8_$DIRTY_FILE
 
     echo "Bicycle delete expired " `date`
-    tilestache-clean -c $TILESTACHE_CONFIG_FILE -l bicycle -e pbf --tile-list delete_openmap_$DIRTY_FILE
-    echo "Bicycle generate expired " `date`
-    tilestache-seed -c $TILESTACHE_CONFIG_FILE -x -l bicycle -e pbf --tile-list generate_bicycle_$DIRTY_FILE
+    tilestache-clean -c $TILESTACHE_CONFIG_FILE -l bicycle -e pbf --tile-list dirty_tiles
+    #echo "Bicycle generate expired " `date`
+    #tilestache-seed -c $TILESTACHE_CONFIG_FILE -x -l bicycle -e pbf --tile-list generate_bicycle_$DIRTY_FILE
 
     echo "Craftbeer delete expired " `date`
-    tilestache-clean -c $TILESTACHE_CONFIG_FILE -l craftbeer -e pbf --tile-list delete_openmap_$DIRTY_FILE
-    echo "Craftbeer generate expired " `date`
-    tilestache-seed -c $TILESTACHE_CONFIG_FILE -x -l craftbeer -e pbf --tile-list generate_craftbeer_$DIRTY_FILE
+    tilestache-clean -c $TILESTACHE_CONFIG_FILE -l craftbeer -e pbf --tile-list dirty_tiles
+    #echo "Craftbeer generate expired " `date`
+    #tilestache-seed -c $TILESTACHE_CONFIG_FILE -x -l craftbeer -e pbf --tile-list generate_craftbeer_$DIRTY_FILE
 
     echo "Done " `date`
 
-    rm delete_openmap_$DIRTY_FILE generate_openmap_$DIRTY_FILE
-    rm generate_bicycle_$DIRTY_FILE
-    rm generate_craftbeer_$DIRTY_FILE
+    rm delete_openmap_$DIRTY_FILE
+    rm generate_openmap_*_$DIRTY_FILE
+    #rm generate_bicycle_$DIRTY_FILE
+    #rm generate_craftbeer_$DIRTY_FILE
 fi
 
 echo "Update end: `date +%c`"
