@@ -324,7 +324,7 @@
         ]
       ],
       "paint": {
-        "fill-color": "rgba(222, 222, 253, 1)",
+        "fill-color": "rgba(226, 215, 251, 1)",
         "fill-opacity": 1
       }
     },
@@ -895,6 +895,88 @@
             ]
           ]
         }
+      }
+    },
+    {
+      "id": "aeroway-landuse",
+      "type": "fill",
+      "source": "tilezen",
+      "source-layer": "landuse",
+      "minzoom": 13,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "runway",
+          "apron"
+        ]
+      ],
+      "layout": {},
+      "paint": {
+        "fill-color": "rgba(96, 96, 96, 1)"
+      }
+    },
+    {
+      "id": "aeroway-apron",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "taxiway",
+          "parking_position"
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-color": "rgba(120, 120, 120, 1)",
+        "line-width": 1
+      }
+    },
+    {
+      "id": "aeroway-runway",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "runway"
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-color": "rgba(220, 220, 220, 1)",
+        "line-width": {
+          "base": 1.55,
+          "stops": [
+            [
+              10,
+              1
+            ],
+            [
+              18,
+              10
+            ]
+          ]
+        },
+        "line-dasharray": [
+          2,
+          6
+        ]
       }
     },
     {
@@ -1929,30 +2011,48 @@
       }
     },
     {
-        "id": "label-address",
-        "type": "symbol",
-        "source": "tilezen",
-        "source-layer": "address",
-        "minzoom": 16,
-        "maxzoom": 20,
-        "layout": {
-            "text-field": "{housenumber}",
-            "text-size": {
-                "stops": [[16, 10], [20, 14]]
-            },
-            "text-max-width": 10,
-            "text-anchor": "center",
-            "text-font": [
-                "Roboto Regular"
+      "id": "label-address",
+      "type": "symbol",
+      "source": "tilezen",
+      "source-layer": "address",
+      "minzoom": 16,
+      "maxzoom": 20,
+      "layout": {
+        "text-field": "{housenumber}",
+        "text-size": {
+          "stops": [
+            [
+              16,
+              10
+            ],
+            [
+              20,
+              14
             ]
+          ]
         },
-        "paint": {
-            "text-halo-width": 2,
-            "text-halo-color": "rgba(255, 255, 255, 0.5)",
-            "text-opacity": {
-                "stops": [[16, 0.3], [18, 1]]
-            }
+        "text-max-width": 10,
+        "text-anchor": "center",
+        "text-font": [
+          "Roboto Regular"
+        ]
+      },
+      "paint": {
+        "text-halo-width": 2,
+        "text-halo-color": "rgba(255, 255, 255, 0.5)",
+        "text-opacity": {
+          "stops": [
+            [
+              16,
+              0.3
+            ],
+            [
+              18,
+              1
+            ]
+          ]
         }
+      }
     },
     {
       "id": "label-amenity",
