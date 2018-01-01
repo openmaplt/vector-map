@@ -50,6 +50,6 @@ WHERE
                'path')
    OR
    railway = 'rail' OR
-   aeroway = 'runway'
+   aeroway IN ('runway', 'taxiway', 'parking_position')
   )
 GROUP BY kind, name, ref, is_tunnel, is_bridge, oneway
