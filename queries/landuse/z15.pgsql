@@ -29,7 +29,7 @@ SELECT
       WHEN "natural" = 'scrub'
         THEN 'scrub'
       WHEN aeroway is not null
-        THEN aeriway
+        THEN aeroway
     END
   ) AS kind
 FROM

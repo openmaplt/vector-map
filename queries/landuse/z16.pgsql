@@ -31,7 +31,7 @@ SELECT
       WHEN leisure = 'park'
         THEN 'park'
       WHEN aeroway is not null
-        THEN aeriway
+        THEN aeroway
     END
   ) AS kind
 FROM
