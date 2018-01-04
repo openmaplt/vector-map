@@ -12,6 +12,7 @@ SELECT
   ) AS kind,
   name,
   ref,
+  length(ref) AS ref_length,
   (
     CASE
       WHEN tunnel IS NOT NULL
