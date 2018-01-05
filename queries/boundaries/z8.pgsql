@@ -1,5 +1,5 @@
 SELECT
-  st_linemerge(st_collect(way)) AS __geometry__,
+  way AS __geometry__,
   admin_level,
   (
     CASE
@@ -13,5 +13,7 @@ FROM
   planet_osm_line
 WHERE
   way && !bbox! AND
-  boundary = 'administrative' AND admin_level IN ('2', '4')
-GROUP BY admin_level, kind
+  boundary = 'administrative' AND
+  ((admin_level = '2' AND name = 'Lietuva') or admin_level = '4') AND
+  name not in ('Kurzeme', 'Latgale', 'Zemgale')
+/*GROUP BY admin_level, kind*/
