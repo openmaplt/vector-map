@@ -9,11 +9,11 @@
       "type": "vector",
       "attribution": "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>",
       "tiles": [
-        "https://dev.openmap.lt/vtiles/all/{z}/{x}/{y}.pbf"
+        "https://openmap.lt/all/{z}/{x}/{y}.pbf"
       ]
     }
   },
-  "sprite": "https://dev.openmap.lt/webgl/openmaplt",
+  "sprite": "https://openmap.lt/sprites/openmaplt",
   "glyphs": "https://orangemug.github.io/font-glyphs/glyphs/{fontstack}/{range}.pbf",
   "layers": [
     {
