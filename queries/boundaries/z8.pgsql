@@ -16,4 +16,3 @@ WHERE
   boundary = 'administrative' AND
   ((admin_level = '2' AND name = 'Lietuva') or admin_level = '4') AND
   name not in ('Kurzeme', 'Latgale', 'Zemgale')
-/*GROUP BY admin_level, kind*/
