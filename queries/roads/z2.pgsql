@@ -9,7 +9,8 @@ SELECT
     END
   ) AS kind,
   name,
-  ref
+  ref,
+  length(ref) AS ref_length
 FROM
   planet_osm_line
 WHERE

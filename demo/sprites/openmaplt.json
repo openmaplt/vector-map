@@ -535,7 +535,7 @@
     "height": 10,
     "pixelRatio": 1,
     "width": 104,
-    "x": 0,
+    "x": 94,
     "y": 251
   },
   "park": {
@@ -712,6 +712,34 @@
     "width": 19,
     "x": 152,
     "y": 232
+  },
+  "shield2": {
+    "height": 14,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 0,
+    "y": 251
+  },
+  "shield3": {
+    "height": 14,
+    "pixelRatio": 1,
+    "width": 22,
+    "x": 19,
+    "y": 251
+  },
+  "shield4": {
+    "height": 14,
+    "pixelRatio": 1,
+    "width": 25,
+    "x": 41,
+    "y": 251
+  },
+  "shield5": {
+    "height": 14,
+    "pixelRatio": 1,
+    "width": 28,
+    "x": 66,
+    "y": 251
   },
   "shop": {
     "height": 19,

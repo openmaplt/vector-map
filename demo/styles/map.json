@@ -595,7 +595,8 @@
       ],
       "layout": {
         "line-cap": "round",
-        "line-join": "round"
+        "line-join": "round",
+        "visibility": "visible"
       },
       "paint": {
         "line-color": "rgba(204, 98, 98, 1)",
@@ -1838,6 +1839,101 @@
         "text-color": "rgba(51, 51, 255, 1)",
         "text-halo-width": 1,
         "text-halo-color": "rgba(255, 255, 255, 1)"
+      }
+    },
+    {
+      "id": "label-road-shield-low",
+      "type": "symbol",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "minzoom": 8,
+      "maxzoom": 11,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "motorway",
+          "trunk",
+          "primary"
+        ],
+        [
+          "has",
+          "ref"
+        ],
+        [
+          "<=",
+          "ref_length",
+          3
+        ]
+      ],
+      "layout": {
+        "text-field": "{ref}",
+        "symbol-placement": "point",
+        "text-rotation-alignment": "auto",
+        "text-anchor": "center",
+        "text-size": 9,
+        "text-allow-overlap": false,
+        "text-font": [
+          "Roboto Regular"
+        ],
+        "icon-image": "shield{ref_length}",
+        "text-padding": 30,
+        "symbol-avoid-edges": false
+      },
+      "paint": {
+        "text-halo-width": 2,
+        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-color": "rgba(115, 77, 13, 1)"
+      }
+    },
+    {
+      "id": "label-road-shield",
+      "type": "symbol",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "minzoom": 11,
+      "maxzoom": 20,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "motorway",
+          "trunk",
+          "primary",
+          "secondary",
+          "tertiary"
+        ],
+        [
+          "has",
+          "ref"
+        ],
+        [
+          "<=",
+          "ref_length",
+          5
+        ]
+      ],
+      "layout": {
+        "text-field": "{ref}",
+        "symbol-placement": "point",
+        "text-rotation-alignment": "auto",
+        "text-anchor": "center",
+        "text-size": 9,
+        "text-allow-overlap": true,
+        "text-font": [
+          "Roboto Regular"
+        ],
+        "icon-image": "shield{ref_length}",
+        "text-padding": 30,
+        "symbol-avoid-edges": false,
+        "visibility": "visible"
+      },
+      "paint": {
+        "text-halo-width": 2,
+        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-color": "rgba(115, 77, 13, 1)"
       }
     },
     {
