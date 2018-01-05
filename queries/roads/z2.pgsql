@@ -8,6 +8,13 @@ SELECT
         THEN coalesce(service, railway)
     END
   ) AS kind,
+  CASE WHEN highway = 'motorway' THEN 1
+       WHEN highway = 'trunk' THEN 2
+       WHEN highway = 'primary' THEN 3
+       WHEN highway = 'secondary' THEN 4
+       WHEN highway = 'tertiary' THEN 5
+       ELSE 6
+  END AS priority,
   name,
   ref,
   length(ref) AS ref_length
@@ -28,4 +35,5 @@ WHERE
    OR
    (railway = 'rail' AND service IS NULL)
   )
-GROUP BY kind, name, ref
+GROUP BY kind, name, priority, ref
+ORDER BY priority

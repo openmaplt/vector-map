@@ -9,11 +9,11 @@
       "type": "vector",
       "attribution": "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>",
       "tiles": [
-        "https://openmap.lt/all/{z}/{x}/{y}.pbf"
+        "https://dev.openmap.lt/vtiles/all/{z}/{x}/{y}.pbf"
       ]
     }
   },
-  "sprite": "https://openmap.lt/sprites/openmaplt",
+  "sprite": "https://dev.openmap.lt/webgl/openmaplt",
   "glyphs": "https://orangemug.github.io/font-glyphs/glyphs/{fontstack}/{range}.pbf",
   "layers": [
     {
@@ -1869,8 +1869,8 @@
       ],
       "layout": {
         "text-field": "{ref}",
-        "symbol-placement": "point",
-        "text-rotation-alignment": "auto",
+        "symbol-placement": "line",
+        "text-rotation-alignment": "viewport",
         "text-anchor": "center",
         "text-size": 9,
         "text-allow-overlap": false,
@@ -1879,7 +1879,9 @@
         ],
         "icon-image": "shield{ref_length}",
         "text-padding": 30,
-        "symbol-avoid-edges": false
+        "symbol-avoid-edges": false,
+        "text-pitch-alignment": "viewport",
+        "icon-rotation-alignment": "viewport"
       },
       "paint": {
         "text-halo-width": 2,
@@ -1917,8 +1919,8 @@
       ],
       "layout": {
         "text-field": "{ref}",
-        "symbol-placement": "point",
-        "text-rotation-alignment": "auto",
+        "symbol-placement": "line",
+        "text-rotation-alignment": "viewport",
         "text-anchor": "center",
         "text-size": 9,
         "text-allow-overlap": true,
@@ -1928,7 +1930,9 @@
         "icon-image": "shield{ref_length}",
         "text-padding": 30,
         "symbol-avoid-edges": false,
-        "visibility": "visible"
+        "visibility": "visible",
+        "text-pitch-alignment": "viewport",
+        "icon-rotation-alignment": "viewport"
       },
       "paint": {
         "text-halo-width": 2,
