@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if [ ! -e data.pbf ]; then
-	wget -O data.pbf http://osm.ramuno.lt/lithuania.pbf
+	wget -O data.pbf http://download.geofabrik.de/europe/lithuania-latest.osm.pbf
 fi
 
 ./osm2pgsql -s -c -C 1024 -E 3857 --multi-geometry -S ./osm2pgsql.style -d osm -U postgres data.pbf
