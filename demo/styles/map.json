@@ -903,7 +903,7 @@
       "type": "fill",
       "source": "tilezen",
       "source-layer": "landuse",
-      "minzoom": 13,
+      "minzoom": 12,
       "maxzoom": 24,
       "filter": [
         "all",
@@ -1617,7 +1617,7 @@
           "Roboto Condensed Italic"
         ],
         "text-max-width": 10,
-        "text-letter-spacing": 0.1,
+        "text-letter-spacing": 0.05,
         "text-size": {
           "stops": [
             [
@@ -1641,126 +1641,31 @@
       }
     },
     {
-      "id": "label-village",
+      "id": "label-park",
       "type": "symbol",
       "source": "tilezen",
-      "source-layer": "places",
-      "minzoom": 10,
-      "maxzoom": 15,
-      "filter": [
-        "any",
-        [
-          "==",
-          "kind",
-          "village"
-        ]
-      ],
-      "layout": {
-        "text-field": "{name}",
-        "text-font": [
-          "Roboto Regular"
-        ],
-        "text-max-width": 10,
-        "text-letter-spacing": 0.1,
-        "text-size": {
-          "stops": [
-            [
-              8,
-              8
-            ],
-            [
-              14,
-              13
-            ]
-          ]
-        },
-        "visibility": "visible",
-        "symbol-spacing": 250,
-        "text-padding": 5
-      },
-      "paint": {
-        "text-color": "#384646",
-        "text-halo-color": "rgba(255,255,255,1)",
-        "icon-halo-width": 0,
-        "icon-halo-color": "rgba(0, 0, 0, 0)",
-        "text-halo-width": 2
-      }
-    },
-    {
-      "id": "label-town",
-      "type": "symbol",
-      "source": "tilezen",
-      "source-layer": "places",
+      "source-layer": "poi",
       "minzoom": 7,
-      "maxzoom": 13,
-      "filter": [
-        "all",
-        [
-          "in",
-          "kind",
-          "town",
-          "little_town",
-          "railway_station"
-        ]
-      ],
+      "maxzoom": 11,
       "layout": {
         "text-field": "{name}",
-        "text-font": [
-          "Roboto Medium"
+        "text-size": 12,
+        "text-max-width": 9,
+        "text-anchor": "top",
+        "text-offset": [
+          0,
+          0.6
         ],
-        "text-max-width": 10,
-        "text-letter-spacing": 0.1,
-        "text-size": {
-          "stops": [
-            [
-              8,
-              12
-            ],
-            [
-              12,
-              13
-            ]
-          ]
-        },
-        "visibility": "visible"
+        "icon-image": "park",
+        "text-font": [
+          "Roboto Condensed Italic"
+        ],
+        "text-padding": 1
       },
       "paint": {
-        "text-color": "#384646",
-        "text-halo-color": "rgba(255,255,255,0.5)",
-        "text-halo-width": 2,
-        "icon-halo-width": 0,
-        "icon-halo-color": "rgba(0, 0, 0, 0)"
-      }
-    },
-    {
-      "id": "label-city",
-      "type": "symbol",
-      "source": "tilezen",
-      "source-layer": "places",
-      "minzoom": 7,
-      "maxzoom": 14,
-      "filter": [
-        "all",
-        [
-          "in",
-          "kind",
-          "city"
-        ]
-      ],
-      "layout": {
-        "text-field": "{name}",
-        "text-font": [
-          "Roboto Medium"
-        ],
-        "text-max-width": 10,
-        "text-letter-spacing": 0.1,
-        "text-size": 18
-      },
-      "paint": {
-        "text-color": "#384646",
-        "text-halo-color": "rgba(255,255,255,0.5)",
-        "icon-halo-width": 2,
-        "icon-halo-color": "rgba(255, 255, 255, 1)"
+        "text-color": "rgba(26, 92, 0, 1)",
+        "text-halo-width": 1,
+        "text-halo-color": "rgba(255, 255, 255, 0.7)"
       }
     },
     {
@@ -1846,7 +1751,7 @@
       "type": "symbol",
       "source": "tilezen",
       "source-layer": "roads",
-      "minzoom": 8,
+      "minzoom": 7,
       "maxzoom": 11,
       "filter": [
         "all",
@@ -1983,6 +1888,126 @@
       }
     },
     {
+      "id": "label-village",
+      "type": "symbol",
+      "source": "tilezen",
+      "source-layer": "places",
+      "minzoom": 10,
+      "maxzoom": 15,
+      "filter": [
+        "any",
+        [
+          "==",
+          "kind",
+          "village"
+        ]
+      ],
+      "layout": {
+        "text-field": "{name}",
+        "text-font": [
+          "Roboto Regular"
+        ],
+        "text-max-width": 10,
+        "text-letter-spacing": 0.05,
+        "text-size": {
+          "stops": [
+            [
+              8,
+              8
+            ],
+            [
+              14,
+              13
+            ]
+          ]
+        },
+        "symbol-spacing": 250,
+        "text-padding": 5
+      },
+      "paint": {
+        "text-color": "#384646",
+        "text-halo-color": "rgba(255,255,255,1)",
+        "icon-halo-width": 0,
+        "icon-halo-color": "rgba(0, 0, 0, 0)",
+        "text-halo-width": 2
+      }
+    },
+    {
+      "id": "label-town",
+      "type": "symbol",
+      "source": "tilezen",
+      "source-layer": "places",
+      "minzoom": 7,
+      "maxzoom": 13,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "town",
+          "little_town",
+          "railway_station"
+        ]
+      ],
+      "layout": {
+        "text-field": "{name}",
+        "text-font": [
+          "Roboto Medium"
+        ],
+        "text-max-width": 10,
+        "text-letter-spacing": 0.05,
+        "text-size": {
+          "stops": [
+            [
+              8,
+              12
+            ],
+            [
+              12,
+              13
+            ]
+          ]
+        }
+      },
+      "paint": {
+        "text-color": "#384646",
+        "text-halo-color": "rgba(255,255,255,0.5)",
+        "text-halo-width": 2,
+        "icon-halo-width": 0,
+        "icon-halo-color": "rgba(0, 0, 0, 0)"
+      }
+    },
+    {
+      "id": "label-city",
+      "type": "symbol",
+      "source": "tilezen",
+      "source-layer": "places",
+      "minzoom": 7,
+      "maxzoom": 11,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "city"
+        ]
+      ],
+      "layout": {
+        "text-field": "{name}",
+        "text-font": [
+          "Roboto Medium"
+        ],
+        "text-max-width": 10,
+        "text-letter-spacing": 0.05,
+        "text-size": 18
+      },
+      "paint": {
+        "text-color": "#384646",
+        "text-halo-color": "rgba(255,255,255,0.5)",
+        "text-halo-width": 3
+      }
+    },
+    {
       "id": "label-road-proposed",
       "type": "symbol",
       "source": "tilezen",
@@ -2069,35 +2094,6 @@
         "text-size": 12,
         "text-max-width": 9,
         "text-anchor": "top",
-        "text-font": [
-          "Roboto Condensed Italic"
-        ],
-        "visibility": "visible",
-        "text-padding": 1
-      },
-      "paint": {
-        "text-color": "rgba(26, 92, 0, 1)",
-        "text-halo-width": 1,
-        "text-halo-color": "rgba(255, 255, 255, 0.7)"
-      }
-    },
-    {
-      "id": "label-park",
-      "type": "symbol",
-      "source": "tilezen",
-      "source-layer": "poi",
-      "minzoom": 7,
-      "maxzoom": 11,
-      "layout": {
-        "text-field": "{name}",
-        "text-size": 12,
-        "text-max-width": 9,
-        "text-anchor": "top",
-        "text-offset": [
-          0,
-          0.6
-        ],
-        "icon-image": "park",
         "text-font": [
           "Roboto Condensed Italic"
         ],
