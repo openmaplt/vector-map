@@ -28,6 +28,8 @@ SELECT
         THEN 'sand'
       WHEN "natural" = 'scrub'
         THEN 'scrub'
+      WHEN aeroway is not null
+        THEN aeroway
     END
   ) AS kind
 FROM
@@ -36,6 +38,7 @@ WHERE
   way && !bbox! AND
   (
     landuse IN ('forest', 'residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages') OR
-   "natural" in ('wetland', 'beach', 'sand', 'scrub')
+   "natural" in ('wetland', 'beach', 'sand', 'scrub') OR
+   aeroway = 'runway'
   ) AND
   way_area >= 100000
