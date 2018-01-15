@@ -12,4 +12,4 @@ docker exec $CONTAINER_DB sh -c 'apt update -qy && apt install -qy postgis'
 docker run --rm -it -w /tmp/src -v `pwd`:/tmp/src --network "container:$CONTAINER_DB" -e PGPASSWORD=osm openmap/osm2pgsql:latest osm2pgsql -s -c -C 512 --multi-geometry -S db/osm2pgsql.style -d osm -U osm -H db data.pbf
 docker exec -u postgres $CONTAINER_DB sh -c 'psql osm -f /src/db/index.sql'
 docker exec -u postgres $CONTAINER_DB sh -c 'psql osm -f /src/db/table_poi.sql'
-docker exec -u postgres $CONTAINER_DB sh -c 'shp2pgsql -dDI -s 3857 /src/queries/coastline/coastline.shp | psql osm'
+docker exec -u postgres $CONTAINER_DB sh -c 'bunzip2 -ck /src/queries/coastline/coastline.sql.bz2 | psql osm'
