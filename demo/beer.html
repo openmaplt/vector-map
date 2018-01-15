@@ -10,10 +10,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager -->
     <meta charset='utf-8' />
     <title>Craft alaus žemėlapis</title>
+    <meta name="description" content="Vietos, kur Lietuvoje galima paragauti arba įsigyti Craft alaus: parduotuvėlės, aludės, restoranai ir pan."</meta>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.css' rel='stylesheet' />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <style>
         body { margin:0; padding:0; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
@@ -21,60 +20,47 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         .mapboxgl-popup-content img {max-width: 400px; max-height: 400px;}
         .icon {width: 15px; display: inline-block; text-align: center;}
 
-    .filter-group {
-        font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-        font-weight: 600;
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        z-index: 1;
-        border-radius: 3px;
-        width: 120px;
-        color: #fff;
+    .menu {
+      font: 11px/18px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+      font-weight: 550;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 7px;
+      right: 7px;
+      padding: 4px;
+      width: 120px;
     }
-
-    .filter-group input[type=checkbox]:first-child + label {
-        border-radius: 7px 7px 0 0;
-    }
-
-    .filter-group label:last-child {
-        border-radius: 0 0 7px 7px;
-        border: none;
-    }
-
-    .filter-group input[type=checkbox] {
+    .menu input[type=checkbox] {
         display: none;
     }
-
-    .filter-group input[type=checkbox] + label {
+    .menu input[type=checkbox] + label {
         background-color: #333333;
         display: block;
         cursor: pointer;
-        padding: 10px;
+        padding: 7px;
         border-bottom: 1px solid rgba(0, 0, 0, 0.25);
         margin-bottom: 0px;
     }
-
-    .filter-group input[type=checkbox] + label {
+    .menu input[type=checkbox] + label {
         background-color: #333333;
         text-transform: capitalize;
     }
-
-    @media (hover: hover) {
-      .filter-group input[type=checkbox] + label:hover {
-        background-color: #fff480;
-        color: #000;
-      }
-    }
-
-    .filter-group input[type=checkbox]:checked + label {
+    .menu input[type=checkbox]:checked + label {
         background-color: #fff480;
         color: #000;
     }
-
-    .filter-group input[type=checkbox]:checked + label:before {
+    .menu input[type=checkbox]:checked + label:before {
         content: '✔';
         margin-right: 5px;
+    }
+    .menu2 {
+      display: flex;
+      flex-direction: row;
+    }
+    .menu2 input[type=checkbox] + label {
+      width: 46px;
     }
     </style>
 </head>
@@ -84,15 +70,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 <div id="map"></div>
-<!--div id="layers" class="pull-right btn-group hidden">
-    <button type="button" class="btn btn-default" data-style="beer_dark">Craft-alus</button>
-</div-->
-<nav id='filter-group' class='filter-group'>
-<input type="checkbox" id="label-lager" checked="true" onChange="change()"><label for="label-lager">Lager</label>
-<input type="checkbox" id="label-ale"   checked="true" onChange="change()"><label for="label-ale"  >Ale</label>
-<input type="checkbox" id="label-stout" checked="true" onChange="change()"><label for="label-stout">Stout</label>
-<input type="checkbox" id="label-ipa"   checked="true" onChange="change()"><label for="label-ipa"  >IPA</label>
-</nav>
+<div class="menu" style="border-radius: 7px;">
+  <div><input type="checkbox" id="label-lager" checked="true"  onChange="change()"><label style="border-radius: 7px 7px 0 0;" for="label-lager">Lageris</label></div>
+  <div><input type="checkbox" id="label-ale"   checked="true"  onChange="change()"><label for="label-ale"  >Elis</label></div>
+  <div><input type="checkbox" id="label-wheat" checked="true"  onChange="change()"><label for="label-wheat">Kvietinis</label></div>
+  <div><input type="checkbox" id="label-stout" checked="true"  onChange="change()"><label for="label-stout">Stautas</label></div>
+  <div><input type="checkbox" id="label-ipa"   checked="true"  onChange="change()"><label style="border-radius: 0 0 7px 7px;" for="label-ipa"  >IPA</label></div>
+  <div style="margin-bottom: 5px;" class="menu2">
+    <div><input type="checkbox" id="label-or"    checked="true"  onChange="changeCond('any')"><label style="border-radius: 7px 0 0 7px;" for="label-or">ARBA</label></div>
+    <div><input type="checkbox" id="label-and"    onChange="changeCond('all')"><label style="border-radius: 0 7px 7px 0;" for="label-and">IR</label></div>
+  </div>
+  <div><input type="checkbox" id="label-drink" checked="true"  onChange="changeType('drink')"><label style="border-radius: 7px 7px 0 0;" for="label-drink">Gerti</label></div>
+  <div><input type="checkbox" id="label-shop"   onChange="changeType('shop')"><label style="border-radius: 0 0 7px 7px;" for="label-shop">Išsinešti</label></div>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.js'></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-supported/v1.2.0/mapbox-gl-supported.js'></script>
@@ -101,13 +91,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   var mapTypes = {
     beer_dark: 'c'
   };
+  var filterCond = 'any';
+  var filterPlace = 'drink';
   function change() {
-    var filters = ['any'];
+    var filters = [filterCond];
     if (document.getElementById("label-lager").checked) {
       filters.push(['==', 'style_lager', 'y']);
     }
     if (document.getElementById("label-ale").checked) {
       filters.push(['==', 'style_ale', 'y']);
+    }
+    if (document.getElementById("label-wheat").checked) {
+      filters.push(['==', 'style_wheat', 'y']);
     }
     if (document.getElementById("label-stout").checked) {
       filters.push(['==', 'style_stout', 'y']);
@@ -115,7 +110,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     if (document.getElementById("label-ipa").checked) {
       filters.push(['==', 'style_ipa', 'y']);
     }
-    map.setFilter('label-amenity', filters.length > 1 ? filters : null);
+    var filterMain = ['all'];
+    if (filterPlace == 'drink') {
+      filterMain.push(['==', 'drink', 'y']);
+    } else {
+      filterMain.push(['==', 'shop', 'y']);
+    }
+    filterMain.push(filters.length > 1 ? filters : null);
+    map.setFilter('label-amenity', filterMain);
+  }
+  function changeCond(f) {
+    filterCond = f;
+    if (f == 'any') {
+      document.getElementById("label-or").checked = true;
+      document.getElementById("label-and").checked = false;
+    } else {
+      document.getElementById("label-or").checked = false;
+      document.getElementById("label-and").checked = true;
+    }
+    change();
+  }
+  function changeType(f) {
+    filterPlace = f;
+    if (f == 'drink') {
+      document.getElementById("label-drink").checked = true;
+      document.getElementById("label-shop").checked = false;
+    } else {
+      document.getElementById("label-drink").checked = false;
+      document.getElementById("label-shop").checked = true;
+    }
+    change();
   }
 </script>
 <script src="map.js"></script>

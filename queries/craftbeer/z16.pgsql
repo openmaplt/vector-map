@@ -23,6 +23,8 @@ SELECT
   CASE WHEN real_ale like '%stout%' THEN 'y' ELSE 'n' END AS style_stout,
   CASE WHEN real_ale like '%ipa%'   THEN 'y' ELSE 'n' END AS style_ipa,
   CASE WHEN real_ale like '%wheat%' THEN 'y' ELSE 'n' END AS style_wheat,
+  CASE WHEN shop = 'alcohol' THEN 'y' ELSE 'n' END AS shop,
+  CASE WHEN amenity in ('bar', 'cafe', 'fast_food', 'pub', 'restaurant') THEN 'y' ELSE 'n' END AS drink,
   official_name,
   alt_name,
   opening_hours,
