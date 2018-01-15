@@ -327,6 +327,9 @@ function getFomatedValue(attribute, properties) {
       if (properties['style_ipa'] == 'y') {
         styles.push('IPA');
       }
+      if (properties['style_wheat'] == 'y') {
+        styles.push('kvietinis');
+      }
       return '<b>Stiliai:</b> ' + styles.join(', ');
   }
 
