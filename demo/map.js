@@ -1,6 +1,7 @@
 var interactiveLayerId = 'label-amenity';
 var defaultType = defaultType || 'map';
 var cookieName = defaultType + 'Data';
+var popupPoi = null;
 
 var mapTypes = mapTypes || {
   map: 'm',
@@ -114,7 +115,6 @@ if (!mapboxgl.supported()) {
       }
     })
     .on('moveend', function () {
-      delete mapData.objectId;
       setMapData();
       changeHashUrl();
     })
@@ -257,6 +257,10 @@ function removeMousePointerCursor() {
 }
 
 function poiOnClick(e) {
+  if (popupPoi) {
+    popupPoi.remove();
+    popupPoi = null;
+  }
   var poi = e.features[0];
   var html = getHtml(poi).join('<br />');
   html += '<br />' + getDirectLink(poi);
@@ -265,13 +269,27 @@ function poiOnClick(e) {
   } catch (err) {
     console.error(err);
   }
-  if (html.length) {
-    new mapboxgl.Popup()
+  popupPoi = new mapboxgl.Popup();
+  popupPoi
       .setLngLat(poi.geometry.coordinates)
       .setHTML(html)
-      .addTo(map);
+      .addTo(map)
+      .once('close', onPoiPopupClose);
+  try {
+    mapData.objectId = getObjectId(poi.properties, poi.layer);
+    changeHashUrl();
+  } catch (err) {
+    delete mapData.objectId;
   }
 }
+
+function onPoiPopupClose() {
+  if (typeof mapData.objectId !== 'undefined') {
+    delete mapData.objectId;
+    changeHashUrl();
+  }
+  popupPoi = null;
+};
 
 function getHtml(poi) {
   return showAttributes
@@ -427,18 +445,29 @@ function getAddress(properties) {
   return address;
 };
 
+function getLayerCode(layerId) {
+  return Object.keys(layerCode).filter(function(key) {return layerCode[key] === layerId;})[0] || '';
+};
+
+function getObjectId(properties, layer) {
+  if (typeof properties.id === "undefined") {
+    throw new Error('Missing object id');
+  }
+  return getLayerCode(layer.id) + properties.id;
+};
+
 function getDirectLink(feature) {
   var coordinates = feature.geometry.coordinates;
   var state = Object.assign({}, mapData);
   state.lat = coordinates[1].toFixed(5);
   state.lng = coordinates[0].toFixed(5);
   var properties = feature.properties;
-  if (typeof properties.id !== "undefined") {
-    var code = Object.keys(layerCode).filter(function(key) {return layerCode[key] === feature.layer.id})[0] || '';
-    state.objectId = code + properties.id;
-  } else {
+  try {
+    state.objectId = getObjectId(properties, feature.layer);
+  } catch (err) {
     delete state.objectId;
   }
+
   var hash = getUrlHash(state);
   var url = window.location.origin + '#' + hash;
 
