@@ -1,4 +1,7 @@
 SELECT
+  id,
+  id AS __id__,
+  __type__,
   way AS __geometry__,
   name,
   (
