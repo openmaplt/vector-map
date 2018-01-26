@@ -17,7 +17,7 @@ SELECT
     WHEN amenity = 'restaurant'
       THEN 'restaurant'
     WHEN shop = 'alcohol'
-      THEN 'alcohol_shop'
+      THEN 'alcohol-shop'
     ELSE 'marker'
     END
   ) AS kind,
