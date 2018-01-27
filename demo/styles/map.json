@@ -11,6 +11,13 @@
       "tiles": [
         "https://openmap.lt/all/{z}/{x}/{y}.pbf"
       ]
+    },
+    "detail": {
+      "type": "vector",
+      "attribution": "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>",
+      "tiles": [
+        "https://openmap.lt/detail/{z}/{x}/{y}.pbf"
+      ]
     }
   },
   "sprite": "https://openmap.lt/sprites/openmaplt",
@@ -386,6 +393,44 @@
       }
     },
     {
+      "id": "detail-cutline",
+      "type": "line",
+      "source": "detail",
+      "source-layer": "detail",
+      "minzoom": 13,
+      "filter": [
+        "all"
+      ],
+      "layout": {},
+      "paint": {
+        "line-color": "rgba(255, 255, 255, 1)",
+        "line-width": {
+          "stops": [
+            [
+              13,
+              2
+            ],
+            [
+              18,
+              11
+            ]
+          ]
+        },
+        "line-opacity": {
+          "stops": [
+            [
+              13,
+              0
+            ],
+            [
+              14,
+              0.5
+            ]
+          ]
+        }
+      }
+    },
+    {
       "id": "water-polygon",
       "type": "fill",
       "source": "tilezen",
@@ -596,24 +641,36 @@
       "layout": {
         "line-cap": "round",
         "line-join": "round",
-        "visibility": "visible"
+        "line-miter-limit": 2,
+        "line-round-limit": 1.1
       },
       "paint": {
-        "line-color": "rgba(204, 98, 98, 1)",
+        "line-color": "rgba(214, 157, 157, 1)",
         "line-width": {
-          "base": 2,
           "stops": [
-            [
-              1,
-              1
-            ],
             [
               7,
               2
+            ],
+            [
+              16,
+              14
             ]
           ]
         },
-        "line-translate-anchor": "map"
+        "line-translate-anchor": "map",
+        "line-offset": {
+          "stops": [
+            [
+              7,
+              1
+            ],
+            [
+              16,
+              -7
+            ]
+          ]
+        }
       }
     },
     {
