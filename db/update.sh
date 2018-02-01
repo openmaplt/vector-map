@@ -89,6 +89,9 @@ if [ -s dirty_tiles ]; then
     #echo "Craftbeer generate expired " `date`
     #tilestache-seed -c $TILESTACHE_CONFIG_FILE -x -l craftbeer -e pbf --tile-list generate_craftbeer_$DIRTY_FILE
 
+    echo "Detail delete expired " `date`
+    tilestache-clean -c $TILESTACHE_CONFIG_FILE -l detail -e pbf --tile-list dirty_tiles
+
     echo "Done " `date`
 
     rm delete_openmap_$DIRTY_FILE
