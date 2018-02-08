@@ -98,7 +98,7 @@ if (!mapboxgl.supported()) {
     maxZoom: 18,
     center: [mapData.lng, mapData.lat],
     hash: false,
-    maxBounds: [20.880, 53.888, 26.862, 56.453],
+    maxBounds: [20.700, 53.700, 27.050, 56.650],
     bearing: mapData.bearing,
     pitch: mapData.pitch
   })
