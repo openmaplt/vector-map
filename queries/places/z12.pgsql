@@ -22,7 +22,7 @@ FROM
    WHERE
      way && !bbox! AND
      name IS NOT NULL AND
-     place IN ('city', 'town', 'village')
+     place IN ('city', 'town', 'village', 'suburb')
    ORDER BY
      coalesce(population::int, 0) desc) AS place
 

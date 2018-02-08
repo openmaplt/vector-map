@@ -832,7 +832,7 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "rgba(234, 160, 160, 1)",
+        "line-color": "rgba(190, 160, 120, 1)",
         "line-width": {
           "base": 1.55,
           "stops": [
@@ -867,7 +867,7 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "rgba(236, 140, 140, 1)",
+        "line-color": "rgba(200, 160, 0, 1)",
         "line-width": {
           "base": 1.55,
           "stops": [
@@ -902,7 +902,7 @@
         "line-cap": "butt"
       },
       "paint": {
-        "line-color": "rgba(240, 96, 96, 1)",
+        "line-color": "rgba(180, 90, 0, 1)",
         "line-width": {
           "base": 1.55,
           "stops": [
@@ -939,7 +939,7 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "rgba(240, 96, 96, 1)",
+        "line-color": "rgba(120, 70, 0, 1)",
         "line-width": {
           "base": 1.55,
           "stops": [
@@ -1055,7 +1055,7 @@
         "line-cap": "round"
       },
       "paint": {
-        "line-color": "rgba(180, 180, 180, 1)",
+        "line-color": "rgba(190, 190, 190, 1)",
         "line-width": {
           "base": 1.55,
           "stops": [
@@ -1619,9 +1619,7 @@
         [
           "in",
           "kind",
-          "neighbourhood",
           "hamlet",
-          "suburb",
           "locality"
         ]
       ],
@@ -1990,7 +1988,7 @@
       }
     },
     {
-      "id": "label-town",
+      "id": "label-little-town",
       "type": "symbol",
       "source": "tilezen",
       "source-layer": "places",
@@ -2001,7 +1999,6 @@
         [
           "in",
           "kind",
-          "town",
           "little_town",
           "railway_station"
         ]
@@ -2032,6 +2029,81 @@
         "text-halo-width": 2,
         "icon-halo-width": 0,
         "icon-halo-color": "rgba(0, 0, 0, 0)"
+      }
+    },
+    {
+      "id": "label-town",
+      "type": "symbol",
+      "source": "tilezen",
+      "source-layer": "places",
+      "minzoom": 7,
+      "maxzoom": 13,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "town"
+        ]
+      ],
+      "layout": {
+        "text-field": "{name}",
+        "text-font": [
+          "Roboto Medium"
+        ],
+        "text-max-width": 10,
+        "text-letter-spacing": 0.05,
+        "text-size": {
+          "stops": [
+            [
+              8,
+              12
+            ],
+            [
+              12,
+              13
+            ]
+          ]
+        }
+      },
+      "paint": {
+        "text-color": "#384646",
+        "text-halo-color": "rgba(255,255,255,0.5)",
+        "text-halo-width": 2,
+        "icon-halo-width": 0,
+        "icon-halo-color": "rgba(0, 0, 0, 0)"
+      }
+    },
+    {
+      "id": "label-suburb",
+      "type": "symbol",
+      "source": "tilezen",
+      "source-layer": "places",
+      "minzoom": 12,
+      "maxzoom": 16,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "suburb",
+          "neighbourhood"
+        ]
+      ],
+      "layout": {
+        "text-field": "{name}",
+        "text-font": [
+          "Roboto Medium"
+        ],
+        "text-max-width": 10,
+        "text-letter-spacing": 0.05,
+        "text-size": 16,
+        "text-transform": "uppercase"
+      },
+      "paint": {
+        "text-color": "#808080",
+        "text-halo-color": "rgba(255,255,255,0.5)",
+        "text-halo-width": 3
       }
     },
     {
