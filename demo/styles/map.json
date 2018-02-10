@@ -2097,7 +2097,7 @@
         ],
         "text-max-width": 10,
         "text-letter-spacing": 0.05,
-        "text-size": 16,
+        "text-size": 15,
         "text-transform": "uppercase"
       },
       "paint": {
