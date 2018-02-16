@@ -2,6 +2,11 @@ var interactiveLayerId = 'label-amenity';
 var defaultType = defaultType || 'map';
 var cookieName = defaultType + 'Data';
 var popupPoi = null;
+var pMaxBounds;
+var pMinZoom;
+var pMaxZoom;
+var pZoom;
+var pCenter;
 
 var mapTypes = mapTypes || {
   map: 'm',
@@ -93,12 +98,12 @@ if (!mapboxgl.supported()) {
   var map = new mapboxgl.Map({
     container: 'map',
     style: 'styles/' + mapData.type + '.json',
-    zoom: mapData.zoom,
-    minZoom: 7,
-    maxZoom: 18,
-    center: [mapData.lng, mapData.lat],
+    zoom: pZoom || mapData.zoom,
+    minZoom: pMinZoom || 7,
+    maxZoom: pMaxZoom || 18,
+    center: pCenter || [mapData.lng, mapData.lat],
     hash: false,
-    maxBounds: [20.700, 53.700, 27.050, 56.650],
+    maxBounds: pMaxBounds || [20.700, 53.700, 27.050, 56.650],
     bearing: mapData.bearing,
     pitch: mapData.pitch
   })
