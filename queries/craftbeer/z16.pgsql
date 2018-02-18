@@ -61,4 +61,4 @@ ORDER BY
   CASE WHEN real_ale like '%ale%'   THEN 1 ELSE 0 END +
   CASE WHEN real_ale like '%stout%' THEN 1 ELSE 0 END +
   CASE WHEN real_ale like '%ipa%'   THEN 1 ELSE 0 END +
-  CASE WHEN real_ale like '%wheat%' THEN 1 ELSE 0 END
+  CASE WHEN real_ale like '%wheat%' THEN 1 ELSE 0 END desc
