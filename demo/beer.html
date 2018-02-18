@@ -1,149 +1,41 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="lt">
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-NP4W837');</script>
-<!-- End Google Tag Manager -->
-    <meta charset='utf-8' />
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NP4W837');</script>
+    <!-- End Google Tag Manager -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments)};
+      gtag('js', new Date());
+      gtag('config', 'UA-18331326-1');
+    </script>
+    <meta charset="utf-8">
     <title>Craft alaus žemėlapis</title>
-    <meta name="description" content="Vietos, kur Lietuvoje galima paragauti arba įsigyti Craft alaus: parduotuvėlės, aludės, restoranai ir pan."</meta>
-    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.css' rel='stylesheet' />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <style>
-        body { margin:0; padding:0; }
-        #map { position:absolute; top:0; bottom:0; width:100%; }
-        #layers {right: 5px; top: 5px;}
-        .mapboxgl-popup-content img {max-width: 400px; max-height: 400px;}
-        .icon {width: 15px; display: inline-block; text-align: center;}
-
-    .menu {
-      font: 11px/18px 'Helvetica Neue', Arial, Helvetica, sans-serif;
-      font-weight: 550;
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      position: absolute;
-      top: 7px;
-      right: 7px;
-      padding: 4px;
-      width: 120px;
-    }
-    .menu input[type=checkbox] {
-        display: none;
-    }
-    .menu input[type=checkbox] + label {
-        background-color: #333333;
-        display: block;
-        cursor: pointer;
-        padding: 7px;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-        margin-bottom: 0px;
-    }
-    .menu input[type=checkbox] + label {
-        background-color: #333333;
-        text-transform: capitalize;
-    }
-    .menu input[type=checkbox]:checked + label {
-        background-color: #fff480;
-        color: #000;
-    }
-    .menu input[type=checkbox]:checked + label:before {
-        content: '✔';
-        margin-right: 5px;
-    }
-    .menu2 {
-      display: flex;
-      flex-direction: row;
-    }
-    .menu2 input[type=checkbox] + label {
-      width: 56px;
-    }
-    </style>
+    <meta name="viewport" content="initial-scale=1" />
+    <meta name="theme-color" content="#ffffff">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="OpenMap.lt">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" type="image/png" href="/logo/openmap-icon-16x16.png" sizes="16x16">
+    <link rel="icon" type="image/png" href="/logo/openmap-icon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="/logo/openmap-icon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/logo/openmap-icon-192x192.png" sizes="192x192">
+    <link rel="manifest" href="manifest.json">
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NP4W837"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NP4W837" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-<div id="map"></div>
-<div class="menu" style="border-radius: 7px;">
-  <div><input type="checkbox" id="label-lager" checked="true"  onChange="change()"><label style="border-radius: 7px 7px 0 0;" for="label-lager">Lageris</label></div>
-  <div><input type="checkbox" id="label-ale"   checked="true"  onChange="change()"><label for="label-ale"  >Elis</label></div>
-  <div><input type="checkbox" id="label-wheat" checked="true"  onChange="change()"><label for="label-wheat">Kvietinis</label></div>
-  <div><input type="checkbox" id="label-stout" checked="true"  onChange="change()"><label for="label-stout">Stautas</label></div>
-  <div><input type="checkbox" id="label-ipa"   checked="true"  onChange="change()"><label style="border-radius: 0 0 7px 7px;" for="label-ipa"  >IPA</label></div>
-  <div style="margin-bottom: 5px;" class="menu2">
-    <div><input type="checkbox" id="label-or"    checked="true"  onChange="changeCond('any')"><label style="border-radius: 7px 0 0 7px;" for="label-or">ARBA</label></div>
-    <div><input type="checkbox" id="label-and"    onChange="changeCond('all')"><label style="border-radius: 0 7px 7px 0;" for="label-and">IR</label></div>
-  </div>
-  <div><input type="checkbox" id="label-drink" checked="true"  onChange="changeType('drink')"><label style="border-radius: 7px 7px 0 0;" for="label-drink">Gerti</label></div>
-  <div><input type="checkbox" id="label-shop"   onChange="changeType('shop')"><label style="border-radius: 0 0 7px 7px;" for="label-shop">Išsinešti</label></div>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.js'></script>
-<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-supported/v1.2.0/mapbox-gl-supported.js'></script>
-<script>
-  var defaultType = 'beer_dark';
-  var mapTypes = {
-    beer_dark: 'c'
-  };
-  var filterCond = 'any';
-  var filterPlace = 'drink';
-  function change() {
-    var filters = [filterCond];
-    if (document.getElementById("label-lager").checked) {
-      filters.push(['==', 'style_lager', 'y']);
-    }
-    if (document.getElementById("label-ale").checked) {
-      filters.push(['==', 'style_ale', 'y']);
-    }
-    if (document.getElementById("label-wheat").checked) {
-      filters.push(['==', 'style_wheat', 'y']);
-    }
-    if (document.getElementById("label-stout").checked) {
-      filters.push(['==', 'style_stout', 'y']);
-    }
-    if (document.getElementById("label-ipa").checked) {
-      filters.push(['==', 'style_ipa', 'y']);
-    }
-    var filterMain = ['all'];
-    if (filterPlace == 'drink') {
-      filterMain.push(['==', 'drink', 'y']);
-    } else {
-      filterMain.push(['==', 'shop', 'y']);
-    }
-    filterMain.push(filters.length > 1 ? filters : null);
-    map.setFilter('label-amenity', filterMain);
-  }
-  function changeCond(f) {
-    filterCond = f;
-    if (f == 'any') {
-      document.getElementById("label-or").checked = true;
-      document.getElementById("label-and").checked = false;
-    } else {
-      document.getElementById("label-or").checked = false;
-      document.getElementById("label-and").checked = true;
-    }
-    change();
-  }
-  function changeType(f) {
-    filterPlace = f;
-    if (f == 'drink') {
-      document.getElementById("label-drink").checked = true;
-      document.getElementById("label-shop").checked = false;
-    } else {
-      document.getElementById("label-drink").checked = false;
-      document.getElementById("label-shop").checked = true;
-    }
-    change();
+<div id="map" role="main"></div>
+<script type="text/javascript">
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js');
   }
 </script>
-<script src="map.js"></script>
-</body>
+<script type="text/javascript" src="js/vendor.b645186dc322a2fdc628.js"></script><script type="text/javascript" src="js/beer.9cfaaf4c2614873a4164.js"></script><script type="text/javascript" src="js/app.2a36d288921d257518d6.js"></script></body>
 </html>

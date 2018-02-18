@@ -1,0 +1,34 @@
+{
+  "name": "vector-map",
+  "version": "1.0.0",
+  "description": "Vector Lithuania OpenStreetMap map",
+  "author": "Atvirasis žemėlapis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/openmaplt/vector-map/issues"
+  },
+  "homepage": "https://github.com/openmaplt/vector-map#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/openmaplt/vector-map"
+  },
+  "scripts": {
+    "build": "webpack --config webpack.config.js --progress --profile --colors"
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
+  "dependencies": {
+    "mapbox-gl": "^0.44.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "html-webpack-plugin": "^2.30.1",
+    "webpack": "^3.11.0",
+    "webpack-cleanup-plugin": "^0.5.1"
+  }
+}

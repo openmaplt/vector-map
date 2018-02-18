@@ -6,4 +6,7 @@
 /local
 /share
 pip-selfcheck.json
+/node_modules
+/demo/js
+/demo/*.html
 *.pbf
