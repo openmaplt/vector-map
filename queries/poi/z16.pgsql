@@ -115,12 +115,14 @@ SELECT
       THEN 'bicycle'
     WHEN shop = 'clothes'
       THEN 'clothing_store'
-    WHEN shop in ('supermarket', 'mall')
+    WHEN shop in ('supermarket', 'mall', 'department_store')
       THEN 'grocery'
     WHEN shop in ('convenience')
       THEN 'shop'
     WHEN shop = 'hairdresser'
       THEN 'hairdresser'
+    WHEN shop = 'florist'
+      THEN 'florist'
 
     WHEN office = 'government' or amenity = 'townhall'
       THEN 'town-hall'
@@ -200,9 +202,11 @@ WHERE
              'car_repair',
              'convenience',
              'clothes',
+             'florist',
              'hairdresser',
              'mall',
-             'supermarket') OR
+             'supermarket',
+             'department_store') OR
     historic IN ('archaeological_site',
                  'monument',
                  'memorial',
@@ -214,3 +218,10 @@ WHERE
               'lawyer'
     )
   )
+ORDER BY
+  CASE WHEN tourism is not null then 1
+       WHEN historic is not null then 2
+       WHEN amenity is not null then 3
+       WHEN shop is not null then 4
+       ELSE 5
+  END

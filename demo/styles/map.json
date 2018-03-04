@@ -399,7 +399,9 @@
       "source-layer": "detail",
       "minzoom": 13,
       "filter": [
-        "all"
+        "==",
+        "kind",
+        "cutline"
       ],
       "layout": {},
       "paint": {
@@ -428,6 +430,28 @@
             ]
           ]
         }
+      }
+    },
+    {
+      "id": "detail-cliff",
+      "type": "line",
+      "source": "detail",
+      "source-layer": "detail",
+      "minzoom": 16,
+      "filter": [
+        "==",
+        "kind",
+        "cliff"
+      ],
+      "layout": {},
+      "paint": {
+        "line-pattern": "cliff",
+        "line-width": 10,
+        "line-color": "rgba(100, 100, 100, 1)",
+        "line-translate": [
+          0,
+          4
+        ]
       }
     },
     {

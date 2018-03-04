@@ -89,3 +89,9 @@ WHERE
                  'manor',
                  'monastery')
   )
+ORDER BY
+  CASE WHEN tourism is not null then 1
+       WHEN historic is not null then 2
+       WHEN amenity is not null then 3
+       ELSE 5
+  END
