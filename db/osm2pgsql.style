@@ -95,9 +95,7 @@ node,way   building     text         polygon
 node,way   building:levels text      polygon
 node       capital      text         linear
 node,way   construction text         linear
-node,way   covered      text         linear
 node,way   denomination text         linear
-node,way   disused      text         linear
 node       ele          text         linear
 node,way   foot         text         linear
 node,way   generator:source    text  linear
@@ -132,7 +130,6 @@ node,way   service      text         linear
 node,way   shop         text         polygon
 node,way   sport        text         polygon
 node,way   surface      text         linear
-node,way   toll         text         linear
 node,way   tourism      text         polygon
 node,way   tower:type   text         linear
 way        tracktype    text         linear
@@ -140,8 +137,6 @@ node,way   tunnel       text         linear
 node,way   water        text         polygon
 node,way   waterway     text         polygon
 node,way   wetland      text         polygon
-node,way   width        text         linear
-node,way   wood         text         linear
 node       rank         text         linear
 node,way   opening_hours text        linear
 node,way   official_name text        linear
@@ -167,5 +162,6 @@ node,way   cycleway:both text        linear
 node,way   real_ale     text         linear
 node,way   waterway:milestone text   linear
 node,way   whitewater   text         linear
+node,way   craft        text         polygon
 node,way   z_order      int4         linear # This is calculated during import
 way        way_area     real                # This is calculated during import
