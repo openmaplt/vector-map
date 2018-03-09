@@ -15,9 +15,12 @@ body {
     top: 5px;
 }
 
+.mapboxgl-popup-content {
+    max-width: 90vw;
+}
+
 .mapboxgl-popup-content img {
-    max-width: 400px;
-    max-height: 400px;
+    max-width: 80vw;
 }
 
 .icon {
