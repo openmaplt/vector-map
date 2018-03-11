@@ -9,6 +9,8 @@ SELECT
         THEN 'region'
       WHEN admin_level = '6'
         THEN 'county'
+      WHEN admin_level = '8'
+        THEN 'locality'
     END
   ) AS kind
 FROM
@@ -16,5 +18,5 @@ FROM
 WHERE
   way && !bbox! AND
   boundary = 'administrative' AND
-  ((admin_level = '2' AND name = 'Lietuva') or admin_level IN ('4', '6')) AND
+  ((admin_level = '2' AND name = 'Lietuva') or admin_level IN ('4', '6', '8')) AND
   name not in ('Latgale', 'Kurzeme', 'Zemgale')
