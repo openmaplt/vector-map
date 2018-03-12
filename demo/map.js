@@ -69,6 +69,7 @@ var attributeType = {
   wikipedia: 'wikipedia',
   height: 'height',
   fee: 'fee',
+  phone: 'phone',
   style_lager: 'beer_styles'
 };
 var legendData = legendData || {};
@@ -267,6 +268,16 @@ function poiOnClick(e) {
     popupPoi = null;
   }
   var poi = e.features[0];
+  // move to vertical center on portrait mode
+  if (screen.width < screen.height) {
+      var center = map.getCenter();
+      map.flyTo({
+          center: {
+              lat: center.lat,
+              lng: poi.geometry.coordinates[0]
+          }
+      });
+  }
   var html = getHtml(poi).join('<br />');
   html += '<br />' + getDirectLink(poi);
   try {
@@ -333,6 +344,8 @@ function getFomatedValue(attribute, properties) {
       return '<img src="' + value + '" />';
     case 'address':
       return getAddress(properties);
+    case 'phone':
+      return '<a href="tel:' + value + '">' + value + '</a>';
     case 'wikipedia':
       var splitValue = value.split(':');
       return '<a href="https://' + splitValue[0] + '.wikipedia.org/wiki/' + splitValue[1].replace(/\s/g, '_') + '" target="_blank">' + splitValue[1] + '</a>';
