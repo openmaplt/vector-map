@@ -35,10 +35,9 @@ WHERE
                'residential',
                'pedestrian',
                'track')
-   OR
-   (railway = 'rail' AND service IS NULL)
-   OR
-   aeroway IN ('runway', 'taxiway', 'parking_position')
+   OR (highway = 'service' AND service IS NULL)
+   OR (railway = 'rail' AND service IS NULL)
+   OR aeroway IN ('runway', 'taxiway', 'parking_position')
   )
 GROUP BY kind, name, priority, ref
 ORDER BY priority
