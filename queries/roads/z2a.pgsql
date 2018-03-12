@@ -35,7 +35,7 @@ WHERE
                'residential',
                'pedestrian',
                'track')
-   OR (highway = 'service' AND service IS NULL)
+   OR (highway = 'service' AND service = 'long_distance')
    OR (railway = 'rail' AND service IS NULL)
    OR aeroway IN ('runway', 'taxiway', 'parking_position')
   )
