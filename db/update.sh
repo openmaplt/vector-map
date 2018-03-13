@@ -33,7 +33,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # remove outside objects
-psql osm < remove_outside_objects.sql
+psql -d osm -U postgres < remove_outside_objects.sql
 
 ./update_search.sh
 
