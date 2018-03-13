@@ -32,6 +32,9 @@ if [ $? -ne 0 ]; then
 	exit
 fi
 
+# remove outside objects
+psql osm < remove_outside_objects.sql
+
 ./update_search.sh
 
 ./osmconvert temp.o5m --out-pbf > temp.pbf
