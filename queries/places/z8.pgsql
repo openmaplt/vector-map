@@ -19,7 +19,7 @@ WHERE
   name IS NOT NULL AND
   (
     place IN ('country', 'state', 'city') OR
-    (place = 'town' AND rank in ('0', '10'))
+    (place = 'town' AND coalesce(rank, '0') in ('0', '10'))
   )
 ORDER BY
   coalesce(population::int, 0) desc
