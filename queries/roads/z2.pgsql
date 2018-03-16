@@ -1,13 +1,14 @@
 SELECT
+  r.__geometry__
+ ,r.kind
+ ,r.priority
+ ,r.name
+ ,r.ref
+ ,r.ref_length
+FROM
+(SELECT
   st_linemerge(st_collect(way)) AS __geometry__,
-  (
-    CASE
-      WHEN highway IS NOT NULL
-        THEN highway
-      WHEN railway IS NOT NULL
-        THEN coalesce(service, railway)
-    END
-  ) AS kind,
+  highway AS kind,
   CASE WHEN highway = 'motorway' THEN 1
        WHEN highway = 'trunk' THEN 2
        WHEN highway = 'primary' THEN 3
@@ -32,8 +33,23 @@ WHERE
                'living_street',
                'residential',
                'pedestrian')
-   OR
-   (railway = 'rail' AND service IS NULL)
   )
 GROUP BY kind, name, priority, ref
-ORDER BY priority
+
+UNION ALL
+
+SELECT
+  way AS __geometry__,
+  'rail' AS kind,
+  7 AS priority,
+  null AS name,
+  null AS ref,
+  null AS ref_length
+FROM
+  gen_ways
+WHERE
+  way && !bbox! AND
+  type = 'rail'
+) AS r
+
+ORDER BY r.priority

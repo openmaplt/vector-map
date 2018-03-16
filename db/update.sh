@@ -35,6 +35,11 @@ fi
 # remove outside objects
 psql -d osm -U postgres < remove_outside_objects.sql
 
+# update way generalisation on saturday
+if [[ $(date +%u) -eq 6 ]] ; then
+  psql -d osm -U postgres < way_generalisation.sql
+fi
+
 ./update_search.sh
 
 ./osmconvert temp.o5m --out-pbf > temp.pbf
