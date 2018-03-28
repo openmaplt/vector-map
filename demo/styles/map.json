@@ -1515,6 +1515,49 @@
       }
     },
     {
+      "id": "railway-minor-casing",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "minzoom": 9,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "yard",
+          "spur",
+          "siding",
+          "crossover"
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-color": "rgba(100, 100, 100, 1)",
+        "line-width": {
+          "base": 1.8,
+          "stops": [
+            [
+              9,
+              1
+            ],
+            [
+              20,
+              7
+            ]
+          ]
+        },
+        "line-dasharray": [
+          2,
+          0
+        ]
+      }
+    },
+    {
       "id": "railway-casing",
       "type": "line",
       "source": "tilezen",
@@ -1551,6 +1594,50 @@
         "line-dasharray": [
           2,
           0
+        ]
+      }
+    },
+    {
+      "id": "railway-minor",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "minzoom": 9,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "yard",
+          "spur",
+          "siding",
+          "crossover"
+        ]
+      ],
+      "layout": {
+        "line-join": "bevel",
+        "line-cap": "butt",
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-color": "rgba(255, 255, 255, 1)",
+        "line-width": {
+          "base": 1.8,
+          "stops": [
+            [
+              9,
+              0.8
+            ],
+            [
+              20,
+              6
+            ]
+          ]
+        },
+        "line-dasharray": [
+          3,
+          4
         ]
       }
     },
