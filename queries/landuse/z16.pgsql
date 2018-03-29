@@ -10,7 +10,7 @@ SELECT
         THEN 'commercial'
       WHEN landuse = 'industrial'
         THEN 'industrial'
-      WHEN landuse = 'meadow'
+      WHEN landuse = 'meadow' or "natural" = 'heath'
         THEN 'meadow'
       WHEN landuse = 'farmland'
         THEN 'farmland'
@@ -40,7 +40,7 @@ WHERE
   way && !bbox! AND
   (
     landuse in ('forest', 'residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages')
-    OR "natural" in ('wetland', 'sand', 'beach', 'scrub')
+    OR "natural" in ('wetland', 'sand', 'beach', 'scrub', 'heath')
     OR leisure = 'park'
     OR aeroway in ('apron', 'runway')
   )
