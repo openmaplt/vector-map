@@ -10,7 +10,7 @@ SELECT
         THEN 'commercial'
       WHEN landuse = 'industrial'
         THEN 'industrial'
-      WHEN landuse = 'meadow'
+      WHEN landuse = 'meadow' or "natural" = 'heath'
         THEN 'meadow'
       WHEN landuse = 'farmland'
         THEN 'farmland'
@@ -32,6 +32,6 @@ WHERE
   way && !bbox! AND
   (
     landuse IN ('forest', 'residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages') OR
-   "natural" = 'wetland'
+   "natural" in ('wetland', 'heath')
   ) AND
   way_area >= 500000
