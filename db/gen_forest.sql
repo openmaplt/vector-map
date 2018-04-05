@@ -45,4 +45,4 @@ delete from gen_forest where st_area(st_buffer(way, -600)) < 600 and res = 600;
 update gen_forest set way = st_makevalid(st_multi(st_simplifypreservetopology(st_buffer(st_buffer(way, 1200, 'quad_segs=1'), -1200, 'quad_segs=1'), 600))) where res = 600;
 update gen_forest set way_area = st_area(way) where res = 600;
 
-create index gen_building_gix ON gen_forest using gist (way);
+create index gen_forest_gix ON gen_forest using gist (way);
