@@ -35,11 +35,18 @@ fi
 # remove outside objects
 psql -d osm -U postgres < remove_outside_objects.sql
 
-# update way generalisation on saturday
+# update generalisation on Saturday
+if [[ $(date +%u) -eq 6 ]] ; then
 # NOTE: IŠJUNGTA, KOL SERVERIS NETURI PAKANKAMAI ATMINTIES APDOROTI
-#if [[ $(date +%u) -eq 6 ]] ; then
 #  psql -d osm -U postgres < way_generalisation.sql
-#fi
+  echo "water generalisation" `date`
+  psql -d osm -U postgres < gen_water.sql
+  echo "building generalisation" `date`
+  psql -d osm -U postgres < gen_building.sql
+  echo "forest generalisation" `date`
+  psql -d osm -U postgres < gen_forest.sql
+  echo "done" `date`
+fi
 
 ./update_search.sh
 
