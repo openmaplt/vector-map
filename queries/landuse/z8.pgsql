@@ -1,9 +1,10 @@
 SELECT
   way AS __geometry__,
-  landuse AS kind
+  'forest' AS kind
 FROM
-  planet_osm_polygon
+  gen_forest
 WHERE
   way && !bbox! AND
-  landuse = 'forest' AND
+  res = 600 AND
   way_area >= 10000000
+
