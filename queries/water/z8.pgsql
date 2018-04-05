@@ -17,23 +17,13 @@ UNION ALL
 
 SELECT
   st_union(way) AS __geometry__,
-  (
-    CASE
-      WHEN "natural" = 'water'
-        THEN 'water'
-      WHEN landuse = 'reservoir'
-        THEN 'water'
-    END
-  ) AS kind,
+  'water' AS kind,
   null AS name
 FROM
-  planet_osm_polygon
+  gen_water
 WHERE
   way && !bbox! AND
-  (
-    "natural" = 'water' OR
-    landuse = 'reservoir'
-  ) AND
+  res = 600 AND
   way_area >= 10000000
 GROUP BY
   kind

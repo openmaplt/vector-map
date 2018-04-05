@@ -2,8 +2,6 @@ SELECT
   way AS __geometry__,
   (
     CASE
-      WHEN landuse = 'forest'
-        THEN 'forest'
       WHEN landuse = 'residential'
         THEN 'residential'
       WHEN landuse = 'commercial'
@@ -37,8 +35,20 @@ FROM
 WHERE
   way && !bbox! AND
   (
-    landuse IN ('forest', 'residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages') OR
+    landuse IN ('residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages') OR
    "natural" in ('wetland', 'beach', 'sand', 'scrub', 'heath') OR
    aeroway = 'runway'
   ) AND
   way_area >= 100000
+
+UNION ALL
+
+SELECT
+  way AS __geometry__,
+  'forest' AS kind
+FROM
+  gen_forest
+WHERE
+  way && !bbox! AND
+  res = 10 AND
+  way_area >= 10000

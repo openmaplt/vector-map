@@ -25,14 +25,8 @@ SELECT
     CASE
       WHEN waterway = 'riverbank'
         THEN 'water'
-      WHEN "natural" = 'water'
-        THEN 'water'
       WHEN landuse = 'basin'
         THEN 'basin'
-      WHEN landuse = 'reservoir'
-        THEN 'water'
-      WHEN amenity = 'swimming_pool' OR leisure = 'swimming_pool'
-        THEN 'swimming_pool'
     END
   ) AS kind,
   null AS name
@@ -40,13 +34,20 @@ FROM
   planet_osm_polygon
 WHERE
   way && !bbox! AND
-  (
-    waterway = 'riverbank' OR
-    "natural" = 'water' OR
-    landuse IN ('basin', 'reservoir') OR
-    amenity = 'swimming_pool' OR
-    leisure = 'swimming_pool'
-  ) AND
+  waterway = 'riverbank' AND
   way_area >= 5000000
 GROUP BY
   kind
+
+UNION ALL
+
+SELECT
+  way AS __geometry__,
+  'water' AS kind,
+  null AS name
+FROM
+  gen_water
+WHERE
+  way && !bbox! AND
+  res = 150 AND
+  way_area >= 5000000
