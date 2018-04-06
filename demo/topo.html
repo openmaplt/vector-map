@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="lt">
 <head>
     <meta charset='utf-8' />
     <title>Topo</title>
@@ -32,17 +32,12 @@
 </div>
 
 <script>
-    var map = new mapboxgl.Map({
-        container: 'map',
-        style: 'styles/topo.json',
-        zoom: 7,
-        minZoom: 7,
-        maxZoom: 18,
-        center: [24.07, 54.96],
-        hash: true
-    });
-    map.addControl(new mapboxgl.NavigationControl());
+  var defaultType = 'topo';
+  var mapTypes = {
+    topo: 't'
+  };
 </script>
+<script src="map.js"></script>
 
 </body>
 </html>
