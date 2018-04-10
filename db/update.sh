@@ -40,11 +40,11 @@ if [[ $(date +%u) -eq 6 ]] ; then
 # NOTE: IŠJUNGTA, KOL SERVERIS NETURI PAKANKAMAI ATMINTIES APDOROTI
 #  psql -d osm -U postgres < way_generalisation.sql
   echo "water generalisation" `date`
-  psql -d osm -U postgres < gen_water.sql
+  psql -d osm -U osm < gen_water.sql
   echo "building generalisation" `date`
-  psql -d osm -U postgres < gen_building.sql
+  psql -d osm -U osm < gen_building.sql
   echo "forest generalisation" `date`
-  psql -d osm -U postgres < gen_forest.sql
+  psql -d osm -U osm < gen_forest.sql
   echo "done" `date`
 fi
 
@@ -71,6 +71,7 @@ if [ -s dirty_tiles ]; then
     grep -E "^(10)" dirty_tiles > generate_openmap_10_$DIRTY_FILE
     grep -E "^(9)"  dirty_tiles > generate_openmap_9_$DIRTY_FILE
     grep -E "^(8)"  dirty_tiles > generate_openmap_8_$DIRTY_FILE
+    grep -E "^(7)"  dirty_tiles > generate_openmap_7_$DIRTY_FILE
 
     #grep -E "^(10|11|12|13|14)" dirty_tiles > generate_bicycle_$DIRTY_FILE
     #grep -E "^(10|11|12|13|14)" dirty_tiles > generate_craftbeer_$DIRTY_FILE
@@ -94,6 +95,8 @@ if [ -s dirty_tiles ]; then
     tilestache-seed -c $TILESTACHE_CONFIG_FILE -x -l all -e pbf --tile-list generate_openmap_9_$DIRTY_FILE
     echo "OpenMap.lt generate expired 8 " `date`
     tilestache-seed -c $TILESTACHE_CONFIG_FILE -x -l all -e pbf --tile-list generate_openmap_8_$DIRTY_FILE
+    echo "OpenMap.lt generate expired 7 " `date`
+    tilestache-seed -c $TILESTACHE_CONFIG_FILE -x -l all -e pbf --tile-list generate_openmap_7_$DIRTY_FILE
 
     echo "Bicycle delete expired " `date`
     tilestache-clean -c $TILESTACHE_CONFIG_FILE -l bicycle -e pbf --tile-list dirty_tiles
