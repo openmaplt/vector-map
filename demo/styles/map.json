@@ -740,13 +740,13 @@
       "type": "fill",
       "source": "tilezen",
       "source-layer": "buildings",
-      "minzoom": 15,
+      "minzoom": 14,
       "maxzoom": 20,
       "paint": {
         "fill-outline-color": {
           "stops": [
             [
-              15,
+              14,
               "rgba(204, 204, 204, 1)"
             ],
             [
@@ -758,7 +758,7 @@
         "fill-color": {
           "stops": [
             [
-              15,
+              14,
               "rgba(221, 221, 221, 1)"
             ],
             [
@@ -1500,7 +1500,7 @@
       "type": "line",
       "source": "tilezen",
       "source-layer": "routes",
-      "minzoom": 15,
+      "minzoom": 14,
       "maxzoom": 24,
       "filter": [
         "all"
