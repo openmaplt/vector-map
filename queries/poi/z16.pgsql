@@ -35,7 +35,7 @@ SELECT
     WHEN amenity = 'doctors'
       THEN 'doctor'
     WHEN amenity = 'fast_food'
-      THEN 'fast_food'
+      THEN 'fast-food'
     WHEN amenity = 'fire_station'
       THEN 'fire-station'
     WHEN amenity = 'fuel'
@@ -71,7 +71,7 @@ SELECT
       THEN 'marker' -- TODO: tower
 
     WHEN tourism = 'attraction' and "attraction:type" = 'hiking_route'
-      THEN 'marker' -- TODO: hiking route
+      THEN 'hiking'
     WHEN tourism = 'information'
       THEN 'information'
     WHEN tourism in ('camp_site', 'caravan_site')
@@ -83,7 +83,7 @@ SELECT
     WHEN tourism = 'museum'
       THEN 'museum'
     WHEN tourism = 'picnic_site'
-      THEN 'picnic_site'
+      THEN 'picnic-site'
     WHEN tourism = 'viewpoint'
       THEN 'viewpoint'
     WHEN tourism = 'zoo'
@@ -106,7 +106,7 @@ SELECT
       THEN 'attraction'
 
     WHEN shop = 'alcohol'
-      THEN 'alcohol_shop'
+      THEN 'alcohol-shop'
     WHEN shop = 'car_repair'
       THEN 'marker' -- TODO car repair
     WHEN shop = 'bakery'
@@ -114,7 +114,7 @@ SELECT
     WHEN shop = 'bicycle'
       THEN 'bicycle'
     WHEN shop = 'clothes'
-      THEN 'clothing_store'
+      THEN 'clothing-store'
     WHEN shop in ('supermarket', 'mall', 'department_store')
       THEN 'grocery'
     WHEN shop in ('convenience')

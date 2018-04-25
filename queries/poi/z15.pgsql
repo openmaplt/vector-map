@@ -15,7 +15,7 @@ SELECT
       THEN 'marker' -- TODO: tower
 
     WHEN tourism = 'attraction' and "attraction:type" = 'hiking_route'
-      THEN 'marker' -- TODO: hiking route
+      THEN 'hiking'
     WHEN tourism = 'information'
       THEN 'information'
     WHEN tourism in ('camp_site', 'caravan_site')
@@ -27,7 +27,7 @@ SELECT
     WHEN tourism = 'museum'
       THEN 'museum'
     WHEN tourism = 'picnic_site'
-      THEN 'picnic_site'
+      THEN 'picnic-site'
     WHEN tourism = 'viewpoint'
       THEN 'viewpoint'
 
