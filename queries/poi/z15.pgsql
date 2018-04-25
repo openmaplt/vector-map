@@ -27,7 +27,7 @@ SELECT
     WHEN tourism = 'museum'
       THEN 'museum'
     WHEN tourism = 'picnic_site'
-      THEN 'picnic_site'
+      THEN 'picnic-site'
     WHEN tourism = 'viewpoint'
       THEN 'viewpoint'
 
