@@ -38,4 +38,4 @@ WHERE
   way && !bbox! AND
   name IS NOT NULL AND
   ("natural" = 'water' OR landuse = 'reservoir') AND
-  way_area >= 1000000
+  way_area >= 500000
