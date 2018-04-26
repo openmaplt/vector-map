@@ -1,4 +1,9 @@
 SELECT
+  place.__geometry__,
+  place.name,
+  place.kind
+FROM
+(SELECT
   way AS __geometry__,
   coalesce("name:lt", name) AS name,
   (
@@ -22,4 +27,18 @@ WHERE
     (place = 'town' AND coalesce(rank, '0') in ('0', '10'))
   )
 ORDER BY
-  coalesce(population::int, 0) desc
+  coalesce(population::int, 0) desc) AS place
+
+UNION ALL
+
+SELECT
+  ST_PointOnSurface(way) AS __geometry__,
+  coalesce("name:lt", name) AS name,
+  'water' AS kind
+FROM
+  planet_osm_polygon
+WHERE
+  way && !bbox! AND
+  name IS NOT NULL AND
+  ("natural" = 'water' OR landuse = 'reservoir') AND
+  way_area >= 1000000
