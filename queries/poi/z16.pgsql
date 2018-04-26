@@ -123,6 +123,10 @@ SELECT
       THEN 'hairdresser'
     WHEN shop = 'florist'
       THEN 'florist'
+    WHEN shop = 'music'
+      THEN 'music'
+    WHEN shop = 'butcher'
+      THEN 'slaughterhouse'
 
     WHEN office = 'government' or amenity = 'townhall'
       THEN 'town-hall'
@@ -206,7 +210,9 @@ WHERE
              'hairdresser',
              'mall',
              'supermarket',
-             'department_store') OR
+             'department_store',
+             'music',
+             'butcher') OR
     historic IN ('archaeological_site',
                  'monument',
                  'memorial',
