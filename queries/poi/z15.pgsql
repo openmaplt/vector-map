@@ -90,8 +90,11 @@ WHERE
                  'monastery')
   )
 ORDER BY
-  CASE WHEN tourism is not null then 1
-       WHEN historic is not null then 2
-       WHEN amenity is not null then 3
-       ELSE 5
+  CASE WHEN tourism = 'attraction' then 1
+       WHEN tourism = 'viewpoint' then 2
+       WHEN tourism in ('camp_site', 'caravan_site') then 3
+       WHEN tourism is not null then 4
+       WHEN historic is not null then 5
+       WHEN amenity is not null then 6
+       ELSE 7
   END
