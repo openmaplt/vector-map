@@ -44,5 +44,5 @@ FROM
   gen_water
 WHERE
   way && !bbox! AND
-  res = 150 AND
+  res = 10 AND
   way_area >= 100000
