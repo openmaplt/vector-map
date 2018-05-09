@@ -1,15 +1,37 @@
 drop table if exists gen_building;
+drop sequence if exists gen_building_seq;
+create sequence gen_building_seq;
+
+--------------
+-- Selection
+--------------
 create table gen_building as
-  select 0 AS way_area
+  select nextval('gen_building_seq') AS id
+        ,0 AS way_area
         ,10 AS res
-        ,ST_CollectionExtract(unnest(ST_ClusterWithin(way, 10)), 3)::geometry(MultiPolygon, 3857) as way
+        ,''::text AS status
+        ,ST_CollectionExtract(unnest(ST_ClusterWithin(way, 10.00)), 3)::geometry(MultiPolygon, 3857) as way
     from planet_osm_polygon
    where building is not null;
 
-delete from gen_building where st_area(st_buffer(way, -6)) < 6 and res = 10;
+create index gen_buildings_gix on gen_building using gist(way);
 
-update gen_building set way = st_multi(st_simplifypreservetopology(st_buffer(st_buffer(way, 30, 'join=mitre'), -30, 'join=mitre'), 1)) where res = 10;
-update gen_building set way = st_multi(st_simplifypreservetopology(st_buffer(st_buffer(way, -5, 'join=mitre'),   5, 'join=mitre'), 1)) where res = 10;
-update gen_building set way_area = st_area(way) where res = 10;
+-- Remove buildings which are:
+-- a) smaller than 100
+-- b) not isolated (theer are other buildings closer than
+delete from gen_building b
+ where st_area(way) < 100
+   and exists (select 1
+                 from gen_building n
+                where st_dwithin(n.way, b.way, 500)
+                  and n.id != b.id);
 
-create index gen_building_gix ON gen_building using gist (way);
+----------------
+-- Aggregation
+----------------
+update gen_building set way = st_multi(st_buffer(way, 0));
+
+-------------------------------
+-- Aggregation/Simplification
+-------------------------------
+update gen_building set status = 'DONE', way = st_multi(stc_simplify_building(way, 10));
