@@ -17,8 +17,8 @@ create table gen_building as
 create index gen_buildings_gix on gen_building using gist(way);
 
 -- Remove buildings which are:
--- a) smaller than 100
--- b) not isolated (theer are other buildings closer than
+-- a) smaller than 100m2
+-- b) not isolated (there are other buildings closer than 500m)
 delete from gen_building b
  where st_area(way) < 100
    and exists (select 1
@@ -29,9 +29,9 @@ delete from gen_building b
 ----------------
 -- Aggregation
 ----------------
-update gen_building set way = st_multi(st_buffer(way, 0));
+update gen_building set way = st_multi(st_buffer(way, 0)) where res = 10;
 
 -------------------------------
 -- Aggregation/Simplification
 -------------------------------
-update gen_building set status = 'DONE', way = st_multi(stc_simplify_building(way, 10));
+update gen_building set status = 'DONE', way = st_multi(stc_simplify_building(way, 10)) where res = 10;
