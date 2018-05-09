@@ -1,6 +1,7 @@
 {
   "version": 8,
   "name": "openmap.lt",
+  "center": [23.87100, 55.19114],
   "metadata": {
     "maputnik:renderer": "mbgljs"
   },
