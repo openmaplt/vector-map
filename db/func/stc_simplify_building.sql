@@ -18,6 +18,7 @@ begin
     j := 0;
     for i in 1..st_numinteriorrings(r) loop
       --raise notice 'interior % % %', i, st_area(st_makepolygon(st_interiorringn(r, i))), st_numpoints(st_interiorringn(r, i));
+      e = st_interiorringn(r, i);
       if st_area(st_makepolygon(e)) > t ^ 2 then
         e = stc_simplify_building(st_interiorringn(r, i), t, mi, d);
         if st_area(st_makepolygon(e)) > t ^ 2 then

@@ -1,9 +1,9 @@
 create or replace function stc_simplify_building_line(r geometry, t integer, l integer default 100, d boolean default false) returns geometry as $$
 /*******************************************************************
 * Simplify building line (exterior or interior ring).
-* Performs ONE simplification step.
 * @g = line geometry (not polygon!)
 * @t = tolerance
+* @d = debug true|false
 *******************************************************************/
 declare
 fg geometry;     -- final geometry
