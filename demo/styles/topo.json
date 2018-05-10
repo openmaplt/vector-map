@@ -789,7 +789,7 @@
       ],
       "layout": {
         "line-join": "round",
-        "line-cap": "butt"
+        "line-cap": "round"
       },
       "paint": {
         "line-color": "#111111",
@@ -1164,7 +1164,7 @@
       ],
       "layout": {
         "line-join": "round",
-        "line-cap": "butt",
+        "line-cap": "round",
         "visibility": "visible"
       },
       "paint": {
@@ -1189,8 +1189,6 @@
       "type": "line",
       "source": "tilezen",
       "source-layer": "roads",
-      "minzoom": 0,
-      "maxzoom": 24,
       "filter": [
         "all",
         [
@@ -1227,7 +1225,6 @@
       "type": "line",
       "source": "tilezen",
       "source-layer": "roads",
-      "maxzoom": 24,
       "filter": [
         "all",
         [
