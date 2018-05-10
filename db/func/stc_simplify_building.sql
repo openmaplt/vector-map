@@ -9,6 +9,9 @@ e geometry;
 g geometry[];
 i integer;
 j integer;
+m1 text;
+m2 text;
+m3 text;
 begin
   --raise notice 'Geometry type %, mi=%', tp, mi;
   if tp = 'ST_LineString' then
@@ -52,5 +55,11 @@ begin
     raise notice 'ERROR: Unknown geometry type';
     return r;
   end if;
+exception when others then
+  get stacked diagnostics m1 = message_text,
+                          m2 = pg_exception_detail,
+                          m3 = pg_exception_hint;
+  raise notice 'EXCEPTION OCCURED: % % %', m1, m2, m3;
+  return r;
 end
 $$ language plpgsql;
