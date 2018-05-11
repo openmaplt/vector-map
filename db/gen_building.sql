@@ -35,3 +35,21 @@ update gen_building set way = st_multi(st_buffer(way, 0)) where res = 10;
 -- Aggregation/Simplification
 -------------------------------
 update gen_building set status = 'DONE', way = st_multi(stc_simplify_building(way, 10)) where res = 10;
+
+--------------------------------------------------------------------------
+-- Fix invalid geometries
+-- (This should eventually be done properly in simplification algorithm)
+--------------------------------------------------------------------------
+do $$declare
+c record;
+begin
+  for c in (select id from gen_building where not st_isvalid(way) and res = 10) loop
+    raise notice '=== Invalid geometry for gen_building.id=%', c.id;
+    update gen_building set way = st_makevalid(way) where id = c.id;
+  end loop;
+end$$;
+
+----------------
+-- Update area
+----------------
+update gen_building set way_area = st_area(way) where res = 10;
