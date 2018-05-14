@@ -78,6 +78,7 @@ if [ -s dirty_tiles ]; then
 
     echo "Refreshing poi materialized view " `date`
     psql -d osm -U postgres < update_poi.sql
+    psql -d osm -U postgres < update_poi_topo.sql
 
     echo "OpenMap.lt delete expired " `date`
     tilestache-clean -c $TILESTACHE_CONFIG_FILE -l all -e pbf --tile-list delete_openmap_$DIRTY_FILE

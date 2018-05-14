@@ -11,9 +11,23 @@
       "tiles": [
         "https://openmap.lt/all/{z}/{x}/{y}.pbf"
       ]
+    },
+    "topo": {
+      "type": "vector",
+      "attribution": "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>",
+      "tiles": [
+        "https://openmap.lt/topo/{z}/{x}/{y}.pbf"
+      ]
+    },
+    "detail": {
+      "type": "vector",
+      "attribution": "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>",
+      "tiles": [
+        "https://openmap.lt/detail/{z}/{x}/{y}.pbf"
+      ]
     }
   },
-  "sprite": "https://openmap.lt/sprites/openmaplt",
+  "sprite": "https://openmap.lt/sprites/topo",
   "glyphs": "https://openmap.lt/glyphs/{fontstack}/{range}.pbf",
   "layers": [
     {
@@ -309,9 +323,6 @@
           "residential"
         ]
       ],
-      "layout": {
-        "visibility": "none"
-      },
       "paint": {
         "fill-color": "rgba(221, 221, 221, 1)",
         "fill-opacity": 1
@@ -426,6 +437,49 @@
       }
     },
     {
+      "id": "detail-cutline",
+      "type": "line",
+      "source": "detail",
+      "source-layer": "detail",
+      "minzoom": 13,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "==",
+          "kind",
+          "cutline"
+        ]
+      ],
+      "paint": {
+        "line-width": 0.5,
+        "line-dasharray": [
+          12,
+          6
+        ]
+      }
+    },
+    {
+      "id": "detail-cliff",
+      "type": "line",
+      "source": "detail",
+      "source-layer": "detail",
+      "minzoom": 14,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "==",
+          "kind",
+          "cliff"
+        ]
+      ],
+      "paint": {
+        "line-pattern": "cliff",
+        "line-width": 5
+      }
+    },
+    {
       "id": "waterway-river",
       "type": "line",
       "source": "tilezen",
@@ -463,6 +517,48 @@
             ]
           ]
         }
+      }
+    },
+    {
+      "id": "waterway-river-direction",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "water",
+      "minzoom": 16,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "==",
+          "kind",
+          "river"
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round",
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-width": {
+          "base": 1.55,
+          "stops": [
+            [
+              4,
+              0.25
+            ],
+            [
+              20,
+              30
+            ]
+          ]
+        },
+        "line-pattern": "river",
+        "line-opacity": 0.6,
+        "line-translate": [
+          0,
+          0
+        ]
       }
     },
     {
@@ -504,6 +600,37 @@
             ]
           ]
         }
+      }
+    },
+    {
+      "id": "waterway-stream-direction",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "water",
+      "minzoom": 16,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "stream",
+          "canal"
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round",
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-width": 16,
+        "line-pattern": "stream",
+        "line-opacity": 0.6,
+        "line-translate": [
+          0,
+          0
+        ]
       }
     },
     {
@@ -2182,6 +2309,16 @@
       "paint": {
         "text-halo-width": 2,
         "text-halo-color": "rgba(255, 255, 255, 0.5)"
+      }
+    },
+    {
+      "id": "topo_sym",
+      "type": "symbol",
+      "source": "topo",
+      "source-layer": "topo_sym",
+      "layout": {
+        "icon-image": "{kind}",
+        "visibility": "visible"
       }
     }
   ],
