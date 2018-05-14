@@ -24,7 +24,7 @@ WHERE
     landuse IN ('residential', 'meadow', 'farmland', 'allotments') OR
    "natural" in ('wetland', 'heath')
   ) AND
-  way_area >= 500000
+  way_area >= 100000
 
 UNION ALL
 
@@ -36,4 +36,4 @@ FROM
 WHERE
   way && !bbox! AND
   res = 10 AND
-  way_area >= 500000
+  way_area >= 100000

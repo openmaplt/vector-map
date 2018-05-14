@@ -16,12 +16,9 @@ FROM
 WHERE
   way && !bbox! AND
   (
-    highway IN ('motorway_link',
-               'trunk_link',
-               'primary_link',
-               'secondary', 'secondary_link',
-               'tertiary', 'tertiary_link',
-               'unclassified')
+    highway IN ('secondary',
+                'tertiary',
+                'unclassified')
   )
 GROUP BY kind, priority, ref
 

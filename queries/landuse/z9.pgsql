@@ -6,4 +6,4 @@ FROM
 WHERE
   way && !bbox! AND
   res = 150 AND
-  way_area >= 5000000
+  way_area >= 1000000

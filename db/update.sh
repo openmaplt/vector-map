@@ -112,6 +112,9 @@ if [ -s dirty_tiles ]; then
     echo "Detail delete expired " `date`
     tilestache-clean -c $TILESTACHE_CONFIG_FILE -l detail -e pbf --tile-list dirty_tiles
 
+    echo "Topo delete expired " `date`
+    tilestache-clean -c $TILESTACHE_CONFIG_FILE -l topo -e pbf --tile-list dirty_tiles
+
     echo "Done " `date`
 
     rm delete_openmap_$DIRTY_FILE

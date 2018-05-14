@@ -16,5 +16,5 @@ FROM
 WHERE
   way && !bbox! AND
   boundary = 'administrative' AND
-  ((admin_level = '2' AND name = 'Lietuva') or admin_level IN ('4', '6')) AND
+  ((admin_level = '2' AND name = 'Lietuva') /*or admin_level IN ('4', '6')*/) AND
   name not in ('Latgale', 'Kurzeme', 'Zemgale')
