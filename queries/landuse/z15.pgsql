@@ -41,4 +41,4 @@ WHERE
     OR "natural" in ('wetland', 'sand', 'beach', 'scrub', 'heath')
     OR aeroway in ('apron', 'runway')
   ) AND
-  way_area >= 2000
+  way_area >= 1000
