@@ -10,16 +10,6 @@ create materialized view poi_topo (
  ,"attraction:type"
  ,access
  ,historic
- ,site_type
- ,shop
- ,information
- ,office
- ,official_name
- ,alt_name
- ,opening_hours
- ,website
- ,image
- ,"ref:lt:kpd"
  ,religion
  ,aeroway
  ,power
@@ -38,16 +28,6 @@ create materialized view poi_topo (
         ,"attraction:type"
         ,access
         ,historic
-        ,site_type
-        ,shop
-        ,information
-        ,office
-        ,official_name
-        ,alt_name
-        ,opening_hours
-        ,website
-        ,image
-        ,"ref:lt:kpd"
         ,religion
         ,aeroway
         ,power
@@ -72,16 +52,6 @@ create materialized view poi_topo (
         ,null --"attraction:type"
         ,access
         ,historic
-        ,site_type
-        ,shop
-        ,information
-        ,office
-        ,official_name
-        ,alt_name
-        ,opening_hours
-        ,website
-        ,image
-        ,"ref:lt:kpd"
         ,religion
         ,aeroway
         ,power

@@ -520,7 +520,7 @@
       }
     },
     {
-      "id": "waterway-river-direction-copy",
+      "id": "waterway-river-direction",
       "type": "line",
       "source": "tilezen",
       "source-layer": "water",
@@ -2319,11 +2319,6 @@
       "layout": {
         "icon-image": "{kind}",
         "visibility": "visible"
-      },
-      "paint": {
-        "icon-halo-width": 2,
-        "icon-halo-color": "rgba(255, 255, 255, 1)",
-        "icon-color": "rgba(255, 255, 255, 1)"
       }
     }
   ],
