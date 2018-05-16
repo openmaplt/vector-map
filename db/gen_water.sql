@@ -1,6 +1,10 @@
 drop table if exists gen_water;
+drop sequence if exists gen_water_seq;
+create sequence gen_water_seq;
+
 create table gen_water as
-  select 0 AS way_area
+  select nextval('gen_water_seq') AS id
+        ,0 AS way_area
         ,10 AS res
         ,ST_CollectionExtract(unnest(ST_ClusterWithin(way, 10)), 3)::geometry(MultiPolygon, 3857) as way
     from planet_osm_polygon
@@ -12,7 +16,8 @@ update gen_water set way = st_multi(st_simplifypreservetopology(st_buffer(st_buf
 update gen_water set way_area = st_area(way) where res = 10;
 
 insert into gen_water
-  select 0,
+  select nextval('gen_water_seq') AS id,
+         0,
          150,
          ST_CollectionExtract(unnest(ST_ClusterWithin(way, 150)), 3)::geometry(MultiPolygon, 3857)
     from gen_water
@@ -24,7 +29,8 @@ update gen_water set way = st_multi(st_simplifypreservetopology(st_buffer(st_buf
 update gen_water set way_area = st_area(way) where res = 150;
 
 insert into gen_water
-  select 0,
+  select nextval('gen_water_seq') AS id,
+         0,
          600,
          ST_CollectionExtract(unnest(ST_ClusterWithin(way, 600)), 3)::geometry(MultiPolygon, 3857)
     from gen_water

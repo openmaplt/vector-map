@@ -1,10 +1,13 @@
 drop table if exists gen_forest;
+drop sequence if exists gen_forest_seq;
+create sequence gen_forest_seq;
 
 ------------------
 -- resolution 10
 ------------------
 create table gen_forest as
-  select 0::bigint AS way_area
+  select nextval('gen_forest_seq') AS id
+        ,0::bigint AS way_area
         ,10 AS res
         ,ST_CollectionExtract(unnest(ST_ClusterWithin(way, 10)), 3)::geometry(MultiPolygon, 3857) as way
     from planet_osm_polygon
@@ -19,7 +22,8 @@ update gen_forest set way_area = st_area(way) where res = 10;
 -- resolution 150
 -------------------
 insert into gen_forest
-  select 0,
+  select nextval('gen_forest_seq') AS id,
+         0,
          150,
          ST_CollectionExtract(unnest(ST_ClusterWithin(way, 150)), 3)::geometry(MultiPolygon, 3857)
     from gen_forest
@@ -34,7 +38,8 @@ update gen_forest set way_area = st_area(way) where res = 150;
 -- resolution 600
 -------------------
 insert into gen_forest
-  select 0,
+  select nextval('gen_forest_seq') AS id,
+         0,
          600,
          ST_CollectionExtract(unnest(ST_ClusterWithin(way, 300)), 3)::geometry(MultiPolygon, 3857)
     from gen_forest
