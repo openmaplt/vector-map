@@ -162,6 +162,7 @@ node,way   cycleway:both text        linear
 node,way   real_ale     text         linear
 node,way   waterway:milestone text   linear
 node,way   whitewater   text         linear
+way        waterway:name text        linear
 node,way   craft        text         polygon
 node,way   z_order      int4         linear # This is calculated during import
 way        way_area     real                # This is calculated during import

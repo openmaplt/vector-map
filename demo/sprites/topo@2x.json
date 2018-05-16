@@ -3,147 +3,161 @@
     "height": 18,
     "pixelRatio": 1,
     "width": 18,
-    "x": 142,
-    "y": 0
+    "x": 19,
+    "y": 84
   },
   "beacon": {
     "height": 18,
     "pixelRatio": 1,
     "width": 18,
-    "x": 160,
-    "y": 0
+    "x": 37,
+    "y": 84
   },
   "chapel": {
     "height": 18,
     "pixelRatio": 1,
     "width": 18,
-    "x": 178,
-    "y": 0
+    "x": 55,
+    "y": 84
   },
   "chimney": {
     "height": 18,
     "pixelRatio": 1,
     "width": 18,
-    "x": 0,
-    "y": 20
+    "x": 73,
+    "y": 84
   },
   "cliff": {
-    "height": 11,
+    "height": 9,
     "pixelRatio": 1,
     "width": 12,
-    "x": 37,
-    "y": 38
+    "x": 181,
+    "y": 103
   },
   "communication_tower": {
     "height": 18,
     "pixelRatio": 1,
     "width": 18,
-    "x": 18,
-    "y": 20
+    "x": 91,
+    "y": 84
   },
   "fuel": {
     "height": 18,
     "pixelRatio": 1,
     "width": 18,
-    "x": 36,
-    "y": 20
+    "x": 109,
+    "y": 84
   },
   "helipad": {
     "height": 18,
     "pixelRatio": 1,
     "width": 18,
-    "x": 54,
-    "y": 20
+    "x": 0,
+    "y": 103
   },
   "hydro": {
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
     "x": 104,
-    "y": 0
+    "y": 64
   },
   "light_tower": {
     "height": 18,
     "pixelRatio": 1,
     "width": 18,
-    "x": 72,
-    "y": 20
+    "x": 18,
+    "y": 103
+  },
+  "marsh": {
+    "height": 64,
+    "pixelRatio": 1,
+    "width": 64,
+    "x": 0,
+    "y": 0
   },
   "quary": {
     "height": 18,
     "pixelRatio": 1,
     "width": 18,
-    "x": 90,
-    "y": 20
+    "x": 36,
+    "y": 103
   },
   "river": {
     "height": 10,
     "pixelRatio": 1,
     "width": 104,
-    "x": 51,
-    "y": 38
+    "x": 127,
+    "y": 84
   },
   "stream": {
     "height": 20,
     "pixelRatio": 1,
     "width": 104,
     "x": 0,
-    "y": 0
+    "y": 64
   },
   "substation": {
     "height": 18,
     "pixelRatio": 1,
     "width": 18,
-    "x": 108,
-    "y": 20
+    "x": 54,
+    "y": 103
+  },
+  "swamp": {
+    "height": 64,
+    "pixelRatio": 1,
+    "width": 64,
+    "x": 64,
+    "y": 0
   },
   "tower": {
     "height": 18,
     "pixelRatio": 1,
     "width": 18,
-    "x": 126,
-    "y": 20
+    "x": 72,
+    "y": 103
   },
   "turf": {
     "height": 18,
     "pixelRatio": 1,
     "width": 18,
-    "x": 144,
-    "y": 20
+    "x": 90,
+    "y": 103
   },
   "unesco": {
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 123,
-    "y": 0
+    "x": 0,
+    "y": 84
   },
   "windmill": {
     "height": 18,
     "pixelRatio": 1,
     "width": 18,
-    "x": 162,
-    "y": 20
+    "x": 108,
+    "y": 103
   },
   "windpower": {
     "height": 18,
     "pixelRatio": 1,
     "width": 18,
-    "x": 180,
-    "y": 20
+    "x": 126,
+    "y": 103
   },
   "worship_christian": {
     "height": 18,
     "pixelRatio": 1,
     "width": 18,
-    "x": 0,
-    "y": 38
+    "x": 144,
+    "y": 103
   },
   "worship_other": {
     "height": 18,
     "pixelRatio": 1,
     "width": 18,
-    "x": 18,
-    "y": 38
+    "x": 162,
+    "y": 103
   }
 }
