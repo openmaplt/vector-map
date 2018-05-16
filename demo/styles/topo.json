@@ -53,33 +53,6 @@
       }
     },
     {
-      "id": "water-line",
-      "type": "line",
-      "source": "tilezen",
-      "source-layer": "water",
-      "filter": [
-        "==",
-        "$type",
-        "LineString"
-      ],
-      "paint": {
-        "line-color": "#7acad0",
-        "line-width": {
-          "base": 1.2,
-          "stops": [
-            [
-              8,
-              0.5
-            ],
-            [
-              20,
-              15
-            ]
-          ]
-        }
-      }
-    },
-    {
       "id": "landuse-forest",
       "type": "fill",
       "source": "tilezen",
@@ -160,11 +133,8 @@
           "sand"
         ]
       ],
-      "layout": {
-        "visibility": "none"
-      },
       "paint": {
-        "fill-color": "rgba(242, 232, 141, 1)",
+        "fill-color": "#fffacd",
         "fill-opacity": 1
       }
     },
@@ -249,7 +219,7 @@
         ]
       ],
       "layout": {
-        "visibility": "none"
+        "visibility": "visible"
       },
       "paint": {
         "fill-pattern": "marsh"
@@ -303,7 +273,7 @@
         ]
       ],
       "layout": {
-        "visibility": "none"
+        "visibility": "visible"
       },
       "paint": {
         "fill-pattern": "swamp"
@@ -394,6 +364,36 @@
       }
     },
     {
+      "id": "water-line",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "water",
+      "filter": [
+        "==",
+        "$type",
+        "LineString"
+      ],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-color": "#7acad0",
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              8,
+              0.5
+            ],
+            [
+              20,
+              15
+            ]
+          ]
+        }
+      }
+    },
+    {
       "id": "water-polygon",
       "type": "fill",
       "source": "tilezen",
@@ -403,6 +403,9 @@
         "$type",
         "Polygon"
       ],
+      "layout": {
+        "visibility": "visible"
+      },
       "paint": {
         "fill-color": "#bed7f0",
         "fill-outline-color": "#49a5dd",
@@ -419,7 +422,9 @@
         "$type",
         "Polygon"
       ],
-      "layout": {},
+      "layout": {
+        "visibility": "visible"
+      },
       "paint": {
         "line-color": "#49a5dd",
         "line-width": {
@@ -520,7 +525,7 @@
       }
     },
     {
-      "id": "waterway-river-direction",
+      "id": "waterway-river-direction-copy",
       "type": "line",
       "source": "tilezen",
       "source-layer": "water",
@@ -583,7 +588,8 @@
       ],
       "layout": {
         "line-cap": "round",
-        "line-join": "round"
+        "line-join": "round",
+        "visibility": "visible"
       },
       "paint": {
         "line-color": "#bed7f0",
@@ -2319,6 +2325,11 @@
       "layout": {
         "icon-image": "{kind}",
         "visibility": "visible"
+      },
+      "paint": {
+        "icon-halo-width": 2,
+        "icon-halo-color": "rgba(255, 255, 255, 1)",
+        "icon-color": "rgba(255, 255, 255, 1)"
       }
     }
   ],
