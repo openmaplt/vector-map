@@ -16,13 +16,13 @@ SELECT
         THEN 'drain'
     END
   ) AS kind,
-  coalesce("name:lt", name) AS name,
-  case when "waterway:name" is null then 'yes' else 'no' end AS through
+  coalesce("name:lt", name) AS name
 FROM
   planet_osm_line
 WHERE
   way && !bbox! AND
-  waterway IN ('dock', 'canal', 'river', 'stream', 'ditch', 'drain')
+  waterway IN ('dock', 'canal', 'river', 'stream', 'ditch', 'drain') AND
+  "waterway:name" is null
 
 UNION ALL
 
