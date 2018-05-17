@@ -1,4 +1,5 @@
 SELECT
+  osm_id AS __id__,
   way AS __geometry__,
   (
     CASE

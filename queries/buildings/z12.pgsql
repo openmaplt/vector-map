@@ -1,4 +1,5 @@
 SELECT
+  id AS __id__,
   way AS __geometry__,
   'yes' AS kind,
   null AS name,

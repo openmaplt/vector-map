@@ -1,4 +1,5 @@
 SELECT
+  osm_id AS __id__
   way AS __geometry__,
   building AS kind,
   coalesce(name, "addr:housename") AS name,
