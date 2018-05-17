@@ -42,8 +42,7 @@ SELECT
         THEN 'swimming_pool'
     END
   ) AS kind,
-  null AS name,
-  null AS through
+  null AS name
 FROM
   planet_osm_polygon
 WHERE
