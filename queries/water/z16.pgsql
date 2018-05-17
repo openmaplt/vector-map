@@ -16,7 +16,8 @@ SELECT
         THEN 'drain'
     END
   ) AS kind,
-  coalesce("name:lt", name) AS name
+  coalesce("name:lt", name) AS name,
+  case when "waterway:name" is null then 'yes' else 'no' end AS through
 FROM
   planet_osm_line
 WHERE
@@ -41,7 +42,8 @@ SELECT
         THEN 'swimming_pool'
     END
   ) AS kind,
-  null AS name
+  null AS name,
+  null AS through
 FROM
   planet_osm_polygon
 WHERE

@@ -6,7 +6,8 @@ SELECT
         THEN 'river'
     END
   ) AS kind,
-  coalesce("name:lt", name) AS name
+  coalesce("name:lt", name) AS name,
+  "waterway:name" AS wname
 FROM
   planet_osm_line
 WHERE
@@ -18,7 +19,8 @@ UNION ALL
 SELECT
   st_union(way) AS __geometry__,
   'water' AS kind,
-  null AS name
+  null AS name,
+  null AS wname
 FROM
   gen_water
 WHERE
