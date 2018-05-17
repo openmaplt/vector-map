@@ -17,7 +17,8 @@ FROM
   planet_osm_line
 WHERE
   way && !bbox! AND
-  waterway IN ('dock', 'canal', 'river', 'stream')
+  waterway IN ('dock', 'canal', 'river', 'stream') AND
+  "waterway:name" is null
 
 UNION ALL
 
