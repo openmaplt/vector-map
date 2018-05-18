@@ -5,6 +5,7 @@ CREATE INDEX planet_osm_line_railway_service_index ON planet_osm_line (railway, 
 CREATE INDEX planet_osm_line_railway_index ON planet_osm_line (railway);
 CREATE INDEX planet_osm_line_waterway_index ON planet_osm_line (waterway);
 CREATE INDEX planet_osm_line_route_index ON planet_osm_line (route);
+CREATE INDEX planet_osm_line_man_made_index ON planet_osm_line (man_made);
 
 CREATE INDEX planet_osm_point_amenity_index ON planet_osm_point (amenity);
 CREATE INDEX planet_osm_point_name_place_index ON planet_osm_point (name, place);

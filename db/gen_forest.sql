@@ -29,9 +29,9 @@ insert into gen_forest
     from gen_forest
    where res = 10;
 
-delete from gen_forest where st_area(st_buffer(way, -150)) < 150 and res = 150;
+delete from gen_forest where st_area(st_buffer(way, -75)) < 150 and res = 150;
 
-update gen_forest set way = st_makevalid(st_multi(st_simplifypreservetopology(st_buffer(st_buffer(way, 150, 'quad_segs=1'), -150, 'quad_segs=1'), 150))) where res = 150;
+update gen_forest set way = st_makevalid(st_multi(st_simplifypreservetopology(st_buffer(st_buffer(way, 75, 'quad_segs=1'), -75, 'quad_segs=1'), 150))) where res = 150;
 update gen_forest set way_area = st_area(way) where res = 150;
 
 -------------------
@@ -45,9 +45,11 @@ insert into gen_forest
     from gen_forest
    where res = 150;
 
-delete from gen_forest where st_area(st_buffer(way, -600)) < 600 and res = 600;
+delete from gen_forest where st_area(st_buffer(way, -300)) < 600 and res = 600;
 
-update gen_forest set way = st_makevalid(st_multi(st_simplifypreservetopology(st_buffer(st_buffer(way, 1200, 'quad_segs=1'), -1200, 'quad_segs=1'), 600))) where res = 600;
+update gen_forest set way = st_makevalid(st_multi(st_simplifypreservetopology(st_buffer(st_buffer(way, 600, 'quad_segs=1'), -600, 'quad_segs=1'), 600))) where res = 600;
 update gen_forest set way_area = st_area(way) where res = 600;
 
-create index gen_forest_gix ON gen_forest using gist (way);
+create index gen_forest_10_gix ON gen_forest using gist (way) where res = 10;
+create index gen_forest_150_gix ON gen_forest using gist (way) where res = 150;
+create index gen_forest_600_gix ON gen_forest using gist (way) where res = 600;
