@@ -23,9 +23,9 @@ insert into gen_water
     from gen_water
    where res = 10;
 
-delete from gen_water where st_area(st_buffer(way, -150)) < 150 and res = 150;
+delete from gen_water where st_area(st_buffer(way, -75)) < 150 and res = 150;
 
-update gen_water set way = st_multi(st_simplifypreservetopology(st_buffer(st_buffer(way, 150, 'quad_segs=1'), -150, 'quad_segs=1'), 150)) where res = 150;
+update gen_water set way = st_multi(st_simplifypreservetopology(st_buffer(st_buffer(way, 75, 'quad_segs=1'), -75, 'quad_segs=1'), 150)) where res = 150;
 update gen_water set way_area = st_area(way) where res = 150;
 
 insert into gen_water
@@ -36,9 +36,9 @@ insert into gen_water
     from gen_water
    where res = 150;
 
-delete from gen_water where st_area(st_buffer(way, -600)) < 600 and res = 600;
+delete from gen_water where st_area(st_buffer(way, -300)) < 600 and res = 600;
 
-update gen_water set way = st_multi(st_simplifypreservetopology(st_buffer(st_buffer(way, 600, 'quad_segs=1'), -600, 'quad_segs=1'), 300)) where res = 600;
+update gen_water set way = st_multi(st_simplifypreservetopology(st_buffer(st_buffer(way, 300, 'quad_segs=1'), -300, 'quad_segs=1'), 300)) where res = 600;
 update gen_water set way_area = st_area(way) where res = 600;
 
 create index gen_water_10_gix ON gen_water using gist (way) where res = 10;
