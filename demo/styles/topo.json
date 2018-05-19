@@ -66,9 +66,6 @@
           "forest"
         ]
       ],
-      "layout": {
-        "visibility": "visible"
-      },
       "paint": {
         "fill-color": "#cbe3a9",
         "fill-opacity": 1
@@ -110,12 +107,8 @@
           "meadow"
         ]
       ],
-      "layout": {
-        "visibility": "none"
-      },
       "paint": {
-        "fill-color": "rgba(205, 235, 176, 1)",
-        "fill-opacity": 1
+        "fill-pattern": "meadow"
       }
     },
     {
@@ -135,28 +128,6 @@
       ],
       "paint": {
         "fill-color": "#fffacd",
-        "fill-opacity": 1
-      }
-    },
-    {
-      "id": "landuse-marsh",
-      "type": "fill",
-      "source": "tilezen",
-      "source-layer": "landuse",
-      "minzoom": 6,
-      "filter": [
-        "all",
-        [
-          "in",
-          "kind",
-          "marsh"
-        ]
-      ],
-      "layout": {
-        "visibility": "none"
-      },
-      "paint": {
-        "fill-color": "rgba(205, 235, 176, 1)",
         "fill-opacity": 1
       }
     },
@@ -183,29 +154,7 @@
       }
     },
     {
-      "id": "landuse-farmland",
-      "type": "fill",
-      "source": "tilezen",
-      "source-layer": "landuse",
-      "minzoom": 6,
-      "filter": [
-        "all",
-        [
-          "in",
-          "kind",
-          "farmland"
-        ]
-      ],
-      "layout": {
-        "visibility": "none"
-      },
-      "paint": {
-        "fill-color": "rgba(251, 236, 215, 1)",
-        "fill-opacity": 1
-      }
-    },
-    {
-      "id": "landuse-marsh-symbol",
+      "id": "landuse-marsh",
       "type": "fill",
       "source": "tilezen",
       "source-layer": "landuse",
@@ -218,9 +167,6 @@
           "marsh"
         ]
       ],
-      "layout": {
-        "visibility": "visible"
-      },
       "paint": {
         "fill-pattern": "marsh"
       }
@@ -239,42 +185,6 @@
           "swamp"
         ]
       ],
-      "layout": {
-        "visibility": "none"
-      },
-      "paint": {
-        "fill-color": {
-          "stops": [
-            [
-              6,
-              "rgba(255, 255, 255, 1)"
-            ],
-            [
-              12,
-              "rgba(136, 220, 122, 1)"
-            ]
-          ]
-        },
-        "fill-opacity": 1
-      }
-    },
-    {
-      "id": "landuse-swamp-symbol",
-      "type": "fill",
-      "source": "tilezen",
-      "source-layer": "landuse",
-      "minzoom": 7,
-      "filter": [
-        "all",
-        [
-          "in",
-          "kind",
-          "swamp"
-        ]
-      ],
-      "layout": {
-        "visibility": "visible"
-      },
       "paint": {
         "fill-pattern": "swamp"
       }
@@ -295,7 +205,8 @@
       ],
       "paint": {
         "fill-color": "rgba(221, 221, 221, 1)",
-        "fill-opacity": 1
+        "fill-opacity": 1,
+        "fill-outline-color": "rgba(200, 200, 200, 1)"
       }
     },
     {
@@ -312,12 +223,10 @@
           "industrial"
         ]
       ],
-      "layout": {
-        "visibility": "none"
-      },
       "paint": {
-        "fill-color": "rgba(226, 215, 251, 1)",
-        "fill-opacity": 1
+        "fill-color": "rgba(210, 190, 210, 1)",
+        "fill-opacity": 1,
+        "fill-outline-color": "rgba(150, 125, 160, 1)"
       }
     },
     {
@@ -373,9 +282,6 @@
         "$type",
         "LineString"
       ],
-      "layout": {
-        "visibility": "visible"
-      },
       "paint": {
         "line-color": "#7acad0",
         "line-width": {
@@ -403,9 +309,6 @@
         "$type",
         "Polygon"
       ],
-      "layout": {
-        "visibility": "visible"
-      },
       "paint": {
         "fill-color": "#bed7f0",
         "fill-outline-color": "#49a5dd",
@@ -422,9 +325,6 @@
         "$type",
         "Polygon"
       ],
-      "layout": {
-        "visibility": "visible"
-      },
       "paint": {
         "line-color": "#49a5dd",
         "line-width": {
@@ -485,6 +385,24 @@
       }
     },
     {
+      "id": "landuse-reedbed",
+      "type": "fill",
+      "source": "tilezen",
+      "source-layer": "landuse",
+      "minzoom": 6,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "reedbed"
+        ]
+      ],
+      "paint": {
+        "fill-pattern": "reedbed"
+      }
+    },
+    {
       "id": "waterway-river",
       "type": "line",
       "source": "tilezen",
@@ -541,8 +459,7 @@
       ],
       "layout": {
         "line-join": "round",
-        "line-cap": "round",
-        "visibility": "visible"
+        "line-cap": "round"
       },
       "paint": {
         "line-width": {
@@ -588,8 +505,7 @@
       ],
       "layout": {
         "line-cap": "round",
-        "line-join": "round",
-        "visibility": "visible"
+        "line-join": "round"
       },
       "paint": {
         "line-color": "#bed7f0",
@@ -626,8 +542,7 @@
       ],
       "layout": {
         "line-join": "round",
-        "line-cap": "round",
-        "visibility": "visible"
+        "line-cap": "round"
       },
       "paint": {
         "line-width": 16,
@@ -654,9 +569,6 @@
           "national_park"
         ]
       ],
-      "layout": {
-        "visibility": "visible"
-      },
       "paint": {
         "line-color": "#85c4a5",
         "line-dasharray": [
@@ -692,9 +604,6 @@
           "national_park"
         ]
       ],
-      "layout": {
-        "visibility": "visible"
-      },
       "paint": {
         "fill-color": {
           "stops": [
@@ -727,8 +636,7 @@
       ],
       "layout": {
         "line-cap": "round",
-        "line-join": "round",
-        "visibility": "visible"
+        "line-join": "round"
       },
       "paint": {
         "line-color": "#eb9dcb",
@@ -1113,8 +1021,7 @@
       ],
       "layout": {
         "line-join": "round",
-        "line-cap": "round",
-        "visibility": "visible"
+        "line-cap": "round"
       },
       "paint": {
         "line-color": "#110f0d",
@@ -1152,8 +1059,7 @@
       ],
       "layout": {
         "line-join": "round",
-        "line-cap": "round",
-        "visibility": "visible"
+        "line-cap": "round"
       },
       "paint": {
         "line-color": "rgba(170, 170, 170, 1)",
@@ -1190,8 +1096,7 @@
       ],
       "layout": {
         "line-join": "round",
-        "line-cap": "round",
-        "visibility": "visible"
+        "line-cap": "round"
       },
       "paint": {
         "line-color": "rgba(238, 238, 238, 1)",
@@ -1226,8 +1131,7 @@
       ],
       "layout": {
         "line-join": "round",
-        "line-cap": "round",
-        "visibility": "visible"
+        "line-cap": "round"
       },
       "paint": {
         "line-color": "#fffbb3",
@@ -1297,8 +1201,7 @@
       ],
       "layout": {
         "line-join": "round",
-        "line-cap": "round",
-        "visibility": "visible"
+        "line-cap": "round"
       },
       "paint": {
         "line-color": "#d7b7ad",
@@ -1333,8 +1236,7 @@
       ],
       "layout": {
         "line-join": "round",
-        "line-cap": "butt",
-        "visibility": "visible"
+        "line-cap": "butt"
       },
       "paint": {
         "line-color": "#882a30",
@@ -1371,8 +1273,7 @@
       ],
       "layout": {
         "line-join": "round",
-        "line-cap": "round",
-        "visibility": "visible"
+        "line-cap": "round"
       },
       "paint": {
         "line-color": "#882a30",
@@ -1468,8 +1369,7 @@
       ],
       "layout": {
         "line-join": "round",
-        "line-cap": "round",
-        "visibility": "visible"
+        "line-cap": "round"
       },
       "paint": {
         "line-width": {
@@ -1647,8 +1547,7 @@
       ],
       "layout": {
         "line-join": "bevel",
-        "line-cap": "butt",
-        "visibility": "visible"
+        "line-cap": "butt"
       },
       "paint": {
         "line-color": "rgba(255, 255, 255, 1)",
@@ -1735,8 +1634,7 @@
               13
             ]
           ]
-        },
-        "visibility": "visible"
+        }
       },
       "paint": {
         "text-color": "#384646",
@@ -1780,7 +1678,6 @@
             ]
           ]
         },
-        "visibility": "visible",
         "symbol-spacing": 250,
         "text-padding": 5
       },
@@ -1827,8 +1724,7 @@
               13
             ]
           ]
-        },
-        "visibility": "visible"
+        }
       },
       "paint": {
         "text-color": "#111111",
@@ -1923,6 +1819,7 @@
         ],
         "text-allow-overlap": false,
         "text-ignore-placement": false,
+        "text-letter-spacing": 0.1,
         "text-size": {
           "stops": [
             [
@@ -1934,8 +1831,7 @@
               15
             ]
           ]
-        },
-        "visibility": "visible"
+        }
       },
       "paint": {
         "text-color": "#49a5dd",
@@ -1968,7 +1864,7 @@
         "text-padding": 5,
         "text-allow-overlap": false,
         "text-ignore-placement": false,
-        "visibility": "visible",
+        "text-letter-spacing": 0.1,
         "text-size": 14
       },
       "paint": {
@@ -2015,8 +1911,7 @@
         ],
         "icon-image": "shield{ref_length}",
         "text-padding": 30,
-        "symbol-avoid-edges": false,
-        "visibility": "visible"
+        "symbol-avoid-edges": false
       },
       "paint": {
         "text-halo-width": 2,
@@ -2065,7 +1960,6 @@
         "icon-image": "shield{ref_length}",
         "text-padding": 30,
         "symbol-avoid-edges": false,
-        "visibility": "visible",
         "icon-rotation-alignment": "auto"
       },
       "paint": {
@@ -2109,8 +2003,7 @@
         "text-allow-overlap": false,
         "text-font": [
           "Playfair Regular"
-        ],
-        "visibility": "visible"
+        ]
       },
       "paint": {
         "text-halo-width": 1.5,
@@ -2207,7 +2100,6 @@
         "text-font": [
           "Roboto Condensed Italic"
         ],
-        "visibility": "visible",
         "text-padding": 1
       },
       "paint": {
@@ -2236,7 +2128,6 @@
         "text-font": [
           "Roboto Condensed Italic"
         ],
-        "visibility": "none",
         "text-padding": 1
       },
       "paint": {
@@ -2270,8 +2161,7 @@
         "text-anchor": "center",
         "text-font": [
           "Roboto Regular"
-        ],
-        "visibility": "none"
+        ]
       },
       "paint": {
         "text-halo-width": 2,
@@ -2309,8 +2199,7 @@
         "icon-image": "{kind}",
         "text-font": [
           "Roboto Regular"
-        ],
-        "visibility": "none"
+        ]
       },
       "paint": {
         "text-halo-width": 2,
@@ -2322,9 +2211,14 @@
       "type": "symbol",
       "source": "topo",
       "source-layer": "topo_sym",
+      "minzoom": 12,
       "layout": {
-        "icon-image": "{kind}",
-        "visibility": "visible"
+        "icon-image": "{kind}"
+      },
+      "paint": {
+        "icon-halo-width": 2,
+        "icon-halo-color": "rgba(255, 255, 255, 1)",
+        "icon-color": "rgba(255, 255, 255, 1)"
       }
     }
   ],
