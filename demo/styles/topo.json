@@ -1819,6 +1819,7 @@
         ],
         "text-allow-overlap": false,
         "text-ignore-placement": false,
+        "text-letter-spacing": 0.1,
         "text-size": {
           "stops": [
             [
@@ -1863,6 +1864,7 @@
         "text-padding": 5,
         "text-allow-overlap": false,
         "text-ignore-placement": false,
+        "text-letter-spacing": 0.1,
         "text-size": 14
       },
       "paint": {
