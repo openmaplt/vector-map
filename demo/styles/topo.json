@@ -443,7 +443,7 @@
       }
     },
     {
-      "id": "waterway-river-direction-copy",
+      "id": "waterway-river-direction",
       "type": "line",
       "source": "tilezen",
       "source-layer": "water",
