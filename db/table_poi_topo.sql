@@ -69,4 +69,3 @@ create materialized view poi_topo (
       or power = 'substation'
       or (power = 'generator' and "generator:source" in ('hydro', 'wind'))
       or tourism = 'camp_site';
-grant select on poi_topo to tomas;
