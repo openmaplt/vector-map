@@ -9,7 +9,7 @@ create materialized view poi_topo (
  ,tourism
  ,"attraction:type"
  ,access
- ,historic
+ ,"generator:source"
  ,religion
  ,aeroway
  ,power
@@ -27,7 +27,7 @@ create materialized view poi_topo (
         ,tourism
         ,"attraction:type"
         ,access
-        ,historic
+        ,"generator:source"
         ,religion
         ,aeroway
         ,power
@@ -37,9 +37,11 @@ create materialized view poi_topo (
     from planet_osm_point
    where aeroway in ('aerodrome', 'helipad')
       or amenity = 'place_of_worship'
-      or man_made in ('chimnei', 'windmill', 'watermill', 'tower')
+      or man_made in ('chimney', 'windmill', 'watermill', 'tower')
       or amenity = 'fuel'
       or power = 'substation'
+      or (power = 'generator' and "generator:source" in ('hydro', 'wind'))
+      or tourism = 'camp_site'
   union
   select
         ABS(osm_id)
@@ -51,7 +53,7 @@ create materialized view poi_topo (
         ,tourism
         ,null --"attraction:type"
         ,access
-        ,historic
+        ,"generator:source"
         ,religion
         ,aeroway
         ,power
@@ -61,7 +63,10 @@ create materialized view poi_topo (
     from planet_osm_polygon
    where aeroway in ('aerodrome', 'helipad')
       or amenity = 'place_of_worship'
-      or man_made in ('chimnei', 'windmill', 'watermill', 'tower')
+      or man_made in ('chimney', 'windmill', 'watermill', 'tower')
       or amenity = 'fuel'
       or landuse = 'quary'
-      or power = 'substation';
+      or power = 'substation'
+      or (power = 'generator' and "generator:source" in ('hydro', 'wind'))
+      or tourism = 'camp_site';
+grant select on poi_topo to tomas;

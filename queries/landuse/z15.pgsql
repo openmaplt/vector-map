@@ -25,6 +25,8 @@ SELECT
         THEN 'marsh'
       WHEN "natural" = 'wetland' AND "wetland" = 'swamp'
         THEN 'swamp'
+      WHEN "natural" = 'wetland' AND "wetland" = 'reedbed'
+        THEN 'reedbed'
       WHEN "natural" in ('beach', 'sand')
         THEN 'sand'
       WHEN "natural" = 'scrub'
