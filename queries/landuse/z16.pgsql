@@ -3,24 +3,10 @@ SELECT
   way AS __geometry__,
   (
     CASE
-      WHEN landuse = 'forest'
-        THEN 'forest'
-      WHEN landuse = 'residential'
-        THEN 'residential'
-      WHEN landuse = 'commercial'
-        THEN 'commercial'
-      WHEN landuse = 'industrial'
-        THEN 'industrial'
       WHEN landuse = 'meadow' or "natural" = 'heath'
         THEN 'meadow'
-      WHEN landuse = 'farmland'
-        THEN 'farmland'
-      WHEN landuse = 'allotments'
-        THEN 'allotments'
-      WHEN landuse = 'cemetery'
-        THEN 'cemetery'
-      WHEN landuse = 'garages'
-        THEN 'garages'
+      WHEN landuse is not null
+        THEN landuse
       WHEN "natural" = 'wetland' AND "wetland" = 'marsh'
         THEN 'marsh'
       WHEN "natural" = 'wetland' AND "wetland" = 'swamp'
@@ -29,10 +15,10 @@ SELECT
         THEN 'reedbed'
       WHEN "natural" in ('beach', 'sand')
         THEN 'sand'
-      WHEN "natural" = 'scrub'
-        THEN 'scrub'
-      WHEN leisure = 'park'
-        THEN 'park'
+      WHEN "natural" is not null
+        THEN "natural"
+      WHEN leisure is not null
+        THEN leisure
       WHEN aeroway is not null
         THEN aeroway
     END
@@ -42,7 +28,7 @@ FROM
 WHERE
   way && !bbox! AND
   (
-    landuse in ('forest', 'residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages')
+    landuse in ('forest', 'residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages', 'orchard')
     OR "natural" in ('wetland', 'sand', 'beach', 'scrub', 'heath')
     OR leisure = 'park'
     OR aeroway in ('apron', 'runway')

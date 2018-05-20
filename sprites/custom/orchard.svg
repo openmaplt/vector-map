@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="svg3836"
+   width="15"
+   height="15"
+   viewBox="0 0 15 15"
+   sodipodi:docname="orchard.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <metadata
+     id="metadata3842">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3840">
+    <inkscape:path-effect
+       effect="bspline"
+       id="path-effect5456"
+       is_visible="true"
+       weight="33.333333"
+       steps="2"
+       helper_size="0"
+       apply_no_weight="true"
+       apply_with_weight="true"
+       only_selected="false" />
+  </defs>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1864"
+     inkscape:window-height="1051"
+     id="namedview3838"
+     showgrid="true"
+     inkscape:zoom="48.028868"
+     inkscape:cx="4.2001909"
+     inkscape:cy="7.6375462"
+     inkscape:window-x="56"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg3836"
+     showguides="false">
+    <inkscape:grid
+       type="xygrid"
+       id="grid6477" />
+  </sodipodi:namedview>
+  <path
+     inkscape:connector-curvature="0"
+     d="m 2.5017692,1.3533645e-7 a 2.4844951,2.5021041 0 1 1 0,5.00420746466355 2.4844951,2.5021041 0 0 1 0,-5.00420746466355 z m 0,0.55613437466355 a 1.9322746,1.9459697 0 1 0 0,3.89193939 1.9322746,1.9459697 0 0 0 0,-3.89193939 z"
+     id="path5641"
+     style="fill:#000000;fill-opacity:1;stroke-width:0.33243787" />
+</svg>
