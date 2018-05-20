@@ -15,7 +15,7 @@
    height="8"
    viewBox="0 0 12 8"
    sodipodi:docname="cliff.svg"
-   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)">
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
   <metadata
      id="metadata3842">
     <rdf:RDF>
@@ -24,7 +24,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -43,9 +43,9 @@
      inkscape:window-height="1051"
      id="namedview3838"
      showgrid="true"
-     inkscape:zoom="33.961538"
-     inkscape:cx="9.1884305"
-     inkscape:cy="8.6590883"
+     inkscape:zoom="48.028868"
+     inkscape:cx="7.3078822"
+     inkscape:cy="5.6140686"
      inkscape:window-x="56"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
@@ -57,7 +57,7 @@
   </sodipodi:namedview>
   <path
      style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-     d="M 3,0 6,8 H 0 Z"
+     d="M 2,0 4,8 H 0 Z"
      id="path869"
      inkscape:connector-curvature="0"
      sodipodi:nodetypes="cccc" />
