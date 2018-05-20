@@ -27,7 +27,7 @@
       ]
     }
   },
-  "sprite": "https://openmap.lt/sprites/topo",
+  "sprite": "https://dev.openmap.lt/webgl/topo",
   "glyphs": "https://openmap.lt/glyphs/{fontstack}/{range}.pbf",
   "layers": [
     {
@@ -72,6 +72,27 @@
       }
     },
     {
+      "id": "landuse-orchard-sym",
+      "type": "fill",
+      "source": "tilezen",
+      "source-layer": "landuse",
+      "minzoom": 7,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "orchard"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "fill-pattern": "orchard"
+      }
+    },
+    {
       "id": "landuse-cemetery",
       "type": "fill",
       "source": "tilezen",
@@ -86,11 +107,10 @@
         ]
       ],
       "layout": {
-        "visibility": "none"
+        "visibility": "visible"
       },
       "paint": {
-        "fill-color": "rgba(121, 185, 150, 1)",
-        "fill-opacity": 1
+        "fill-pattern": "cemetery"
       }
     },
     {
@@ -1295,61 +1315,6 @@
       }
     },
     {
-      "id": "road-oneway",
-      "type": "line",
-      "source": "tilezen",
-      "source-layer": "roads",
-      "minzoom": 16,
-      "maxzoom": 24,
-      "filter": [
-        "all",
-        [
-          "in",
-          "kind",
-          "residential",
-          "unclassified",
-          "living_street",
-          "service",
-          "tertiary",
-          "tertiary_link",
-          "secondary",
-          "secondary_link",
-          "primary",
-          "primary_link",
-          "trunk",
-          "trunk_link",
-          "motorway",
-          "motorway_link"
-        ],
-        [
-          "==",
-          "oneway",
-          "yes"
-        ]
-      ],
-      "layout": {
-        "line-join": "round",
-        "line-cap": "round"
-      },
-      "paint": {
-        "line-width": {
-          "base": 1.55,
-          "stops": [
-            [
-              4,
-              0.25
-            ],
-            [
-              20,
-              30
-            ]
-          ]
-        },
-        "line-pattern": "oneway",
-        "line-opacity": 0.6
-      }
-    },
-    {
       "id": "road-track",
       "type": "line",
       "source": "tilezen",
@@ -1779,7 +1744,7 @@
         ],
         "text-allow-overlap": false,
         "text-ignore-placement": false,
-        "text-letter-spacing": 0.1,
+        "text-letter-spacing": 0.2,
         "text-size": {
           "stops": [
             [
@@ -1795,8 +1760,8 @@
       },
       "paint": {
         "text-color": "#49a5dd",
-        "text-halo-width": 1,
-        "text-halo-color": "rgba(255, 255, 255, 1)"
+        "text-halo-width": 1.5,
+        "text-halo-color": "rgba(255, 255, 255, 0.9)"
       }
     },
     {
@@ -1824,13 +1789,13 @@
         "text-padding": 5,
         "text-allow-overlap": false,
         "text-ignore-placement": false,
-        "text-letter-spacing": 0.1,
+        "text-letter-spacing": 0.2,
         "text-size": 14
       },
       "paint": {
         "text-color": "#49a5dd",
-        "text-halo-width": 1,
-        "text-halo-color": "rgba(255, 255, 255, 1)"
+        "text-halo-width": 1.5,
+        "text-halo-color": "rgba(255, 255, 255, 0.9)"
       }
     },
     {
@@ -1869,7 +1834,7 @@
         "text-font": [
           "Roboto Regular"
         ],
-        "icon-image": "shield{ref_length}",
+        "icon-image": "",
         "text-padding": 30,
         "symbol-avoid-edges": false
       },
@@ -1917,7 +1882,7 @@
         "text-font": [
           "Roboto Regular"
         ],
-        "icon-image": "shield{ref_length}",
+        "icon-image": "",
         "text-padding": 30,
         "symbol-avoid-edges": false,
         "icon-rotation-alignment": "auto"
@@ -2017,11 +1982,12 @@
         "text-font": [
           "Roboto Condensed Italic"
         ],
-        "text-padding": 1
+        "text-padding": 1,
+        "visibility": "visible"
       },
       "paint": {
         "text-color": "rgba(26, 92, 0, 1)",
-        "text-halo-width": 1,
+        "text-halo-width": 1.5,
         "text-halo-color": "rgba(255, 255, 255, 0.7)"
       }
     },

@@ -20,6 +20,13 @@
     "x": 183,
     "y": 64
   },
+  "cemetery": {
+    "height": 16,
+    "pixelRatio": 1,
+    "width": 14,
+    "x": 198,
+    "y": 128
+  },
   "chapel": {
     "height": 18,
     "pixelRatio": 1,
@@ -89,6 +96,13 @@
     "width": 64,
     "x": 64,
     "y": 0
+  },
+  "orchard": {
+    "height": 15,
+    "pixelRatio": 1,
+    "width": 15,
+    "x": 212,
+    "y": 128
   },
   "quary": {
     "height": 18,
