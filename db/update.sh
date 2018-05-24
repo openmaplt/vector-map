@@ -9,7 +9,7 @@ echo "Update started: `date +%c`"
 
 # download data
 if [ ! -e $DATAFILE ]; then
-	wget -O $DATAFILE http://osm.ramuno.lt/lithuania.pbf
+	wget -O $DATAFILE http://download.geofabrik.de/europe/lithuania-latest.osm.pbf
 fi
 
 # update

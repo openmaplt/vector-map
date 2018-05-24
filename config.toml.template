@@ -1,0 +1,33 @@
+[webserver]
+port = ":8081"
+
+[cache]
+type = "file"
+basepath = "./cache"
+
+[[providers]]
+name = "osm"
+type = "postgis"
+host = "localhost"
+port = 5432
+database = "osm"
+user = "osm"
+password = "osm"
+srid = 3857
+
+  [[providers.layers]]
+  name = "address"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """%./queries/address/z16.pgsql%"""
+
+[[maps]]
+name = "openmap"
+attribution = "OpenStreetMap"
+center = [23.871, 55.191, 7.0]
+
+  [[maps.layers]]
+  name = "address"
+  provider_layer = "osm.address"
+  min_zoom = 16
+  max_zoom = 20

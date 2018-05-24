@@ -1,0 +1,1821 @@
+[webserver]
+port = ":8081"
+
+[cache]
+type = "file"
+basepath = "./cache"
+
+[[providers]]
+name = "osm"
+type = "postgis"
+host = "localhost"
+port = 5432
+database = "osm"
+user = "osm"
+password = "osm"
+srid = 3857
+
+  [[providers.layers]]
+  name = "address"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """
+    SELECT
+      ABS(osm_id) AS id,
+      CASE WHEN osm_id < 0 THEN 'r' ELSE 'w' END AS __type__,
+      ST_AsBinary(ST_PointOnSurface(way)) AS geometry,
+      "addr:housenumber" as housenumber,
+      "addr:housename" as name,
+      "addr:street" as street,
+      "addr:city" as city,
+      "addr:postcode" as post_code
+    FROM
+      planet_osm_polygon
+    WHERE
+      way && !BBOX! AND
+      "addr:housenumber" IS NOT NULL AND "addr:contact" IS NULL
+    UNION
+    SELECT
+      osm_id AS id,
+      'n' AS __type__,
+      ST_AsBinary(way) as geometry,
+      "addr:housenumber" as housenumber,
+      "addr:housename" as name,
+      "addr:street" as street,
+      "addr:city" as city,
+      "addr:postcode" as post_code
+    FROM
+      planet_osm_point
+    WHERE
+      way && !BBOX!
+      AND "addr:housenumber" IS NOT NULL and "addr:contact" IS NULL
+  """
+
+  [[providers.layers]]
+  name = "bicycle_9-10"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """
+    SELECT
+      ABS(osm_id) AS is,
+      ST_AsBinary(st_linemerge(st_collect(way))) AS geometry,
+      route AS kind,
+      network,
+      name,
+      distance
+    FROM
+      planet_osm_line
+    WHERE
+      way && !BBOX! AND
+      route IN ('bicycle')
+    GROUP BY
+      route, network, name, distance, osm_id
+  """
+
+  [[providers.layers]]
+  name = "bicycle_11-20"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """
+    SELECT
+      ABS(osm_id) AS id,
+      ST_AsBinary(st_linemerge(st_collect(way))) AS geometry,
+      route AS kind,
+      network,
+      name,
+      distance
+    FROM
+      planet_osm_line
+    WHERE
+      way && !BBOX! AND
+      route IN ('bicycle')
+    GROUP BY
+      route, network, name, distance, osm_id
+    UNION ALL
+    SELECT
+      ABS(osm_id) AS id,
+      ST_AsBinary(st_linemerge(st_collect(way))) AS geometry,
+      (
+      CASE
+        WHEN (highway = 'cycleway') or (highway = 'path' and bicycle = 'designated')
+          THEN 'cycleway'
+        ELSE
+          coalesce(cycleway, "cycleway:both", "cycleway:left", "cycleway:right", bicycle)
+      END
+      ) AS kind,
+      'ways' AS network,
+      name,
+      null AS distance
+    FROM
+      planet_osm_line
+    WHERE
+      way && !BBOX! AND
+      (cycleway is not null OR
+       "cycleway:left" is not null OR
+       "cycleway:right" is not null OR
+       "cycleway:both" is not null OR
+       bicycle = 'yes' OR
+       highway = 'cycleway' OR
+       (highway = 'path' and bicycle = 'designated')
+      )
+    GROUP BY
+      name, cycleway, "cycleway:both", "cycleway:left", "cycleway:right", bicycle, highway, osm_id
+  """
+
+  [[providers.layers]]
+  name = "boundaries_7-9"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """
+    SELECT
+      ABS(osm_id) AS id,
+      ST_AsBinary(st_union(way)) AS geometry,
+      admin_level,
+      CASE WHEN admin_level = '2' THEN 'country' WHEN admin_level = '4' THEN 'region' END AS kind
+    FROM
+      planet_osm_line
+    WHERE
+      way && !BBOX! AND
+      boundary = 'administrative' AND
+      ((admin_level = '2' AND name = 'Lietuva') /*OR admin_level = '4'*/) AND
+      name not in ('Kurzeme', 'Latgale', 'Zemgale')
+    GROUP BY
+      osm_id, admin_level
+  """
+
+  [[providers.layers]]
+  name = "boundaries_10-12"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """
+    SELECT
+      ABS(osm_id) AS id,
+      ST_AsBinary(st_union(way)) AS geometry,
+      admin_level,
+      CASE WHEN admin_level = '2' THEN 'country' WHEN admin_level = '4' THEN 'region' WHEN admin_level = '6' THEN 'county' END AS kind
+    FROM
+      planet_osm_line
+    WHERE
+      way && !BBOX! AND
+      boundary = 'administrative' AND
+      ((admin_level = '2' AND name = 'Lietuva') /*OR admin_level IN ('4', '6')*/) AND
+      name not in ('Latgale', 'Kurzeme', 'Zemgale')
+    GROUP BY
+      osm_id, admin_level
+  """
+
+  [[providers.layers]]
+  name = "boundaries_13-20"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """
+    SELECT
+      ABS(osm_id) AS id,
+      ST_AsBinary(st_union(way)) AS geometry,
+      admin_level,
+      CASE WHEN admin_level = '2' THEN 'country' WHEN admin_level = '4' THEN 'region' WHEN admin_level = '6' THEN 'county' WHEN admin_level = '8' THEN 'locality' END AS kind
+    FROM
+      planet_osm_line
+    WHERE
+      way && !BBOX! AND
+      boundary = 'administrative' AND
+      ((admin_level = '2' AND name = 'Lietuva') /*OR admin_level IN ('4', '6', '8')*/) AND
+      name not in ('Latgale', 'Kurzeme', 'Zemgale')
+    GROUP BY
+      osm_id, admin_level
+  """
+
+  [[providers.layers]]
+  name = "buildings_12"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = "SELECT id, ST_AsBinary(way) AS geometry, 'yes' AS kind, null AS name, null AS height FROM gen_building WHERE way && !BBOX! AND way_area > 320"
+
+  [[providers.layers]]
+  name = "buildings_13"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = "SELECT id, ST_AsBinary(way) AS geometry, 'yes' AS kind, null AS name, null AS height FROM gen_building WHERE way && !BBOX!"
+
+  [[providers.layers]]
+  name = "buildings_14"
+  geometry_fieldname = "geometry"
+  id_fieldname = "osm_id"
+  sql = """
+    SELECT
+      osm_id,
+      ST_AsBinary(way) AS geometry,
+      building AS kind,
+      coalesce(name, "addr:housename") AS name,
+      coalesce(cast(split_part(height, '.', 1) as integer), coalesce(cast("building:levels" as integer), 2) * 3) AS height
+    FROM
+      planet_osm_polygon
+    WHERE
+      way && !BBOX! AND
+      building IS NOT NULL AND
+      way_area > 80
+  """
+
+  [[providers.layers]]
+  name = "buildings_15"
+  geometry_fieldname = "geometry"
+  id_fieldname = "osm_id"
+  sql = """
+    SELECT
+      osm_id,
+      ST_AsBinary(way) AS geometry,
+      building AS kind,
+      coalesce(name, "addr:housename") AS name,
+      coalesce(cast(split_part(height, '.', 1) as integer), coalesce(cast("building:levels" as integer), 2) * 3) AS height
+    FROM
+      planet_osm_polygon
+    WHERE
+      way && !BBOX! AND
+      building IS NOT NULL AND
+      way_area > 40
+  """
+
+  [[providers.layers]]
+  name = "buildings_16"
+  geometry_fieldname = "geometry"
+  id_fieldname = "osm_id"
+  sql = """
+    SELECT
+      osm_id,
+      ST_AsBinary(way) AS geometry,
+      building AS kind,
+      coalesce(name, "addr:housename") AS name,
+      coalesce(cast(split_part(height, '.', 1) as integer), coalesce(cast("building:levels" as integer), 2) * 3) AS height
+    FROM
+      planet_osm_polygon
+    WHERE
+      way && !BBOX! AND
+      building IS NOT NULL AND
+      way_area > 20
+  """
+
+  [[providers.layers]]
+  name = "buildings_17"
+  geometry_fieldname = "geometry"
+  id_fieldname = "osm_id"
+  sql = """
+    SELECT
+      osm_id,
+      ST_AsBinary(way) AS geometry,
+      building AS kind,
+      coalesce(name, "addr:housename") AS name,
+      coalesce(cast(split_part(height, '.', 1) as integer), coalesce(cast("building:levels" as integer), 2) * 3) AS height
+    FROM
+      planet_osm_polygon
+    WHERE
+      way && !BBOX! AND
+      building IS NOT NULL
+  """
+
+  [[providers.layers]]
+  name = "coastline"
+  geometry_fieldname = "geometry"
+  id_fieldname = "gid"
+  sql = "SELECT gid, ST_AsBinary(st_union(geom)) AS geometry, 'coastline' AS kind FROM coastline WHERE geom && !BBOX! GROUP BY gid"
+
+  [[providers.layers]]
+  name = "craftbeer"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """
+    SELECT
+      id,
+      __type__,
+      ST_AsBinary(way) AS geometry,
+      name,
+      (
+        CASE
+        WHEN amenity = 'bar'
+          THEN 'bar'
+        WHEN amenity = 'cafe'
+          THEN 'cafe'
+        WHEN amenity = 'fast_food'
+          THEN 'fast_food'
+        WHEN amenity = 'pub'
+          THEN 'beer'
+        WHEN amenity = 'restaurant'
+          THEN 'restaurant'
+        WHEN shop = 'alcohol'
+          THEN 'alcohol-shop'
+        ELSE 'marker'
+        END
+      ) AS kind,
+      CASE WHEN real_ale like '%lager%' THEN 'y' ELSE 'n' END AS style_lager,
+      CASE WHEN real_ale like '%ale%'   THEN 'y' ELSE 'n' END AS style_ale,
+      CASE WHEN real_ale like '%stout%' THEN 'y' ELSE 'n' END AS style_stout,
+      CASE WHEN real_ale like '%ipa%'   THEN 'y' ELSE 'n' END AS style_ipa,
+      CASE WHEN real_ale like '%wheat%' THEN 'y' ELSE 'n' END AS style_wheat,
+      CASE WHEN shop = 'alcohol' THEN 'y' ELSE 'n' END AS shop,
+      CASE WHEN amenity in ('bar', 'cafe', 'fast_food', 'pub', 'restaurant') THEN 'y' ELSE 'n' END AS drink,
+      official_name,
+      alt_name,
+      opening_hours,
+      website,
+      image,
+      "ref:lt:kpd" AS heritage,
+      height,
+      wikipedia,
+      fee,
+      email,
+      phone,
+      "addr:city" AS city,
+      "addr:street" AS street,
+      "addr:housenumber" AS housenumber
+    FROM
+      poi
+    WHERE
+      way && !BBOX! AND
+      (amenity IN ('bar', 'cafe', 'fast_food', 'pub', 'restaurant') OR shop = 'alcohol') AND
+      real_ale is not null
+    ORDER BY
+      CASE WHEN amenity in ('bar', 'pub') THEN 1 ELSE 2 END,
+      CASE WHEN real_ale like '%lager%' THEN 1 ELSE 0 END +
+      CASE WHEN real_ale like '%ale%'   THEN 1 ELSE 0 END +
+      CASE WHEN real_ale like '%stout%' THEN 1 ELSE 0 END +
+      CASE WHEN real_ale like '%ipa%'   THEN 1 ELSE 0 END +
+      CASE WHEN real_ale like '%wheat%' THEN 1 ELSE 0 END desc
+  """
+
+  [[providers.layers]]
+  name = "detail_13-15"
+  geometry_fieldname = "geometry"
+  id_fieldname = "osm_id"
+  sql = "SELECT osm_id, ST_AsBinary(way) AS geometry, CASE WHEN man_made is not null THEN man_made END AS kind FROM planet_osm_line WHERE way && !BBOX! AND man_made = 'cutline'"
+
+  [[providers.layers]]
+  name = "detail_16-20"
+  geometry_fieldname = "geometry"
+  id_fieldname = "osm_id"
+  sql = "SELECT osm_id, ST_AsBinary(way) AS geometry, CASE WHEN man_made is not null THEN man_made WHEN \"natural\" is not null THEN \"natural\" END AS kind FROM planet_osm_line WHERE way && !BBOX! AND (man_made = 'cutline' OR \"natural\" = 'cliff')"
+
+  [[providers.layers]]
+  name = "landuse_7-8"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = "SELECT id, ST_AsBinary(way) AS geometry, 'forest' AS kind FROM gen_forest WHERE way && !BBOX! AND res = 600 AND way_area >= 5000000"
+
+  [[providers.layers]]
+  name = "landuse_9"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = "SELECT id, ST_AsBinary(way) AS geometry, 'forest' AS kind FROM gen_forest WHERE way && !BBOX! AND res = 150 AND way_area >= 1000000"
+
+  [[providers.layers]]
+  name = "landuse_10"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """
+    SELECT
+      osm_id AS id,
+      ST_AsBinary(way) AS geometry,
+      (
+        CASE
+          WHEN landuse = 'residential'
+            THEN 'residential'
+          WHEN landuse = 'commercial'
+            THEN 'commercial'
+          WHEN landuse = 'industrial'
+            THEN 'industrial'
+          WHEN landuse = 'meadow' or "natural" = 'heath'
+            THEN 'meadow'
+          WHEN landuse = 'farmland'
+            THEN 'farmland'
+          WHEN landuse = 'allotments'
+            THEN 'allotments'
+          WHEN landuse = 'cemetery'
+            THEN 'cemetery'
+          WHEN landuse = 'garages'
+            THEN 'garages'
+          WHEN "natural" = 'wetland' AND "wetland" = 'marsh'
+            THEN 'marsh'
+          WHEN "natural" = 'wetland' AND "wetland" = 'swamp'
+            THEN 'swamp'
+        END
+      ) AS kind
+    FROM
+      planet_osm_polygon
+    WHERE
+      way && !BBOX! AND
+      (
+        landuse IN ('residential', 'meadow', 'farmland', 'allotments') OR
+       "natural" in ('wetland', 'heath')
+      ) AND
+      way_area >= 500000
+    UNION ALL
+    SELECT
+      id AS id,
+      ST_AsBinary(way) AS geometry,
+      'forest' AS kind
+    FROM
+      gen_forest
+    WHERE
+      way && !BBOX! AND
+      res = 150 AND
+      way_area >= 500000
+
+  """
+
+  [[providers.layers]]
+  name = "landuse_11"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """
+    SELECT
+      osm_id AS id,
+      ST_AsBinary(way) AS geometry,
+      (
+        CASE
+          WHEN landuse = 'residential'
+            THEN 'residential'
+          WHEN landuse = 'meadow' or "natural" = 'heath'
+            THEN 'meadow'
+          WHEN landuse = 'farmland'
+            THEN 'farmland'
+          WHEN landuse = 'allotments'
+            THEN 'allotments'
+          WHEN "natural" = 'wetland' AND "wetland" = 'marsh'
+            THEN 'marsh'
+          WHEN "natural" = 'wetland' AND "wetland" = 'swamp'
+            THEN 'swamp'
+        END
+      ) AS kind
+    FROM
+      planet_osm_polygon
+    WHERE
+      way && !BBOX! AND
+      (
+        landuse IN ('residential', 'meadow', 'farmland', 'allotments') OR
+         "natural" in ('wetland', 'heath')
+      ) AND
+      way_area >= 100000
+    UNION ALL
+    SELECT
+      id AS id,
+      ST_AsBinary(way) AS geometry,
+      'forest' AS kind
+    FROM
+      gen_forest
+    WHERE
+      way && !BBOX! AND
+      res = 10 AND
+      way_area >= 100000
+  """
+
+  [[providers.layers]]
+  name = "landuse_12"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """
+    SELECT
+      osm_id AS id,
+      ST_AsBinary(way) AS geometry,
+      (
+        CASE
+          WHEN landuse = 'residential'
+            THEN 'residential'
+          WHEN landuse = 'commercial'
+            THEN 'commercial'
+          WHEN landuse = 'industrial'
+            THEN 'industrial'
+          WHEN landuse = 'meadow' or "natural" = 'heath'
+            THEN 'meadow'
+          WHEN landuse = 'farmland'
+            THEN 'farmland'
+          WHEN landuse = 'allotments'
+            THEN 'allotments'
+          WHEN landuse = 'cemetery'
+            THEN 'cemetery'
+          WHEN landuse = 'garages'
+            THEN 'garages'
+          WHEN "natural" = 'wetland' AND "wetland" = 'marsh'
+            THEN 'marsh'
+          WHEN "natural" = 'wetland' AND "wetland" = 'swamp'
+            THEN 'swamp'
+          WHEN "natural" in ('beach', 'sand')
+            THEN 'sand'
+          WHEN "natural" = 'scrub'
+            THEN 'scrub'
+          WHEN aeroway is not null
+            THEN aeroway
+        END
+      ) AS kind
+    FROM
+      planet_osm_polygon
+    WHERE
+      way && !BBOX! AND
+      (
+        landuse IN ('residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages') OR
+         "natural" in ('wetland', 'beach', 'sand', 'scrub', 'heath') OR
+         aeroway = 'runway'
+      ) AND
+      way_area >= 50000
+    UNION ALL
+    SELECT
+      id AS id,
+      ST_AsBinary(way) AS geometry,
+      'forest' AS kind
+    FROM
+      gen_forest
+    WHERE
+      way && !BBOX! AND
+      res = 10 AND
+      way_area >= 50000
+  """
+
+  [[providers.layers]]
+  name = "landuse_13"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """
+    SELECT
+      osm_id AS id,
+      ST_AsBinary(way) AS geometry,
+      (
+        CASE
+          WHEN landuse = 'residential'
+            THEN 'residential'
+          WHEN landuse = 'commercial'
+            THEN 'commercial'
+          WHEN landuse = 'industrial'
+            THEN 'industrial'
+          WHEN landuse = 'meadow' or "natural" = 'heath'
+            THEN 'meadow'
+          WHEN landuse = 'farmland'
+            THEN 'farmland'
+          WHEN landuse = 'allotments'
+            THEN 'allotments'
+          WHEN landuse = 'cemetery'
+            THEN 'cemetery'
+          WHEN landuse = 'garages'
+            THEN 'garages'
+          WHEN "natural" = 'wetland' AND "wetland" = 'marsh'
+            THEN 'marsh'
+          WHEN "natural" = 'wetland' AND "wetland" = 'swamp'
+            THEN 'swamp'
+          WHEN "natural" in ('beach', 'sand')
+            THEN 'sand'
+          WHEN "natural" = 'scrub'
+            THEN 'scrub'
+          WHEN aeroway is not null
+            THEN aeroway
+        END
+      ) AS kind
+    FROM
+      planet_osm_polygon
+    WHERE
+      way && !BBOX! AND
+      (
+        landuse in ('residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages')
+        OR "natural" in ('wetland', 'sand', 'beach', 'scrub', 'heath')
+        OR aeroway in ('runway')
+      ) AND
+      way_area >= 10000
+    UNION ALL
+    SELECT
+      id AS id,
+      ST_AsBinary(way) AS geometry,
+      'forest' AS kind
+    FROM
+      gen_forest
+    WHERE
+      way && !BBOX! AND
+      res = 10 AND
+      way_area >= 10000
+  """
+
+  [[providers.layers]]
+  name = "landuse_14"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """
+    SELECT
+      osm_id AS id,
+      ST_AsBinary(way) AS geometry,
+      (
+        CASE
+          WHEN landuse = 'residential'
+            THEN 'residential'
+          WHEN landuse = 'commercial'
+            THEN 'commercial'
+          WHEN landuse = 'industrial'
+            THEN 'industrial'
+          WHEN landuse = 'meadow' or "natural" = 'heath'
+            THEN 'meadow'
+          WHEN landuse = 'farmland'
+            THEN 'farmland'
+          WHEN landuse = 'allotments'
+            THEN 'allotments'
+          WHEN landuse = 'cemetery'
+            THEN 'cemetery'
+          WHEN landuse = 'garages'
+            THEN 'garages'
+          WHEN "natural" = 'wetland' AND "wetland" = 'marsh'
+            THEN 'marsh'
+          WHEN "natural" = 'wetland' AND "wetland" = 'swamp'
+            THEN 'swamp'
+          WHEN "natural" in ('beach', 'sand')
+            THEN 'sand'
+          WHEN "natural" = 'scrub'
+            THEN 'scrub'
+          WHEN aeroway is not null
+            THEN aeroway
+        END
+      ) AS kind
+    FROM
+      planet_osm_polygon
+    WHERE
+      way && !BBOX! AND
+      (
+        landuse in ('residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages')
+        OR "natural" in ('wetland', 'sand', 'beach', 'scrub', 'heath')
+        OR aeroway in ('apron', 'runway')
+      ) AND
+      way_area >= 5000
+    UNION ALL
+    SELECT
+      id AS id,
+      ST_AsBinary(way) AS geometry,
+      'forest' AS kind
+    FROM
+      gen_forest
+    WHERE
+      way && !BBOX! AND
+      res = 10 AND
+      way_area >= 5000
+  """
+
+  [[providers.layers]]
+  name = "landuse_15"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """
+    SELECT
+      osm_id AS id,
+      ST_AsBinary(way) AS geometry,
+      (
+        CASE
+          WHEN landuse = 'forest'
+            THEN 'forest'
+          WHEN landuse = 'residential'
+            THEN 'residential'
+          WHEN landuse = 'commercial'
+            THEN 'commercial'
+          WHEN landuse = 'industrial'
+            THEN 'industrial'
+          WHEN landuse = 'meadow' or "natural" = 'heath'
+            THEN 'meadow'
+          WHEN landuse = 'farmland'
+            THEN 'farmland'
+          WHEN landuse = 'allotments'
+            THEN 'allotments'
+          WHEN landuse = 'cemetery'
+            THEN 'cemetery'
+          WHEN landuse = 'garages'
+            THEN 'garages'
+          WHEN "natural" = 'wetland' AND "wetland" = 'marsh'
+            THEN 'marsh'
+          WHEN "natural" = 'wetland' AND "wetland" = 'swamp'
+            THEN 'swamp'
+          WHEN "natural" in ('beach', 'sand')
+            THEN 'sand'
+          WHEN "natural" = 'scrub'
+            THEN 'scrub'
+          WHEN aeroway is not null
+            THEN aeroway
+        END
+      ) AS kind
+    FROM
+      planet_osm_polygon
+    WHERE
+      way && !BBOX! AND
+      (
+        landuse in ('forest', 'residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages')
+        OR "natural" in ('wetland', 'sand', 'beach', 'scrub', 'heath')
+        OR aeroway in ('apron', 'runway')
+      ) AND
+      way_area >= 1000
+  """
+
+  [[providers.layers]]
+  name = "landuse_16-20"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """
+    SELECT
+      osm_id AS id,
+      ST_AsBinary(way) AS geometry,
+      (
+        CASE
+          WHEN landuse = 'forest'
+            THEN 'forest'
+          WHEN landuse = 'residential'
+            THEN 'residential'
+          WHEN landuse = 'commercial'
+            THEN 'commercial'
+          WHEN landuse = 'industrial'
+            THEN 'industrial'
+          WHEN landuse = 'meadow' or "natural" = 'heath'
+            THEN 'meadow'
+          WHEN landuse = 'farmland'
+            THEN 'farmland'
+          WHEN landuse = 'allotments'
+            THEN 'allotments'
+          WHEN landuse = 'cemetery'
+            THEN 'cemetery'
+          WHEN landuse = 'garages'
+            THEN 'garages'
+          WHEN "natural" = 'wetland' AND "wetland" = 'marsh'
+            THEN 'marsh'
+          WHEN "natural" = 'wetland' AND "wetland" = 'swamp'
+            THEN 'swamp'
+          WHEN "natural" in ('beach', 'sand')
+            THEN 'sand'
+          WHEN "natural" = 'scrub'
+            THEN 'scrub'
+          WHEN leisure = 'park'
+            THEN 'park'
+          WHEN aeroway is not null
+            THEN aeroway
+        END
+      ) AS kind
+    FROM
+      planet_osm_polygon
+    WHERE
+      way && !BBOX! AND
+      (
+        landuse in ('forest', 'residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages')
+        OR "natural" in ('wetland', 'sand', 'beach', 'scrub', 'heath')
+        OR leisure = 'park'
+        OR aeroway in ('apron', 'runway')
+      )
+  """
+  [[providers.layers]]
+  name = "names_15-20"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """
+    SELECT
+      ABS(osm_id) AS id,
+      ST_AsBinary(st_PointOnSurface(way)) AS geometry,
+      (
+        CASE
+          WHEN landuse = 'cemetery'
+            THEN 'cemetery'
+          WHEN "natural" = 'water'
+            THEN 'water'
+          WHEN landuse = 'reservoir'
+            THEN 'lake'
+        END
+      ) AS kind,
+      coalesce("name:lt", name) AS name
+    FROM
+      planet_osm_polygon
+    WHERE
+      way && !BBOX! AND
+      (
+        landuse IN ('cemetery', 'reservoir') OR
+        "natural" IN ('water')
+      ) AND
+      name is not null
+  """
+
+  [[providers.layers]]
+  name = "places_7-8"
+  geometry_fieldname = "geometry"
+  id_fieldname = "osm_id"
+  sql = """
+    SELECT
+      osm_id,
+      ST_AsBinary(way) AS geometry,
+      coalesce("name:lt", name) AS name,
+      (
+        CASE
+          WHEN place = 'town' AND rank = '0'
+            THEN 'town'
+          WHEN place = 'town' AND rank = '10'
+            THEN 'little_town'
+          WHEN place = 'town' AND rank = '20'
+            THEN 'railway_station'
+          ELSE place
+        END
+      ) AS kind
+    FROM
+      planet_osm_point
+    WHERE
+      way && !BBOX! AND
+      name IS NOT NULL AND
+      (
+        place IN ('country', 'state', 'city') OR
+        (place = 'town' AND coalesce(rank, '0') in ('0', '10'))
+      )
+    ORDER BY
+      coalesce(population::int, 0) desc
+  """
+
+  [[providers.layers]]
+  name = "places_9"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """
+    SELECT
+      ABS(places.osm_id) AS id,
+      ST_AsBinary(places.way) AS geometry,
+      places.name,
+      places.kind
+    FROM
+    (SELECT
+      osm_id,
+      way,
+      coalesce("name:lt", name) AS name,
+      (
+        CASE
+          WHEN place = 'town' AND rank = '0'
+            THEN 'town'
+          WHEN place = 'town' AND rank = '10'
+            THEN 'little_town'
+          WHEN place = 'town' AND rank = '20'
+            THEN 'railway_station'
+          ELSE place
+        END
+      ) AS kind
+    FROM
+      planet_osm_point
+    WHERE
+      way && !BBOX! AND
+      name IS NOT NULL AND
+      (
+        place IN ('country', 'state', 'city') OR
+        (place = 'town' AND coalesce(rank, '0') in ('0', '10'))
+      )
+    ORDER BY
+      coalesce(population::int, 0) desc) AS places
+    UNION ALL
+    SELECT
+      ABS(osm_id) AS id,
+      ST_AsBinary(ST_PointOnSurface(way)) AS geometry,
+      coalesce("name:lt", name) AS name,
+      'water' AS kind
+    FROM
+      planet_osm_polygon
+    WHERE
+      way && !BBOX! AND
+      name IS NOT NULL AND
+      ("natural" = 'water' OR landuse = 'reservoir') AND
+      way_area >= 1000000
+  """
+
+  [[providers.layers]]
+  name = "places_10-11"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """
+    SELECT
+      ABS(place.osm_id) AS id,
+      ST_AsBinary(place.way) AS geometry,
+      place.name,
+      place.kind
+    FROM
+      (SELECT
+         osm_id,
+         way,
+         coalesce("name:lt", name) AS name,
+         (
+           CASE
+             WHEN place = 'town' AND rank = '0'
+               THEN 'town'
+             WHEN place = 'town' AND rank = '10'
+               THEN 'little_town'
+             WHEN place = 'town' AND rank = '20'
+               THEN 'railway_station'
+             ELSE place
+           END
+         ) AS kind
+       FROM
+         planet_osm_point
+       WHERE
+         way && !BBOX! AND
+         name IS NOT NULL AND
+         place IN ('city', 'town', 'village')
+       ORDER BY
+         coalesce(population::int, 0) desc) AS place
+    UNION ALL
+    SELECT
+      ABS(osm_id) AS id,
+      ST_AsBinary(ST_PointOnSurface(way)) AS geometry,
+      coalesce("name:lt", name) AS name,
+      'water' AS kind
+    FROM
+      planet_osm_polygon
+    WHERE
+      way && !BBOX! AND
+      name IS NOT NULL AND
+      ("natural" = 'water' OR landuse = 'reservoir') AND
+      way_area >= 500000
+  """
+
+  [[providers.layers]]
+  name = "places_12"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """
+    SELECT
+      ABS(place.osm_id) AS id,
+      ST_AsBinary(place.way) AS geometry,
+      place.name,
+      place.kind
+    FROM
+      (SELECT
+        osm_id,
+         way,
+         coalesce("name:lt", name) AS name,
+         (
+           CASE
+              WHEN place = 'town' AND rank = '0'
+                THEN 'town'
+              WHEN place = 'town' AND rank = '10'
+                THEN 'little_town'
+              WHEN place = 'town' AND rank = '20'
+                THEN 'railway_station'
+              ELSE place
+            END
+         ) AS kind
+       FROM
+         planet_osm_point
+       WHERE
+         way && !BBOX! AND
+         name IS NOT NULL AND
+         place IN ('city', 'town', 'village', 'suburb')
+       ORDER BY
+         coalesce(population::int, 0) desc) AS place
+    UNION ALL
+    SELECT
+      ABS(osm_id) AS id,
+      ST_AsBinary(ST_PointOnSurface(way)) AS geometry,
+      coalesce("name:lt", name) AS name,
+      'water' AS kind
+    FROM
+      planet_osm_polygon
+    WHERE
+      way && !BBOX! AND
+      name IS NOT NULL AND
+      ("natural" = 'water' OR landuse = 'reservoir') AND
+      way_area >= 500000
+  """
+
+  [[providers.layers]]
+  name = "places_13"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """
+    SELECT
+      ABS(osm_id) AS id,
+      ST_AsBinary(way) AS geometry,
+      coalesce("name:lt", name) AS name,
+      (
+       CASE
+         WHEN place = 'town' AND rank = '0'
+           THEN 'town'
+         WHEN place = 'town' AND rank = '10'
+           THEN 'little_town'
+         WHEN place = 'town' AND rank = '20'
+           THEN 'railway_station'
+         ELSE place
+       END
+      ) AS kind
+     FROM
+       planet_osm_point
+     WHERE
+       way && !BBOX! AND
+       name IS NOT NULL AND
+       place IN ('city', 'town', 'village', 'suburb')
+    UNION ALL
+    SELECT
+      ABS(osm_id) AS id,
+      ST_AsBinary(ST_PointOnSurface(way)) AS geometry,
+      coalesce("name:lt", name) AS name,
+      'water' AS kind
+    FROM
+      planet_osm_polygon
+    WHERE
+      way && !BBOX! AND
+      name IS NOT NULL AND
+      ("natural" = 'water' OR landuse = 'reservoir') AND
+      way_area >= 100000
+  """
+
+  [[providers.layers]]
+  name = "places_14-20"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """
+    SELECT
+      ABS(osm_id) AS id,
+       ST_AsBinary(way) AS geometry,
+       coalesce("name:lt", name) AS name,
+       (
+         CASE
+           WHEN place = 'town' AND rank = '0'
+             THEN 'town'
+           WHEN place = 'town' AND rank = '10'
+             THEN 'little_town'
+           WHEN place = 'town' AND rank = '20'
+             THEN 'railway_station'
+           ELSE place
+         END
+       ) AS kind
+     FROM
+       planet_osm_point
+     WHERE
+       way && !BBOX! AND
+       name IS NOT NULL AND
+       place IN ('city', 'town', 'village', 'hamlet', 'locality', 'neighbourhood', 'suburb')
+    UNION ALL
+    SELECT
+      ABS(osm_id) AS id,
+      ST_AsBinary(ST_PointOnSurface(way)) AS geometry,
+      coalesce("name:lt", name) AS name,
+      'water' AS kind
+    FROM
+      planet_osm_polygon
+    WHERE
+      way && !BBOX! AND
+      name IS NOT NULL AND
+      ("natural" = 'water' OR landuse = 'reservoir') AND
+      way_area >= 50000
+  """
+
+  [[providers.layers]]
+  name = "poi_7-9"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """
+    SELECT
+      ABS(osm_id) AS id,
+      ST_AsBinary(ST_PointOnSurface(way)) AS geometry,
+      coalesce("name:lt", name) AS name,
+      'park' AS kind,
+      website,
+      wikipedia
+    FROM
+      planet_osm_polygon
+    WHERE
+      way && !BBOX! AND
+      name IS NOT NULL AND
+      boundary = 'national_park' AND
+      way_area >= 1000000
+  """
+
+  [[providers.layers]]
+  name = "poi_14-15"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """
+    SELECT
+      id,
+      __type__,
+      ST_AsBinary(way) AS geometry,
+      name,
+      (
+        CASE
+        WHEN amenity = 'fuel'
+          THEN 'fuel'
+        WHEN amenity = 'place_of_worship'
+          THEN 'place_of_worship'
+        WHEN man_made = 'tower' and "tower:type" is not null and tourism in ('attraction', 'viewpoint', 'museum') and coalesce(access, 'yes') != 'no'
+          THEN 'marker' -- TODO: tower
+        WHEN tourism = 'attraction' and "attraction:type" = 'hiking_route'
+          THEN 'hiking'
+        WHEN tourism = 'information'
+          THEN 'information'
+        WHEN tourism in ('camp_site', 'caravan_site')
+          THEN 'campsite'
+        WHEN tourism in ('chalet', 'hostel', 'motel', 'guest_house')
+          THEN 'home' -- TODO: split, fix icon
+        WHEN tourism = 'hotel'
+          THEN 'lodging'
+        WHEN tourism = 'museum'
+          THEN 'museum'
+        WHEN tourism = 'picnic_site'
+          THEN 'picnic-site'
+        WHEN tourism = 'viewpoint'
+          THEN 'viewpoint'
+        WHEN historic = 'archaeological_site' and site_type = 'fortification'
+          THEN 'hillfort'
+        WHEN historic in ('monument', 'memorial')
+          THEN 'memorial'
+        WHEN historic = 'archaeological_site' and site_type = 'tumulus'
+          THEN 'tumulus'
+        WHEN historic = 'manor'
+          THEN 'marker' -- TODO: manor
+        WHEN historic = 'monastery'
+          THEN 'marker' -- TODO: monastery
+        WHEN historic = 'castle'
+          THEN 'castle'
+        WHEN tourism = 'attraction'
+          THEN 'attraction'
+        END
+      ) AS kind,
+      official_name,
+      alt_name,
+      opening_hours,
+      website,
+      image,
+      "ref:lt:kpd" AS heritage,
+      height,
+      wikipedia,
+      fee,
+      email,
+      phone,
+      "addr:city" AS city,
+      "addr:street" AS street,
+      "addr:housenumber" AS housenumber,
+      "addr:postcode" AS post_code
+    FROM
+      poi
+    WHERE
+      way && !BBOX! AND
+      (
+        amenity IN ('fuel', 'place_of_worship') OR
+        tourism IN ('attraction',
+                    'camp_site',
+                    'caravan_site',
+                    'chalet',
+                    'hostel',
+                    'motel',
+                    'guest_house',
+                    'hotel',
+                    'museum',
+                    'picnic_site',
+                    'viewpoint') OR
+        (tourism = 'information' and information = 'office') OR
+        historic IN ('archaeological_site',
+                     'castle',
+                     'monument',
+                     'memorial',
+                     'manor',
+                     'monastery')
+      )
+    ORDER BY
+      CASE WHEN tourism = 'attraction' then 1
+           WHEN tourism = 'viewpoint' then 2
+           WHEN tourism in ('camp_site', 'caravan_site') then 3
+           WHEN tourism is not null then 4
+           WHEN historic is not null then 5
+           WHEN amenity is not null then 6
+           ELSE 7
+      END
+  """
+
+  [[providers.layers]]
+  name = "poi_16-20"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """
+    SELECT
+      id,
+      __type__,
+      ST_AsBinary(way) AS geometry,
+      name,
+      (
+        CASE
+        WHEN amenity = 'arts_centre'
+          THEN 'art-gallery'
+        WHEN amenity = 'atm'
+          THEN 'marker' -- TODO atm
+        WHEN amenity = 'bank'
+          THEN 'bank'
+        WHEN amenity = 'bar'
+          THEN 'bar'
+        WHEN amenity = 'bicycle_parking'
+          THEN 'bicycle_parking'
+        WHEN amenity = 'bicycle_rental'
+          THEN 'bicycle_rental'
+        WHEN amenity = 'cafe'
+          THEN 'cafe'
+        WHEN amenity = 'car_wash'
+          THEN 'marker' -- TODO: car_wash
+        WHEN amenity = 'cinema'
+          THEN 'cinema'
+        WHEN amenity = 'clinic'
+          THEN 'marker' -- TODO: clinic
+        WHEN amenity = 'courthouse'
+          THEN 'marker' -- TODO: courthouse
+        WHEN amenity = 'compressed_air'
+          THEN 'compressed_air'
+        WHEN amenity = 'dentist'
+          THEN 'dentist'
+        WHEN amenity = 'doctors'
+          THEN 'doctor'
+        WHEN amenity = 'fast_food'
+          THEN 'fast-food'
+        WHEN amenity = 'fire_station'
+          THEN 'fire-station'
+        WHEN amenity = 'fuel'
+          THEN 'fuel'
+        WHEN amenity = 'hospital'
+          THEN 'hospital'
+        WHEN amenity = 'kindergarten'
+          THEN 'scooter'
+        WHEN amenity = 'library'
+          THEN 'library'
+        WHEN amenity = 'pharmacy'
+          THEN 'pharmacy'
+        WHEN amenity = 'place_of_worship'
+          THEN 'place_of_worship'
+        WHEN amenity = 'police'
+          THEN 'police'
+        WHEN amenity = 'post_office'
+          THEN 'post'
+        WHEN amenity = 'pub'
+          THEN 'beer'
+        WHEN amenity = 'restaurant'
+          THEN 'restaurant'
+        WHEN amenity = 'school'
+          THEN 'school'
+        WHEN amenity = 'shelter'
+          THEN 'shelter'
+        WHEN amenity = 'theatre'
+          THEN 'theatre'
+        WHEN amenity in ('college', 'university')
+          THEN 'college'
+        WHEN man_made = 'tower' and "tower:type" is not null and tourism in ('attraction', 'viewpoint', 'museum') and coalesce(access, 'yes') != 'no'
+          THEN 'marker' -- TODO: tower
+        WHEN tourism = 'attraction' and "attraction:type" = 'hiking_route'
+          THEN 'hiking'
+        WHEN tourism = 'information'
+          THEN 'information'
+        WHEN tourism in ('camp_site', 'caravan_site')
+          THEN 'campsite'
+        WHEN tourism in ('chalet', 'hostel', 'motel', 'guest_house')
+          THEN 'home' -- TODO: split, fix icon
+        WHEN tourism = 'hotel'
+          THEN 'lodging'
+        WHEN tourism = 'museum'
+          THEN 'museum'
+        WHEN tourism = 'picnic_site'
+          THEN 'picnic-site'
+        WHEN tourism = 'viewpoint'
+          THEN 'viewpoint'
+        WHEN tourism = 'zoo'
+          THEN 'zoo'
+        WHEN tourism = 'theme_park'
+          THEN 'theme_park'
+        WHEN historic = 'archaeological_site' and site_type = 'fortification'
+          THEN 'hillfort'
+        WHEN historic in ('monument', 'memorial')
+          THEN 'memorial'
+        WHEN historic = 'archaeological_site' and site_type = 'tumulus'
+          THEN 'tumulus'
+        WHEN historic = 'manor'
+          THEN 'marker' -- TODO: manor
+        WHEN historic = 'monastery'
+          THEN 'marker' -- TODO: monastery
+        WHEN tourism = 'attraction'
+          THEN 'attraction'
+        WHEN shop = 'alcohol'
+          THEN 'alcohol-shop'
+        WHEN shop = 'car_repair'
+          THEN 'marker' -- TODO car repair
+        WHEN shop = 'bakery'
+          THEN 'bakery'
+        WHEN shop = 'bicycle'
+          THEN 'bicycle'
+        WHEN shop = 'clothes'
+          THEN 'clothing-store'
+        WHEN shop in ('supermarket', 'mall', 'department_store')
+          THEN 'grocery'
+        WHEN shop in ('convenience')
+          THEN 'shop'
+        WHEN shop = 'hairdresser'
+          THEN 'hairdresser'
+        WHEN shop = 'florist'
+          THEN 'florist'
+        WHEN shop = 'music'
+          THEN 'music'
+        WHEN shop = 'butcher'
+          THEN 'slaughterhouse'
+        WHEN office = 'government' or amenity = 'townhall'
+          THEN 'town-hall'
+        WHEN office in ('notary', 'lawyer')
+          THEN 'marker' -- TODO notary
+        END
+      ) AS kind,
+      official_name,
+      alt_name,
+      opening_hours,
+      website,
+      image,
+      "ref:lt:kpd" AS heritage,
+      height,
+      wikipedia,
+      fee,
+      email,
+      phone,
+      "addr:city" AS city,
+      "addr:street" AS street,
+      "addr:housenumber" AS housenumber,
+      "addr:postcode" AS post_code
+    FROM
+      poi
+    WHERE
+      way && !BBOX! AND
+      (
+        amenity IN ('arts_centre',
+                    'atm'
+                    'bank',
+                    'bar',
+                    'bicycle_parking',
+                    'bicycle_rental',
+                    'cafe',
+                    'car_wash',
+                    'cinema',
+                    'clinic',
+                    'college',
+                    'compressed_air',
+                    'courthouse',
+                    'dentist',
+                    'doctors',
+                    'fast_food',
+                    'fire_station',
+                    'fuel',
+                    'hospital',
+                    'kindergarten',
+                    'library',
+                    'pharmacy',
+                    'place_of_worship',
+                    'police',
+                    'post_office',
+                    'pub',
+                    'restaurant',
+                    'school',
+                    'shelter',
+                    'theatre',
+                    'townhall',
+                    'university') OR
+        tourism IN ('attraction',
+                    'camp_site',
+                    'caravan_site',
+                    'chalet',
+                    'guest_house',
+                    'hostel',
+                    'hotel',
+                    'motel',
+                    'museum',
+                    'picnic_site',
+                    'theme_park',
+                    'viewpoint',
+                    'zoo') OR
+        (tourism = 'information' and information = 'office') OR
+        shop IN ('alcohol',
+                 'bakery',
+                 'bicycle',
+                 'car_repair',
+                 'convenience',
+                 'clothes',
+                 'florist',
+                 'hairdresser',
+                 'mall',
+                 'supermarket',
+                 'department_store',
+                 'music',
+                 'butcher') OR
+        historic IN ('archaeological_site',
+                     'monument',
+                     'memorial',
+                     'manor',
+                     'monastery') OR
+        office IN (
+                  'government',
+                  'notary',
+                  'lawyer'
+        )
+      )
+    ORDER BY
+      CASE WHEN tourism = 'attraction' then 1
+           WHEN tourism = 'viewpoint' then 2
+           WHEN tourism in ('camp_site', 'caravan_site') then 3
+           WHEN tourism is not null then 4
+           WHEN historic is not null then 5
+           WHEN amenity is not null then 6
+           WHEN shop is not null then 7
+           ELSE 8
+      END
+  """
+
+  [[providers.layers]]
+  name = "protected"
+  geometry_fieldname = "geometry"
+  id_fieldname = "osm_id"
+  sql = "SELECT osm_id, ST_AsBinary(way) AS geometry, boundary AS kind, name FROM planet_osm_polygon WHERE way && !BBOX! AND boundary = 'national_park'"
+
+  [[providers.layers]]
+  name = "routes"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """
+    SELECT
+      ABS(osm_id) AS id,
+      ST_AsBinary(st_linemerge(st_collect(way))) AS geometry,
+      route AS kind,
+      network,
+      name,
+      distance
+    FROM
+      planet_osm_line
+    WHERE
+      way && !BBOX! AND
+      route IN ('hiking') AND
+      network = 'lwn'
+    GROUP BY
+      route, network, name, distance, osm_id
+  """
+
+  [[providers.layers]]
+  name = "roads_7-8"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """
+    SELECT
+      id,
+      ST_AsBinary(st_linemerge(st_collect(way))) AS geometry,
+      type AS kind,
+      subtype AS ref,
+      length(subtype) AS ref_length
+    FROM
+      gen_ways
+    WHERE
+      way && !BBOX! AND
+      type != 'rail'
+    GROUP BY type, subtype, id
+  """
+
+  [[providers.layers]]
+  name = "roads_9-10"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """
+    SELECT
+      r.osm_id AS id,
+      ST_AsBinary(r.geometry) AS geometry,
+      r.kind,
+      r.priority,
+      r.ref,
+      r.ref_length
+    FROM
+      (SELECT
+        osm_id,
+        st_linemerge(st_collect(way)) AS geometry,
+        highway AS kind,
+        6 AS priority,
+        ref,
+        length(ref) AS ref_length
+      FROM
+        planet_osm_line
+      WHERE
+        way && !BBOX! AND highway IN ('secondary', 'tertiary', 'unclassified')
+      GROUP BY kind, priority, ref, osm_id
+      UNION ALL
+      SELECT
+        id,
+        st_linemerge(st_collect(way)) AS geometry,
+        type AS kind,
+        CASE WHEN type = 'motorway' THEN 1
+             WHEN type = 'trunk' THEN 2
+             WHEN type = 'primary' THEN 3
+             ELSE 6
+        END AS priority,
+        subtype AS ref,
+        length(subtype) AS ref_length
+      FROM
+        gen_ways
+      WHERE
+        way && !BBOX! AND type != 'rail'
+      GROUP BY kind, priority, ref, id
+      UNION ALL
+      SELECT
+        id,
+        way AS geometry,
+        'rail' AS kind,
+        7 AS priority,
+        null as ref,
+        null ref_length
+      FROM
+        gen_ways
+      WHERE
+        way && !BBOX! AND type = 'rail'
+    ) AS r
+    ORDER BY r.priority
+  """
+
+  [[providers.layers]]
+  name = "topo"
+  geometry_fieldname = "geometry"
+  id_fieldname = "id"
+  sql = """
+    SELECT
+      id,
+      __type__,
+      ST_AsBinary(way) AS geometry,
+      name,
+      (
+        CASE
+        WHEN aeroway = 'aerodrome'
+          THEN 'airport'
+        WHEN amenity = 'place_of_worship' and building = 'chapel'
+          THEN 'chapel'
+        WHEN man_made = 'chimnei'
+          THEN 'chimney'
+        WHEN man_made = 'tower'
+          THEN 'tower'
+        WHEN amenity = 'fuel'
+          THEN 'fuel'
+        WHEN aeroway = 'helipad'
+          THEN 'helipad'
+        WHEN landuse = 'quary'
+          THEN 'quary'
+        WHEN power = 'substation'
+          THEN 'substation'
+        WHEN man_made = 'windmill'
+          THEN 'windmill'
+        WHEN amenity = 'place_of_worship' and religion = 'christian'
+          THEN 'worship_christian'
+        WHEN amenity = 'place_of_worship' and religion != 'christian'
+          THEN 'worship_other'
+        END
+      ) AS kind
+    FROM
+      poi_topo
+    WHERE
+      way && !BBOX!
+
+  """
+
+[[maps]]
+name = "openmap"
+attribution = "OpenStreetMap"
+center = [23.871, 55.191, 7.0]
+
+  [[maps.layers]]
+  name = "address"
+  provider_layer = "osm.address"
+  min_zoom = 16
+  max_zoom = 20
+
+  [[maps.layers]]
+  name = "boundaries"
+  provider_layer = "osm.boundaries_7-9"
+  min_zoom = 7
+  max_zoom = 9
+
+  [[maps.layers]]
+  name = "boundaries"
+  provider_layer = "osm.boundaries_10-12"
+  min_zoom = 10
+  max_zoom = 12
+
+  [[maps.layers]]
+  name = "boundaries"
+  provider_layer = "osm.boundaries_13-20"
+  min_zoom = 13
+  max_zoom = 20
+
+  [[maps.layers]]
+  name = "buildings"
+  provider_layer = "osm.buildings_12"
+  min_zoom = 12
+  max_zoom = 12
+
+  [[maps.layers]]
+  name = "buildings"
+  provider_layer = "osm.buildings_13"
+  min_zoom = 13
+  max_zoom = 13
+
+  [[maps.layers]]
+  name = "buildings"
+  provider_layer = "osm.buildings_14"
+  min_zoom = 14
+  max_zoom = 14
+
+  [[maps.layers]]
+  name = "buildings"
+  provider_layer = "osm.buildings_15"
+  min_zoom = 15
+  max_zoom = 15
+
+  [[maps.layers]]
+  name = "buildings"
+  provider_layer = "osm.buildings_16"
+  min_zoom = 16
+  max_zoom = 16
+
+  [[maps.layers]]
+  name = "buildings"
+  provider_layer = "osm.buildings_17"
+  min_zoom = 17
+  max_zoom = 20
+
+  [[maps.layers]]
+  name = "coastline"
+  provider_layer = "osm.coastline"
+  min_zoom = 7
+  max_zoom = 20
+
+  [[maps.layers]]
+  name = "landuse"
+  provider_layer = "osm.landuse_7-8"
+  min_zoom = 7
+  max_zoom = 8
+
+  [[maps.layers]]
+  name = "landuse"
+  provider_layer = "osm.landuse_9"
+  min_zoom = 9
+  max_zoom = 9
+
+  [[maps.layers]]
+  name = "landuse"
+  provider_layer = "osm.landuse_10"
+  min_zoom = 10
+  max_zoom = 10
+
+  [[maps.layers]]
+  name = "landuse"
+  provider_layer = "osm.landuse_11"
+  min_zoom = 11
+  max_zoom = 11
+
+  [[maps.layers]]
+  name = "landuse"
+  provider_layer = "osm.landuse_12"
+  min_zoom = 12
+  max_zoom = 12
+
+  [[maps.layers]]
+  name = "landuse"
+  provider_layer = "osm.landuse_13"
+  min_zoom = 13
+  max_zoom = 13
+
+  [[maps.layers]]
+  name = "landuse"
+  provider_layer = "osm.landuse_14"
+  min_zoom = 14
+  max_zoom = 14
+
+  [[maps.layers]]
+  name = "landuse"
+  provider_layer = "osm.landuse_15"
+  min_zoom = 15
+  max_zoom = 15
+
+  [[maps.layers]]
+  name = "landuse"
+  provider_layer = "osm.landuse_16-20"
+  min_zoom = 16
+  max_zoom = 20
+
+  [[maps.layers]]
+  name = "names"
+  provider_layer = "osm.names_15-20"
+  min_zoom = 15
+  max_zoom = 20
+
+  [[maps.layers]]
+  name = "places"
+  provider_layer = "osm.places_7-8"
+  min_zoom = 7
+  max_zoom = 8
+
+  [[maps.layers]]
+  name = "places"
+  provider_layer = "osm.places_9"
+  min_zoom = 9
+  max_zoom = 9
+
+  [[maps.layers]]
+  name = "places"
+  provider_layer = "osm.places_10-11"
+  min_zoom = 10
+  max_zoom = 11
+
+  [[maps.layers]]
+  name = "places"
+  provider_layer = "osm.places_12"
+  min_zoom = 12
+  max_zoom = 12
+
+  [[maps.layers]]
+  name = "places"
+  provider_layer = "osm.places_13"
+  min_zoom = 13
+  max_zoom = 13
+
+  [[maps.layers]]
+  name = "places"
+  provider_layer = "osm.places_14-20"
+  min_zoom = 14
+  max_zoom = 20
+
+  [[maps.layers]]
+  name = "poi"
+  provider_layer = "osm.poi_7-9"
+  min_zoom = 7
+  max_zoom = 9
+
+  [[maps.layers]]
+  name = "poi"
+  provider_layer = "osm.poi_14-15"
+  min_zoom = 14
+  max_zoom = 15
+
+  [[maps.layers]]
+  name = "poi"
+  provider_layer = "osm.poi_14-15"
+  min_zoom = 16
+  max_zoom = 20
+
+  [[maps.layers]]
+  name = "protected"
+  provider_layer = "osm.protected"
+  min_zoom = 7
+  max_zoom = 20
+
+#  [[maps.layers]]
+#  name = "roads"
+#  provider_layer = "osm.roads_7-8"
+#  min_zoom = 7
+#  max_zoom = 8
+
+#  [[maps.layers]]
+#  name = "roads"
+#  provider_layer = "osm.roads_9-10"
+#  min_zoom = 9
+#  max_zoom = 10
+
+  [[maps.layers]]
+  name = "routes"
+  provider_layer = "osm.routes"
+  min_zoom = 14
+  max_zoom = 20
+
+[[maps]]
+name = "bicycle"
+attribution = "OpenStreetMap"
+center = [23.871, 55.191, 7.0]
+
+  [[maps.layers]]
+  name = "bicycle"
+  provider_layer = "osm.bicycle_9-10"
+  min_zoom = 9
+  max_zoom = 10
+
+  [[maps.layers]]
+  name = "bicycle"
+  provider_layer = "osm.bicycle_11-20"
+  min_zoom = 11
+  max_zoom = 20
+
+[[maps]]
+name = "craftbeer"
+attribution = "OpenStreetMap"
+center = [23.871, 55.191, 7.0]
+
+  [[maps.layers]]
+  name = "craftbeer"
+  provider_layer = "osm.craftbeer"
+  min_zoom = 10
+  max_zoom = 20
+
+[[maps]]
+name = "detail"
+attribution = "OpenStreetMap"
+center = [23.871, 55.191, 7.0]
+
+  [[maps.layers]]
+  name = "detail"
+  provider_layer = "osm.detail_13-15"
+  min_zoom = 13
+  max_zoom = 15
+
+  [[maps.layers]]
+  name = "detail"
+  provider_layer = "osm.detail_16-20"
+  min_zoom = 16
+  max_zoom = 20
+
+[[maps]]
+name = "topo"
+attribution = "OpenStreetMap"
+center = [23.871, 55.191, 7.0]
+
+  [[maps.layers]]
+  name = "topo"
+  provider_layer = "osm.topo"
+  min_zoom = 12
+  max_zoom = 20
