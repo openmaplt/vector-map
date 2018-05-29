@@ -37,7 +37,7 @@ create materialized view poi_topo (
     from planet_osm_point
    where aeroway in ('aerodrome', 'helipad')
       or amenity = 'place_of_worship'
-      or man_made in ('chimney', 'windmill', 'watermill', 'tower')
+      or man_made in ('chimney', 'windmill', 'watermill', 'tower', 'communications_tower', 'lighthouse', 'water_tower')
       or amenity = 'fuel'
       or power = 'substation'
       or (power = 'generator' and "generator:source" in ('hydro', 'wind'))
@@ -63,7 +63,7 @@ create materialized view poi_topo (
     from planet_osm_polygon
    where aeroway in ('aerodrome', 'helipad')
       or amenity = 'place_of_worship'
-      or man_made in ('chimney', 'windmill', 'watermill', 'tower')
+      or man_made in ('chimney', 'windmill', 'watermill', 'tower', 'communications_tower', 'lighthouse', 'water_tower')
       or amenity = 'fuel'
       or landuse = 'quary'
       or power = 'substation'
