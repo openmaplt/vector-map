@@ -35,6 +35,9 @@ fi
 # remove outside objects
 psql -d osm -U postgres < remove_outside_objects.sql
 
+# atsiminti dienos kaladėles savaitgaliui (šeštadieniui)
+cat dirty_tiles >> dirty_tiles_weekly
+
 # update generalisation on Saturday
 if [[ $(date +%u) -eq 6 ]] ; then
 # NOTE: IŠJUNGTA, KOL SERVERIS NETURI PAKANKAMAI ATMINTIES APDOROTI
@@ -46,6 +49,10 @@ if [[ $(date +%u) -eq 6 ]] ; then
   echo "forest generalisation" `date`
   psql -d osm -U osm < gen_forest.sql
   echo "done" `date`
+
+  # apdoroti visas per savaitę išpurvintas kaladėles
+  sort -u dirty_tiles_weekly > dirty_tiles
+  rm dirty_tiles_weekly
 fi
 
 ./update_search.sh
