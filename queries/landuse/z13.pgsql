@@ -5,7 +5,7 @@ SELECT
     CASE
       WHEN landuse = 'meadow' or "natural" = 'heath'
         THEN 'meadow'
-      WHEN landuse = 'orchard'
+      WHEN landuse is not null
         THEN landuse
       WHEN "natural" = 'wetland' AND "wetland" = 'marsh'
         THEN 'marsh'
