@@ -16,7 +16,7 @@ SELECT
       THEN 'communication_tower'
     WHEN man_made = 'tower' and "tower:type" in ('observation', 'communication')
       THEN 'light_tower'
-    WHEN man_made = 'tower'
+    WHEN man_made in ('tower', 'water_tower')
       THEN 'tower'
     WHEN man_made = 'lighthouse'
       THEN 'beacon'
