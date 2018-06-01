@@ -1368,7 +1368,8 @@
           "kind",
           "path",
           "footway",
-          "steps"
+          "steps",
+          "cycleway"
         ]
       ],
       "layout": {

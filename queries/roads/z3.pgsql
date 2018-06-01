@@ -54,6 +54,7 @@ WHERE
                'service',
                'track',
                'footway',
+               'cycleway',
                'steps',
                'path')
    OR

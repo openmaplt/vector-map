@@ -363,6 +363,7 @@
           "kind",
           "path",
           "footway",
+          "cycleway",
           "track"
         ]
       ],
