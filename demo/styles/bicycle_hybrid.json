@@ -29,7 +29,7 @@
     }
   },
   "sprite": "https://openmap.lt/sprites/openmaplt",
-  "glyphs": "https://orangemug.github.io/font-glyphs/glyphs/{fontstack}/{range}.pbf",
+  "glyphs": "https://openmap.lt/glyphs/{fontstack}/{range}.pbf",
   "layers": [
     {
       "id": "overlay",
