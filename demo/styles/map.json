@@ -1,10 +1,13 @@
 {
   "version": 8,
   "name": "openmap.lt",
-  "center": [23.87100, 55.19114],
   "metadata": {
     "maputnik:renderer": "mbgljs"
   },
+  "center": [
+    23.871,
+    55.19114
+  ],
   "sources": {
     "tilezen": {
       "type": "vector",
@@ -391,6 +394,26 @@
       "paint": {
         "fill-color": "rgba(122, 220, 125, 1)",
         "fill-opacity": 0.5
+      }
+    },
+    {
+      "id": "detail-stadium",
+      "type": "fill",
+      "source": "detail",
+      "source-layer": "detail",
+      "minzoom": 13,
+      "filter": [
+        "all",
+        [
+          "==",
+          "kind",
+          "stadium"
+        ]
+      ],
+      "paint": {
+        "fill-color": "rgba(27, 185, 86, 1)",
+        "fill-outline-color": "rgba(10, 150, 50, 1)",
+        "fill-antialias": true
       }
     },
     {
