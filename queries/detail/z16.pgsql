@@ -1,5 +1,5 @@
 SELECT
-  osm_id,
+  osm_id __id__,
   way AS __geometry__,
   (
     CASE
@@ -19,9 +19,9 @@ WHERE
 UNION ALL
 
 SELECT
-  osm_id,
-  way,
-  leisure
+  osm_id AS __id__,
+  way AS __geometry__,
+  leisure AS kind
 FROM
   planet_osm_polygon
 WHERE
