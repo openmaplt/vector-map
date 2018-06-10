@@ -1,5 +1,6 @@
 SELECT
-  st_linemerge(st_collect(way)) AS __geometry__,
+  max(osm_id) AS gid,
+  ST_AsBinary(ST_LineMerge(ST_Collect(way))) AS geom,
   route AS kind,
   network,
   name,
@@ -7,7 +8,7 @@ SELECT
 FROM
   planet_osm_line
 WHERE
-  way && !bbox! AND
+  way && !BBOX! AND
   route IN ('hiking') AND
   network = 'lwn'
 GROUP BY

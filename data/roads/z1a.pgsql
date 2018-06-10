@@ -1,12 +1,13 @@
 SELECT
-  r.__geometry__
- ,r.kind
- ,r.priority
- ,r.ref
- ,r.ref_length
+  row_number() over() AS gid,
+  st_asbinary(r.geom) AS geom,
+  r.kind,
+  r.priority,
+  r.ref,
+  r.ref_length
 FROM
 (SELECT
-  st_linemerge(st_collect(way)) AS __geometry__,
+  st_linemerge(st_collect(way)) AS geom,
   highway AS kind,
   6 AS priority,
   ref,
@@ -14,7 +15,7 @@ FROM
 FROM
   planet_osm_line
 WHERE
-  way && !bbox! AND
+  way && !BBOX! AND
   (
     highway IN ('secondary',
                 'tertiary',
@@ -25,7 +26,7 @@ GROUP BY kind, priority, ref
 UNION ALL
 
 SELECT
-  st_linemerge(st_collect(way)) AS __geometry__,
+  st_linemerge(st_collect(way)) AS geom,
   type AS kind,
   CASE WHEN type = 'motorway' THEN 1
        WHEN type = 'trunk' THEN 2
@@ -37,14 +38,14 @@ SELECT
 FROM
   gen_ways
 WHERE
-  way && !bbox! AND
+  way && !BBOX! AND
   type != 'rail'
 GROUP BY kind, priority, ref
 
 UNION ALL
 
 SELECT
-  way AS __geometry__,
+  way AS geom,
   'rail' AS kind,
   7 AS priority,
   null as ref,
@@ -52,7 +53,7 @@ SELECT
 FROM
   gen_ways
 WHERE
-  way && !bbox! AND
+  way && !BBOX! AND
   type = 'rail'
 ) AS r
 ORDER BY r.priority

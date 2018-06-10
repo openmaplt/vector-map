@@ -1,5 +1,6 @@
 SELECT
-  st_PointOnSurface(way) AS __geometry__,
+  osm_id AS gid,
+  ST_AsBinary(ST_PointOnSurface(way)) AS geom,
   (
     CASE
       WHEN landuse = 'cemetery'
@@ -14,7 +15,7 @@ SELECT
 FROM
   planet_osm_polygon
 WHERE
-  way && !bbox! AND
+  way && !BBOX! AND
   (
     landuse IN ('cemetery', 'reservoir') OR
     "natural" IN ('water')

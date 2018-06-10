@@ -1,5 +1,6 @@
 SELECT
-  st_linemerge(st_collect(way)) AS __geometry__,
+  row_number() over() AS gid,
+  st_asbinary(st_linemerge(st_collect(way))) AS geom,
   (
     CASE
       WHEN highway IS NOT NULL
@@ -23,7 +24,7 @@ SELECT
 FROM
   planet_osm_line
 WHERE
-  way && !bbox! AND
+  way && !BBOX! AND
   (
     highway IN ('motorway', 'motorway_link',
                'trunk', 'trunk_link',

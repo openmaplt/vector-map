@@ -1,5 +1,6 @@
 SELECT
-  way AS __geometry__,
+  osm_id AS gid,
+  st_asbinary(way) AS geom,
   (
     CASE
       WHEN waterway = 'river'
@@ -10,20 +11,21 @@ SELECT
 FROM
   planet_osm_line
 WHERE
-  way && !bbox! AND
+  way && !BBOX! AND
   waterway = 'river' AND
   "waterway:name" is null
 
 UNION ALL
 
 SELECT
-  st_union(way) AS __geometry__,
+  max(id) AS gid,
+  st_asbinary(st_union(way)) AS geom,
   'water' AS kind,
   null AS name
 FROM
   gen_water
 WHERE
-  way && !bbox! AND
+  way && !BBOX! AND
   res = 600 AND
   way_area >= 5000000
 GROUP BY

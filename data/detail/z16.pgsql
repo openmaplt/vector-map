@@ -1,6 +1,6 @@
 SELECT
-  osm_id __id__,
-  way AS __geometry__,
+  osm_id AS gid,
+  ST_AsBinary(way) AS geom,
   (
     CASE
       WHEN man_made is not null
@@ -12,18 +12,19 @@ SELECT
 FROM
   planet_osm_line
 WHERE
-  way && !bbox! AND
+  way && !BBOX! AND
   (man_made = 'cutline' OR
    "natural" = 'cliff')
 
 UNION ALL
 
 SELECT
-  osm_id AS __id__,
-  way AS __geometry__,
+  osm_id,
+  ST_AsBinary(way),
   leisure AS kind
 FROM
   planet_osm_polygon
 WHERE
-  way && !bbox! AND
+  way && !BBOX! AND
   leisure = 'stadium'
+
