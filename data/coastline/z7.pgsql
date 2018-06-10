@@ -1,10 +1,8 @@
 SELECT
-  gid AS __id__,
-  st_union(geom) AS __geometry__,
+  row_number() over() AS gid,
+  ST_AsBinary(st_union(geom)) AS geom,
   'coastline' AS kind
 FROM
   coastline
 WHERE
-  geom && !bbox!
-GROUP BY
-  gid
+  geom && !BBOX!

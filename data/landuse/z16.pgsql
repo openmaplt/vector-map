@@ -1,6 +1,6 @@
 SELECT
-  osm_id AS __id__,
-  way AS __geometry__,
+  osm_id AS gid,
+  st_asbinary(way) AS geom,
   (
     CASE
       WHEN landuse = 'meadow' or "natural" = 'heath'
@@ -26,7 +26,7 @@ SELECT
 FROM
   planet_osm_polygon
 WHERE
-  way && !bbox! AND
+  way && !BBOX! AND
   (
     landuse in ('forest', 'residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages', 'orchard')
     OR "natural" in ('wetland', 'sand', 'beach', 'scrub', 'heath')

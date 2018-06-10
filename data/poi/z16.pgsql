@@ -1,15 +1,15 @@
 SELECT
   id,
-  id AS __id__,
+  id AS gid,
   __type__,
-  way AS __geometry__,
+  st_asbinary(way) AS geom,
   name,
   (
     CASE
     WHEN amenity = 'arts_centre'
       THEN 'art-gallery'
     WHEN amenity = 'atm'
-      THEN 'marker' -- TODO atm
+      THEN 'marker' /* TODO atm */
     WHEN amenity = 'bank'
       THEN 'bank'
     WHEN amenity = 'bar'
@@ -21,13 +21,13 @@ SELECT
     WHEN amenity = 'cafe'
       THEN 'cafe'
     WHEN amenity = 'car_wash'
-      THEN 'marker' -- TODO: car_wash
+      THEN 'marker' /* TODO: car_wash */
     WHEN amenity = 'cinema'
       THEN 'cinema'
     WHEN amenity = 'clinic'
-      THEN 'marker' -- TODO: clinic
+      THEN 'marker' /* TODO: clinic */
     WHEN amenity = 'courthouse'
-      THEN 'marker' -- TODO: courthouse
+      THEN 'marker' /* TODO: courthouse */
     WHEN amenity = 'compressed_air'
       THEN 'compressed_air'
     WHEN amenity = 'dentist'
@@ -68,7 +68,7 @@ SELECT
       THEN 'college'
 
     WHEN man_made = 'tower' and "tower:type" is not null and tourism in ('attraction', 'viewpoint', 'museum') and coalesce(access, 'yes') != 'no'
-      THEN 'marker' -- TODO: tower
+      THEN 'marker' /* TODO: tower */
 
     WHEN tourism = 'attraction' and "attraction:type" = 'hiking_route'
       THEN 'hiking'
@@ -77,7 +77,7 @@ SELECT
     WHEN tourism in ('camp_site', 'caravan_site')
       THEN 'campsite'
     WHEN tourism in ('chalet', 'hostel', 'motel', 'guest_house')
-      THEN 'home' -- TODO: split, fix icon
+      THEN 'home' /* TODO: split, fix icon */
     WHEN tourism = 'hotel'
       THEN 'lodging'
     WHEN tourism = 'museum'
@@ -98,9 +98,9 @@ SELECT
     WHEN historic = 'archaeological_site' and site_type = 'tumulus'
       THEN 'tumulus'
     WHEN historic = 'manor'
-      THEN 'marker' -- TODO: manor
+      THEN 'marker' /* TODO: manor */
     WHEN historic = 'monastery'
-      THEN 'marker' -- TODO: monastery
+      THEN 'marker' /* TODO: monastery */
 
     WHEN tourism = 'attraction'
       THEN 'attraction'
@@ -108,7 +108,7 @@ SELECT
     WHEN shop = 'alcohol'
       THEN 'alcohol-shop'
     WHEN shop = 'car_repair'
-      THEN 'marker' -- TODO car repair
+      THEN 'marker' /* TODO car repair */
     WHEN shop = 'bakery'
       THEN 'bakery'
     WHEN shop = 'bicycle'
@@ -131,7 +131,7 @@ SELECT
     WHEN office = 'government' or amenity = 'townhall'
       THEN 'town-hall'
     WHEN office in ('notary', 'lawyer')
-      THEN 'marker' -- TODO notary
+      THEN 'marker' /* TODO notary */
     END
   ) AS kind,
   official_name,
@@ -150,12 +150,12 @@ SELECT
   "addr:housenumber" AS housenumber,
   "addr:postcode" AS post_code
 FROM
-  poi
+  poi2
 WHERE
-  way && !bbox! AND
+  way && !BBOX! AND
   (
     amenity IN ('arts_centre',
-                'atm'
+                'atm',
                 'bank',
                 'bar',
                 'bicycle_parking',

@@ -1,5 +1,6 @@
 SELECT
-  way AS __geometry__,
+  osm_id AS gid,
+  ST_AsBinary(way) AS geom,
   coalesce("name:lt", name) AS name,
   (
     CASE
@@ -15,7 +16,7 @@ SELECT
 FROM
   planet_osm_point
 WHERE
-  way && !bbox! AND
+  way && !BBOX! AND
   name IS NOT NULL AND
   (
     place IN ('country', 'state', 'city') OR

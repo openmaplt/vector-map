@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+GLOBIGNORE="*"
 CONFIG_TEMPLATE='./config.toml.template'
 CONFIG_FILE='./config.toml'
 CONFIG_TEMP=$CONFIG_FILE'_temp'

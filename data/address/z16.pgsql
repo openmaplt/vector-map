@@ -1,7 +1,7 @@
 SELECT
-  ABS(osm_id) AS id,
+  ABS(osm_id) AS gid,
   CASE WHEN osm_id < 0 THEN 'r' ELSE 'w' END AS __type__,
-  ST_AsBinary(ST_PointOnSurface(way)) AS geometry,
+  st_asbinary(ST_PointOnSurface(way)) AS geom,
   "addr:housenumber" as housenumber,
   "addr:housename" as name,
   "addr:street" as street,
@@ -14,9 +14,9 @@ WHERE
   "addr:housenumber" IS NOT NULL AND "addr:contact" IS NULL
 UNION
 SELECT
-  osm_id AS id,
+  osm_id AS gid,
   'n' AS __type__,
-  ST_AsBinary(way) as geometry,
+  st_asbinary(way) as geom,
   "addr:housenumber" as housenumber,
   "addr:housename" as name,
   "addr:street" as street,
@@ -25,5 +25,5 @@ SELECT
 FROM
   planet_osm_point
 WHERE
-  way && !BBOX!
-  AND "addr:housenumber" IS NOT NULL and "addr:contact" IS NULL
+  way && !BBOX! AND
+  "addr:housenumber" IS NOT NULL and "addr:contact" IS NULL

@@ -1,10 +1,12 @@
 SELECT
-  place.__geometry__,
+  place.gid AS gis,
+  ST_AsBinary(place.geom) AS geom,
   place.name,
   place.kind
 FROM
   (SELECT
-     way AS __geometry__,
+     osm_id AS gid,
+     way AS geom,
      coalesce("name:lt", name) AS name,
      (
        CASE
@@ -20,7 +22,7 @@ FROM
    FROM
      planet_osm_point
    WHERE
-     way && !bbox! AND
+     way && !BBOX! AND
      name IS NOT NULL AND
      place IN ('city', 'town', 'village')
    ORDER BY
@@ -29,13 +31,14 @@ FROM
 UNION ALL
 
 SELECT
-  ST_PointOnSurface(way) AS __geometry__,
+  osm_id AS gid,
+  ST_AsBinary(ST_PointOnSurface(way)) AS geom,
   coalesce("name:lt", name) AS name,
   'water' AS kind
 FROM
   planet_osm_polygon
 WHERE
-  way && !bbox! AND
+  way && !BBOX! AND
   name IS NOT NULL AND
   ("natural" = 'water' OR landuse = 'reservoir') AND
   way_area >= 500000

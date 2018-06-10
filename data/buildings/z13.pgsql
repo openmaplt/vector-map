@@ -1,11 +1,11 @@
 SELECT
-  id AS __id__,
-  way AS __geometry__,
+  id AS gid,
+  st_asbinary(way) AS geom,
   'yes' AS kind,
   null AS name,
   null AS height
 FROM
   gen_building
 WHERE
-  way && !bbox! /*AND
-  way_area > 160*/
+  way && !BBOX! AND
+  way_area > 160

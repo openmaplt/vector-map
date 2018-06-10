@@ -1,8 +1,8 @@
 SELECT
   id,
-  id AS __id__,
+  id AS gid,
   __type__,
-  way AS __geometry__,
+  ST_AsBinary(way) AS geom,
   name,
   (
     CASE
@@ -12,7 +12,7 @@ SELECT
       THEN 'place_of_worship'
 
     WHEN man_made = 'tower' and "tower:type" is not null and tourism in ('attraction', 'viewpoint', 'museum') and coalesce(access, 'yes') != 'no'
-      THEN 'marker' -- TODO: tower
+      THEN 'marker' /* TODO: tower */
 
     WHEN tourism = 'attraction' and "attraction:type" = 'hiking_route'
       THEN 'hiking'
@@ -21,7 +21,7 @@ SELECT
     WHEN tourism in ('camp_site', 'caravan_site')
       THEN 'campsite'
     WHEN tourism in ('chalet', 'hostel', 'motel', 'guest_house')
-      THEN 'home' -- TODO: split, fix icon
+      THEN 'home' /* TODO: split, fix icon */
     WHEN tourism = 'hotel'
       THEN 'lodging'
     WHEN tourism = 'museum'
@@ -38,9 +38,9 @@ SELECT
     WHEN historic = 'archaeological_site' and site_type = 'tumulus'
       THEN 'tumulus'
     WHEN historic = 'manor'
-      THEN 'marker' -- TODO: manor
+      THEN 'marker' /* TODO: manor */
     WHEN historic = 'monastery'
-      THEN 'marker' -- TODO: monastery
+      THEN 'marker' /* TODO: monastery */
     WHEN historic = 'castle'
       THEN 'castle'
 
@@ -64,9 +64,9 @@ SELECT
   "addr:housenumber" AS housenumber,
   "addr:postcode" AS post_code
 FROM
-  poi
+  poi2
 WHERE
-  way && !bbox! AND
+  way && !BBOX! AND
   (
     amenity IN ('fuel',
                 'place_of_worship') OR

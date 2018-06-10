@@ -10,24 +10,554 @@ name = "osm"
 type = "postgis"
 host = "localhost"
 port = 5432
-database = "osm"
-user = "osm"
-password = "osm"
+database = "gis"
+user = "tomas"
+password = ""
 srid = 3857
 
   [[providers.layers]]
-  name = "address"
-  geometry_fieldname = "geometry"
-  id_fieldname = "id"
-  sql = """%./queries/address/z16.pgsql%"""
+  name = "boundaries8"
+  sql = "%./data/boundaries/z8.pgsql%"
+
+  [[providers.layers]]
+  name = "boundaries10"
+  sql = "%./data/boundaries/z10.pgsql%"
+
+  [[providers.layers]]
+  name = "boundaries13"
+  sql = "%./data/boundaries/z13.pgsql%"
+
+  [[providers.layers]]
+  name = "roads7"
+  #tablename = "t_roads_7"
+  sql = "%./data/roads/z1.pgsql%"
+  fields = ["kind", "ref", "ref_length"]
+
+  [[providers.layers]]
+  name = "roads9"
+  sql = "%./data/roads/z1a.pgsql%"
+  fields = ["kind", "ref", "ref_length"]
+
+  [[providers.layers]]
+  name = "roads11"
+  sql = "%./data/roads/z2.pgsql%"
+  fields = ["kind", "ref", "ref_length", "name"]
+
+  [[providers.layers]]
+  name = "roads13"
+  sql = "%./data/roads/z2a.pgsql%"
+  fields = ["kind", "ref", "ref_length", "name"]
+
+  [[providers.layers]]
+  name = "roads15"
+  sql = "%./data/roads/z3.pgsql%"
+  fields = ["kind", "ref", "ref_length", "name"]
+
+  [[providers.layers]]
+  name = "water8"
+  sql = """%./data/water/z8.pgsql%"""
+  fields = ["kind", "name"]
+
+  [[providers.layers]]
+  name = "water9"
+  sql = """%./data/water/z9.pgsql%"""
+  fields = ["kind", "name"]
+
+  [[providers.layers]]
+  name = "water10"
+  sql = """%./data/water/z10.pgsql%"""
+  fields = ["kind", "name"]
+
+  [[providers.layers]]
+  name = "water11"
+  sql = """%./data/water/z11.pgsql%"""
+  fields = ["kind", "name"]
+
+  [[providers.layers]]
+  name = "water12"
+  sql = """%./data/water/z12.pgsql%"""
+  fields = ["kind", "name"]
+
+  [[providers.layers]]
+  name = "water13"
+  sql = """%./data/water/z13.pgsql%"""
+  fields = ["kind", "name"]
+
+  [[providers.layers]]
+  name = "water14"
+  sql = """%./data/water/z14.pgsql%"""
+  fields = ["kind", "name"]
+
+  [[providers.layers]]
+  name = "water15"
+  sql = """%./data/water/z15.pgsql%"""
+  fields = ["kind", "name"]
+
+  [[providers.layers]]
+  name = "water16"
+  sql = """%./data/water/z16.pgsql%"""
+  fields = ["kind", "name"]
+
+  [[providers.layers]]
+  name = "landuse8"
+  sql = """%./data/landuse/z8.pgsql%"""
+  fields = ["kind"]
+
+  [[providers.layers]]
+  name = "landuse9"
+  sql = """%./data/landuse/z9.pgsql%"""
+  fields = ["kind"]
+
+  [[providers.layers]]
+  name = "landuse10"
+  sql = """%./data/landuse/z10.pgsql%"""
+  fields = ["kind"]
+
+  [[providers.layers]]
+  name = "landuse11"
+  sql = """%./data/landuse/z11.pgsql%"""
+  fields = ["kind"]
+
+  [[providers.layers]]
+  name = "landuse12"
+  sql = """%./data/landuse/z12.pgsql%"""
+  fields = ["kind"]
+
+  [[providers.layers]]
+  name = "landuse13"
+  sql = """%./data/landuse/z13.pgsql%"""
+  fields = ["kind"]
+
+  [[providers.layers]]
+  name = "landuse14"
+  sql = """%./data/landuse/z14.pgsql%"""
+  fields = ["kind"]
+
+  [[providers.layers]]
+  name = "landuse15"
+  sql = """%./data/landuse/z15.pgsql%"""
+  fields = ["kind"]
+
+  [[providers.layers]]
+  name = "landuse16"
+  sql = """%./data/landuse/z16.pgsql%"""
+  fields = ["kind"]
+
+  [[providers.layers]]
+  name = "buildings12"
+  sql = """%./data/buildings/z12.pgsql%"""
+  fields = ["kind", "name", "height"]
+
+  [[providers.layers]]
+  name = "buildings13"
+  sql = """%./data/buildings/z13.pgsql%"""
+  fields = ["kind", "name", "height"]
+
+  [[providers.layers]]
+  name = "buildings14"
+  sql = """%./data/buildings/z14.pgsql%"""
+  fields = ["kind", "name", "height"]
+
+  [[providers.layers]]
+  name = "buildings15"
+  sql = """%./data/buildings/z15.pgsql%"""
+  fields = ["kind", "name", "height"]
+
+  [[providers.layers]]
+  name = "buildings16"
+  sql = """%./data/buildings/z16.pgsql%"""
+  fields = ["kind", "name", "height"]
+
+  [[providers.layers]]
+  name = "buildings17"
+  sql = """%./data/buildings/z17.pgsql%"""
+  fields = ["kind", "name", "height"]
+
+  [[providers.layers]]
+  name = "poi7"
+  sql = """%./data/poi/z7.pgsql%"""
+  fields = ["kind", "name", "website", "wikipedia"]
+
+  [[providers.layers]]
+  name = "poi15"
+  sql = """%./data/poi/z15.pgsql%"""
+  fields = ["kind", "name", "official_name", "alt_name", "opening_hours", "website", "image", "heritage", "height", "wikipedia", "fee", "email", "phone", "city", "street", "housenumber", "post_code"]
+
+  [[providers.layers]]
+  name = "poi16"
+  sql = """%./data/poi/z16.pgsql%"""
+  fields = ["kind", "name", "official_name", "alt_name", "opening_hours", "website", "image", "heritage", "height", "wikipedia", "fee", "email", "phone", "city", "street", "housenumber", "post_code"]
+
+  [[providers.layers]]
+  name = "protected0"
+  sql = """%./data/protected/z0.pgsql%"""
+  fields = ["kind", "name"]
+
+  [[providers.layers]]
+  name = "places8"
+  sql = """%./data/places/z8.pgsql%"""
+  fields = ["kind", "name"]
+
+  [[providers.layers]]
+  name = "places9"
+  sql = """%./data/places/z9.pgsql%"""
+  fields = ["kind", "name"]
+
+  [[providers.layers]]
+  name = "places10"
+  sql = """%./data/places/z10.pgsql%"""
+  fields = ["kind", "name"]
+
+  [[providers.layers]]
+  name = "places11"
+  sql = """%./data/places/z11.pgsql%"""
+  fields = ["kind", "name"]
+
+  [[providers.layers]]
+  name = "places12"
+  sql = """%./data/places/z12.pgsql%"""
+  fields = ["kind", "name"]
+
+  [[providers.layers]]
+  name = "places13"
+  sql = """%./data/places/z13.pgsql%"""
+  fields = ["kind", "name"]
+
+  [[providers.layers]]
+  name = "places14"
+  sql = """%./data/places/z14.pgsql%"""
+  fields = ["kind", "name"]
+
+  [[providers.layers]]
+  name = "names16"
+  sql = """%./data/names/z16.pgsql%"""
+  fields = ["kind", "name"]
+
+  [[providers.layers]]
+  name = "routes15"
+  sql = """%./data/routes/z15.pgsql%"""
+  fields = ["kind", "name", "network", "distance"]
+
+  [[providers.layers]]
+  name = "address16"
+  sql = """%./data/address/z16.pgsql%"""
+  fields = ["__type__", "housenumber", "name", "street", "city", "post_code"]
+
+  [[providers.layers]]
+  name = "coastline7"
+  sql = """%./data/coastline/z7.pgsql%"""
+  fields = ["kind"]
+
+  [[providers.layers]]
+  name = "detail13"
+  sql = """%./data/detail/z13.pgsql%"""
+  fields = ["kind"]
+
+  [[providers.layers]]
+  name = "detail16"
+  sql = """%./data/detail/z16.pgsql%"""
+  fields = ["kind"]
 
 [[maps]]
-name = "openmap"
+name = "all"
 attribution = "OpenStreetMap"
 center = [23.871, 55.191, 7.0]
 
   [[maps.layers]]
-  name = "address"
-  provider_layer = "osm.address"
+  name = "boundaries"
+  provider_layer = "osm.boundaries8"
+  min_zoom = 7
+  max_zoom = 9
+
+  [[maps.layers]]
+  name = "boundaries"
+  provider_layer = "osm.boundaries10"
+  min_zoom = 10
+  max_zoom = 12
+
+  [[maps.layers]]
+  name = "boundaries"
+  provider_layer = "osm.boundaries13"
+  min_zoom = 13
+  max_zoom = 18
+
+  [[maps.layers]]
+  name = "roads"
+  provider_layer = "osm.roads7"
+  min_zoom = 7
+  max_zoom = 8
+
+  [[maps.layers]]
+  name = "roads"
+  provider_layer = "osm.roads9"
+  min_zoom = 9
+  max_zoom = 10
+
+  [[maps.layers]]
+  name = "roads"
+  provider_layer = "osm.roads11"
+  min_zoom = 11
+  max_zoom = 12
+
+  [[maps.layers]]
+  name = "roads"
+  provider_layer = "osm.roads13"
+  min_zoom = 13
+  max_zoom = 14
+
+  [[maps.layers]]
+  name = "roads"
+  provider_layer = "osm.roads15"
+  min_zoom = 15
+  max_zoom = 18
+
+  [[maps.layers]]
+  name = "water"
+  provider_layer = "osm.water8"
+  min_zoom = 7
+  max_zoom = 8
+
+  [[maps.layers]]
+  name = "water"
+  provider_layer = "osm.water9"
+  min_zoom = 9
+  max_zoom = 9
+
+  [[maps.layers]]
+  name = "water"
+  provider_layer = "osm.water10"
+  min_zoom = 10
+  max_zoom = 10
+
+  [[maps.layers]]
+  name = "water"
+  provider_layer = "osm.water11"
+  min_zoom = 11
+  max_zoom = 11
+
+  [[maps.layers]]
+  name = "water"
+  provider_layer = "osm.water12"
+  min_zoom = 12
+  max_zoom = 12
+
+  [[maps.layers]]
+  name = "water"
+  provider_layer = "osm.water13"
+  min_zoom = 13
+  max_zoom = 13
+
+  [[maps.layers]]
+  name = "water"
+  provider_layer = "osm.water14"
+  min_zoom = 14
+  max_zoom = 14
+
+  [[maps.layers]]
+  name = "water"
+  provider_layer = "osm.water15"
+  min_zoom = 15
+  max_zoom = 15
+
+  [[maps.layers]]
+  name = "water"
+  provider_layer = "osm.water16"
   min_zoom = 16
-  max_zoom = 20
+  max_zoom = 16
+
+  [[maps.layers]]
+  name = "landuse"
+  provider_layer = "osm.landuse8"
+  min_zoom = 7
+  max_zoom = 8
+
+  [[maps.layers]]
+  name = "landuse"
+  provider_layer = "osm.landuse9"
+  min_zoom = 9
+  max_zoom = 9
+
+  [[maps.layers]]
+  name = "landuse"
+  provider_layer = "osm.landuse10"
+  min_zoom = 10
+  max_zoom = 10
+
+  [[maps.layers]]
+  name = "landuse"
+  provider_layer = "osm.landuse11"
+  min_zoom = 11
+  max_zoom = 11
+
+  [[maps.layers]]
+  name = "landuse"
+  provider_layer = "osm.landuse12"
+  min_zoom = 12
+  max_zoom = 12
+
+  [[maps.layers]]
+  name = "landuse"
+  provider_layer = "osm.landuse13"
+  min_zoom = 13
+  max_zoom = 13
+
+  [[maps.layers]]
+  name = "landuse"
+  provider_layer = "osm.landuse14"
+  min_zoom = 14
+  max_zoom = 14
+
+  [[maps.layers]]
+  name = "landuse"
+  provider_layer = "osm.landuse15"
+  min_zoom = 15
+  max_zoom = 15
+
+  [[maps.layers]]
+  name = "landuse"
+  provider_layer = "osm.landuse16"
+  min_zoom = 16
+  max_zoom = 18
+
+  [[maps.layers]]
+  name = "buildings"
+  provider_layer = "osm.buildings12"
+  min_zoom = 12
+  max_zoom = 12
+
+  [[maps.layers]]
+  name = "buildings"
+  provider_layer = "osm.buildings13"
+  min_zoom = 13
+  max_zoom = 13
+
+  [[maps.layers]]
+  name = "buildings"
+  provider_layer = "osm.buildings14"
+  min_zoom = 14
+  max_zoom = 14
+
+  [[maps.layers]]
+  name = "buildings"
+  provider_layer = "osm.buildings15"
+  min_zoom = 15
+  max_zoom = 15
+
+  [[maps.layers]]
+  name = "buildings"
+  provider_layer = "osm.buildings16"
+  min_zoom = 16
+  max_zoom = 16
+
+  [[maps.layers]]
+  name = "buildings"
+  provider_layer = "osm.buildings17"
+  min_zoom = 17
+  max_zoom = 17
+
+  [[maps.layers]]
+  name = "poi"
+  provider_layer = "osm.poi7"
+  min_zoom = 7
+  max_zoom = 9
+
+  [[maps.layers]]
+  name = "poi"
+  provider_layer = "osm.poi15"
+  min_zoom = 14
+  max_zoom = 15
+
+  [[maps.layers]]
+  name = "poi"
+  provider_layer = "osm.poi16"
+  min_zoom = 16
+  max_zoom = 18
+
+  [[maps.layers]]
+  name = "protected"
+  provider_layer = "osm.protected0"
+  min_zoom = 7
+  max_zoom = 18
+
+  [[maps.layers]]
+  name = "places"
+  provider_layer = "osm.places8"
+  min_zoom = 7
+  max_zoom = 8
+
+  [[maps.layers]]
+  name = "places"
+  provider_layer = "osm.places9"
+  min_zoom = 9
+  max_zoom = 9
+
+  [[maps.layers]]
+  name = "places"
+  provider_layer = "osm.places10"
+  min_zoom = 10
+  max_zoom = 10
+
+  [[maps.layers]]
+  name = "places"
+  provider_layer = "osm.places11"
+  min_zoom = 11
+  max_zoom = 11
+
+  [[maps.layers]]
+  name = "places"
+  provider_layer = "osm.places12"
+  min_zoom = 12
+  max_zoom = 12
+
+  [[maps.layers]]
+  name = "places"
+  provider_layer = "osm.places13"
+  min_zoom = 13
+  max_zoom = 13
+
+  [[maps.layers]]
+  name = "places"
+  provider_layer = "osm.places14"
+  min_zoom = 14
+  max_zoom = 14
+
+  [[maps.layers]]
+  name = "names"
+  provider_layer = "osm.names16"
+  min_zoom = 15
+  max_zoom = 18
+
+  [[maps.layers]]
+  name = "routes"
+  provider_layer = "osm.routes15"
+  min_zoom = 14
+  max_zoom = 18
+
+  [[maps.layers]]
+  name = "address"
+  provider_layer = "osm.address16"
+  min_zoom = 16
+  max_zoom = 18
+
+  [[maps.layers]]
+  name = "coastline"
+  provider_layer = "osm.coastline7"
+  min_zoom = 7
+  max_zoom = 18
+
+[[maps]]
+name = "detail"
+attribution = "OpenStreetMap"
+center = [23.871, 55.191, 7.0]
+
+  [[maps.layers]]
+  name = "detail"
+  provider_layer = "osm.detail13"
+  min_zoom = 13
+  max_zoom = 15
+
+  [[maps.layers]]
+  name = "detail"
+  provider_layer = "osm.detail16"
+  min_zoom = 16
+  max_zoom = 18

@@ -1,6 +1,6 @@
 SELECT
-  osm_id AS __id__,
-  way AS __geometry__,
+  osm_id AS gid,
+  st_asbinary(way) AS geom,
   (
     CASE
       WHEN landuse = 'residential'
@@ -28,7 +28,7 @@ SELECT
 FROM
   planet_osm_polygon
 WHERE
-  way && !bbox! AND
+  way && !BBOX! AND
   (
     landuse IN ('residential', 'meadow', 'farmland', 'allotments') OR
    "natural" in ('wetland', 'heath')
@@ -38,12 +38,12 @@ WHERE
 UNION ALL
 
 SELECT
-  id AS __id__,
-  way AS __geometry__,
+  id,
+  st_asbinary(way) AS geometry,
   'forest' AS kind
 FROM
   gen_forest
 WHERE
-  way && !bbox! AND
+  way && !BBOX! AND
   res = 150 AND
   way_area >= 500000
