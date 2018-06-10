@@ -249,6 +249,21 @@ srid = 3857
   fields = ["kind"]
 
   [[providers.layers]]
+  name = "coastline9"
+  sql = """%./data/coastline/z9.pgsql%"""
+  fields = ["kind"]
+
+  [[providers.layers]]
+  name = "coastline11"
+  sql = """%./data/coastline/z11.pgsql%"""
+  fields = ["kind"]
+
+  [[providers.layers]]
+  name = "coastline15"
+  sql = """%./data/coastline/z15.pgsql%"""
+  fields = ["kind"]
+
+  [[providers.layers]]
   name = "detail13"
   sql = """%./data/detail/z13.pgsql%"""
   fields = ["kind"]
@@ -543,6 +558,26 @@ center = [23.871, 55.191, 7.0]
   name = "coastline"
   provider_layer = "osm.coastline7"
   min_zoom = 7
+  max_zoom = 8
+  dont_simplify = true
+
+  [[maps.layers]]
+  name = "coastline"
+  provider_layer = "osm.coastline9"
+  min_zoom = 9
+  max_zoom = 10
+  dont_simplify = true
+
+  [[maps.layers]]
+  name = "coastline"
+  provider_layer = "osm.coastline11"
+  min_zoom = 11
+  max_zoom = 14
+
+  [[maps.layers]]
+  name = "coastline"
+  provider_layer = "osm.coastline15"
+  min_zoom = 15
   max_zoom = 18
 
 [[maps]]

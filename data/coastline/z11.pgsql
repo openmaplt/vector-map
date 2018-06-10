@@ -6,4 +6,4 @@ FROM
   coastline
 WHERE
   geom && !BBOX! AND
-  res = 600
+  res = 10
