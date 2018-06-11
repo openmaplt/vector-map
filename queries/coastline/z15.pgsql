@@ -6,6 +6,6 @@ FROM
   coastline
 WHERE
   geom && !bbox! AND
-  res = 600
+  res = 0
 GROUP BY
   gid
