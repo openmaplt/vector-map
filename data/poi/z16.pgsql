@@ -150,7 +150,7 @@ SELECT
   "addr:housenumber" AS housenumber,
   "addr:postcode" AS post_code
 FROM
-  poi2
+  poi
 WHERE
   way && !BBOX! AND
   (
