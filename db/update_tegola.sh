@@ -90,21 +90,21 @@ if [ -s dirty_tiles ]; then
     echo "OpenMap.lt delete expired " `date`
     ../tegola cache purge --config $TEGOLA_CONFIG_FILE --tile-list delete_openmap_$DIRTY_FILE
     echo "OpenMap.lt generate expired 14 " `date`
-    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --tile-list generate_openmap_14_$DIRTY_FILE
+    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --tile-list generate_openmap_14_$DIRTY_FILE --overwrite
     echo "OpenMap.lt generate expired 13 " `date`
-    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --tile-list generate_openmap_13_$DIRTY_FILE
+    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --tile-list generate_openmap_13_$DIRTY_FILE --overwrite
     echo "OpenMap.lt generate expired 12 " `date`
-    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --tile-list generate_openmap_12_$DIRTY_FILE
+    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --tile-list generate_openmap_12_$DIRTY_FILE --overwrite
     echo "OpenMap.lt generate expired 11 " `date`
-    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --tile-list generate_openmap_11_$DIRTY_FILE
+    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --tile-list generate_openmap_11_$DIRTY_FILE --overwrite
     echo "OpenMap.lt generate expired 10 " `date`
-    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --tile-list generate_openmap_10_$DIRTY_FILE
+    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --tile-list generate_openmap_10_$DIRTY_FILE --overwrite
     echo "OpenMap.lt generate expired 9 " `date`
-    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --tile-list generate_openmap_9_$DIRTY_FILE
+    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --tile-list generate_openmap_9_$DIRTY_FILE --overwrite
     echo "OpenMap.lt generate expired 8 " `date`
-    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --tile-list generate_openmap_8_$DIRTY_FILE
+    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --tile-list generate_openmap_8_$DIRTY_FILE --overwrite
     echo "OpenMap.lt generate expired 7 " `date`
-    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --tile-list generate_openmap_7_$DIRTY_FILE
+    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --tile-list generate_openmap_7_$DIRTY_FILE --overwrite
 
     #echo "Bicycle delete expired " `date`
     #tilestache-clean -c $TILESTACHE_CONFIG_FILE -l bicycle -e pbf --tile-list dirty_tiles
