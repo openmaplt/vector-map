@@ -1,9 +1,8 @@
 SELECT
-  gid AS __id__,
+  gid __id__,
   geom AS __geometry__,
   kind AS kind
 FROM
-  details_poly
+  details_line
 WHERE
   geom && !bbox!
-

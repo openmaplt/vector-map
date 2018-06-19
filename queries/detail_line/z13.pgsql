@@ -3,7 +3,7 @@ SELECT
   geom AS __geometry__,
   kind AS kind
 FROM
-  details_poly
+  details_line
 WHERE
   geom && !bbox! AND
-  kind = 'stadium'
+  kind = 'cutline'

@@ -10,9 +10,9 @@ name = "osm"
 type = "postgis"
 host = "localhost"
 port = 5432
-database = "osm"
-user = "osm"
-password = "osm"
+database = "gis"
+user = "tomas"
+password = ""
 srid = 3857
 
   [[providers.layers]]
@@ -29,249 +29,207 @@ srid = 3857
 
   [[providers.layers]]
   name = "roads7"
-  #tablename = "t_roads_7"
-  sql = "%./data/roads/z1.pgsql%"
-  fields = ["kind", "ref", "ref_length"]
+  sql = """%./data/roads/z1.pgsql%"""
 
   [[providers.layers]]
   name = "roads9"
   sql = "%./data/roads/z1a.pgsql%"
-  fields = ["kind", "ref", "ref_length"]
 
   [[providers.layers]]
   name = "roads11"
   sql = "%./data/roads/z2.pgsql%"
-  fields = ["kind", "ref", "ref_length", "name"]
 
   [[providers.layers]]
   name = "roads13"
   sql = "%./data/roads/z2a.pgsql%"
-  fields = ["kind", "ref", "ref_length", "name"]
 
   [[providers.layers]]
   name = "roads15"
   sql = "%./data/roads/z3.pgsql%"
-  fields = ["kind", "ref", "ref_length", "name"]
 
   [[providers.layers]]
   name = "water8"
   sql = """%./data/water/z8.pgsql%"""
-  fields = ["kind", "name"]
 
   [[providers.layers]]
   name = "water9"
   sql = """%./data/water/z9.pgsql%"""
-  fields = ["kind", "name"]
 
   [[providers.layers]]
   name = "water10"
   sql = """%./data/water/z10.pgsql%"""
-  fields = ["kind", "name"]
 
   [[providers.layers]]
   name = "water11"
   sql = """%./data/water/z11.pgsql%"""
-  fields = ["kind", "name"]
 
   [[providers.layers]]
   name = "water12"
   sql = """%./data/water/z12.pgsql%"""
-  fields = ["kind", "name"]
 
   [[providers.layers]]
   name = "water13"
   sql = """%./data/water/z13.pgsql%"""
-  fields = ["kind", "name"]
 
   [[providers.layers]]
   name = "water14"
   sql = """%./data/water/z14.pgsql%"""
-  fields = ["kind", "name"]
 
   [[providers.layers]]
   name = "water15"
   sql = """%./data/water/z15.pgsql%"""
-  fields = ["kind", "name"]
 
   [[providers.layers]]
   name = "water16"
   sql = """%./data/water/z16.pgsql%"""
-  fields = ["kind", "name"]
 
   [[providers.layers]]
   name = "landuse8"
   sql = """%./data/landuse/z8.pgsql%"""
-  fields = ["kind"]
 
   [[providers.layers]]
   name = "landuse9"
   sql = """%./data/landuse/z9.pgsql%"""
-  fields = ["kind"]
 
   [[providers.layers]]
   name = "landuse10"
   sql = """%./data/landuse/z10.pgsql%"""
-  fields = ["kind"]
 
   [[providers.layers]]
   name = "landuse11"
   sql = """%./data/landuse/z11.pgsql%"""
-  fields = ["kind"]
 
   [[providers.layers]]
   name = "landuse12"
   sql = """%./data/landuse/z12.pgsql%"""
-  fields = ["kind"]
 
   [[providers.layers]]
   name = "landuse13"
   sql = """%./data/landuse/z13.pgsql%"""
-  fields = ["kind"]
 
   [[providers.layers]]
   name = "landuse14"
   sql = """%./data/landuse/z14.pgsql%"""
-  fields = ["kind"]
 
   [[providers.layers]]
   name = "landuse15"
   sql = """%./data/landuse/z15.pgsql%"""
-  fields = ["kind"]
 
   [[providers.layers]]
   name = "landuse16"
   sql = """%./data/landuse/z16.pgsql%"""
-  fields = ["kind"]
 
   [[providers.layers]]
   name = "buildings12"
   sql = """%./data/buildings/z12.pgsql%"""
-  fields = ["kind", "name", "height"]
 
   [[providers.layers]]
   name = "buildings13"
   sql = """%./data/buildings/z13.pgsql%"""
-  fields = ["kind", "name", "height"]
 
   [[providers.layers]]
   name = "buildings14"
   sql = """%./data/buildings/z14.pgsql%"""
-  fields = ["kind", "name", "height"]
 
   [[providers.layers]]
   name = "buildings15"
   sql = """%./data/buildings/z15.pgsql%"""
-  fields = ["kind", "name", "height"]
 
   [[providers.layers]]
   name = "buildings16"
   sql = """%./data/buildings/z16.pgsql%"""
-  fields = ["kind", "name", "height"]
 
   [[providers.layers]]
   name = "buildings17"
   sql = """%./data/buildings/z17.pgsql%"""
-  fields = ["kind", "name", "height"]
 
   [[providers.layers]]
   name = "poi7"
   sql = """%./data/poi/z7.pgsql%"""
-  fields = ["kind", "name", "website", "wikipedia"]
 
   [[providers.layers]]
   name = "poi15"
   sql = """%./data/poi/z15.pgsql%"""
-  fields = ["kind", "name", "official_name", "alt_name", "opening_hours", "website", "image", "heritage", "height", "wikipedia", "fee", "email", "phone", "city", "street", "housenumber", "post_code"]
 
   [[providers.layers]]
   name = "poi16"
   sql = """%./data/poi/z16.pgsql%"""
-  fields = ["kind", "name", "official_name", "alt_name", "opening_hours", "website", "image", "heritage", "height", "wikipedia", "fee", "email", "phone", "city", "street", "housenumber", "post_code"]
 
   [[providers.layers]]
   name = "protected0"
   sql = """%./data/protected/z0.pgsql%"""
-  fields = ["kind", "name"]
 
   [[providers.layers]]
   name = "places8"
   sql = """%./data/places/z8.pgsql%"""
-  fields = ["kind", "name"]
 
   [[providers.layers]]
   name = "places9"
   sql = """%./data/places/z9.pgsql%"""
-  fields = ["kind", "name"]
 
   [[providers.layers]]
   name = "places10"
   sql = """%./data/places/z10.pgsql%"""
-  fields = ["kind", "name"]
 
   [[providers.layers]]
   name = "places11"
   sql = """%./data/places/z11.pgsql%"""
-  fields = ["kind", "name"]
 
   [[providers.layers]]
   name = "places12"
   sql = """%./data/places/z12.pgsql%"""
-  fields = ["kind", "name"]
 
   [[providers.layers]]
   name = "places13"
   sql = """%./data/places/z13.pgsql%"""
-  fields = ["kind", "name"]
 
   [[providers.layers]]
   name = "places14"
   sql = """%./data/places/z14.pgsql%"""
-  fields = ["kind", "name"]
 
   [[providers.layers]]
   name = "names16"
   sql = """%./data/names/z16.pgsql%"""
-  fields = ["kind", "name"]
 
   [[providers.layers]]
   name = "routes15"
   sql = """%./data/routes/z15.pgsql%"""
-  fields = ["kind", "name", "network", "distance"]
 
   [[providers.layers]]
   name = "address16"
   sql = """%./data/address/z16.pgsql%"""
-  fields = ["__type__", "housenumber", "name", "street", "city", "post_code"]
 
   [[providers.layers]]
   name = "coastline7"
   sql = """%./data/coastline/z7.pgsql%"""
-  fields = ["kind"]
 
   [[providers.layers]]
   name = "coastline9"
   sql = """%./data/coastline/z9.pgsql%"""
-  fields = ["kind"]
 
   [[providers.layers]]
   name = "coastline11"
   sql = """%./data/coastline/z11.pgsql%"""
-  fields = ["kind"]
 
   [[providers.layers]]
   name = "coastline15"
   sql = """%./data/coastline/z15.pgsql%"""
-  fields = ["kind"]
 
   [[providers.layers]]
-  name = "detail13"
+  name = "detail_poly13"
   sql = """%./data/detail/z13.pgsql%"""
-  fields = ["kind"]
 
   [[providers.layers]]
-  name = "detail16"
+  name = "detail_poly16"
   sql = """%./data/detail/z16.pgsql%"""
-  fields = ["kind"]
+
+  [[providers.layers]]
+  name = "detail_line13"
+  sql = """%./data/detail_line/z13.pgsql%"""
+
+  [[providers.layers]]
+  name = "detail_line16"
+  sql = """%./data/detail_line/z16.pgsql%"""
 
 [[maps]]
 name = "all"
@@ -586,13 +544,25 @@ attribution = "OpenStreetMap"
 center = [23.871, 55.191, 7.0]
 
   [[maps.layers]]
-  name = "detail"
-  provider_layer = "osm.detail13"
+  name = "detail_poly"
+  provider_layer = "osm.detail_poly13"
   min_zoom = 13
   max_zoom = 15
 
   [[maps.layers]]
-  name = "detail"
-  provider_layer = "osm.detail16"
+  name = "detail_poly"
+  provider_layer = "osm.detail_poly16"
+  min_zoom = 16
+  max_zoom = 18
+
+  [[maps.layers]]
+  name = "detail_line"
+  provider_layer = "osm.detail_line13"
+  min_zoom = 13
+  max_zoom = 15
+
+  [[maps.layers]]
+  name = "detail_line"
+  provider_layer = "osm.detail_line16"
   min_zoom = 16
   max_zoom = 18
