@@ -1,9 +1,9 @@
 [webserver]
-port = ":8081"
+port = ":8082"
 
 [cache]
 type = "file"
-basepath = "./cache"
+basepath = "./tegola_cache"
 
 [[providers]]
 name = "osm"
@@ -17,15 +17,15 @@ srid = 3857
 
   [[providers.layers]]
   name = "boundaries8"
-  sql = "%./data/boundaries/z8.pgsql%"
+  sql = """%./data/boundaries/z8.pgsql%"""
 
   [[providers.layers]]
   name = "boundaries10"
-  sql = "%./data/boundaries/z10.pgsql%"
+  sql = """%./data/boundaries/z10.pgsql%"""
 
   [[providers.layers]]
   name = "boundaries13"
-  sql = "%./data/boundaries/z13.pgsql%"
+  sql = """%./data/boundaries/z13.pgsql%"""
 
   [[providers.layers]]
   name = "roads7"
@@ -33,19 +33,19 @@ srid = 3857
 
   [[providers.layers]]
   name = "roads9"
-  sql = "%./data/roads/z1a.pgsql%"
+  sql = """%./data/roads/z1a.pgsql%"""
 
   [[providers.layers]]
   name = "roads11"
-  sql = "%./data/roads/z2.pgsql%"
+  sql = """%./data/roads/z2.pgsql%"""
 
   [[providers.layers]]
   name = "roads13"
-  sql = "%./data/roads/z2a.pgsql%"
+  sql = """%./data/roads/z2a.pgsql%"""
 
   [[providers.layers]]
   name = "roads15"
-  sql = "%./data/roads/z3.pgsql%"
+  sql = """%./data/roads/z3.pgsql%"""
 
   [[providers.layers]]
   name = "water8"
