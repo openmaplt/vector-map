@@ -3,7 +3,6 @@ SELECT
   st_asbinary(geom) AS geom,
   kind AS kind
 FROM
-  details_poly
+  details_line
 WHERE
   geom && !BBOX!
-

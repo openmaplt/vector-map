@@ -216,12 +216,20 @@ srid = 3857
   sql = """%./data/coastline/z15.pgsql%"""
 
   [[providers.layers]]
-  name = "detail13"
+  name = "detail_poly13"
   sql = """%./data/detail/z13.pgsql%"""
 
   [[providers.layers]]
-  name = "detail16"
+  name = "detail_poly16"
   sql = """%./data/detail/z16.pgsql%"""
+
+  [[providers.layers]]
+  name = "detail_line13"
+  sql = """%./data/detail_line/z13.pgsql%"""
+
+  [[providers.layers]]
+  name = "detail_line16"
+  sql = """%./data/detail_line/z16.pgsql%"""
 
 [[maps]]
 name = "all"
@@ -536,13 +544,25 @@ attribution = "OpenStreetMap"
 center = [23.871, 55.191, 7.0]
 
   [[maps.layers]]
-  name = "detail"
-  provider_layer = "osm.detail13"
+  name = "detail_poly"
+  provider_layer = "osm.detail_poly13"
   min_zoom = 13
   max_zoom = 15
 
   [[maps.layers]]
-  name = "detail"
-  provider_layer = "osm.detail16"
+  name = "detail_poly"
+  provider_layer = "osm.detail_poly16"
+  min_zoom = 16
+  max_zoom = 18
+
+  [[maps.layers]]
+  name = "detail_line"
+  provider_layer = "osm.detail_line13"
+  min_zoom = 13
+  max_zoom = 15
+
+  [[maps.layers]]
+  name = "detail_line"
+  provider_layer = "osm.detail_line16"
   min_zoom = 16
   max_zoom = 18

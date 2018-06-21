@@ -400,7 +400,7 @@
       "id": "detail-stadium",
       "type": "fill",
       "source": "detail",
-      "source-layer": "detail",
+      "source-layer": "detail_poly",
       "minzoom": 13,
       "filter": [
         "all",
@@ -420,7 +420,7 @@
       "id": "detail-cutline",
       "type": "line",
       "source": "detail",
-      "source-layer": "detail",
+      "source-layer": "detail_line",
       "minzoom": 13,
       "filter": [
         "==",
@@ -460,7 +460,7 @@
       "id": "detail-cliff",
       "type": "line",
       "source": "detail",
-      "source-layer": "detail",
+      "source-layer": "detail_line",
       "minzoom": 16,
       "filter": [
         "==",

@@ -84,8 +84,7 @@ if [ -s dirty_tiles ]; then
     #grep -E "^(10|11|12|13|14)" dirty_tiles > generate_craftbeer_$DIRTY_FILE
 
     echo "Refreshing poi materialized view " `date`
-    psql -d osm -U postgres < update_poi.sql
-    psql -d osm -U postgres < update_poi_topo.sql
+    psql -d osm -U postgres < update_mv.sql
 
     echo "OpenMap.lt delete expired " `date`
     tilestache-clean -c $TILESTACHE_CONFIG_FILE -l all -e pbf --tile-list delete_openmap_$DIRTY_FILE

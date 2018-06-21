@@ -1,21 +1,9 @@
 SELECT
-  osm_id AS gid,
-  ST_AsBinary(way) AS geom,
-  man_made AS kind
+  gid AS gid,
+  st_asbinary(geom) AS geom,
+  kind AS kind
 FROM
-  planet_osm_line
+  details_poly
 WHERE
-  way && !BBOX! AND
-  man_made = 'cutline'
-
-UNION ALL
-
-SELECT
-  osm_id,
-  ST_AsBinary(way),
-  leisure AS kind
-FROM
-  planet_osm_polygon
-WHERE
-  way && !BBOX! AND
-  leisure in ('stadium', 'pitch')
+  geom && !BBOX! AND
+  kind = 'stadium'
