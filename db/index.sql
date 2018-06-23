@@ -27,3 +27,5 @@ CREATE INDEX planet_osm_polygon_tourism_information_index ON planet_osm_polygon 
 CREATE INDEX planet_osm_polygon_tourism_index ON planet_osm_polygon (tourism);
 CREATE INDEX planet_osm_polygon_waterway_index ON planet_osm_polygon (waterway);
 CREATE INDEX planet_osm_polygon_way_area_index ON planet_osm_polygon (way_area);
+CREATE INDEX poi_gix ON poi using gist(way);
+CREATE INDEX poi_topo_gix ON poi_topo using gist(way);
