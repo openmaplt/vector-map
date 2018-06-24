@@ -1,8 +1,8 @@
 SELECT
-  id,
-  id AS __id__,
+  id AS gid,
+  st_asbinary(way) AS geom,
+  id AS id,
   __type__,
-  way AS __geometry__,
   name,
   (
     CASE
@@ -45,7 +45,7 @@ SELECT
 FROM
   poi
 WHERE
-  way && !bbox! AND
+  way && !BBOX! AND
   (
     amenity IN ('bar',
                 'cafe',

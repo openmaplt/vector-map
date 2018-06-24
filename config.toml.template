@@ -231,6 +231,22 @@ srid = 3857
   name = "detail_line16"
   sql = """%./data/detail_line/z16.pgsql%"""
 
+  [[providers.layers]]
+  name = "craftbeer16"
+  sql = """%./data/craftbeer/z16.pgsql%"""
+
+  [[providers.layers]]
+  name = "topo_sym16"
+  sql = """%./data/topo/z16.pgsql%"""
+
+  [[providers.layers]]
+  name = "bicycle11"
+  sql = """%./data/bicycle/z11.pgsql%"""
+
+  [[providers.layers]]
+  name = "bicycle13"
+  sql = """%./data/bicycle/z13.pgsql%"""
+
 [[maps]]
 name = "all"
 attribution = "OpenStreetMap"
@@ -395,54 +411,63 @@ center = [23.871, 55.191, 7.0]
   [[maps.layers]]
   name = "buildings"
   provider_layer = "osm.buildings12"
+  dont_simplify = true
   min_zoom = 12
   max_zoom = 12
 
   [[maps.layers]]
   name = "buildings"
   provider_layer = "osm.buildings13"
+  dont_simplify = true
   min_zoom = 13
   max_zoom = 13
 
   [[maps.layers]]
   name = "buildings"
   provider_layer = "osm.buildings14"
+  dont_simplify = true
   min_zoom = 14
   max_zoom = 14
 
   [[maps.layers]]
   name = "buildings"
   provider_layer = "osm.buildings15"
+  dont_simplify = true
   min_zoom = 15
   max_zoom = 15
 
   [[maps.layers]]
   name = "buildings"
   provider_layer = "osm.buildings16"
+  dont_simplify = true
   min_zoom = 16
   max_zoom = 16
 
   [[maps.layers]]
   name = "buildings"
   provider_layer = "osm.buildings17"
+  dont_simplify = true
   min_zoom = 17
-  max_zoom = 17
+  max_zoom = 18
 
   [[maps.layers]]
   name = "poi"
   provider_layer = "osm.poi7"
+  dont_simplify = true
   min_zoom = 7
   max_zoom = 9
 
   [[maps.layers]]
   name = "poi"
   provider_layer = "osm.poi15"
+  dont_simplify = true
   min_zoom = 14
   max_zoom = 15
 
   [[maps.layers]]
   name = "poi"
   provider_layer = "osm.poi16"
+  dont_simplify = true
   min_zoom = 16
   max_zoom = 18
 
@@ -455,48 +480,56 @@ center = [23.871, 55.191, 7.0]
   [[maps.layers]]
   name = "places"
   provider_layer = "osm.places8"
+  dont_simplify = true
   min_zoom = 7
   max_zoom = 8
 
   [[maps.layers]]
   name = "places"
   provider_layer = "osm.places9"
+  dont_simplify = true
   min_zoom = 9
   max_zoom = 9
 
   [[maps.layers]]
   name = "places"
   provider_layer = "osm.places10"
+  dont_simplify = true
   min_zoom = 10
   max_zoom = 10
 
   [[maps.layers]]
   name = "places"
   provider_layer = "osm.places11"
+  dont_simplify = true
   min_zoom = 11
   max_zoom = 11
 
   [[maps.layers]]
   name = "places"
   provider_layer = "osm.places12"
+  dont_simplify = true
   min_zoom = 12
   max_zoom = 12
 
   [[maps.layers]]
   name = "places"
   provider_layer = "osm.places13"
+  dont_simplify = true
   min_zoom = 13
   max_zoom = 13
 
   [[maps.layers]]
   name = "places"
   provider_layer = "osm.places14"
+  dont_simplify = true
   min_zoom = 14
   max_zoom = 14
 
   [[maps.layers]]
   name = "names"
   provider_layer = "osm.names16"
+  dont_simplify = true
   min_zoom = 15
   max_zoom = 18
 
@@ -509,6 +542,7 @@ center = [23.871, 55.191, 7.0]
   [[maps.layers]]
   name = "address"
   provider_layer = "osm.address16"
+  dont_simplify = true
   min_zoom = 16
   max_zoom = 18
 
@@ -558,11 +592,54 @@ center = [23.871, 55.191, 7.0]
   [[maps.layers]]
   name = "detail_line"
   provider_layer = "osm.detail_line13"
+  dont_simplify = true
   min_zoom = 13
   max_zoom = 15
 
   [[maps.layers]]
   name = "detail_line"
   provider_layer = "osm.detail_line16"
+  dont_simplify = true
   min_zoom = 16
+  max_zoom = 18
+
+[[maps]]
+name = "craftbeer"
+attribution = "OpenStreetMap"
+center = [23.871, 55.191, 7.0]
+
+  [[maps.layers]]
+  name = "craftbeer"
+  provider_layer = "osm.craftbeer16"
+  dont_simplify = true
+  min_zoom = 10
+  max_zoom = 18
+
+[[maps]]
+name = "topo"
+attribution = "OpenStreetMap"
+center = [23.871, 55.191, 7.0]
+
+  [[maps.layers]]
+  name = "topo_sym"
+  provider_layer = "osm.topo_sym16"
+  dont_simplify = true
+  min_zoom = 10
+  max_zoom = 18
+
+[[maps]]
+name = "bicycle"
+attribution = "OpenStreetMap"
+center = [23.871, 55.191, 7.0]
+
+  [[maps.layers]]
+  name = "bicycle"
+  provider_layer = "osm.bicycle11"
+  min_zoom = 9
+  max_zoom = 11
+
+  [[maps.layers]]
+  name = "bicycle"
+  provider_layer = "osm.bicycle13"
+  min_zoom = 12
   max_zoom = 18
