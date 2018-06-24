@@ -1,8 +1,8 @@
 SELECT
+  id AS gid,
+  ST_AsBinary(way) AS geom,
   id,
-  id AS __id__,
   __type__,
-  way AS __geometry__,
   name,
   (
     CASE
@@ -45,4 +45,4 @@ SELECT
 FROM
   poi_topo
 WHERE
-  way && !bbox!
+  way && !BBOX!

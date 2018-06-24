@@ -10,9 +10,9 @@ name = "osm"
 type = "postgis"
 host = "localhost"
 port = 5432
-database = "osm"
-user = "osm"
-password = "osm"
+database = "gis"
+user = "tomas"
+password = ""
 srid = 3857
 
   [[providers.layers]]
@@ -230,6 +230,22 @@ srid = 3857
   [[providers.layers]]
   name = "detail_line16"
   sql = """%./data/detail_line/z16.pgsql%"""
+
+  [[providers.layers]]
+  name = "craftbeer16"
+  sql = """%./data/craftbeer/z16.pgsql%"""
+
+  [[providers.layers]]
+  name = "topo_sym16"
+  sql = """%./data/topo/z16.pgsql%"""
+
+  [[providers.layers]]
+  name = "bicycle11"
+  sql = """%./data/bicycle/z11.pgsql%"""
+
+  [[providers.layers]]
+  name = "bicycle13"
+  sql = """%./data/bicycle/z13.pgsql%"""
 
 [[maps]]
 name = "all"
@@ -565,4 +581,43 @@ center = [23.871, 55.191, 7.0]
   name = "detail_line"
   provider_layer = "osm.detail_line16"
   min_zoom = 16
+  max_zoom = 18
+
+[[maps]]
+name = "craftbeer"
+attribution = "OpenStreetMap"
+center = [23.871, 55.191, 7.0]
+
+  [[maps.layers]]
+  name = "craftbeer"
+  provider_layer = "osm.craftbeer16"
+  min_zoom = 10
+  max_zoom = 18
+
+[[maps]]
+name = "topo"
+attribution = "OpenStreetMap"
+center = [23.871, 55.191, 7.0]
+
+  [[maps.layers]]
+  name = "topo_sym"
+  provider_layer = "osm.topo_sym16"
+  min_zoom = 10
+  max_zoom = 18
+
+[[maps]]
+name = "bicycle"
+attribution = "OpenStreetMap"
+center = [23.871, 55.191, 7.0]
+
+  [[maps.layers]]
+  name = "bicycle"
+  provider_layer = "osm.bicycle11"
+  min_zoom = 9
+  max_zoom = 11
+
+  [[maps.layers]]
+  name = "bicycle"
+  provider_layer = "osm.bicycle13"
+  min_zoom = 12
   max_zoom = 18

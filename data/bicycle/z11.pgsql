@@ -1,7 +1,6 @@
-create or replace view t_bicycle_11 as
 SELECT
-  max(osm_id) AS id,
-  st_asbinary(st_linemerge(st_collect(way))) AS geometry,
+  max(osm_id) AS gid,
+  ST_AsBinary(ST_LineMerge(ST_Collect(way))) AS geom,
   route AS kind,
   network,
   name,
@@ -9,6 +8,7 @@ SELECT
 FROM
   planet_osm_line
 WHERE
+  way && !BBOX! AND
   route IN ('bicycle')
 GROUP BY
-  route, network, name, distance;
+  route, network, name, distance
