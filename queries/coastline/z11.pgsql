@@ -1,5 +1,5 @@
 SELECT
-  gid AS __id__,
+  1 AS __id__,
   st_union(geom) AS __geometry__,
   'coastline' AS kind
 FROM
@@ -7,5 +7,3 @@ FROM
 WHERE
   geom && !bbox! AND
   res = 10
-GROUP BY
-  gid
