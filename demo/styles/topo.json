@@ -2057,10 +2057,7 @@
       "source-layer": "topo_sym",
       "minzoom": 12,
       "layout": {
-        "icon-image": "{kind}",
-        "text-ignore-placement": false,
-        "visibility": "visible",
-        "text-allow-overlap": false
+        "icon-image": "{kind}"
       },
       "paint": {
         "icon-halo-width": 2,

@@ -430,8 +430,7 @@
               30
             ]
           ]
-        },
-        "visibility": "visible"
+        }
       },
       "paint": {
         "text-color": "rgba(204, 204, 204, 1)",
