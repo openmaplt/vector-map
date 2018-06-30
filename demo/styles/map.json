@@ -764,7 +764,7 @@
       "type": "fill",
       "source": "tilezen",
       "source-layer": "buildings",
-      "minzoom": 14,
+      "minzoom": 13,
       "maxzoom": 20,
       "paint": {
         "fill-outline-color": {
@@ -782,7 +782,7 @@
         "fill-color": {
           "stops": [
             [
-              14,
+              13,
               "rgba(221, 221, 221, 1)"
             ],
             [

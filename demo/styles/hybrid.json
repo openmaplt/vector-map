@@ -394,49 +394,6 @@
       }
     },
     {
-      "id": "label-country",
-      "type": "symbol",
-      "source": "osm",
-      "source-layer": "places",
-      "maxzoom": 7,
-      "filter": [
-        "all",
-        [
-          "==",
-          "$type",
-          "Point"
-        ],
-        [
-          "==",
-          "kind",
-          "country"
-        ]
-      ],
-      "layout": {
-        "text-field": "{name}",
-        "text-font": [
-          "Roboto Condensed Italic"
-        ],
-        "text-max-width": 4,
-        "text-size": {
-          "stops": [
-            [
-              2,
-              24
-            ],
-            [
-              6,
-              21
-            ]
-          ]
-        }
-      },
-      "paint": {
-        "text-color": "#cb4b49",
-        "text-halo-color": "rgba(255,255,255,0.5)"
-      }
-    },
-    {
       "id": "label-state",
       "type": "symbol",
       "source": "osm",
@@ -473,7 +430,8 @@
               30
             ]
           ]
-        }
+        },
+        "visibility": "visible"
       },
       "paint": {
         "text-color": "rgba(204, 204, 204, 1)",
@@ -511,57 +469,6 @@
         "text-color": "rgba(11, 119, 14, 1)",
         "text-halo-color": "rgba(255, 255, 255, 0.7)",
         "text-halo-width": 1.7
-      }
-    },
-    {
-      "id": "label-city",
-      "type": "symbol",
-      "source": "osm",
-      "source-layer": "places",
-      "minzoom": 10,
-      "maxzoom": 14,
-      "filter": [
-        "all",
-        [
-          "==",
-          "$type",
-          "Point"
-        ],
-        [
-          "in",
-          "kind",
-          "city",
-          "county",
-          "district",
-          "town",
-          "village"
-        ]
-      ],
-      "layout": {
-        "text-field": "{name}",
-        "text-font": [
-          "Roboto Medium"
-        ],
-        "text-max-width": 10,
-        "text-letter-spacing": 0.1,
-        "text-size": {
-          "stops": [
-            [
-              8,
-              12
-            ],
-            [
-              12,
-              13
-            ]
-          ]
-        },
-        "visibility": "visible",
-        "text-allow-overlap": false
-      },
-      "paint": {
-        "text-color": "#f7f9f9",
-        "text-halo-color": "rgba(255,255,255,0.5)"
       }
     },
     {
@@ -607,7 +514,107 @@
       },
       "paint": {
         "text-color": "#cb4b49",
-        "text-halo-color": "rgba(255,255,255,0.5)"
+        "text-halo-color": "rgba(0,0,0,0.7)",
+        "text-halo-width": 1
+      }
+    },
+    {
+      "id": "label-town",
+      "type": "symbol",
+      "source": "osm",
+      "source-layer": "places",
+      "minzoom": 7,
+      "maxzoom": 14,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "Point"
+        ],
+        [
+          "in",
+          "kind",
+          "county",
+          "district",
+          "town",
+          "village"
+        ]
+      ],
+      "layout": {
+        "text-field": "{name}",
+        "text-font": [
+          "Roboto Medium"
+        ],
+        "text-max-width": 10,
+        "text-letter-spacing": 0.1,
+        "text-size": {
+          "stops": [
+            [
+              8,
+              11
+            ],
+            [
+              12,
+              13
+            ]
+          ]
+        },
+        "visibility": "visible",
+        "text-allow-overlap": false
+      },
+      "paint": {
+        "text-color": "#f7f9f9",
+        "text-halo-color": "rgba(0,0,0,0.7)",
+        "text-halo-width": 1
+      }
+    },
+    {
+      "id": "label-city",
+      "type": "symbol",
+      "source": "osm",
+      "source-layer": "places",
+      "minzoom": 7,
+      "maxzoom": 14,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "Point"
+        ],
+        [
+          "in",
+          "kind",
+          "city"
+        ]
+      ],
+      "layout": {
+        "text-field": "{name}",
+        "text-font": [
+          "Roboto Medium"
+        ],
+        "text-max-width": 10,
+        "text-letter-spacing": 0.1,
+        "text-size": {
+          "stops": [
+            [
+              8,
+              15
+            ],
+            [
+              12,
+              16
+            ]
+          ]
+        },
+        "visibility": "visible",
+        "text-allow-overlap": false
+      },
+      "paint": {
+        "text-color": "#f7f9f9",
+        "text-halo-color": "rgba(0,0,0,0.5)",
+        "text-halo-width": 1
       }
     },
     {
