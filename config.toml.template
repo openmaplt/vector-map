@@ -160,6 +160,22 @@ srid = 3857
   sql = """%./data/protected/z0.pgsql%"""
 
   [[providers.layers]]
+  name = "protected10"
+  sql = """%./data/protected/z10.pgsql%"""
+
+  [[providers.layers]]
+  name = "protected40"
+  sql = """%./data/protected/z40.pgsql%"""
+
+  [[providers.layers]]
+  name = "protected150"
+  sql = """%./data/protected/z150.pgsql%"""
+
+  [[providers.layers]]
+  name = "protected600"
+  sql = """%./data/protected/z600.pgsql%"""
+
+  [[providers.layers]]
   name = "places8"
   sql = """%./data/places/z8.pgsql%"""
 
@@ -473,8 +489,36 @@ center = [23.871, 55.191, 7.0]
 
   [[maps.layers]]
   name = "protected"
-  provider_layer = "osm.protected0"
+  provider_layer = "osm.protected600"
+  dont_simplify = true
   min_zoom = 7
+  max_zoom = 8
+
+  [[maps.layers]]
+  name = "protected"
+  provider_layer = "osm.protected150"
+  dont_simplify = true
+  min_zoom = 9
+  max_zoom = 10
+
+  [[maps.layers]]
+  name = "protected"
+  provider_layer = "osm.protected40"
+  dont_simplify = true
+  min_zoom = 11
+  max_zoom = 12
+
+  [[maps.layers]]
+  name = "protected"
+  provider_layer = "osm.protected10"
+  dont_simplify = true
+  min_zoom = 13
+  max_zoom = 14
+
+  [[maps.layers]]
+  name = "protected"
+  provider_layer = "osm.protected0"
+  min_zoom = 15
   max_zoom = 18
 
   [[maps.layers]]

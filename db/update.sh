@@ -48,6 +48,8 @@ if [[ $(date +%u) -eq 6 ]] ; then
   psql -d osm -U osm < gen_building.sql
   echo "forest generalisation" `date`
   psql -d osm -U osm < gen_forest.sql
+  echo "protected area generalisation" `date`
+  psql -d osm -U osm < gen_protected.sql
   echo "done" `date`
 
   # apdoroti visas per savaitę išpurvintas kaladėles
