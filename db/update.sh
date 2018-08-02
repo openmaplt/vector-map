@@ -57,8 +57,6 @@ if [[ $(date +%u) -eq 6 ]] ; then
   rm dirty_tiles_weekly
 fi
 
-./update_search.sh
-
 ./osmconvert temp.o5m --out-pbf > temp.pbf
 mv temp.pbf data.pbf
 
