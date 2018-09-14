@@ -271,350 +271,350 @@ center = [23.871, 55.191, 7.0]
   [[maps.layers]]
   name = "boundaries"
   provider_layer = "osm.boundaries8"
-  min_zoom = 7
-  max_zoom = 9
+  min_zoom = 6
+  max_zoom = 8
 
   [[maps.layers]]
   name = "boundaries"
   provider_layer = "osm.boundaries10"
-  min_zoom = 10
-  max_zoom = 12
+  min_zoom = 9
+  max_zoom = 11
 
   [[maps.layers]]
   name = "boundaries"
   provider_layer = "osm.boundaries13"
-  min_zoom = 13
-  max_zoom = 18
+  min_zoom = 12
+  max_zoom = 17
 
   [[maps.layers]]
   name = "roads"
   provider_layer = "osm.roads7"
-  min_zoom = 7
-  max_zoom = 8
+  min_zoom = 6
+  max_zoom = 7
 
   [[maps.layers]]
   name = "roads"
   provider_layer = "osm.roads9"
-  min_zoom = 9
-  max_zoom = 10
+  min_zoom = 8
+  max_zoom = 9
 
   [[maps.layers]]
   name = "roads"
   provider_layer = "osm.roads11"
-  min_zoom = 11
-  max_zoom = 12
+  min_zoom = 10
+  max_zoom = 11
 
   [[maps.layers]]
   name = "roads"
   provider_layer = "osm.roads13"
-  min_zoom = 13
-  max_zoom = 14
+  min_zoom = 12
+  max_zoom = 13
 
   [[maps.layers]]
   name = "roads"
   provider_layer = "osm.roads15"
-  min_zoom = 15
-  max_zoom = 18
+  min_zoom = 14
+  max_zoom = 17
 
   [[maps.layers]]
   name = "water"
   provider_layer = "osm.water8"
-  min_zoom = 7
-  max_zoom = 8
+  min_zoom = 6
+  max_zoom = 7
 
   [[maps.layers]]
   name = "water"
   provider_layer = "osm.water9"
-  min_zoom = 9
-  max_zoom = 9
+  min_zoom = 8
+  max_zoom = 8
 
   [[maps.layers]]
   name = "water"
   provider_layer = "osm.water10"
+  min_zoom = 9
+  max_zoom = 9
+
+  [[maps.layers]]
+  name = "water"
+  provider_layer = "osm.water11"
   min_zoom = 10
   max_zoom = 10
 
   [[maps.layers]]
   name = "water"
-  provider_layer = "osm.water11"
+  provider_layer = "osm.water12"
   min_zoom = 11
   max_zoom = 11
 
   [[maps.layers]]
   name = "water"
-  provider_layer = "osm.water12"
+  provider_layer = "osm.water13"
   min_zoom = 12
   max_zoom = 12
 
   [[maps.layers]]
   name = "water"
-  provider_layer = "osm.water13"
+  provider_layer = "osm.water14"
   min_zoom = 13
   max_zoom = 13
 
   [[maps.layers]]
   name = "water"
-  provider_layer = "osm.water14"
+  provider_layer = "osm.water15"
   min_zoom = 14
   max_zoom = 14
 
   [[maps.layers]]
   name = "water"
-  provider_layer = "osm.water15"
+  provider_layer = "osm.water16"
   min_zoom = 15
   max_zoom = 15
 
   [[maps.layers]]
-  name = "water"
-  provider_layer = "osm.water16"
-  min_zoom = 16
-  max_zoom = 16
-
-  [[maps.layers]]
   name = "landuse"
   provider_layer = "osm.landuse8"
-  min_zoom = 7
-  max_zoom = 8
+  min_zoom = 6
+  max_zoom = 7
 
   [[maps.layers]]
   name = "landuse"
   provider_layer = "osm.landuse9"
+  min_zoom = 8
+  max_zoom = 8
+
+  [[maps.layers]]
+  name = "landuse"
+  provider_layer = "osm.landuse10"
   min_zoom = 9
   max_zoom = 9
 
   [[maps.layers]]
   name = "landuse"
-  provider_layer = "osm.landuse10"
+  provider_layer = "osm.landuse11"
   min_zoom = 10
   max_zoom = 10
 
   [[maps.layers]]
   name = "landuse"
-  provider_layer = "osm.landuse11"
+  provider_layer = "osm.landuse12"
   min_zoom = 11
   max_zoom = 11
 
   [[maps.layers]]
   name = "landuse"
-  provider_layer = "osm.landuse12"
+  provider_layer = "osm.landuse13"
   min_zoom = 12
   max_zoom = 12
 
   [[maps.layers]]
   name = "landuse"
-  provider_layer = "osm.landuse13"
+  provider_layer = "osm.landuse14"
   min_zoom = 13
   max_zoom = 13
 
   [[maps.layers]]
   name = "landuse"
-  provider_layer = "osm.landuse14"
+  provider_layer = "osm.landuse15"
   min_zoom = 14
   max_zoom = 14
 
   [[maps.layers]]
   name = "landuse"
-  provider_layer = "osm.landuse15"
-  min_zoom = 15
-  max_zoom = 15
-
-  [[maps.layers]]
-  name = "landuse"
   provider_layer = "osm.landuse16"
-  min_zoom = 16
-  max_zoom = 18
+  min_zoom = 15
+  max_zoom = 17
 
   [[maps.layers]]
   name = "buildings"
   provider_layer = "osm.buildings12"
   dont_simplify = true
+  min_zoom = 11
+  max_zoom = 11
+
+  [[maps.layers]]
+  name = "buildings"
+  provider_layer = "osm.buildings13"
+  dont_simplify = true
   min_zoom = 12
   max_zoom = 12
 
   [[maps.layers]]
   name = "buildings"
-  provider_layer = "osm.buildings13"
+  provider_layer = "osm.buildings14"
   dont_simplify = true
   min_zoom = 13
   max_zoom = 13
 
   [[maps.layers]]
   name = "buildings"
-  provider_layer = "osm.buildings14"
+  provider_layer = "osm.buildings15"
   dont_simplify = true
   min_zoom = 14
   max_zoom = 14
-
-  [[maps.layers]]
-  name = "buildings"
-  provider_layer = "osm.buildings15"
-  dont_simplify = true
-  min_zoom = 15
-  max_zoom = 15
 
   [[maps.layers]]
   name = "buildings"
   provider_layer = "osm.buildings16"
   dont_simplify = true
-  min_zoom = 16
-  max_zoom = 16
+  min_zoom = 15
+  max_zoom = 15
 
   [[maps.layers]]
   name = "buildings"
   provider_layer = "osm.buildings17"
   dont_simplify = true
-  min_zoom = 17
-  max_zoom = 18
+  min_zoom = 16
+  max_zoom = 17
 
   [[maps.layers]]
   name = "poi"
   provider_layer = "osm.poi7"
   dont_simplify = true
-  min_zoom = 7
-  max_zoom = 9
+  min_zoom = 6
+  max_zoom = 8
 
   [[maps.layers]]
   name = "poi"
   provider_layer = "osm.poi15"
   dont_simplify = true
-  min_zoom = 14
-  max_zoom = 15
+  min_zoom = 13
+  max_zoom = 14
 
   [[maps.layers]]
   name = "poi"
   provider_layer = "osm.poi16"
   dont_simplify = true
-  min_zoom = 16
-  max_zoom = 18
+  min_zoom = 15
+  max_zoom = 17
 
   [[maps.layers]]
   name = "protected"
   provider_layer = "osm.protected600"
   dont_simplify = true
-  min_zoom = 7
-  max_zoom = 8
+  min_zoom = 6
+  max_zoom = 7
 
   [[maps.layers]]
   name = "protected"
   provider_layer = "osm.protected150"
   dont_simplify = true
-  min_zoom = 9
-  max_zoom = 10
+  min_zoom = 8
+  max_zoom = 9
 
   [[maps.layers]]
   name = "protected"
   provider_layer = "osm.protected40"
   dont_simplify = true
-  min_zoom = 11
-  max_zoom = 12
+  min_zoom = 10
+  max_zoom = 11
 
   [[maps.layers]]
   name = "protected"
   provider_layer = "osm.protected10"
   dont_simplify = true
-  min_zoom = 13
-  max_zoom = 14
+  min_zoom = 12
+  max_zoom = 13
 
   [[maps.layers]]
   name = "protected"
   provider_layer = "osm.protected0"
-  min_zoom = 15
-  max_zoom = 18
+  min_zoom = 14
+  max_zoom = 17
 
   [[maps.layers]]
   name = "places"
   provider_layer = "osm.places8"
   dont_simplify = true
   min_zoom = 7
-  max_zoom = 8
+  max_zoom = 7
 
   [[maps.layers]]
   name = "places"
   provider_layer = "osm.places9"
+  dont_simplify = true
+  min_zoom = 8
+  max_zoom = 8
+
+  [[maps.layers]]
+  name = "places"
+  provider_layer = "osm.places10"
   dont_simplify = true
   min_zoom = 9
   max_zoom = 9
 
   [[maps.layers]]
   name = "places"
-  provider_layer = "osm.places10"
+  provider_layer = "osm.places11"
   dont_simplify = true
   min_zoom = 10
   max_zoom = 10
 
   [[maps.layers]]
   name = "places"
-  provider_layer = "osm.places11"
+  provider_layer = "osm.places12"
   dont_simplify = true
   min_zoom = 11
   max_zoom = 11
 
   [[maps.layers]]
   name = "places"
-  provider_layer = "osm.places12"
+  provider_layer = "osm.places13"
   dont_simplify = true
   min_zoom = 12
   max_zoom = 12
 
   [[maps.layers]]
   name = "places"
-  provider_layer = "osm.places13"
+  provider_layer = "osm.places14"
   dont_simplify = true
   min_zoom = 13
   max_zoom = 13
 
   [[maps.layers]]
-  name = "places"
-  provider_layer = "osm.places14"
-  dont_simplify = true
-  min_zoom = 14
-  max_zoom = 14
-
-  [[maps.layers]]
   name = "names"
   provider_layer = "osm.names16"
   dont_simplify = true
-  min_zoom = 15
-  max_zoom = 18
+  min_zoom = 14
+  max_zoom = 17
 
   [[maps.layers]]
   name = "routes"
   provider_layer = "osm.routes15"
-  min_zoom = 14
-  max_zoom = 18
+  min_zoom = 13
+  max_zoom = 17
 
   [[maps.layers]]
   name = "address"
   provider_layer = "osm.address16"
   dont_simplify = true
-  min_zoom = 16
-  max_zoom = 18
+  min_zoom = 15
+  max_zoom = 17
 
   [[maps.layers]]
   name = "coastline"
   provider_layer = "osm.coastline7"
-  min_zoom = 7
-  max_zoom = 8
+  min_zoom = 6
+  max_zoom = 7
   dont_simplify = true
 
   [[maps.layers]]
   name = "coastline"
   provider_layer = "osm.coastline9"
-  min_zoom = 9
-  max_zoom = 10
+  min_zoom = 8
+  max_zoom = 9
   dont_simplify = true
 
   [[maps.layers]]
   name = "coastline"
   provider_layer = "osm.coastline11"
-  min_zoom = 11
-  max_zoom = 14
+  min_zoom = 10
+  max_zoom = 13
 
   [[maps.layers]]
   name = "coastline"
   provider_layer = "osm.coastline15"
-  min_zoom = 15
-  max_zoom = 18
+  min_zoom = 14
+  max_zoom = 17
 
 [[maps]]
 name = "detail"
@@ -624,28 +624,28 @@ center = [23.871, 55.191, 7.0]
   [[maps.layers]]
   name = "detail_poly"
   provider_layer = "osm.detail_poly13"
-  min_zoom = 13
-  max_zoom = 15
+  min_zoom = 12
+  max_zoom = 14
 
   [[maps.layers]]
   name = "detail_poly"
   provider_layer = "osm.detail_poly16"
-  min_zoom = 16
-  max_zoom = 18
+  min_zoom = 15
+  max_zoom = 17
 
   [[maps.layers]]
   name = "detail_line"
   provider_layer = "osm.detail_line13"
   dont_simplify = true
-  min_zoom = 13
-  max_zoom = 15
+  min_zoom = 12
+  max_zoom = 14
 
   [[maps.layers]]
   name = "detail_line"
   provider_layer = "osm.detail_line16"
   dont_simplify = true
-  min_zoom = 16
-  max_zoom = 18
+  min_zoom = 15
+  max_zoom = 17
 
 [[maps]]
 name = "craftbeer"
@@ -656,8 +656,8 @@ center = [23.871, 55.191, 7.0]
   name = "craftbeer"
   provider_layer = "osm.craftbeer16"
   dont_simplify = true
-  min_zoom = 10
-  max_zoom = 18
+  min_zoom = 9
+  max_zoom = 17
 
 [[maps]]
 name = "topo"
@@ -668,8 +668,8 @@ center = [23.871, 55.191, 7.0]
   name = "topo_sym"
   provider_layer = "osm.topo_sym16"
   dont_simplify = true
-  min_zoom = 10
-  max_zoom = 18
+  min_zoom = 9
+  max_zoom = 17
 
 [[maps]]
 name = "bicycle"
@@ -679,11 +679,11 @@ center = [23.871, 55.191, 7.0]
   [[maps.layers]]
   name = "bicycle"
   provider_layer = "osm.bicycle11"
-  min_zoom = 9
-  max_zoom = 11
+  min_zoom = 8
+  max_zoom = 10
 
   [[maps.layers]]
   name = "bicycle"
   provider_layer = "osm.bicycle13"
-  min_zoom = 12
-  max_zoom = 18
+  min_zoom = 11
+  max_zoom = 17
