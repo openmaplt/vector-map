@@ -1,7 +1,7 @@
 drop materialized view if exists details_poly;
 create materialized view details_poly (
   gid,
-  wkt,
+  wkb,
   geom,
   kind
 ) as

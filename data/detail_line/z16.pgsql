@@ -1,6 +1,6 @@
 SELECT
   gid AS gid,
-  st_asbinary(geom) AS geom,
+  wkb AS geom,
   kind AS kind
 FROM
   details_line
