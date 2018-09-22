@@ -1,7 +1,7 @@
 drop materialized view if exists details_line;
 create materialized view details_line (
   gid,
-  wkt,
+  wkb,
   geom,
   kind
 ) as
