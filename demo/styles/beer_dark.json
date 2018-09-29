@@ -8,16 +8,12 @@
     "tilezen": {
       "type": "vector",
       "attribution": "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>",
-      "tiles": [
-        "https://openmap.lt/all/{z}/{x}/{y}.pbf"
-      ]
+      "url": "https://openmap.lt/capabilities/all.json"
     },
     "beer": {
       "type": "vector",
       "attribution": "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>",
-      "tiles": [
-        "https://openmap.lt/craftbeer/{z}/{x}/{y}.pbf"
-      ]
+      "url": "https://openmap.lt/capabilities/craftbeer.json"
     }
   },
   "sprite": "https://openmap.lt/sprites/craftbeer",

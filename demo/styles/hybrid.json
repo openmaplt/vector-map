@@ -16,9 +16,7 @@
     "osm": {
       "type": "vector",
       "attribution": "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>",
-      "tiles": [
-        "https://openmap.lt/all/{z}/{x}/{y}.pbf"
-      ]
+      "url": "https://openmap.lt/capabilities/all.json"
     }
   },
   "sprite": "https://openmap.lt/sprites/openmaplt",

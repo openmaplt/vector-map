@@ -8,16 +8,12 @@
     "tilezen": {
       "type": "vector",
       "attribution": "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>",
-      "tiles": [
-        "https://openmap.lt/all/{z}/{x}/{y}.pbf"
-      ]
+      "url": "https://openmap.lt/capabilities/all.json"
     },
     "bicycle": {
       "type": "vector",
       "attribution": "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>",
-      "tiles": [
-        "https://openmap.lt/bicycle/{z}/{x}/{y}.pbf"
-      ]
+      "url": "https://openmap.lt/capabilities/bicycle.json"
     }
   },
   "sprite": "https://openmap.lt/sprites/openmapcycle",
