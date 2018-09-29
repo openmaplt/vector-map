@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#DATAFILE=${DATAFILE:=data.pbf}
+DATAFILE=${DATAFILE:=data.pbf}
 DIRTY_FILE=dirty_tegola_tiles_`date +%s`
 TEGOLA_CONFIG_FILE=$(readlink -f ./../config.toml)
 
@@ -8,64 +8,64 @@ echo "----------"
 echo "Update started: `date +%c`"
 
 # download data
-#if [ ! -e $DATAFILE ]; then
-#	wget -O $DATAFILE http://download.geofabrik.de/europe/lithuania-latest.osm.pbf
-#fi
+if [ ! -e $DATAFILE ]; then
+	wget -O $DATAFILE http://download.geofabrik.de/europe/lithuania-latest.osm.pbf
+fi
 
 # update
-#rm change.osc.gz
-#./osmupdate $DATAFILE change.osc.gz
-#if [ ! -s change.osc.gz ]; then
-#	echo "Failed to update data"
-#	exit
-#fi
+rm change.osc.gz
+./osmupdate $DATAFILE change.osc.gz
+if [ ! -s change.osc.gz ]; then
+	echo "Failed to update data"
+	exit
+fi
 
 # apply & clip
-#./osmconvert $DATAFILE change.osc.gz -B=lithuania.poly --complete-ways --complex-ways --out-o5m > temp.o5m
-#./osmconvert $DATAFILE temp.o5m --diff > change.osc
+./osmconvert $DATAFILE change.osc.gz -B=lithuania.poly --complete-ways --complex-ways --out-o5m > temp.o5m
+./osmconvert $DATAFILE temp.o5m --diff > change.osc
 
 #apply diff
-#rm dirty_tiles
-#./osm2pgsql --username postgres --database osm --style ./osm2pgsql.style --multi-geometry --number-processes 4 --slim --cache 100 --proj 3857 --expire-tiles 7-18 --append change.osc > /dev/null
+rm dirty_tiles
+./osm2pgsql --username postgres --database osm --style ./osm2pgsql.style --multi-geometry --number-processes 4 --slim --cache 100 --proj 3857 --expire-tiles 7-18 --append change.osc > /dev/null
 
-#if [ $? -ne 0 ]; then
-#	exit
-#fi
+if [ $? -ne 0 ]; then
+	exit
+fi
 
 # remove outside objects
-#psql -d osm -U postgres < remove_outside_objects.sql
+psql -d osm -U postgres < remove_outside_objects.sql
 
 # atsiminti dienos kaladėles savaitgaliui (šeštadieniui)
-#cat dirty_tiles >> dirty_tiles_weekly
+cat dirty_tiles >> dirty_tiles_weekly
 
 # update generalisation on Saturday
-#if [[ $(date +%u) -eq 6 ]] ; then
+if [[ $(date +%u) -eq 6 ]] ; then
 # NOTE: IŠJUNGTA, KOL SERVERIS NETURI PAKANKAMAI ATMINTIES APDOROTI
 #  psql -d osm -U postgres < way_generalisation.sql
-#  echo "water generalisation" `date`
-#  psql -d osm -U osm < gen_water.sql
-#  echo "building generalisation" `date`
-#  psql -d osm -U osm < gen_building.sql
-#  echo "forest generalisation" `date`
-#  psql -d osm -U osm < gen_forest.sql
-#  echo "done" `date`
+  echo "water generalisation" `date`
+  psql -d osm -U osm < gen_water.sql
+  echo "building generalisation" `date`
+  psql -d osm -U osm < gen_building.sql
+  echo "forest generalisation" `date`
+  psql -d osm -U osm < gen_forest.sql
+  echo "protected area generalisation" `date`
+  psql -d osm -U osm < gen_protected.sql
+  echo "done" `date`
 
   # apdoroti visas per savaitę išpurvintas kaladėles
-#  sort -u dirty_tiles_weekly > dirty_tiles
-#  rm dirty_tiles_weekly
-#fi
+  sort -u dirty_tiles_weekly > dirty_tiles
+  rm dirty_tiles_weekly
+fi
 
-#./update_search.sh
+./osmconvert temp.o5m --out-pbf > temp.pbf
+mv temp.pbf data.pbf
 
-#./osmconvert temp.o5m --out-pbf > temp.pbf
-#mv temp.pbf data.pbf
+if [ $? -ne 0 ]; then
+	exit
+fi
 
-#if [ $? -ne 0 ]; then
-#	exit
-#fi
-
-#rm temp.o5m
-#md5sum $DATAFILE > $DATAFILE.md5
+rm temp.o5m
+md5sum $DATAFILE > $DATAFILE.md5
 
 # render expired
 if [ -s dirty_tiles ]; then
@@ -83,9 +83,8 @@ if [ -s dirty_tiles ]; then
     #grep -E "^(10|11|12|13|14)" dirty_tiles > generate_bicycle_$DIRTY_FILE
     #grep -E "^(10|11|12|13|14)" dirty_tiles > generate_craftbeer_$DIRTY_FILE
 
-    #echo "Refreshing poi materialized view " `date`
-    #psql -d osm -U postgres < update_poi.sql
-    #psql -d osm -U postgres < update_poi_topo.sql
+    echo "Refreshing poi materialized view " `date`
+    psql -d osm -U postgres < update_mv.sql
 
     echo "OpenMap.lt delete expired " `date`
     ../tegola cache purge --config $TEGOLA_CONFIG_FILE --tile-list delete_openmap_$DIRTY_FILE
