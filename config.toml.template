@@ -271,7 +271,7 @@ srid = 3857
 
 [[maps]]
 name = "all"
-attribution = "OpenStreetMap"
+attribution = "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>"
 center = [23.871, 55.191, 7.0]
 
   [[maps.layers]]

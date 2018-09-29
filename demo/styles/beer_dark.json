@@ -7,12 +7,10 @@
   "sources": {
     "tilezen": {
       "type": "vector",
-      "attribution": "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>",
       "url": "https://openmap.lt/capabilities/all.json"
     },
     "beer": {
       "type": "vector",
-      "attribution": "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>",
       "url": "https://openmap.lt/capabilities/craftbeer.json"
     }
   },

@@ -7,17 +7,14 @@
   "sources": {
     "tilezen": {
       "type": "vector",
-      "attribution": "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>",
       "url": "https://openmap.lt/capabilities/all.json"
     },
     "topo": {
       "type": "vector",
-      "attribution": "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>",
       "url": "https://openmap.lt/capabilities/topo.json"
     },
     "detail": {
       "type": "vector",
-      "attribution": "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>",
       "url": "https://openmap.lt/capabilities/detail.json"
     }
   },
