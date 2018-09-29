@@ -271,7 +271,7 @@ srid = 3857
 
 [[maps]]
 name = "all"
-attribution = "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>"
+attribution = "© OpenStreetMap contributors"
 center = [23.871, 55.191, 7.0]
 
   [[maps.layers]]
@@ -624,7 +624,7 @@ center = [23.871, 55.191, 7.0]
 
 [[maps]]
 name = "detail"
-attribution = "OpenStreetMap"
+attribution = "© OpenStreetMap contributors"
 center = [23.871, 55.191, 7.0]
 
   [[maps.layers]]
@@ -655,7 +655,7 @@ center = [23.871, 55.191, 7.0]
 
 [[maps]]
 name = "craftbeer"
-attribution = "OpenStreetMap"
+attribution = "© OpenStreetMap contributors"
 center = [23.871, 55.191, 7.0]
 
   [[maps.layers]]
@@ -667,7 +667,7 @@ center = [23.871, 55.191, 7.0]
 
 [[maps]]
 name = "topo"
-attribution = "OpenStreetMap"
+attribution = "© OpenStreetMap contributors"
 center = [23.871, 55.191, 7.0]
 
   [[maps.layers]]
@@ -679,7 +679,7 @@ center = [23.871, 55.191, 7.0]
 
 [[maps]]
 name = "bicycle"
-attribution = "OpenStreetMap"
+attribution = "© OpenStreetMap contributors"
 center = [23.871, 55.191, 7.0]
 
   [[maps.layers]]
