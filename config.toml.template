@@ -214,6 +214,7 @@ srid = 3857
   [[providers.layers]]
   name = "address16"
   sql = """%./data/address/z16.pgsql%"""
+  geometry_type = "Point"
 
   [[providers.layers]]
   name = "coastline7"
@@ -222,6 +223,7 @@ srid = 3857
   [[providers.layers]]
   name = "coastline9"
   sql = """%./data/coastline/z9.pgsql%"""
+  geometry_type = "Polygon"
 
   [[providers.layers]]
   name = "coastline11"
@@ -374,7 +376,7 @@ center = [23.871, 55.191, 7.0]
   name = "water"
   provider_layer = "osm.water16"
   min_zoom = 16
-  max_zoom = 16
+  max_zoom = 18
 
   [[maps.layers]]
   name = "landuse"
