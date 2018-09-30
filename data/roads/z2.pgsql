@@ -10,6 +10,9 @@ FROM
 (SELECT
   st_linemerge(st_collect(way)) AS geom,
   highway AS kind,
+  CASE WHEN surface in ('paved', 'asphalt', 'paving_stones') THEN 'paved'
+       ELSE 'unpaved'
+  END AS surface,
   CASE WHEN highway = 'motorway' THEN 1
        WHEN highway = 'trunk' THEN 2
        WHEN highway = 'primary' THEN 3
@@ -35,13 +38,14 @@ WHERE
                'residential',
                'pedestrian')
   )
-GROUP BY kind, name, priority, ref
+GROUP BY kind, surface, name, priority, ref
 
 UNION ALL
 
 SELECT
   way AS geom,
   'rail' AS kind,
+  'paved' AS surface,
   7 AS priority,
   null AS name,
   null AS ref,

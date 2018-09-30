@@ -9,21 +9,21 @@
       "type": "vector",
       "attribution": "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>",
       "tiles": [
-        "https://openmap.lt/all/{z}/{x}/{y}.pbf"
+        "https://openmap.lt/maps/all/{z}/{x}/{y}.pbf"
       ]
     },
     "topo": {
       "type": "vector",
       "attribution": "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>",
       "tiles": [
-        "https://openmap.lt/topo/{z}/{x}/{y}.pbf"
+        "https://openmap.lt/maps/topo/{z}/{x}/{y}.pbf"
       ]
     },
     "detail": {
       "type": "vector",
       "attribution": "© <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a>",
       "tiles": [
-        "https://openmap.lt/detail/{z}/{x}/{y}.pbf"
+        "https://openmap.lt/maps/detail/{z}/{x}/{y}.pbf"
       ]
     }
   },
@@ -830,7 +830,7 @@
       }
     },
     {
-      "id": "casing-tertiary",
+      "id": "casing-tertiary-unpaved",
       "type": "line",
       "source": "tilezen",
       "source-layer": "roads",
@@ -841,6 +841,11 @@
           "kind",
           "tertiary",
           "tertiary_link"
+        ],
+        [
+          "==",
+          "surface",
+          "unpaved"
         ]
       ],
       "layout": {
@@ -849,6 +854,47 @@
       },
       "paint": {
         "line-color": "rgba(100, 100, 0, 1)",
+        "line-width": {
+          "base": 1.55,
+          "stops": [
+            [
+              5,
+              2
+            ],
+            [
+              20,
+              25
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "casing-tertiary-paved",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "tertiary",
+          "tertiary_link"
+        ],
+        [
+          "==",
+          "surface",
+          "paved"
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round",
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-color": "#111111",
         "line-width": {
           "base": 1.55,
           "stops": [
@@ -1201,7 +1247,7 @@
       }
     },
     {
-      "id": "road-tertiary",
+      "id": "road-tertiary-paved",
       "type": "line",
       "source": "tilezen",
       "source-layer": "roads",
@@ -1212,11 +1258,58 @@
           "kind",
           "tertiary",
           "tertiary_link"
+        ],
+        [
+          "==",
+          "surface",
+          "paved"
         ]
       ],
       "layout": {
         "line-join": "round",
-        "line-cap": "round"
+        "line-cap": "round",
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-color": "#d7b7ad",
+        "line-width": {
+          "base": 1.55,
+          "stops": [
+            [
+              5,
+              1
+            ],
+            [
+              20,
+              20
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "road-tertiary-unpaved",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "tertiary",
+          "tertiary_link"
+        ],
+        [
+          "==",
+          "surface",
+          "unpaved"
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round",
+        "visibility": "visible"
       },
       "paint": {
         "line-color": "rgba(230, 220, 0, 1)",
@@ -1987,7 +2080,9 @@
         "text-allow-overlap": false,
         "text-font": [
           "Playfair Regular"
-        ]
+        ],
+        "visibility": "visible",
+        "text-letter-spacing": 0.05
       },
       "paint": {
         "text-halo-width": 1.5,

@@ -11,6 +11,9 @@ SELECT
         THEN aeroway
     END
   ) AS kind,
+  CASE WHEN surface in ('paved', 'asphalt', 'paving_stones') THEN 'paved'
+       ELSE 'unpaved'
+  END AS surface,
   CASE WHEN highway = 'motorway' THEN 1
        WHEN highway = 'trunk' THEN 2
        WHEN highway = 'primary' THEN 3
@@ -62,5 +65,5 @@ WHERE
    railway = 'rail' OR
    aeroway IN ('runway', 'taxiway', 'parking_position')
   )
-GROUP BY kind, name, priority, ref, is_tunnel, is_bridge, oneway
+GROUP BY kind, surface, name, priority, ref, is_tunnel, is_bridge, oneway
 ORDER BY priority
