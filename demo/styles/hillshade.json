@@ -1,0 +1,6 @@
+{"id":"mapbox.terrain-rgb",
+ "maxzoom":13,
+ "minzoom":0,
+ "tilejson":"2.2.0",
+ "tiles":["https://hillshade.openmap.lt/v1/{z}/{x}/{y}.png"]
+}
