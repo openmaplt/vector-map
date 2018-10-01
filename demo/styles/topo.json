@@ -16,6 +16,10 @@
     "detail": {
       "type": "vector",
       "url": "https://openmap.lt/capabilities/detail.json"
+    },
+    "dem" : {
+      "type": "raster-dem",
+      "url": "https://openmap.lt/styles/hillshade.json"
     }
   },
   "sprite": "https://openmap.lt/sprites/topo",
@@ -310,6 +314,15 @@
             ]
           ]
         }
+      }
+    },
+    {
+      "id": "hillshading",
+      "source": "dem",
+      "type": "hillshade",
+      "minzoom": 9,
+      "paint": {
+        "hillshade-exaggeration": 0.5
       }
     },
     {
@@ -2095,7 +2108,7 @@
         "text-size": 12,
         "text-allow-overlap": false,
         "text-font": [
-          "Roboto Italic"
+          "Roboto Condensed Italic"
         ]
       },
       "paint": {
