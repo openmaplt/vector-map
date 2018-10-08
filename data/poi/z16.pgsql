@@ -107,6 +107,17 @@ SELECT
     WHEN tourism = 'attraction'
       THEN 'attraction'
 
+    WHEN railway = 'station'
+      THEN 'rail'
+    WHEN aeroway = 'terminal'
+      THEN 'airport'
+    WHEN aeroway = 'helipad'
+      THEN 'heliport'
+    WHEN aeroway = 'aerodrome'
+      THEN 'airfield'
+    WHEN amenity = 'ferry_terminal'
+      THEN 'ferry'
+
     WHEN shop = 'alcohol'
       THEN 'alcohol-shop'
     WHEN shop = 'car_repair'
@@ -173,6 +184,7 @@ WHERE
                 'dentist',
                 'doctors',
                 'fast_food',
+                'ferry_terminal',
                 'fire_station',
                 'fuel',
                 'hospital',
@@ -225,7 +237,9 @@ WHERE
               'government',
               'notary',
               'lawyer'
-    )
+    ) OR
+    railway = 'station' OR
+    aeroway in ('terminal', 'helipad', 'aerodrome')
   )
 ORDER BY
   CASE WHEN tourism = 'attraction' then 1
@@ -233,7 +247,8 @@ ORDER BY
        WHEN tourism in ('camp_site', 'caravan_site') then 3
        WHEN tourism is not null then 4
        WHEN historic is not null then 5
-       WHEN amenity is not null then 6
-       WHEN shop is not null then 7
-       ELSE 8
+       WHEN railway is not null or aeroway is not null then 6
+       WHEN amenity is not null then 7
+       WHEN shop is not null then 8
+       ELSE 9
   END
