@@ -633,7 +633,7 @@
         "symbol-placement": "point",
         "text-rotation-alignment": "auto",
         "text-font": [
-          "Roboto Italic"
+          "Roboto Condensed Italic"
         ],
         "text-allow-overlap": false,
         "text-ignore-placement": false,
@@ -675,7 +675,7 @@
       "layout": {
         "text-field": "{name}",
         "text-font": [
-          "Roboto Italic"
+          "Roboto Condensed Italic"
         ],
         "symbol-placement": "line",
         "text-rotation-alignment": "auto",
