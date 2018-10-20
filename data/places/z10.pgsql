@@ -1,5 +1,5 @@
 SELECT
-  place.gid AS gis,
+  place.gid AS gid,
   ST_AsBinary(place.geom) AS geom,
   place.name,
   place.kind
