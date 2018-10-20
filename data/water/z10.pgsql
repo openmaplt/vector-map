@@ -36,7 +36,7 @@ WHERE
 UNION ALL
 
 SELECT
-  row_number() over() AS gid,
+  (row_number() over()) + 1000 AS gid,
   st_asbinary(st_union(way)) AS geom,
   'water' AS kind,
   null AS name
