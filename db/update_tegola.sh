@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-
 DATAFILE=${DATAFILE:=data.pbf}
-DIRTY_FILE=dirty_tegola_tiles_`date +%s`
+DIRTY_FILE=dirty_tiles_`date +%s`
 TEGOLA_CONFIG_FILE=$(readlink -f ./../config.toml)
 
 echo "----------"
@@ -80,53 +79,49 @@ if [ -s dirty_tiles ]; then
     grep -E "^(8)"  dirty_tiles > generate_openmap_8_$DIRTY_FILE
     grep -E "^(7)"  dirty_tiles > generate_openmap_7_$DIRTY_FILE
 
-    #grep -E "^(10|11|12|13|14)" dirty_tiles > generate_bicycle_$DIRTY_FILE
-    #grep -E "^(10|11|12|13|14)" dirty_tiles > generate_craftbeer_$DIRTY_FILE
+    grep -E "^(10|11|12|13|14)" dirty_tiles > generate_bicycle_$DIRTY_FILE
+    grep -E "^(10|11|12|13|14)" dirty_tiles > generate_craftbeer_$DIRTY_FILE
 
     echo "Refreshing poi materialized view " `date`
     psql -d osm -U postgres < update_mv.sql
 
-    echo "OpenMap.lt delete expired " `date`
-    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --tile-list delete_openmap_$DIRTY_FILE
-    echo "OpenMap.lt generate expired 14 " `date`
-    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --tile-list generate_openmap_14_$DIRTY_FILE --overwrite --concurrency 3
-    echo "OpenMap.lt generate expired 13 " `date`
-    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --tile-list generate_openmap_13_$DIRTY_FILE --overwrite --concurrency 3
-    echo "OpenMap.lt generate expired 12 " `date`
-    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --tile-list generate_openmap_12_$DIRTY_FILE --overwrite --concurrency 3
-    echo "OpenMap.lt generate expired 11 " `date`
-    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --tile-list generate_openmap_11_$DIRTY_FILE --overwrite --concurrency 3
-    echo "OpenMap.lt generate expired 10 " `date`
-    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --tile-list generate_openmap_10_$DIRTY_FILE --overwrite --concurrency 3
-    echo "OpenMap.lt generate expired 9 " `date`
-    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --tile-list generate_openmap_9_$DIRTY_FILE --overwrite --concurrency 3
-    echo "OpenMap.lt generate expired 8 " `date`
-    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --tile-list generate_openmap_8_$DIRTY_FILE --overwrite --concurrency 3
-    echo "OpenMap.lt generate expired 7 " `date`
-    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --tile-list generate_openmap_7_$DIRTY_FILE --overwrite --concurrency 3
+    echo "OpenMap.lt delete expired tiles large scale tiles in layer 'all' " `date`
+    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="all"       --tile-list delete_openmap_$DIRTY_FILE
 
-    #echo "Bicycle delete expired " `date`
-    #tilestache-clean -c $TILESTACHE_CONFIG_FILE -l bicycle -e pbf --tile-list dirty_tiles
-    #echo "Bicycle generate expired " `date`
-    #tilestache-seed -c $TILESTACHE_CONFIG_FILE -x -l bicycle -e pbf --tile-list generate_bicycle_$DIRTY_FILE
+    echo "OpenMap.lt regenerate expired 14 " `date`
+    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --map="all" --tile-list generate_openmap_14_$DIRTY_FILE --overwrite --concurrency 3
+    echo "OpenMap.lt regenerate expired 13 " `date`
+    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --map="all" --tile-list generate_openmap_13_$DIRTY_FILE --overwrite --concurrency 3
+    echo "OpenMap.lt regenerate expired 12 " `date`
+    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --map="all" --tile-list generate_openmap_12_$DIRTY_FILE --overwrite --concurrency 3
+    echo "OpenMap.lt regenerate expired 11 " `date`
+    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --map="all" --tile-list generate_openmap_11_$DIRTY_FILE --overwrite --concurrency 3
+    echo "OpenMap.lt regenerate expired 10 " `date`
+    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --map="all" --tile-list generate_openmap_10_$DIRTY_FILE --overwrite --concurrency 3
+    echo "OpenMap.lt regenerate expired 9 " `date`
+    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --map="all" --tile-list generate_openmap_9_$DIRTY_FILE --overwrite --concurrency 3
+    echo "OpenMap.lt regenerate expired 8 " `date`
+    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --map="all" --tile-list generate_openmap_8_$DIRTY_FILE --overwrite --concurrency 3
+    echo "OpenMap.lt regenerate expired 7 " `date`
+    ../tegola cache seed --config $TEGOLA_CONFIG_FILE --map="all" --tile-list generate_openmap_7_$DIRTY_FILE --overwrite --concurrency 3
 
-    #echo "Craftbeer delete expired " `date`
-    #tilestache-clean -c $TILESTACHE_CONFIG_FILE -l craftbeer -e pbf --tile-list dirty_tiles
-    #echo "Craftbeer generate expired " `date`
-    #tilestache-seed -c $TILESTACHE_CONFIG_FILE -x -l craftbeer -e pbf --tile-list generate_craftbeer_$DIRTY_FILE
+    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="detail" --tile-list dirty_tiles
+    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="topo"   --tile-list dirty_tiles
 
-    #echo "Detail delete expired " `date`
-    #tilestache-clean -c $TILESTACHE_CONFIG_FILE -l detail -e pbf --tile-list dirty_tiles
+    echo "Bicycle regenerate expired " `date`
+    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="bicycle" --tile-list dirty_tiles
+    ../tegola cache seed --config $TEGOLA_CONFIG_FILE  --map="bicycle" --tile-list generate_bicycle_$DIRTY_FILE
 
-    #echo "Topo delete expired " `date`
-    #tilestache-clean -c $TILESTACHE_CONFIG_FILE -l topo -e pbf --tile-list dirty_tiles
+    echo "Craftbeer generate expired " `date`
+    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="craftbeer" --tile-list dirty_tiles
+    ../tegola cache seed --config $TEGOLA_CONFIG_FILE  --map="bicycle"   --tile-list generate_craftbeer_$DIRTY_FILE
 
     echo "Done " `date`
 
     rm delete_openmap_$DIRTY_FILE
     rm generate_openmap_*_$DIRTY_FILE
-    #rm generate_bicycle_$DIRTY_FILE
-    #rm generate_craftbeer_$DIRTY_FILE
+    rm generate_bicycle_$DIRTY_FILE
+    rm generate_craftbeer_$DIRTY_FILE
 fi
 
 echo "Update end: `date +%c`"
