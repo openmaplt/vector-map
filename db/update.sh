@@ -2,6 +2,14 @@
 DATAFILE=${DATAFILE:=data.pbf}
 DIRTY_FILE=dirty_tiles_`date +%s`
 TEGOLA_CONFIG_FILE=$(readlink -f ./../config.toml)
+LOCK_FILE=/tmp/openmap_update
+
+if [ -f $LOCK_FILE ]; then
+  echo "Update already running"
+  exit
+else
+  touch $LOCK_FILE
+fi
 
 echo "----------"
 echo "Update started: `date +%c`"
@@ -86,7 +94,7 @@ if [ -s dirty_tiles ]; then
     psql -d osm -U postgres < update_mv.sql
 
     echo "OpenMap.lt delete expired tiles large scale tiles in layer 'all' " `date`
-    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="all"       --tile-list delete_openmap_$DIRTY_FILE
+    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="all" --tile-list delete_openmap_$DIRTY_FILE
 
     echo "OpenMap.lt regenerate expired 14 " `date`
     ../tegola cache seed --config $TEGOLA_CONFIG_FILE --map="all" --tile-list generate_openmap_14_$DIRTY_FILE --overwrite --concurrency 3
@@ -110,11 +118,11 @@ if [ -s dirty_tiles ]; then
 
     echo "Bicycle regenerate expired " `date`
     ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="bicycle" --tile-list dirty_tiles
-    ../tegola cache seed --config $TEGOLA_CONFIG_FILE  --map="bicycle" --tile-list generate_bicycle_$DIRTY_FILE
+    ../tegola cache seed  --config $TEGOLA_CONFIG_FILE --map="bicycle" --tile-list generate_bicycle_$DIRTY_FILE --overwrite --concurrency 3
 
     echo "Craftbeer generate expired " `date`
     ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="craftbeer" --tile-list dirty_tiles
-    ../tegola cache seed --config $TEGOLA_CONFIG_FILE  --map="bicycle"   --tile-list generate_craftbeer_$DIRTY_FILE
+    ../tegola cache seed  --config $TEGOLA_CONFIG_FILE --map="craftbeer" --tile-list generate_craftbeer_$DIRTY_FILE --overwrite --concurrency 3
 
     echo "Done " `date`
 
@@ -127,3 +135,5 @@ fi
 echo "Update end: `date +%c`"
 
 find ./tegola_log/ -type f -mtime +7 -name '*.log' -execdir rm -- '{}' +
+
+rm $LOCK_FILE
