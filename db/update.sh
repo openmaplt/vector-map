@@ -134,6 +134,6 @@ fi
 
 echo "Update end: `date +%c`"
 
-find ./tegola_log/ -type f -mtime +7 -name '*.log' -execdir rm -- '{}' +
+find ./log/ -type f -mtime +7 -name '*.log' -execdir rm -- '{}' +
 
 rm $LOCK_FILE
