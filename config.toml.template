@@ -45,6 +45,10 @@ max_connections = 4
   sql = """%./data/roads/z2a.pgsql%"""
 
   [[providers.layers]]
+  name = "roads14"
+  sql = """%./data/roads/z2b.pgsql%"""
+
+  [[providers.layers]]
   name = "roads15"
   sql = """%./data/roads/z3.pgsql%"""
 
@@ -322,6 +326,12 @@ center = [23.871, 55.191, 7.0]
   name = "roads"
   provider_layer = "osm.roads13"
   min_zoom = 13
+  max_zoom = 13
+
+  [[maps.layers]]
+  name = "roads"
+  provider_layer = "osm.roads14"
+  min_zoom = 14
   max_zoom = 14
 
   [[maps.layers]]
