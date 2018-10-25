@@ -166,5 +166,6 @@ way        waterway:name text        linear
 node,way   craft        text         polygon
 way        track        text         linear
 way        footway      text         linear
+node,way   volatage     text         linear
 node,way   z_order      int4         linear # This is calculated during import
 way        way_area     real                # This is calculated during import
