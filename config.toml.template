@@ -265,6 +265,11 @@ max_connections = 4
   geometry_type = "Point"
 
   [[providers.layers]]
+  name = "topo_sym10"
+  sql = """%./data/topo/z10.pgsql%"""
+  geometry_type = "Point"
+
+  [[providers.layers]]
   name = "bicycle11"
   sql = """%./data/bicycle/z11.pgsql%"""
 
@@ -677,8 +682,15 @@ center = [23.871, 55.191, 7.0]
   name = "topo_sym"
   provider_layer = "osm.topo_sym16"
   dont_simplify = true
-  min_zoom = 10
+  min_zoom = 15
   max_zoom = 18
+
+  [[maps.layers]]
+  name = "topo_sym"
+  provider_layer = "osm.topo_sym10"
+  dont_simplify = true
+  min_zoom = 10
+  max_zoom = 14
 
 [[maps]]
 name = "bicycle"

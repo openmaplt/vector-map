@@ -15,6 +15,7 @@ create materialized view poi_topo (
  ,power
  ,landuse
  ,building
+ ,voltage
  ,way
 ) as
   select
@@ -33,6 +34,7 @@ create materialized view poi_topo (
         ,power
         ,landuse
         ,building
+        ,voltage
         ,way
     from planet_osm_point
    where aeroway in ('aerodrome', 'helipad')
@@ -59,6 +61,7 @@ create materialized view poi_topo (
         ,power
         ,landuse
         ,building
+        ,voltage
         ,st_centroid(way)
     from planet_osm_polygon
    where aeroway in ('aerodrome', 'helipad')
