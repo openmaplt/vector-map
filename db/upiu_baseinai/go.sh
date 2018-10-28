@@ -1,5 +1,5 @@
 #!/bin/bash
-#psql gis < upiu_baseinai.sql
-#psql gis < merge_water.sql
-psql gis < touch.sql
-psql gis < process.sql
+psql osm -U osm < upiu_baseinai.sql
+psql osm -U osm < merge_water.sql
+psql osm -U osm < touch.sql
+psql osm -U osm < process.sql

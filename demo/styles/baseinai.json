@@ -7,9 +7,7 @@
   "sources": {
     "basins": {
       "type": "vector",
-      "tiles": [
-        "https://openmap.lt/maps/basins/{z}/{x}/{y}.pbf"
-      ]
+      "url": "https://openmap.lt/capabilities/basins.json"
     },
     "all": {
       "type": "vector",
