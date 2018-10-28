@@ -2,6 +2,7 @@ SELECT
   row_number() over() AS gid,
   st_asbinary(r.geom) AS geom,
   r.kind,
+  r.surface,
   r.priority,
   r.name,
   r.ref,
