@@ -18,7 +18,7 @@
       "url": "https://openmap.lt/styles/hillshade.json"
     }
   },
-  "glyphs": "https://openmap.lt/webgl/glyphs/{fontstack}/{range}.pbf",
+  "glyphs": "https://openmap.lt/glyphs/{fontstack}/{range}.pbf",
   "layers": [
     {
       "id": "background",
