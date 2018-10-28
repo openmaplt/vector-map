@@ -1,0 +1,590 @@
+{
+  "version": 8,
+  "name": "openmap.lt",
+  "metadata": {
+    "maputnik:renderer": "mbgljs"
+  },
+  "sources": {
+    "basins": {
+      "type": "vector",
+      "tiles": [
+        "https://openmap.lt/maps/basins/{z}/{x}/{y}.pbf"
+      ]
+    },
+    "all": {
+      "type": "vector",
+      "url": "https://openmap.lt/capabilities/all.json"
+    },
+    "hillshade": {
+      "type": "raster-dem",
+      "url": "https://openmap.lt/styles/hillshade.json"
+    }
+  },
+  "glyphs": "https://openmap.lt/webgl/glyphs/{fontstack}/{range}.pbf",
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "paint": {
+        "background-color": "#222222"
+      }
+    },
+    {
+      "id": "water",
+      "type": "fill",
+      "source": "all",
+      "source-layer": "water",
+      "filter": [
+        "all",
+        [
+          "==",
+          "kind",
+          "water"
+        ]
+      ],
+      "paint": {
+        "fill-color": "rgba(23, 23, 28, 1)"
+      }
+    },
+    {
+      "id": "boundary",
+      "type": "line",
+      "source": "all",
+      "source-layer": "boundaries",
+      "paint": {
+        "line-color": "rgba(52, 52, 52, 1)",
+        "line-width": 2
+      }
+    },
+    {
+      "id": "city",
+      "type": "symbol",
+      "source": "all",
+      "source-layer": "places",
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "city",
+          "town"
+        ]
+      ],
+      "layout": {
+        "text-field": "{name}",
+        "visibility": "visible",
+        "text-font": [
+          "Roboto Condensed Italic"
+        ]
+      },
+      "paint": {
+        "text-color": "rgba(63, 63, 63, 1)"
+      }
+    },
+    {
+      "id": "hillshade",
+      "type": "hillshade",
+      "source": "hillshade",
+      "source-layer": "water"
+    },
+    {
+      "id": "river-halo",
+      "type": "line",
+      "source": "basins",
+      "source-layer": "basins",
+      "minzoom": 8,
+      "maxzoom": 18,
+      "filter": [
+        "all",
+        [
+          "==",
+          "waterway",
+          "river"
+        ],
+        [
+          "in",
+          "basin",
+          -100,
+          -101,
+          -102,
+          -103,
+          -104,
+          -105,
+          -106,
+          -107,
+          -108,
+          -109,
+          -110
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round",
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-color": {
+          "property": "basin",
+          "stops": [
+            [
+              -110,
+              "#888888"
+            ],
+            [
+              -109,
+              "#6666ff"
+            ],
+            [
+              -108,
+              "#ff66ff"
+            ],
+            [
+              -107,
+              "#ff6666"
+            ],
+            [
+              -106,
+              "#ffff66"
+            ],
+            [
+              -105,
+              "#70ff70"
+            ],
+            [
+              -104,
+              "#66ffff"
+            ],
+            [
+              -103,
+              "#ffff66"
+            ],
+            [
+              -102,
+              "#6666ff"
+            ],
+            [
+              -101,
+              "#ff7070"
+            ],
+            [
+              -100,
+              "#70ff70"
+            ]
+          ],
+          "type": "exponential"
+        },
+        "line-width": {
+          "stops": [
+            [
+              8,
+              1.5
+            ],
+            [
+              18,
+              40
+            ]
+          ]
+        },
+        "line-blur": {
+          "stops": [
+            [
+              8,
+              1.5
+            ],
+            [
+              18,
+              30
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "river",
+      "type": "line",
+      "source": "basins",
+      "source-layer": "basins",
+      "minzoom": 6,
+      "maxzoom": 18,
+      "filter": [
+        "all",
+        [
+          "==",
+          "waterway",
+          "river"
+        ],
+        [
+          "in",
+          "basin",
+          -100,
+          -101,
+          -102,
+          -103,
+          -104,
+          -105,
+          -106,
+          -107,
+          -108,
+          -109,
+          -110
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": {
+          "property": "basin",
+          "stops": [
+            [
+              -110,
+              "#888888"
+            ],
+            [
+              -109,
+              "#6666ff"
+            ],
+            [
+              -108,
+              "#ff66ff"
+            ],
+            [
+              -107,
+              "#ff6666"
+            ],
+            [
+              -106,
+              "#ffff66"
+            ],
+            [
+              -105,
+              "#70ff70"
+            ],
+            [
+              -104,
+              "#66ffff"
+            ],
+            [
+              -103,
+              "#ffff66"
+            ],
+            [
+              -102,
+              "#6666ff"
+            ],
+            [
+              -101,
+              "#ff7070"
+            ],
+            [
+              -100,
+              "#70ff70"
+            ]
+          ],
+          "type": "categorical"
+        },
+        "line-width": {
+          "stops": [
+            [
+              7,
+              1.5
+            ],
+            [
+              20,
+              15
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "stream-halo",
+      "type": "line",
+      "source": "basins",
+      "source-layer": "basins",
+      "minzoom": 6,
+      "maxzoom": 18,
+      "filter": [
+        "all",
+        [
+          "==",
+          "waterway",
+          "stream"
+        ],
+        [
+          "in",
+          "basin",
+          -100,
+          -101,
+          -102,
+          -103,
+          -104,
+          -105,
+          -106,
+          -107,
+          -108,
+          -109,
+          -110
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round",
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-color": {
+          "property": "basin",
+          "stops": [
+            [
+              -110,
+              "#888888"
+            ],
+            [
+              -109,
+              "#6666ff"
+            ],
+            [
+              -108,
+              "#ff66ff"
+            ],
+            [
+              -107,
+              "#ff6666"
+            ],
+            [
+              -106,
+              "#ffff66"
+            ],
+            [
+              -105,
+              "#70ff70"
+            ],
+            [
+              -104,
+              "#66ffff"
+            ],
+            [
+              -103,
+              "#ffff66"
+            ],
+            [
+              -102,
+              "#6666ff"
+            ],
+            [
+              -101,
+              "#ff7070"
+            ],
+            [
+              -100,
+              "#70ff70"
+            ]
+          ],
+          "type": "exponential"
+        },
+        "line-width": {
+          "stops": [
+            [
+              8,
+              0.75
+            ],
+            [
+              18,
+              20
+            ]
+          ]
+        },
+        "line-blur": {
+          "stops": [
+            [
+              8,
+              0.75
+            ],
+            [
+              18,
+              10
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "stream",
+      "type": "line",
+      "source": "basins",
+      "source-layer": "basins",
+      "minzoom": 6,
+      "maxzoom": 18,
+      "filter": [
+        "all",
+        [
+          "==",
+          "waterway",
+          "stream"
+        ],
+        [
+          "in",
+          "basin",
+          -100,
+          -101,
+          -102,
+          -103,
+          -104,
+          -105,
+          -106,
+          -107,
+          -108,
+          -109,
+          -110
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": {
+          "property": "basin",
+          "stops": [
+            [
+              -110,
+              "#888888"
+            ],
+            [
+              -109,
+              "#6666ff"
+            ],
+            [
+              -108,
+              "#ff66ff"
+            ],
+            [
+              -107,
+              "#ff6666"
+            ],
+            [
+              -106,
+              "#ffff66"
+            ],
+            [
+              -105,
+              "#70ff70"
+            ],
+            [
+              -104,
+              "#66ffff"
+            ],
+            [
+              -103,
+              "#ffff66"
+            ],
+            [
+              -102,
+              "#6666ff"
+            ],
+            [
+              -101,
+              "#ff7070"
+            ],
+            [
+              -100,
+              "#70ff70"
+            ]
+          ],
+          "type": "categorical"
+        },
+        "line-width": {
+          "stops": [
+            [
+              7,
+              0.75
+            ],
+            [
+              20,
+              10
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "label-river",
+      "type": "symbol",
+      "source": "basins",
+      "source-layer": "basins",
+      "minzoom": 7,
+      "maxzoom": 18,
+      "layout": {
+        "text-field": "{name}",
+        "symbol-placement": "line",
+        "text-rotation-alignment": "auto",
+        "text-font": [
+          "Roboto Condensed Italic"
+        ],
+        "text-allow-overlap": false,
+        "text-ignore-placement": false,
+        "text-size": 17,
+        "text-letter-spacing": 0.1,
+        "text-anchor": "bottom",
+        "text-max-angle": 55
+      },
+      "paint": {
+        "text-color": {
+          "property": "basin",
+          "stops": [
+            [
+              -110,
+              "#888888"
+            ],
+            [
+              -109,
+              "#6666ff"
+            ],
+            [
+              -108,
+              "#ff66ff"
+            ],
+            [
+              -107,
+              "#ff6666"
+            ],
+            [
+              -106,
+              "#ffff66"
+            ],
+            [
+              -105,
+              "#70ff70"
+            ],
+            [
+              -104,
+              "#66ffff"
+            ],
+            [
+              -103,
+              "#ffff66"
+            ],
+            [
+              -102,
+              "#6666ff"
+            ],
+            [
+              -101,
+              "#ff7070"
+            ],
+            [
+              -100,
+              "#70ff70"
+            ]
+          ],
+          "type": "categorical"
+        },
+        "text-halo-width": 1,
+        "text-halo-color": "rgba(0, 0, 0, 0.5)"
+      }
+    }
+  ],
+  "id": "river-basins"
+}

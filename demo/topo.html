@@ -16,18 +16,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.css' rel='stylesheet' />
     <style>
         body { margin:0; padding:0; }
-        #map { position:absolute; top:0; bottom:0; width:100%; }
-        .info {
-            position: absolute;
-            bottom: 0px;
-            right: 0px;
-            background: #fff;
-            background: rgba(255, 255, 255, 0.8);
-            margin: 0;
-            padding: 0px 5px;
-            font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
-            font-size: 11px;
-        }
     </style>
 </head>
 <body>
@@ -37,11 +25,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 <div id='map'></div>
-<div class='info'>
-    <a href='https://www.mapbox.com/mapbox-gl/' target='_blank'>Mapbox GL</a> |
-    © <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap contributors</a> |
-    <a href='https://mapzen.com/projects/vector-tiles' title='Tiles courtesy of Mapzen' target='_blank'>Mapzen</a>
-</div>
 
 <script>
   var defaultType = 'topo';
