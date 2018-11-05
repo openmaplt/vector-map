@@ -17,7 +17,7 @@
       "type": "vector",
       "url": "https://openmap.lt/capabilities/detail.json"
     },
-    "dem" : {
+    "dem": {
       "type": "raster-dem",
       "url": "https://openmap.lt/styles/hillshade.json"
     }
@@ -318,8 +318,8 @@
     },
     {
       "id": "hillshading",
-      "source": "dem",
       "type": "hillshade",
+      "source": "dem",
       "minzoom": 9,
       "paint": {
         "hillshade-exaggeration": 0.5
@@ -1620,6 +1620,45 @@
           4
         ]
       }
+    },
+    {
+      "id": "power-l",
+      "type": "line",
+      "source": "detail",
+      "source-layer": "power_l",
+      "paint": {
+        "line-width": 0.4,
+        "line-color": "#666666"
+      }
+    },
+    {
+      "id": "power-p",
+      "type": "circle",
+      "source": "detail",
+      "source-layer": "power_p",
+      "paint": {
+        "circle-radius": 2,
+        "circle-color": "#666666"
+      }
+    },
+    {
+      "id": "power-l-label",
+      "type": "symbol",
+      "source": "detail",
+      "source-layer": "power_l",
+      "layout": {
+        "text-font": [
+          "Roboto Regular"
+        ],
+        "text-field": "{voltage} kV",
+        "text-size": 10,
+        "text-offset": [
+          0,
+          -0.5
+        ],
+        "symbol-placement": "line"
+      },
+      "paint": {}
     },
     {
       "id": "label-national-park",
