@@ -285,6 +285,14 @@ max_connections = 4
   name = "basins7"
   sql = """%./data/basins/z7.sql%"""
 
+  [[providers.layers]]
+  name = "power_l13"
+  sql = """%./data/power_l/z13.sql%"""
+
+  [[providers.layers]]
+  name = "power_p13"
+  sql = """%./data/power_p/z13.sql%"""
+
 [[maps]]
 name = "all"
 attribution = "© OpenStreetMap contributors"
@@ -673,6 +681,20 @@ center = [23.871, 55.191, 7.0]
   provider_layer = "osm.detail_line16"
   dont_simplify = true
   min_zoom = 16
+  max_zoom = 18
+
+  [[maps.layers]]
+  name = "power_l"
+  provider_layer = "osm.power_l13"
+  dont_simplify = true
+  min_zoom = 13
+  max_zoom = 18
+
+  [[maps.layers]]
+  name = "power_p"
+  provider_layer = "osm.power_p13"
+  dont_simplify = true
+  min_zoom = 13
   max_zoom = 18
 
 [[maps]]
