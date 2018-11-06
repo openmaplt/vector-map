@@ -1702,6 +1702,52 @@
       }
     },
     {
+      "id": "power-l",
+      "type": "line",
+      "source": "detail",
+      "source-layer": "power_l",
+      "paint": {
+        "line-width": 0.4,
+        "line-color": "#666666"
+      }
+    },
+    {
+      "id": "power-p",
+      "type": "circle",
+      "source": "detail",
+      "source-layer": "power_p",
+      "paint": {
+        "circle-radius": 2,
+        "circle-color": "#666666"
+      }
+    },
+    {
+      "id": "poser-l-label",
+      "type": "symbol",
+      "source": "detail",
+      "source-layer": "power_l",
+      "filter": [
+        "all",
+        [
+          "has",
+          "voltage"
+        ]
+      ],
+      "layout": {
+        "text-font": [
+          "Roboto Regular"
+        ],
+        "text-field": "{voltage} kV",
+        "text-size": 10,
+        "text-offset": [
+          0,
+          -0.5
+        ],
+        "symbol-placement": "line"
+      },
+      "paint": {}
+    },
+    {
       "id": "label-national-park",
       "type": "symbol",
       "source": "tilezen",

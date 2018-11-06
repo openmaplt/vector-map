@@ -1646,6 +1646,13 @@
       "type": "symbol",
       "source": "detail",
       "source-layer": "power_l",
+      "filter": [
+        "all",
+        [
+          "has",
+          "voltage"
+        ]
+      ],
       "layout": {
         "text-font": [
           "Roboto Regular"
