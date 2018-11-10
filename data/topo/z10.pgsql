@@ -16,6 +16,8 @@ SELECT
       THEN 'communication_tower'
     WHEN man_made = 'tower' and "tower:type" in ('observation', 'communication')
       THEN 'light_tower'
+    WHEN mam_made = 'mast'
+      THEN 'light_tower'
     WHEN man_made in ('tower', 'water_tower')
       THEN 'tower'
     WHEN man_made = 'lighthouse'
@@ -46,4 +48,4 @@ FROM
   poi_topo
 WHERE
   way && !BBOX!
-  AND (coalesce(power, '!@#') != 'substation' OR coalesce(voltage, '0') = '110000')
+  AND (coalesce(power, '!@#') != 'substation' OR coalesce(voltage, '0') in ('110000', '35000'))
