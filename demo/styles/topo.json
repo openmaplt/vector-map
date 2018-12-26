@@ -609,6 +609,40 @@
       }
     },
     {
+      "id": "detail-dam",
+      "type": "line",
+      "source": "detail",
+      "source-layer": "detail_line",
+      "minzoom": 13,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "==",
+          "kind",
+          "dam"
+        ]
+      ],
+      "layout": {
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-width": {
+          "stops": [
+            [
+              14,
+              1
+            ],
+            [
+              18,
+              3
+            ]
+          ]
+        },
+        "line-color": "#110f0d"
+      }
+    },
+    {
       "id": "boundary-national-park-outline",
       "type": "line",
       "source": "tilezen",
