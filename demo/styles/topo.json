@@ -609,6 +609,32 @@
       }
     },
     {
+      "id": "detail-dam-teeth",
+      "type": "line",
+      "source": "detail",
+      "source-layer": "detail_line",
+      "minzoom": 15,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "==",
+          "kind",
+          "dam"
+        ]
+      ],
+      "paint": {
+        "line-width": 4,
+        "line-offset": -3,
+        "line-opacity": 1,
+        "line-dasharray": [
+          0.4,
+          0.7
+        ],
+        "line-color": "#110f0d"
+      }
+    },
+    {
       "id": "detail-dam",
       "type": "line",
       "source": "detail",
@@ -623,22 +649,21 @@
           "dam"
         ]
       ],
-      "layout": {
-        "visibility": "visible"
-      },
       "paint": {
         "line-width": {
           "stops": [
             [
-              14,
+              13,
               1
             ],
             [
-              18,
+              15,
               3
             ]
           ]
         },
+        "line-offset": 0,
+        "line-opacity": 1,
         "line-color": "#110f0d"
       }
     },
