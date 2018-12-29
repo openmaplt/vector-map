@@ -609,11 +609,94 @@
       }
     },
     {
-      "id": "detail-dam-teeth",
+      "id": "dam-teeth-highway",
       "type": "line",
       "source": "detail",
       "source-layer": "detail_line",
-      "minzoom": 15,
+      "minzoom": 13,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "==",
+          "kind",
+          "dam_highway"
+        ]
+      ],
+      "paint": {
+        "line-width": {
+          "stops": [
+            [
+              13,
+              3
+            ],
+            [
+              16,
+              8
+            ],
+            [
+              18,
+              15
+            ]
+          ]
+        },
+        "line-offset": 3,
+        "line-opacity": 1,
+        "line-dasharray": {
+          "stops": [
+            [
+              13,
+              [
+                0.5,
+                0.9
+              ]
+            ],
+            [
+              14,
+              [
+                0.4,
+                0.8
+              ]
+            ],
+            [
+              15,
+              [
+                0.3,
+                0.7
+              ]
+            ],
+            [
+              16,
+              [
+                0.25,
+                0.5
+              ]
+            ],
+            [
+              17,
+              [
+                0.2,
+                0.4
+              ]
+            ],
+            [
+              18,
+              [
+                0.2,
+                0.3
+              ]
+            ]
+          ]
+        },
+        "line-color": "#110f0d"
+      }
+    },
+    {
+      "id": "dam-teeth",
+      "type": "line",
+      "source": "detail",
+      "source-layer": "detail_line",
+      "minzoom": 13,
       "maxzoom": 24,
       "filter": [
         "all",
@@ -625,7 +708,7 @@
       ],
       "paint": {
         "line-width": 4,
-        "line-offset": -3,
+        "line-offset": 3,
         "line-opacity": 1,
         "line-dasharray": [
           0.4,
@@ -635,7 +718,7 @@
       }
     },
     {
-      "id": "detail-dam",
+      "id": "dam-main",
       "type": "line",
       "source": "detail",
       "source-layer": "detail_line",
