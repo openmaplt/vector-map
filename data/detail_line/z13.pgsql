@@ -1,7 +1,8 @@
 SELECT
   gid AS gid,
   wkb AS geom,
-  kind AS kind
+  kind AS kind,
+  highway
 FROM
   details_line
 WHERE
