@@ -80,9 +80,6 @@
           "orchard"
         ]
       ],
-      "layout": {
-        "visibility": "visible"
-      },
       "paint": {
         "fill-pattern": "orchard"
       }
@@ -101,9 +98,6 @@
           "cemetery"
         ]
       ],
-      "layout": {
-        "visibility": "visible"
-      },
       "paint": {
         "fill-pattern": "cemetery"
       }
@@ -244,28 +238,6 @@
         "fill-color": "rgba(210, 190, 210, 1)",
         "fill-opacity": 1,
         "fill-outline-color": "rgba(150, 125, 160, 1)"
-      }
-    },
-    {
-      "id": "landuse-allotments",
-      "type": "fill",
-      "source": "tilezen",
-      "source-layer": "landuse",
-      "minzoom": 6,
-      "filter": [
-        "all",
-        [
-          "in",
-          "kind",
-          "allotments"
-        ]
-      ],
-      "layout": {
-        "visibility": "none"
-      },
-      "paint": {
-        "fill-color": "rgba(226, 211, 197, 1)",
-        "fill-opacity": 1
       }
     },
     {
@@ -621,6 +593,94 @@
           "==",
           "kind",
           "dam_highway"
+        ],
+        [
+          "!in",
+          "highway",
+          "footway",
+          "path",
+          "track"
+        ]
+      ],
+      "paint": {
+        "line-width": 4,
+        "line-offset": {
+          "stops": [
+            [
+              13,
+              1
+            ],
+            [
+              15,
+              4
+            ],
+            [
+              18,
+              9
+            ]
+          ]
+        },
+        "line-opacity": 1,
+        "line-dasharray": [
+          0.4,
+          0.7
+        ],
+        "line-color": "#444444"
+      }
+    },
+    {
+      "id": "dam-teeth-small",
+      "type": "line",
+      "source": "detail",
+      "source-layer": "detail_line",
+      "minzoom": 13,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "dam_highway"
+        ],
+        [
+          "in",
+          "highway",
+          "footway",
+          "path",
+          "track"
+        ]
+      ],
+      "paint": {
+        "line-width": 4,
+        "line-offset": 3,
+        "line-opacity": 1,
+        "line-dasharray": [
+          0.4,
+          0.7
+        ],
+        "line-color": "#444444"
+      }
+    },
+    {
+      "id": "dam-main-small",
+      "type": "line",
+      "source": "detail",
+      "source-layer": "detail_line",
+      "minzoom": 13,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "==",
+          "kind",
+          "dam_highway"
+        ],
+        [
+          "in",
+          "highway",
+          "footway",
+          "track",
+          "path"
         ]
       ],
       "paint": {
@@ -628,67 +688,57 @@
           "stops": [
             [
               13,
-              3
-            ],
-            [
-              16,
-              8
-            ],
-            [
-              18,
-              15
-            ]
-          ]
-        },
-        "line-offset": 3,
-        "line-opacity": 1,
-        "line-dasharray": {
-          "stops": [
-            [
-              13,
-              [
-                0.5,
-                0.9
-              ]
-            ],
-            [
-              14,
-              [
-                0.4,
-                0.8
-              ]
+              1
             ],
             [
               15,
-              [
-                0.3,
-                0.7
-              ]
-            ],
-            [
-              16,
-              [
-                0.25,
-                0.5
-              ]
-            ],
-            [
-              17,
-              [
-                0.2,
-                0.4
-              ]
-            ],
-            [
-              18,
-              [
-                0.2,
-                0.3
-              ]
+              4
             ]
           ]
         },
-        "line-color": "#110f0d"
+        "line-offset": 0,
+        "line-opacity": 1,
+        "line-color": "#444444"
+      }
+    },
+    {
+      "id": "dam-small-back",
+      "type": "line",
+      "source": "detail",
+      "source-layer": "detail_line",
+      "minzoom": 13,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "==",
+          "kind",
+          "dam_highway"
+        ],
+        [
+          "in",
+          "highway",
+          "footway",
+          "track",
+          "path"
+        ]
+      ],
+      "paint": {
+        "line-width": {
+          "stops": [
+            [
+              13,
+              1
+            ],
+            [
+              15,
+              1.5
+            ]
+          ]
+        },
+        "line-offset": 0,
+        "line-opacity": 1,
+        "line-color": "#eeeeee"
       }
     },
     {
@@ -701,7 +751,7 @@
       "filter": [
         "all",
         [
-          "==",
+          "in",
           "kind",
           "dam"
         ]
@@ -714,7 +764,7 @@
           0.4,
           0.7
         ],
-        "line-color": "#110f0d"
+        "line-color": "#444444"
       }
     },
     {
@@ -747,7 +797,7 @@
         },
         "line-offset": 0,
         "line-opacity": 1,
-        "line-color": "#110f0d"
+        "line-color": "#444444"
       }
     },
     {
@@ -1036,8 +1086,7 @@
       ],
       "layout": {
         "line-join": "round",
-        "line-cap": "round",
-        "visibility": "visible"
+        "line-cap": "round"
       },
       "paint": {
         "line-color": "#111111",
@@ -1413,8 +1462,7 @@
       ],
       "layout": {
         "line-join": "round",
-        "line-cap": "round",
-        "visibility": "visible"
+        "line-cap": "round"
       },
       "paint": {
         "line-color": "#d7b7ad",
@@ -1454,8 +1502,7 @@
       ],
       "layout": {
         "line-join": "round",
-        "line-cap": "round",
-        "visibility": "visible"
+        "line-cap": "round"
       },
       "paint": {
         "line-color": "rgba(230, 220, 0, 1)",
@@ -1860,8 +1907,7 @@
         "text-font": [
           "Roboto Condensed Italic"
         ],
-        "text-padding": 1,
-        "visibility": "visible"
+        "text-padding": 1
       },
       "paint": {
         "text-color": "rgba(26, 92, 0, 1)",
@@ -1907,8 +1953,7 @@
         ],
         "icon-image": "",
         "text-padding": 30,
-        "symbol-avoid-edges": false,
-        "visibility": "visible"
+        "symbol-avoid-edges": false
       },
       "paint": {
         "text-halo-width": 2,
@@ -2273,7 +2318,6 @@
         "text-font": [
           "Playfair Regular"
         ],
-        "visibility": "visible",
         "text-letter-spacing": 0.05
       },
       "paint": {
@@ -2328,8 +2372,7 @@
         "text-font": [
           "Roboto Condensed Italic"
         ],
-        "text-padding": 1,
-        "visibility": "visible"
+        "text-padding": 1
       },
       "paint": {
         "text-color": "rgba(26, 92, 0, 1)",

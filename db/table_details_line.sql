@@ -11,14 +11,13 @@ SELECT
   way,
   case when man_made = 'cutline' then 'cutline'
        when "natural" = 'cliff' then 'cliff'
+       when highway is not null then 'dam_highway'
        when waterway in ('dam', 'weir') then 'dam'
-       when highway is not null and man_made = 'embankment' then 'dam_highway'
-       when man_made = 'embankment' then 'dam'
-  end AS kind
+  end AS kind,
+  highway
 FROM
   planet_osm_line
 WHERE
   (man_made = 'cutline' OR
    "natural" = 'cliff' OR
-   waterway in ('dam', 'weir') OR
-   (man_made = 'embankment' and "embankment:type" = 'dam'));
+   waterway in ('dam', 'weir'));
