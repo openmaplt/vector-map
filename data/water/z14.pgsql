@@ -1,24 +1,13 @@
 SELECT
   osm_id AS gid,
   st_asbinary(way) AS geom,
-  (
-    CASE
-      WHEN waterway = 'dock'
-        THEN 'dock'
-      WHEN waterway = 'canal'
-        THEN 'canal'
-      WHEN waterway = 'river'
-        THEN 'river'
-      WHEN waterway = 'stream'
-        THEN 'stream'
-    END
-  ) AS kind,
+  waterway AS kind,
   coalesce("name:lt", name) AS name
 FROM
   planet_osm_line
 WHERE
   way && !BBOX! AND
-  waterway IN ('dock', 'canal', 'river', 'stream') AND
+  waterway IN ('dock', 'canal', 'river', 'stream', 'ditch') AND
   "waterway:name" is null
 
 UNION ALL
