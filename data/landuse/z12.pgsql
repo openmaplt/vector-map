@@ -26,7 +26,7 @@ FROM
 WHERE
   way && !BBOX! AND
   (
-    landuse IN ('residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages', 'orchard') OR
+    landuse IN ('residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages', 'orchard', 'farmyard') OR
    "natural" in ('wetland', 'beach', 'sand', 'scrub', 'heath') OR
    aeroway = 'runway'
   ) AND
