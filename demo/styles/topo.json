@@ -231,7 +231,8 @@
         [
           "in",
           "kind",
-          "industrial"
+          "industrial",
+          "farmyard"
         ]
       ],
       "paint": {
@@ -259,33 +260,6 @@
       "paint": {
         "fill-color": "rgba(122, 220, 125, 1)",
         "fill-opacity": 0.5
-      }
-    },
-    {
-      "id": "water-line",
-      "type": "line",
-      "source": "tilezen",
-      "source-layer": "water",
-      "filter": [
-        "==",
-        "$type",
-        "LineString"
-      ],
-      "paint": {
-        "line-color": "#7acad0",
-        "line-width": {
-          "base": 1.2,
-          "stops": [
-            [
-              8,
-              0.5
-            ],
-            [
-              20,
-              15
-            ]
-          ]
-        }
       }
     },
     {
@@ -426,6 +400,43 @@
       ],
       "paint": {
         "fill-pattern": "reedbed"
+      }
+    },
+    {
+      "id": "waterway-other",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "water",
+      "minzoom": 14,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "in",
+          "kind",
+          "ditch",
+          "canal"
+        ]
+      ],
+      "paint": {
+        "line-color": "#bed7f0",
+        "line-width": {
+          "base": 1.2,
+          "stops": [
+            [
+              14,
+              1
+            ],
+            [
+              18,
+              8
+            ]
+          ]
+        }
       }
     },
     {
