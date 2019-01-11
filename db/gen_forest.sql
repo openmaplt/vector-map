@@ -25,13 +25,13 @@ insert into gen_forest
   select nextval('gen_forest_seq') AS id,
          0,
          150,
-         ST_CollectionExtract(unnest(ST_ClusterWithin(way, 150)), 3)::geometry(MultiPolygon, 3857)
+         ST_CollectionExtract(unnest(ST_ClusterWithin(way, 100)), 3)::geometry(MultiPolygon, 3857)
     from gen_forest
    where res = 10;
 
-delete from gen_forest where st_area(st_buffer(way, -75)) < 150 and res = 150;
+delete from gen_forest where st_area(st_buffer(way, -50)) < 150 and res = 150;
 
-update gen_forest set way = st_makevalid(st_multi(st_simplifypreservetopology(st_buffer(st_buffer(way, 75, 'quad_segs=1'), -75, 'quad_segs=1'), 150))) where res = 150;
+update gen_forest set way = st_makevalid(st_multi(st_simplifypreservetopology(st_buffer(st_buffer(st_buffer(way, 50, 'quad_segs=1'), -100, 'quad_segs=1'), 50, 'quad_segs=1'), 100))) where res = 150;
 update gen_forest set way_area = st_area(way) where res = 150;
 
 -------------------
@@ -47,7 +47,7 @@ insert into gen_forest
 
 delete from gen_forest where st_area(st_buffer(way, -300)) < 600 and res = 600;
 
-update gen_forest set way = st_makevalid(st_multi(st_simplifypreservetopology(st_buffer(st_buffer(way, 600, 'quad_segs=1'), -600, 'quad_segs=1'), 600))) where res = 600;
+update gen_forest set way = st_makevalid(st_multi(st_simplifypreservetopology(st_buffer(st_buffer(way, 300, 'quad_segs=1'), -300, 'quad_segs=1'), 400))) where res = 600;
 update gen_forest set way_area = st_area(way) where res = 600;
 
 create index gen_forest_10_gix ON gen_forest using gist (way) where res = 10;
