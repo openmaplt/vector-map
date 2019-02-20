@@ -22,7 +22,7 @@ FROM
 WHERE
   way && !BBOX! AND
   (
-    landuse IN ('residential', 'meadow', 'farmland', 'allotments', 'industrial', 'farmyard') OR
+    landuse IN ('residential', 'meadow', 'farmland', 'allotments', 'industrial', 'farmyard', 'industrial') OR
    "natural" in ('wetland', 'heath')
   ) AND
   way_area >= 100000
