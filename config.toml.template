@@ -293,6 +293,14 @@ max_connections = 4
   name = "power_p13"
   sql = """%./data/power_p/z13.sql%"""
 
+  [[providers.layers]]
+  name = "labels_p"
+  sql = """%./data/labels/labels.sql%"""
+
+  [[providers.layers]]
+  name = "labels_c"
+  sql = """%./data/labels/center.sql%"""
+
 [[maps]]
 name = "all"
 attribution = "© OpenStreetMap contributors"
@@ -650,6 +658,20 @@ center = [23.871, 55.191, 7.0]
   name = "coastline"
   provider_layer = "osm.coastline15"
   min_zoom = 15
+  max_zoom = 18
+
+  [[maps.layers]]
+  name = "labels_c"
+  provider_layer = "osm.labels_c"
+  dont_clip = true
+  min_zoom = 9
+  max_zoom = 18
+
+  [[maps.layers]]
+  name = "labels_p"
+  provider_layer = "osm.labels_p"
+  dont_simplify = true
+  min_zoom = 9
   max_zoom = 18
 
 [[maps]]
