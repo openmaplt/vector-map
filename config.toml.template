@@ -10,9 +10,9 @@ name = "osm"
 type = "postgis"
 host = "localhost"
 port = 5432
-database = "gis"
-user = "tomas"
-password = ""
+database = "osm"
+user = "osm"
+password = "osm"
 srid = 3857
 max_connections = 4
 
