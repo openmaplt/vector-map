@@ -3,7 +3,7 @@ port = ":8082"
 
 [cache]
 type = "file"
-basepath = "/home/openmap/tegola_cache"
+basepath = "/home/openmap/cache"
 
 [[providers]]
 name = "osm"
@@ -296,10 +296,12 @@ max_connections = 4
   [[providers.layers]]
   name = "labels_p"
   sql = """%./data/labels/labels.sql%"""
+  geometry_type = "Point"
 
   [[providers.layers]]
   name = "labels_c"
   sql = """%./data/labels/center.sql%"""
+  geometry_type = "LineString"
 
 [[maps]]
 name = "all"
