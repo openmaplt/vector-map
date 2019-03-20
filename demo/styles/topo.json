@@ -348,6 +348,47 @@
       }
     },
     {
+      "id": "waterway-river-fill",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "water",
+      "minzoom": 12,
+      "maxzoom": 20,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "in",
+          "kind",
+          "river"
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#bed7f0",
+        "line-width": {
+          "base": 1.4,
+          "stops": [
+            [
+              8,
+              0.5
+            ],
+            [
+              20,
+              15
+            ]
+          ]
+        }
+      }
+    },
+    {
       "id": "waterway-river-direction",
       "type": "line",
       "source": "tilezen",
@@ -2070,47 +2111,69 @@
       }
     },
     {
-      "id": "label-water-poly",
+      "id": "label-water-center",
       "type": "symbol",
       "source": "tilezen",
-      "source-layer": "places",
+      "source-layer": "labels_c",
       "minzoom": 9,
-      "maxzoom": 20,
+      "maxzoom": 18,
       "filter": [
-        "all",
-        [
-          "==",
-          "kind",
-          "water"
-        ]
+        "all"
       ],
       "layout": {
+        "symbol-placement": "line-center",
         "text-field": "{name}",
-        "symbol-placement": "point",
-        "text-rotation-alignment": "auto",
         "text-font": [
           "Playfair Italic"
         ],
-        "text-allow-overlap": false,
-        "text-ignore-placement": false,
-        "text-letter-spacing": 0.2,
+        "text-letter-spacing": {
+          "property": "letter_spacing",
+          "type": "identity"
+        },
         "text-size": {
-          "stops": [
-            [
-              6,
-              10
-            ],
-            [
-              20,
-              15
-            ]
-          ]
-        }
+          "property": "font_size",
+          "type": "identity"
+        },
+        "text-max-angle": 80,
+        "visibility": "visible"
       },
       "paint": {
         "text-color": "#49a5dd",
-        "text-halo-width": 1.5,
-        "text-halo-color": "rgba(255, 255, 255, 0.9)"
+        "text-halo-color": "rgba(245, 241, 241, 1)",
+        "text-halo-width": 2,
+        "text-halo-blur": 2
+      }
+    },
+    {
+      "id": "label-water-point",
+      "type": "symbol",
+      "source": "tilezen",
+      "source-layer": "labels_p",
+      "minzoom": 9,
+      "maxzoom": 20,
+      "filter": [
+        "all"
+      ],
+      "layout": {
+        "text-field": "{name}",
+        "text-font": [
+          "Playfair Italic"
+        ],
+        "text-size": {
+          "property": "font_size",
+          "type": "identity"
+        },
+        "text-letter-spacing": {
+          "property": "letter_spacing",
+          "type": "identity"
+        },
+        "text-max-width": 100
+      },
+      "paint": {
+        "text-color": "#49a5dd",
+        "text-halo-color": "rgba(245, 241, 241, 1)",
+        "text-halo-width": 2,
+        "text-halo-blur": 2
       }
     },
     {
@@ -2432,7 +2495,9 @@
         "text-allow-overlap": false,
         "text-font": [
           "Roboto Condensed Italic"
-        ]
+        ],
+        "text-letter-spacing": 0.1,
+        "text-max-angle": 60
       },
       "paint": {
         "text-halo-width": 2,
