@@ -46,7 +46,7 @@ psql -d osm -U postgres < remove_outside_objects.sql
 cat dirty_tiles >> dirty_tiles_weekly
 
 # update generalisation on Saturday
-if [[ $(date +%u) -eq 56 ]] ; then
+if [[ $(date +%u) -eq 6 ]] ; then
 # NOTE: IŠJUNGTA, KOL SERVERIS NETURI PAKANKAMAI ATMINTIES APDOROTI
 #  psql -d osm -U postgres < way_generalisation.sql
   echo "water generalisation" `date`
