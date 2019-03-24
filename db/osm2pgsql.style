@@ -169,4 +169,5 @@ way        footway      text         linear
 node,way   voltage      text         linear
 node,way   z_order      int4         linear # This is calculated during import
 way        way_area     real                # This is calculated during import
+node,way   osm_timestamp timestamptz(0)
 way        embankment:type text

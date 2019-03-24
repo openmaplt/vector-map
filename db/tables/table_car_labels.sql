@@ -1,3 +1,4 @@
+create sequence car_labels_seq;
 drop table if exists car_labels;
 create table car_labels(
 id bigint,
