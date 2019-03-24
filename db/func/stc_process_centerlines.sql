@@ -32,7 +32,7 @@ begin
                   ,planet_osm_polygon p
              where p.osm_id = r.osm_id
                and (r.dirty = 'Y' or
-                    now() - r.last_update > interval '1 month'
+                    now() - r.last_update > interval '3 months'
                    )
              order by st_area(p.way) desc
              limit p_limit) loop

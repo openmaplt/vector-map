@@ -33,7 +33,7 @@ fi
 
 #apply diff
 rm dirty_tiles
-./osm2pgsql --username postgres --database osm --style ./osm2pgsql.style --multi-geometry --number-processes 4 --slim --cache 100 --proj 3857 --expire-tiles 7-18 --append change.osc > /dev/null
+./osm2pgsql --username postgres --database osm --style ./osm2pgsql.style -x --multi-geometry --number-processes 4 --slim --cache 100 --proj 3857 --expire-tiles 7-18 --append change.osc > /dev/null
 
 if [ $? -ne 0 ]; then
 	exit
@@ -90,8 +90,10 @@ if [ -s dirty_tiles ]; then
     grep -E "^(10|11|12|13|14)" dirty_tiles > generate_bicycle_$DIRTY_FILE
     grep -E "^(10|11|12|13|14)" dirty_tiles > generate_craftbeer_$DIRTY_FILE
 
-    echo "Refreshing poi materialized view " `date`
+    echo "Refreshing materialized views " `date`
     psql -d osm -U postgres < update_mv.sql
+    echo "Refreshing waterbody labels " `date`
+    psql -d osm -U postgres < update_water_labels.sql
 
     echo "OpenMap.lt delete expired tiles large scale tiles in layer 'all' " `date`
     ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="all" tile-list delete_openmap_$DIRTY_FILE
