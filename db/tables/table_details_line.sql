@@ -12,7 +12,7 @@ SELECT
   case when man_made = 'cutline' then 'cutline'
        when "natural" = 'cliff' then 'cliff'
        when highway is not null then 'dam_highway'
-       when waterway in ('dam', 'weir') then 'dam'
+       when waterway = 'dam' then 'dam'
   end AS kind,
   highway
 FROM
@@ -20,4 +20,4 @@ FROM
 WHERE
   (man_made = 'cutline' OR
    "natural" = 'cliff' OR
-   waterway in ('dam', 'weir'));
+   waterway = 'dam';
