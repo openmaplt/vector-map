@@ -19,7 +19,7 @@ FROM
 WHERE
   way && !BBOX! AND
   waterway IN ('dock', 'canal', 'river', 'stream') AND
-  "waterway:name" is null
+  "waterway:speed" is null
 
 UNION ALL
 
