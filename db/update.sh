@@ -92,8 +92,8 @@ if [ -s dirty_tiles ]; then
 
     for ZOOM in $(seq 15 -1 7); do
         echo "OpenMap.lt regenerate expired $ZOOM " `date`
-        grep -E "^$ZOOM/" dirty_tiles > generate_openmap_$ZOOM_$DIRTY_FILE
-        $TEGOLA_SEED --map="all" tile-list generate_openmap_$ZOOM_$DIRTY_FILE > /dev/null
+        grep -E "^$ZOOM/" dirty_tiles > generate_openmap_${ZOOM}_$DIRTY_FILE
+        $TEGOLA_SEED --map="all" tile-list generate_openmap_${ZOOM}_$DIRTY_FILE > /dev/null
     done
     rm generate_openmap_*_$DIRTY_FILE
 
