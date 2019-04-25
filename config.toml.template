@@ -303,6 +303,16 @@ max_connections = 4
   sql = """%./data/labels/center.sql%"""
   geometry_type = "LineString"
 
+  [[providers.layers]]
+  name = "river_sym11"
+  sql = """%./data/river/z11.sql%"""
+  geometry_type = "Point"
+
+  [[providers.layers]]
+  name = "river_sym14"
+  sql = """%./data/river/z14.sql%"""
+  geometry_type = "Point"
+
 [[maps]]
 name = "all"
 attribution = "© OpenStreetMap contributors"
@@ -778,4 +788,21 @@ center = [23.871, 55.191, 7.0]
   name = "basins"
   provider_layer = "osm.basins7"
   min_zoom = 7
+  max_zoom = 18
+
+[[maps]]
+name = "river"
+attribution = "© OpenStreetMap contributors"
+center = [23.871, 55.191, 7.0]
+
+  [[maps.layers]]
+  name = "point"
+  provider_layer = "osm.river_sym11"
+  min_zoom = 11
+  max_zoom = 13
+
+  [[maps.layers]]
+  name = "point"
+  provider_layer = "osm.river_sym14"
+  min_zoom = 14
   max_zoom = 18
