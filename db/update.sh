@@ -97,14 +97,14 @@ if [ -s dirty_tiles ]; then
     done
     rm generate_openmap_*_$DIRTY_FILE
 
-    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="detail"    tile-list dirty_tiles
-    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="topo"      tile-list dirty_tiles
-    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="river"     tile-list dirty_tiles
-    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="craftbeer" tile-list dirty_tiles
+    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="detail"    tile-list dirty_tiles > /dev/null
+    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="topo"      tile-list dirty_tiles > /dev/null
+    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="river"     tile-list dirty_tiles > /dev/null
+    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="craftbeer" tile-list dirty_tiles > /dev/null
 
     echo "Bicycle regenerate expired " `date`
-    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="bicycle" tile-list dirty_tiles
-    ../tegola cache seed  --config $TEGOLA_CONFIG_FILE --map="bicycle" tile-list generate_bicycle_$DIRTY_FILE --overwrite --concurrency 3
+    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="bicycle" tile-list dirty_tiles > /dev/null
+    ..$TEGOLA_SEED --map="bicycle" tile-list generate_bicycle_$DIRTY_FILE > /dev/null
 
     echo "Done " `date`
 

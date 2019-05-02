@@ -29,7 +29,8 @@ SELECT
         THEN 'swimming_pool'
     END
   ) AS kind,
-  null AS name
+  null AS name,
+  null AS virtual
 FROM
   planet_osm_polygon
 WHERE

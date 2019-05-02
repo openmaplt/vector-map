@@ -21,7 +21,8 @@ SELECT
   max(id) AS gid,
   st_asbinary(st_union(way)) AS geom,
   'water' AS kind,
-  null AS name
+  null AS name,
+  null AS virtual
 FROM
   gen_water
 WHERE

@@ -25,7 +25,8 @@ SELECT
   row_number() over() AS gid,
   st_asbinary(st_union(way)) AS geom,
   'water' AS kind,
-  null AS name
+  null AS name,
+  null AS virtual
 FROM
   planet_osm_polygon
 WHERE
@@ -39,7 +40,8 @@ SELECT
   (row_number() over()) + 1000 AS gid,
   st_asbinary(st_union(way)) AS geom,
   'water' AS kind,
-  null AS name
+  null AS name,
+  null AS virtual
 FROM
   gen_water
 WHERE
