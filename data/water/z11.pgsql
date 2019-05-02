@@ -27,7 +27,8 @@ SELECT
   max(osm_id) AS gid,
   st_asbinary(st_union(way)) AS geom,
   'water' AS kind,
-  null AS name
+  null AS name,
+  null AS virtual
 FROM
   planet_osm_polygon
 WHERE
@@ -43,7 +44,8 @@ SELECT
   id AS gid,
   st_asbinary(way) AS geom,
   'water' AS kind,
-  null AS name
+  null AS name,
+  null AS virtual
 FROM
   gen_water
 WHERE

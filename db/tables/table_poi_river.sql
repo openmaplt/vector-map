@@ -13,10 +13,17 @@ create materialized view poi_river (
               THEN 'inout'
             WHEN whitewater = 'hazard'
               THEN 'warning'
-            WHEN whitewater = 'hazard;put_in'
-              THEN 'warning_inout'
+            WHEN whitewater = 'dam;put_in'
+              THEN 'dam_inout'
+            WHEN whitewater = 'bridge;dam;put_in'
+              THEN 'bridge_dam_inout'
+            WHEN whitewater = 'bridge:put_in'
+              THEN 'bridge_inout'
+            WHEN whitewater = 'bridge:hazard'
+              THEN 'bridge_warning'
             WHEN "waterway:milestone" is not null
               THEN 'milestone'
+            ELSE whitewater
             END
          )
         ,way
