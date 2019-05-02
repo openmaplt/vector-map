@@ -11,13 +11,13 @@ SELECT
         THEN 'river'
     END
   ) AS kind,
-  coalesce("name:lt", name) AS name
+  coalesce("name:lt", name) AS name,
+  case when "waterway:speed" is null then 'N' else 'Y' end as virtual
 FROM
   planet_osm_line
 WHERE
   way && !BBOX! AND
-  waterway IN ('dock', 'canal', 'river') AND
-  "waterway:speed" is null
+  waterway IN ('dock', 'canal', 'river')
 
 UNION ALL
 
