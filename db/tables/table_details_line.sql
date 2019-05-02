@@ -13,6 +13,7 @@ SELECT
        when "natural" = 'cliff' then 'cliff'
        when highway is not null then 'dam_highway'
        when waterway = 'dam' then 'dam'
+       when waterway = 'weir' then 'weir'
   end AS kind,
   highway
 FROM
@@ -20,4 +21,4 @@ FROM
 WHERE
   (man_made = 'cutline' OR
    "natural" = 'cliff' OR
-   waterway = 'dam';
+   waterway in ('dam', 'weir');
