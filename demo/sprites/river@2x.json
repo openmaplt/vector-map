@@ -1,0 +1,275 @@
+{
+  "airport": {
+    "height": 20,
+    "pixelRatio": 1,
+    "width": 20,
+    "x": 84,
+    "y": 128
+  },
+  "beacon": {
+    "height": 20,
+    "pixelRatio": 1,
+    "width": 20,
+    "x": 104,
+    "y": 128
+  },
+  "bridge": {
+    "height": 22,
+    "pixelRatio": 1,
+    "width": 22,
+    "x": 128,
+    "y": 0
+  },
+  "bridge_dam_inout": {
+    "height": 22,
+    "pixelRatio": 1,
+    "width": 62,
+    "x": 150,
+    "y": 0
+  },
+  "bridge_inout": {
+    "height": 22,
+    "pixelRatio": 1,
+    "width": 42,
+    "x": 212,
+    "y": 0
+  },
+  "bridge_warning": {
+    "height": 22,
+    "pixelRatio": 1,
+    "width": 42,
+    "x": 128,
+    "y": 64
+  },
+  "camp": {
+    "height": 20,
+    "pixelRatio": 1,
+    "width": 20,
+    "x": 124,
+    "y": 128
+  },
+  "cemetery": {
+    "height": 16,
+    "pixelRatio": 1,
+    "width": 14,
+    "x": 78,
+    "y": 170
+  },
+  "chapel": {
+    "height": 20,
+    "pixelRatio": 1,
+    "width": 20,
+    "x": 144,
+    "y": 128
+  },
+  "chimney": {
+    "height": 20,
+    "pixelRatio": 1,
+    "width": 20,
+    "x": 164,
+    "y": 128
+  },
+  "cliff": {
+    "height": 9,
+    "pixelRatio": 1,
+    "width": 15,
+    "x": 211,
+    "y": 170
+  },
+  "communication_tower": {
+    "height": 20,
+    "pixelRatio": 1,
+    "width": 20,
+    "x": 184,
+    "y": 128
+  },
+  "dam": {
+    "height": 11,
+    "pixelRatio": 1,
+    "width": 7,
+    "x": 244,
+    "y": 150
+  },
+  "dam2": {
+    "height": 22,
+    "pixelRatio": 1,
+    "width": 22,
+    "x": 170,
+    "y": 64
+  },
+  "fuel": {
+    "height": 20,
+    "pixelRatio": 1,
+    "width": 20,
+    "x": 204,
+    "y": 128
+  },
+  "helipad": {
+    "height": 20,
+    "pixelRatio": 1,
+    "width": 20,
+    "x": 224,
+    "y": 128
+  },
+  "hydro": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 40,
+    "y": 170
+  },
+  "inout": {
+    "height": 22,
+    "pixelRatio": 1,
+    "width": 22,
+    "x": 192,
+    "y": 64
+  },
+  "inout_bridge": {
+    "height": 22,
+    "pixelRatio": 1,
+    "width": 42,
+    "x": 214,
+    "y": 64
+  },
+  "inout_bridge_hazard": {
+    "height": 22,
+    "pixelRatio": 1,
+    "width": 62,
+    "x": 0,
+    "y": 128
+  },
+  "light_tower": {
+    "height": 20,
+    "pixelRatio": 1,
+    "width": 20,
+    "x": 0,
+    "y": 150
+  },
+  "marsh": {
+    "height": 64,
+    "pixelRatio": 1,
+    "width": 64,
+    "x": 0,
+    "y": 0
+  },
+  "meadow": {
+    "height": 64,
+    "pixelRatio": 1,
+    "width": 64,
+    "x": 64,
+    "y": 0
+  },
+  "orchard": {
+    "height": 15,
+    "pixelRatio": 1,
+    "width": 15,
+    "x": 92,
+    "y": 170
+  },
+  "quary": {
+    "height": 20,
+    "pixelRatio": 1,
+    "width": 20,
+    "x": 20,
+    "y": 150
+  },
+  "rapids": {
+    "height": 9,
+    "pixelRatio": 1,
+    "width": 23,
+    "x": 226,
+    "y": 170
+  },
+  "reedbed": {
+    "height": 64,
+    "pixelRatio": 1,
+    "width": 64,
+    "x": 0,
+    "y": 64
+  },
+  "river": {
+    "height": 10,
+    "pixelRatio": 1,
+    "width": 104,
+    "x": 107,
+    "y": 170
+  },
+  "stream": {
+    "height": 20,
+    "pixelRatio": 1,
+    "width": 104,
+    "x": 40,
+    "y": 150
+  },
+  "substation": {
+    "height": 20,
+    "pixelRatio": 1,
+    "width": 20,
+    "x": 144,
+    "y": 150
+  },
+  "swamp": {
+    "height": 64,
+    "pixelRatio": 1,
+    "width": 64,
+    "x": 64,
+    "y": 64
+  },
+  "tower": {
+    "height": 20,
+    "pixelRatio": 1,
+    "width": 20,
+    "x": 164,
+    "y": 150
+  },
+  "turf": {
+    "height": 20,
+    "pixelRatio": 1,
+    "width": 20,
+    "x": 184,
+    "y": 150
+  },
+  "unesco": {
+    "height": 19,
+    "pixelRatio": 1,
+    "width": 19,
+    "x": 59,
+    "y": 170
+  },
+  "warning": {
+    "height": 22,
+    "pixelRatio": 1,
+    "width": 22,
+    "x": 62,
+    "y": 128
+  },
+  "windmill": {
+    "height": 20,
+    "pixelRatio": 1,
+    "width": 20,
+    "x": 204,
+    "y": 150
+  },
+  "windpower": {
+    "height": 20,
+    "pixelRatio": 1,
+    "width": 20,
+    "x": 224,
+    "y": 150
+  },
+  "worship_christian": {
+    "height": 20,
+    "pixelRatio": 1,
+    "width": 20,
+    "x": 0,
+    "y": 170
+  },
+  "worship_other": {
+    "height": 20,
+    "pixelRatio": 1,
+    "width": 20,
+    "x": 20,
+    "y": 170
+  }
+}

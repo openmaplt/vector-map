@@ -7,4 +7,4 @@ FROM
   details_line
 WHERE
   geom && !BBOX! AND
-  kind in ('cutline', 'dam', 'dam_highway')
+  kind in ('cutline', 'dam', 'dam_highway', 'weir', 'rapid')
