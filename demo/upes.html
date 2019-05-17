@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <title>Lietuvos upių žemėlapis</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css' rel='stylesheet' />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/graphhopper-js-api-client/dist/graphhopper-client.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://openmap.lt/style.css">
+  <style>
+    .info {
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
+      background: #fff;
+      background: rgba(255, 255, 255, 0.8);
+      margin: 0;
+      padding: 0px 5px;
+      font: 12px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+      font-size: 11px;
+    }
+    #instr {
+      position: absolute;
+      top: 50px;
+      right: 2px;
+      max-height: 50%;
+      overflow-y: auto;
+    }
+    #instr p {
+      margin-bottom: 2px;
+      margin-top: 0px;
+      padding: 0px;
+      background: white;
+      color: #222222;
+      font-size: small;
+      box-shadow: 2px 2px 9px 1px #444444;
+    }
+    #layers {
+      right: 5px;
+      top: 5px;
+    }
+  </style>
+</head>
+<body>
+<div id='map'></div>
+<div id="layers" class="pull-right btn-group">
+  <button type="button" class="btn btn-default active" data-style="upes">Žemėlapis</button>
+  <button type="button" class="btn btn-default" data-style="hybrid_upes">Ortofoto</button>
+</div>
+
+<div id='instr' style="max-width: 50%;" onClick="reset()"></div>
+
+<script>
+var startMarker;
+var endMarker;
+var start_lat, start_lon, end_lat, end_lon;
+var start_set = 'N', end_set = 'N';
+var emptyInstruction = '<p>Parinkite plaukimo pradžios, o tada - pabaigos tašką.<br>(Dešiniu pelės mygtuku arba ilgu piršto paspaudimu)</p>';
+var routeAfter = 'topo_sym';
+
+/***********************************************
+* Calculate distance between two coordinates
+***********************************************/
+function distance(lat1, lon1, lat2, lon2, unit) {
+  if ((lat1 == lat2) && (lon1 == lon2)) {
+    return 0;
+  }
+  else {
+    var radlat1 = Math.PI * lat1/180;
+    var radlat2 = Math.PI * lat2/180;
+    var theta = lon1-lon2;
+    var radtheta = Math.PI * theta/180;
+    var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+    if (dist > 1) {
+      dist = 1;
+    }
+    dist = Math.acos(dist);
+    dist = dist * 180/Math.PI;
+    dist = dist * 60 * 1.1515;
+    if (unit=="K") { dist = dist * 1.609344 }
+    if (unit=="N") { dist = dist * 0.8684 }
+    return dist;
+  }
+} // distance
+
+/***************************************************
+* Reset both start and end points as well as route
+***************************************************/
+function reset() {
+  ghRouting.clearPoints();
+  startMarker.remove();
+  endMarker.remove();
+  start_set = 'N';
+  end_set = 'N';
+  document.getElementById("instr").innerHTML=emptyInstruction;
+  var mapLayer = map.getLayer('route');
+  if (typeof mapLayer !== 'undefined') {
+    map.removeLayer('route').removeSource('route');
+  }
+} // reset
+
+/***************************************************
+* Set/update start/end point position and calculate
+* route if both points are set.
+***************************************************/
+function onDragEnd(m) {
+  if (m == 'S') {
+    start_lon = startMarker.getLngLat().lng;
+    start_lat = startMarker.getLngLat().lat;
+  } else {
+    end_lon = endMarker.getLngLat().lng;
+    end_lat = endMarker.getLngLat().lat;
+  }
+  if ((start_set == 'Y') && (end_set == 'Y')) {
+    ghRouting.clearPoints();
+    ghRouting.addPoint(new GHInput(start_lat, start_lon));
+    ghRouting.addPoint(new GHInput(end_lat, end_lon));
+    ghRouting.doRequest()
+      .then(function(json) {
+        console.log(json);
+        var mapLayer = map.getLayer('route');
+        if (typeof mapLayer !== 'undefined') {
+          map.removeLayer('route').removeSource('route');
+        }
+        map.addLayer({
+          "id": "route",
+          "type": "line",
+          "source": {
+            "type": "geojson",
+            "data": {
+              "type": "Feature",
+              "properties": {},
+              "geometry": json.paths[0].points
+            } // data
+          }, // source
+          "layout": {
+            "line-join": "round",
+            "line-cap": "round"
+          }, // layout
+          "paint": {
+            "line-color": "rgba(255, 0, 255, 0.4)",
+            "line-width": 8
+          } // paint
+        }, routeAfter); // addLayer
+        var time = json.paths[0].details.time;
+        var name = json.paths[0].details.street_name;
+        //alert("time" + JSON.stringify(json.paths[0].details.time));
+        //alert("street_name" + JSON.stringify(json.paths[0].details.street_name));
+        var instr = "";
+        var min;
+        var sek;
+        var len;
+        var k = -1;
+        var tim;
+        var total_time = 0;
+        var total_distance = 0;
+        for (i = 0; i < name.length; i++) {
+          k = k + 1;
+          tim = time[k][2];
+          while (time[k][1] < name[i][1]) {
+            k = k + 1;
+            tim = tim + time[k][2];
+          }
+          sek = tim / 1000;
+          min = Math.trunc(sek / 60);
+          sek = Math.trunc(sek % 60);
+          len = 0;
+          total_time = total_time + tim;
+          for (j = name[i][0]; j < name[i][1]; j++) {
+            len = len + distance(json.paths[0].points.coordinates[j][0],
+                                 json.paths[0].points.coordinates[j][1],
+                                 json.paths[0].points.coordinates[j+1][0],
+                                 json.paths[0].points.coordinates[j+1][1],
+                                 'K');
+          }
+          if ((i < name.length - 1) && (name[i+1][2][0] == '!')) {
+            // Add distance and time from milestone item
+            len = len + distance(json.paths[0].points.coordinates[j+1][0],
+                                 json.paths[0].points.coordinates[j+1][1],
+                                 json.paths[0].points.coordinates[j+2][0],
+                                 json.paths[0].points.coordinates[j+2][1],
+                                 'K');
+            k = k + 1;
+            sek = sek + Math.trunc(time[k][2] / 1000);
+            if (sek > 60) {
+              min = min + Math.trunc(sek / 60);
+              sek = sek % 60;
+            }
+          }
+          total_distance = total_distance + len;
+          instr = instr + "<p>" + name[i][2] + ' <i>(' + min + "m" + sek + "s " + Math.trunc(len * 10) / 10 + "km.)</i></p>";
+          if ((i < name.length - 1) && (name[i+1][2][0] == '!')) {
+            // Add milestone item itself
+            i++;
+            text = name[i][2].substr(1).replace('[bridge, put_in ]', '<img src="bridge.png"><img src="inout.png">');
+            text = text.replace('[bridge, egress ]', '<img src="bridge.png"><img src="inout.png">');
+            text = text.replace('[bridge, dam, put_in ]', '<img src="bridge.png"><img src="dam.png"><img src="inout.png">');
+            text = text.replace('[bridge, hazard ]', '<img src="bridge.png"><img src="warning.png">');
+            text = text.replace('[put_in, egress ]', '<img src="inout.png">');
+            text = text.replace('[put_in ]', '<img src="inout.png">');
+            text = text.replace('[egress ]', '<img src="inout.png">');
+            text = text.replace('[bridge ]', '<img src="bridge.png">');
+            text = text.replace('[dam ]', '<img src="dam.png">');
+            text = text.replace('[]', '');
+            if (name[i][2].includes('užtvanka')) {
+              instr = instr + "<p>" + text + " (persinešimas ~20min.)</p>";
+              total_time = total_time + 20 * 60 * 1000;
+            } else {
+              instr = instr + "<p>" + text + "</p>";
+            }
+          }
+        }
+        sek = total_time / 1000;
+        min = Math.trunc(sek / 60);
+        sek = Math.trunc(sek % 60);
+        if (min > 60) {
+          val = Math.trunc(min / 60);
+          min = Math.trunc(min % 60);
+        } else {
+          val = 0;
+        }
+        instr = instr + "<p><b>Iš viso: " + Math.trunc(total_distance * 10) / 10 + "km. ";
+        if (val > 0) {
+          instr = instr + val + "val. ";
+        }
+        if (min > 0) {
+          instr = instr + min + "m. ";
+        }
+        instr = instr + sek + "s.</b></p>";
+        document.getElementById("instr").innerHTML=instr;
+      })
+      .catch(function(err) {
+        console.error(err.message);
+      });
+  }
+} // onDragEnd
+
+document.getElementById("instr").innerHTML=emptyInstruction;
+var map = new mapboxgl.Map({
+  container: 'map',
+  style: 'styles/upes.json',
+  zoom: 7,
+  minZoom: 7,
+  maxZoom: 18,
+  center: [24.07, 54.96],
+  hash: true
+});
+var ghRouting = new GraphHopper.Routing({
+  host: "https://openmap.lt",
+  vehicle: "river",
+  elevation: false,
+  points_encoded: true,
+  details: ["time", "street_name"]
+});
+map.addControl(new mapboxgl.NavigationControl(), 'top-left');
+/*map.showTileBoundaries = true;*/
+/*map.showCollisionBoxes = true;*/
+map.on('contextmenu', (e) => {
+  if (start_set == 'Y') {
+    end_lat = e.lngLat.lat;
+    end_lon = e.lngLat.lng;
+    if (endMarker) {
+      endMarker.remove();
+    }
+    endMarker = new mapboxgl.Marker({ "color": "#4b23da", "draggable": "true" })
+      .setLngLat([end_lon, end_lat])
+      .addTo(map);
+    endMarker.on('dragend', function() { onDragEnd('E'); });
+    end_set = 'Y';
+    onDragEnd('E');
+  } else {
+    start_lat = e.lngLat.lat;
+    start_lon = e.lngLat.lng;
+    if (startMarker) {
+      startMarker.remove();
+    }
+    startMarker = new mapboxgl.Marker({ "color": "#23da2c", "draggable": "true" })
+      .setLngLat([start_lon, start_lat])
+      .addTo(map);
+    startMarker.on('dragend', function() { onDragEnd('S'); });
+    start_set = 'Y';
+    onDragEnd('S');
+  }
+})
+$('#layers button').on('click', function (e) {
+  if ($(this).hasClass('active')) {
+    return false;
+  }
+  $('#layers button').removeClass('active');
+  $(this).addClass('active');
+
+  var selectLayer = $(e.target).data('style');
+  map.setStyle('styles/' + selectLayer + '.json');
+  if (selectLayer == 'upes') {
+    routeAfter = 'topo_sym';
+  } else {
+    routeAfter = 'label-road';
+  }
+  if ((start_set == 'Y') && (end_set == 'Y')) {
+    onDragEnd('S');
+  }
+
+  mapData.type = selectLayer;
+  mapData.id = null;
+  changeHashUrl(mapData);
+});
+</script>
+</body>
+</html>
