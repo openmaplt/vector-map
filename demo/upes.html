@@ -60,6 +60,7 @@ var start_lat, start_lon, end_lat, end_lon;
 var start_set = 'N', end_set = 'N';
 var emptyInstruction = '<p>Parinkite plaukimo pradžios, o tada - pabaigos tašką.<br>(Dešiniu pelės mygtuku arba ilgu piršto paspaudimu)</p>';
 var routeAfter = 'topo_sym';
+var sprite;
 
 /***********************************************
 * Calculate distance between two coordinates
@@ -101,7 +102,14 @@ function reset() {
     map.removeLayer('route').removeSource('route');
   }
 } // reset
-
+/***************************************************
+* Create <img> tag for sprite with a given name
+***************************************************/
+function imgSprite(name) {
+  return '<img src="https://openmap.lt/img_trans.gif" style="width: ' + sprite[name].width +
+    'px; height: ' + sprite[name].height + 
+    'px; background: url(https://openmap.lt/sprites/river.png) -' + sprite[name].x + 'px -' + sprite[name].y + 'px;">';
+}
 /***************************************************
 * Set/update start/end point position and calculate
 * route if both points are set.
@@ -195,15 +203,15 @@ function onDragEnd(m) {
           if ((i < name.length - 1) && (name[i+1][2][0] == '!')) {
             // Add milestone item itself
             i++;
-            text = name[i][2].substr(1).replace('[bridge, put_in ]', '<img src="bridge.png"><img src="inout.png">');
-            text = text.replace('[bridge, egress ]', '<img src="bridge.png"><img src="inout.png">');
-            text = text.replace('[bridge, dam, put_in ]', '<img src="bridge.png"><img src="dam.png"><img src="inout.png">');
-            text = text.replace('[bridge, hazard ]', '<img src="bridge.png"><img src="warning.png">');
-            text = text.replace('[put_in, egress ]', '<img src="inout.png">');
-            text = text.replace('[put_in ]', '<img src="inout.png">');
-            text = text.replace('[egress ]', '<img src="inout.png">');
-            text = text.replace('[bridge ]', '<img src="bridge.png">');
-            text = text.replace('[dam ]', '<img src="dam.png">');
+            text = name[i][2].substr(1).replace('[bridge, put_in ]', imgSprite('bridge_inout'));
+            text = text.replace('[bridge, egress ]', imgSprite('bridge_inout'));
+            text = text.replace('[bridge, dam, put_in ]', imgSprite('bridge_dam_inout'));
+            text = text.replace('[bridge, hazard ]', imgSprite('bridge_warning'));
+            text = text.replace('[put_in, egress ]', imgSprite('inout'));
+            text = text.replace('[put_in ]', imgSprite('inout'));
+            text = text.replace('[egress ]', imgSprite('inout'));
+            text = text.replace('[bridge ]', imgSprite('bridge'));
+            text = text.replace('[dam ]', imgSprite('dam2'));
             text = text.replace('[]', '');
             if (name[i][2].includes('užtvanka')) {
               instr = instr + "<p>" + text + " (persinešimas ~20min.)</p>";
@@ -307,6 +315,14 @@ $('#layers button').on('click', function (e) {
   mapData.id = null;
   changeHashUrl(mapData);
 });
+var xmlhttp = new XMLHttpRequest();
+xmlhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    sprite = JSON.parse(this.responseText);
+  }
+};
+xmlhttp.open("GET", "https://openmap.lt/sprites/river.json", true);
+xmlhttp.send();
 </script>
 </body>
 </html>
