@@ -3,14 +3,14 @@
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 84,
+    "x": 126,
     "y": 128
   },
   "beacon": {
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 104,
+    "x": 146,
     "y": 128
   },
   "bridge": {
@@ -45,42 +45,42 @@
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 124,
+    "x": 166,
     "y": 128
   },
   "cemetery": {
     "height": 16,
     "pixelRatio": 1,
     "width": 14,
-    "x": 78,
+    "x": 118,
     "y": 170
   },
   "chapel": {
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 144,
+    "x": 186,
     "y": 128
   },
   "chimney": {
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 164,
+    "x": 206,
     "y": 128
   },
   "cliff": {
     "height": 9,
     "pixelRatio": 1,
     "width": 15,
-    "x": 211,
-    "y": 170
+    "x": 0,
+    "y": 190
   },
   "communication_tower": {
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 184,
+    "x": 226,
     "y": 128
   },
   "dam": {
@@ -97,53 +97,60 @@
     "x": 170,
     "y": 64
   },
+  "dam_inout": {
+    "height": 22,
+    "pixelRatio": 1,
+    "width": 42,
+    "x": 192,
+    "y": 64
+  },
   "fuel": {
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 204,
-    "y": 128
+    "x": 0,
+    "y": 150
   },
   "helipad": {
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 224,
-    "y": 128
+    "x": 20,
+    "y": 150
   },
   "hydro": {
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 40,
+    "x": 80,
     "y": 170
   },
   "inout": {
     "height": 22,
     "pixelRatio": 1,
     "width": 22,
-    "x": 192,
+    "x": 234,
     "y": 64
   },
   "inout_bridge": {
     "height": 22,
     "pixelRatio": 1,
     "width": 42,
-    "x": 214,
-    "y": 64
+    "x": 0,
+    "y": 128
   },
   "inout_bridge_hazard": {
     "height": 22,
     "pixelRatio": 1,
     "width": 62,
-    "x": 0,
+    "x": 42,
     "y": 128
   },
   "light_tower": {
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 0,
+    "x": 40,
     "y": 150
   },
   "marsh": {
@@ -164,22 +171,22 @@
     "height": 15,
     "pixelRatio": 1,
     "width": 15,
-    "x": 92,
+    "x": 132,
     "y": 170
   },
   "quary": {
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 20,
+    "x": 60,
     "y": 150
   },
   "rapids": {
     "height": 9,
     "pixelRatio": 1,
-    "width": 20,
-    "x": 228,
-    "y": 170
+    "width": 21,
+    "x": 16,
+    "y": 190
   },
   "reedbed": {
     "height": 64,
@@ -192,21 +199,21 @@
     "height": 10,
     "pixelRatio": 1,
     "width": 104,
-    "x": 107,
+    "x": 147,
     "y": 170
   },
   "stream": {
     "height": 20,
     "pixelRatio": 1,
     "width": 104,
-    "x": 40,
+    "x": 80,
     "y": 150
   },
   "substation": {
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 144,
+    "x": 184,
     "y": 150
   },
   "swamp": {
@@ -220,56 +227,56 @@
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 164,
+    "x": 204,
     "y": 150
   },
   "turf": {
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 184,
+    "x": 224,
     "y": 150
   },
   "unesco": {
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 59,
+    "x": 99,
     "y": 170
   },
   "warning": {
     "height": 22,
     "pixelRatio": 1,
     "width": 22,
-    "x": 62,
+    "x": 104,
     "y": 128
   },
   "windmill": {
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 204,
-    "y": 150
+    "x": 0,
+    "y": 170
   },
   "windpower": {
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 224,
-    "y": 150
+    "x": 20,
+    "y": 170
   },
   "worship_christian": {
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 0,
+    "x": 40,
     "y": 170
   },
   "worship_other": {
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 20,
+    "x": 60,
     "y": 170
   }
 }
