@@ -212,6 +212,7 @@ function onDragEnd(m) {
             text = text.replace('[egress ]', imgSprite('inout'));
             text = text.replace('[bridge ]', imgSprite('bridge'));
             text = text.replace('[dam ]', imgSprite('dam2'));
+            text = text.replace('[dam, put_in ]', imgSprite('dam_inout'));
             text = text.replace('[]', '');
             if (name[i][2].includes('užtvanka')) {
               instr = instr + "<p>" + text + " (persinešimas ~20min.)</p>";
