@@ -242,27 +242,6 @@
       }
     },
     {
-      "id": "landuse-park",
-      "type": "fill",
-      "source": "tilezen",
-      "source-layer": "landuse",
-      "filter": [
-        "all",
-        [
-          "in",
-          "kind",
-          "park"
-        ]
-      ],
-      "layout": {
-        "visibility": "none"
-      },
-      "paint": {
-        "fill-color": "rgba(122, 220, 125, 1)",
-        "fill-opacity": 0.5
-      }
-    },
-    {
       "id": "hillshading",
       "type": "hillshade",
       "source": "dem",
@@ -386,47 +365,6 @@
             ]
           ]
         }
-      }
-    },
-    {
-      "id": "waterway-river-direction",
-      "type": "line",
-      "source": "tilezen",
-      "source-layer": "water",
-      "minzoom": 16,
-      "maxzoom": 24,
-      "filter": [
-        "all",
-        [
-          "==",
-          "kind",
-          "river"
-        ]
-      ],
-      "layout": {
-        "line-join": "round",
-        "line-cap": "round"
-      },
-      "paint": {
-        "line-width": {
-          "base": 1.55,
-          "stops": [
-            [
-              4,
-              0.25
-            ],
-            [
-              20,
-              30
-            ]
-          ]
-        },
-        "line-pattern": "river",
-        "line-opacity": 0.6,
-        "line-translate": [
-          0,
-          0
-        ]
       }
     },
     {
@@ -563,6 +501,52 @@
         "fill-color": "#bed7f0",
         "fill-outline-color": "#49a5dd",
         "fill-antialias": false
+      }
+    },
+    {
+      "id": "waterway-river-direction",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "water",
+      "minzoom": 16,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "==",
+          "kind",
+          "river"
+        ],
+        [
+          "==",
+          "virtual",
+          "N"
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-width": {
+          "base": 1.55,
+          "stops": [
+            [
+              4,
+              0.25
+            ],
+            [
+              20,
+              30
+            ]
+          ]
+        },
+        "line-pattern": "river",
+        "line-opacity": 0.6,
+        "line-translate": [
+          0,
+          0
+        ]
       }
     },
     {
@@ -2451,6 +2435,11 @@
           "==",
           "$type",
           "LineString"
+        ],
+        [
+          "==",
+          "virtual",
+          "N"
         ]
       ],
       "layout": {
