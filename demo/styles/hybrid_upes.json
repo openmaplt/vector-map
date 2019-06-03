@@ -22,7 +22,7 @@
       "url": "https://openmap.lt/capabilities/river.json"
     }
   },
-  "sprite": "https://openmap.lt/webgl/sprites/river",
+  "sprite": "https://openmap.lt/sprites/river",
   "glyphs": "https://openmap.lt/glyphs/{fontstack}/{range}.pbf",
   "layers": [
     {
@@ -58,44 +58,6 @@
           3,
           7
         ]
-      }
-    },
-    {
-      "id": "boundary-national-park-outline",
-      "type": "line",
-      "source": "osm",
-      "source-layer": "protected",
-      "minzoom": 0,
-      "maxzoom": 20,
-      "filter": [
-        "all",
-        [
-          "==",
-          "kind",
-          "national_park"
-        ]
-      ],
-      "layout": {
-        "visibility": "visible"
-      },
-      "paint": {
-        "line-color": "rgba(135, 199, 137, 1)",
-        "line-dasharray": [
-          2,
-          2
-        ],
-        "line-width": {
-          "stops": [
-            [
-              8,
-              2
-            ],
-            [
-              18,
-              4
-            ]
-          ]
-        }
       }
     },
     {
@@ -454,7 +416,6 @@
         ]
       ],
       "layout": {
-        "visibility": "visible",
         "symbol-placement": "line",
         "text-field": "{name}",
         "text-font": [
@@ -715,6 +676,42 @@
       }
     },
     {
+      "id": "label-icon-milestone",
+      "type": "symbol",
+      "source": "river",
+      "source-layer": "point",
+      "minzoom": 14,
+      "maxzoom": 20,
+      "filter": [
+        "all",
+        [
+          "!=",
+          "kind",
+          "milestone"
+        ]
+      ],
+      "layout": {
+        "text-field": "{name}",
+        "text-size": 12,
+        "text-max-width": 9,
+        "text-anchor": "center",
+        "text-font": [
+          "Roboto Condensed Italic"
+        ],
+        "text-padding": 1,
+        "visibility": "visible",
+        "text-offset": [
+          0,
+          1.8
+        ]
+      },
+      "paint": {
+        "text-color": "rgba(20, 20, 20, 1)",
+        "text-halo-width": 1.5,
+        "text-halo-color": "rgba(255, 255, 255, 0.7)"
+      }
+    },
+    {
       "id": "label-milestone",
       "type": "symbol",
       "source": "river",
@@ -737,8 +734,7 @@
         "text-font": [
           "Roboto Condensed Italic"
         ],
-        "text-padding": 1,
-        "visibility": "visible"
+        "text-padding": 1
       },
       "paint": {
         "text-color": "rgba(20, 20, 20, 1)",
