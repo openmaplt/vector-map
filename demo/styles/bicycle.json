@@ -12,6 +12,10 @@
     "bicycle": {
       "type": "vector",
       "url": "https://openmap.lt/capabilities/bicycle.json"
+    },
+    "dem": {
+      "type": "raster-dem",
+      "url": "https://openmap.lt/styles/hillshade.json"
     }
   },
   "sprite": "https://openmap.lt/sprites/openmapcycle",
@@ -36,24 +40,6 @@
       ],
       "paint": {
         "fill-color": "rgba(179, 213, 230, 1)"
-      }
-    },
-    {
-      "id": "coastline-pattern",
-      "type": "fill",
-      "source": "tilezen",
-      "source-layer": "coastline",
-      "filter": [
-        "==",
-        "kind",
-        "coastline"
-      ],
-      "layout": {
-        "visibility": "none"
-      },
-      "paint": {
-        "fill-pattern": "water",
-        "fill-opacity": 0.1
       }
     },
     {
@@ -138,6 +124,15 @@
       "paint": {
         "fill-pattern": "forest",
         "fill-opacity": 0.3
+      }
+    },
+    {
+      "id": "hillshading",
+      "type": "hillshade",
+      "source": "dem",
+      "minzoom": 9,
+      "paint": {
+        "hillshade-exaggeration": 0.5
       }
     },
     {
