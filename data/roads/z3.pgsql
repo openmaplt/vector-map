@@ -69,5 +69,5 @@ WHERE
    railway = 'rail' OR
    aeroway IN ('runway', 'taxiway', 'parking_position')
   )
-GROUP BY kind, surface, name, priority, ref, is_tunnel, is_bridge, oneway
+GROUP BY kind, surface, name, priority, ref, is_tunnel, is_bridge, oneway, highway, tracktype
 ORDER BY priority

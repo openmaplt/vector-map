@@ -327,47 +327,6 @@
       }
     },
     {
-      "id": "waterway-river-fill",
-      "type": "line",
-      "source": "tilezen",
-      "source-layer": "water",
-      "minzoom": 12,
-      "maxzoom": 20,
-      "filter": [
-        "all",
-        [
-          "==",
-          "$type",
-          "LineString"
-        ],
-        [
-          "in",
-          "kind",
-          "river"
-        ]
-      ],
-      "layout": {
-        "line-cap": "round",
-        "line-join": "round"
-      },
-      "paint": {
-        "line-color": "#bed7f0",
-        "line-width": {
-          "base": 1.4,
-          "stops": [
-            [
-              8,
-              0.5
-            ],
-            [
-              20,
-              15
-            ]
-          ]
-        }
-      }
-    },
-    {
       "id": "waterway-stream-etc",
       "type": "line",
       "source": "tilezen",
@@ -504,11 +463,78 @@
       }
     },
     {
+      "id": "water-outline",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "water",
+      "filter": [
+        "==",
+        "$type",
+        "Polygon"
+      ],
+      "paint": {
+        "line-color": "#49a5dd",
+        "line-width": {
+          "stops": [
+            [
+              7,
+              0
+            ],
+            [
+              12,
+              1
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "waterway-river-fill",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "water",
+      "minzoom": 12,
+      "maxzoom": 20,
+      "filter": [
+        "all",
+        [
+          "==",
+          "$type",
+          "LineString"
+        ],
+        [
+          "in",
+          "kind",
+          "river"
+        ]
+      ],
+      "layout": {
+        "line-cap": "round",
+        "line-join": "round"
+      },
+      "paint": {
+        "line-color": "#bed7f0",
+        "line-width": {
+          "base": 1.4,
+          "stops": [
+            [
+              8,
+              0.5
+            ],
+            [
+              20,
+              15
+            ]
+          ]
+        }
+      }
+    },
+    {
       "id": "waterway-river-direction",
       "type": "line",
       "source": "tilezen",
       "source-layer": "water",
-      "minzoom": 16,
+      "minzoom": 15,
       "maxzoom": 24,
       "filter": [
         "all",
@@ -542,37 +568,7 @@
           ]
         },
         "line-pattern": "river",
-        "line-opacity": 0.6,
-        "line-translate": [
-          0,
-          0
-        ]
-      }
-    },
-    {
-      "id": "water-outline",
-      "type": "line",
-      "source": "tilezen",
-      "source-layer": "water",
-      "filter": [
-        "==",
-        "$type",
-        "Polygon"
-      ],
-      "paint": {
-        "line-color": "#49a5dd",
-        "line-width": {
-          "stops": [
-            [
-              7,
-              0
-            ],
-            [
-              12,
-              1
-            ]
-          ]
-        }
+        "line-opacity": 0.6
       }
     },
     {
@@ -1749,6 +1745,48 @@
       }
     },
     {
+      "id": "road-track-high",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "minzoom": 12,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "track"
+        ],
+        [
+          "in",
+          "tracktype",
+          "grade1",
+          "grade2"
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-color": "#110f0d",
+        "line-width": {
+          "base": 1.8,
+          "stops": [
+            [
+              10,
+              0.3
+            ],
+            [
+              20,
+              15
+            ]
+          ]
+        }
+      }
+    },
+    {
       "id": "road-track",
       "type": "line",
       "source": "tilezen",
@@ -1761,6 +1799,12 @@
           "in",
           "kind",
           "track"
+        ],
+        [
+          "!in",
+          "tracktype",
+          "grade1",
+          "grade2"
         ]
       ],
       "layout": {
@@ -1977,37 +2021,6 @@
       "paint": {}
     },
     {
-      "id": "label-national-park",
-      "type": "symbol",
-      "source": "tilezen",
-      "source-layer": "protected",
-      "minzoom": 0,
-      "maxzoom": 20,
-      "filter": [
-        "all",
-        [
-          "==",
-          "kind",
-          "national_park"
-        ]
-      ],
-      "layout": {
-        "visibility": "none",
-        "symbol-placement": "line",
-        "text-field": "{name}",
-        "text-font": [
-          "Roboto Regular"
-        ],
-        "text-size": 13,
-        "text-anchor": "top"
-      },
-      "paint": {
-        "text-color": "rgba(11, 119, 14, 1)",
-        "text-halo-color": "rgba(255, 255, 255, 1)",
-        "text-halo-width": 1.5
-      }
-    },
-    {
       "id": "label-park",
       "type": "symbol",
       "source": "tilezen",
@@ -2154,8 +2167,7 @@
           "property": "font_size",
           "type": "identity"
         },
-        "text-max-angle": 80,
-        "visibility": "visible"
+        "text-max-angle": 80
       },
       "paint": {
         "text-color": "#49a5dd",

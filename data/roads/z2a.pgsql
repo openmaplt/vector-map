@@ -47,5 +47,5 @@ WHERE
    OR (railway = 'rail' AND service IS NULL)
    OR aeroway IN ('runway', 'taxiway', 'parking_position')
   )
-GROUP BY kind, surface, name, priority, ref
+GROUP BY kind, surface, name, priority, ref, highway, tracktype
 ORDER BY priority
