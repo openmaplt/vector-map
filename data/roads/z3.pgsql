@@ -23,6 +23,10 @@ SELECT
   END AS priority,
   name,
   ref,
+  CASE WHEN highway = 'track' and tracktype is null THEN 'grade3'
+       WHEN highway = 'track' THEN tracktype
+       ELSE null
+  END AS tracktype,
   length(ref) AS ref_length,
   (
     CASE
