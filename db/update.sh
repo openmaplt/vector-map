@@ -104,7 +104,7 @@ if [ -s dirty_tiles ]; then
 
     echo "Bicycle regenerate expired " `date`
     ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="bicycle" tile-list dirty_tiles > /dev/null
-    ..$TEGOLA_SEED --map="bicycle" tile-list generate_bicycle_$DIRTY_FILE > /dev/null
+    $TEGOLA_SEED --map="bicycle" tile-list generate_bicycle_$DIRTY_FILE > /dev/null
 
     echo "Done " `date`
 
