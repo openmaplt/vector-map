@@ -145,28 +145,6 @@
       }
     },
     {
-      "id": "landuse-scrub",
-      "type": "fill",
-      "source": "tilezen",
-      "source-layer": "landuse",
-      "minzoom": 6,
-      "filter": [
-        "all",
-        [
-          "in",
-          "kind",
-          "scrub"
-        ]
-      ],
-      "layout": {
-        "visibility": "none"
-      },
-      "paint": {
-        "fill-color": "rgba(180, 231, 172, 1)",
-        "fill-opacity": 1
-      }
-    },
-    {
       "id": "landuse-marsh",
       "type": "fill",
       "source": "tilezen",
@@ -1189,6 +1167,42 @@
       }
     },
     {
+      "id": "road-track-bkg",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "minzoom": 12,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "track"
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-color": "rgba(255, 255, 255, 0.4)",
+        "line-width": {
+          "base": 1.8,
+          "stops": [
+            [
+              10,
+              3
+            ],
+            [
+              20,
+              60
+            ]
+          ]
+        }
+      }
+    },
+    {
       "id": "casing-road",
       "type": "line",
       "source": "tilezen",
@@ -1607,6 +1621,137 @@
       }
     },
     {
+      "id": "road-path",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "minzoom": 12,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "path",
+          "footway",
+          "steps",
+          "cycleway"
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-color": "#5d6765",
+        "line-width": {
+          "base": 1.8,
+          "stops": [
+            [
+              10,
+              0.5
+            ],
+            [
+              20,
+              3
+            ]
+          ]
+        },
+        "line-dasharray": [
+          10,
+          10
+        ]
+      }
+    },
+    {
+      "id": "road-track-high",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "minzoom": 12,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "track"
+        ],
+        [
+          "in",
+          "tracktype",
+          "grade1",
+          "grade2"
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-color": "#110f0d",
+        "line-width": {
+          "base": 1.8,
+          "stops": [
+            [
+              10,
+              0.3
+            ],
+            [
+              20,
+              15
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "id": "road-track",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "minzoom": 12,
+      "maxzoom": 24,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "track"
+        ],
+        [
+          "!in",
+          "tracktype",
+          "grade1",
+          "grade2"
+        ]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "round"
+      },
+      "paint": {
+        "line-color": "#110f0d",
+        "line-width": {
+          "base": 1.8,
+          "stops": [
+            [
+              10,
+              0.3
+            ],
+            [
+              20,
+              15
+            ]
+          ]
+        },
+        "line-dasharray": [
+          30,
+          7
+        ]
+      }
+    },
+    {
       "id": "road-road",
       "type": "line",
       "source": "tilezen",
@@ -1863,173 +2008,6 @@
             ]
           ]
         }
-      }
-    },
-    {
-      "id": "road-track-bkg",
-      "type": "line",
-      "source": "tilezen",
-      "source-layer": "roads",
-      "minzoom": 12,
-      "maxzoom": 24,
-      "filter": [
-        "all",
-        [
-          "in",
-          "kind",
-          "track"
-        ]
-      ],
-      "layout": {
-        "line-join": "round",
-        "line-cap": "round"
-      },
-      "paint": {
-        "line-color": "rgba(255, 255, 255, 0.4)",
-        "line-width": {
-          "base": 1.8,
-          "stops": [
-            [
-              10,
-              3
-            ],
-            [
-              20,
-              60
-            ]
-          ]
-        }
-      }
-    },
-    {
-      "id": "road-track-high",
-      "type": "line",
-      "source": "tilezen",
-      "source-layer": "roads",
-      "minzoom": 12,
-      "maxzoom": 24,
-      "filter": [
-        "all",
-        [
-          "in",
-          "kind",
-          "track"
-        ],
-        [
-          "in",
-          "tracktype",
-          "grade1",
-          "grade2"
-        ]
-      ],
-      "layout": {
-        "line-join": "round",
-        "line-cap": "round"
-      },
-      "paint": {
-        "line-color": "#110f0d",
-        "line-width": {
-          "base": 1.8,
-          "stops": [
-            [
-              10,
-              0.3
-            ],
-            [
-              20,
-              15
-            ]
-          ]
-        }
-      }
-    },
-    {
-      "id": "road-track",
-      "type": "line",
-      "source": "tilezen",
-      "source-layer": "roads",
-      "minzoom": 12,
-      "maxzoom": 24,
-      "filter": [
-        "all",
-        [
-          "in",
-          "kind",
-          "track"
-        ],
-        [
-          "!in",
-          "tracktype",
-          "grade1",
-          "grade2"
-        ]
-      ],
-      "layout": {
-        "line-join": "round",
-        "line-cap": "round"
-      },
-      "paint": {
-        "line-color": "#110f0d",
-        "line-width": {
-          "base": 1.8,
-          "stops": [
-            [
-              10,
-              0.3
-            ],
-            [
-              20,
-              15
-            ]
-          ]
-        },
-        "line-dasharray": [
-          30,
-          7
-        ]
-      }
-    },
-    {
-      "id": "road-path",
-      "type": "line",
-      "source": "tilezen",
-      "source-layer": "roads",
-      "minzoom": 12,
-      "maxzoom": 24,
-      "filter": [
-        "all",
-        [
-          "in",
-          "kind",
-          "path",
-          "footway",
-          "steps",
-          "cycleway"
-        ]
-      ],
-      "layout": {
-        "line-join": "round",
-        "line-cap": "round"
-      },
-      "paint": {
-        "line-color": "#5d6765",
-        "line-width": {
-          "base": 1.8,
-          "stops": [
-            [
-              10,
-              0.5
-            ],
-            [
-              20,
-              3
-            ]
-          ]
-        },
-        "line-dasharray": [
-          10,
-          10
-        ]
       }
     },
     {
@@ -2782,7 +2760,7 @@
         "text-font": [
           "Roboto Condensed Italic"
         ],
-        "text-padding": 1
+        "text-padding": 1,
         "text-offset": [
           0,
           1.8
