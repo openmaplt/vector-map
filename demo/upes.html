@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NP4W837');</script>
+<!-- End Google Tag Manager -->
   <meta charset='utf-8' />
   <title>Lietuvos upių žemėlapis</title>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
@@ -45,6 +52,11 @@
   </style>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NP4W837"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
 <div id='map'></div>
 <div id="layers" class="pull-right btn-group">
   <button type="button" class="btn btn-default active" data-style="upes">Žemėlapis</button>
@@ -65,7 +77,7 @@ var sprite;
 /***********************************************
 * Calculate distance between two coordinates
 ***********************************************/
-function distance(lat1, lon1, lat2, lon2, unit) {
+function distance(lat1, lon1, lat2, lon2) {
   if ((lat1 == lat2) && (lon1 == lon2)) {
     return 0;
   }
@@ -80,10 +92,7 @@ function distance(lat1, lon1, lat2, lon2, unit) {
     }
     dist = Math.acos(dist);
     dist = dist * 180/Math.PI;
-    dist = dist * 60 * 1.1515;
-    if (unit=="K") { dist = dist * 1.609344 }
-    if (unit=="N") { dist = dist * 0.8684 }
-    return dist;
+    return dist * 82.0;
   }
 } // distance
 
@@ -164,7 +173,7 @@ function onDragEnd(m) {
         var k = -1;
         var tim;
         var total_time = 0;
-        var total_distance = 0;
+        var total_distance = 0.0001;
         for (i = 0; i < name.length; i++) {
           k = k + 1;
           tim = time[k][2];
@@ -181,16 +190,14 @@ function onDragEnd(m) {
             len = len + distance(json.paths[0].points.coordinates[j][0],
                                  json.paths[0].points.coordinates[j][1],
                                  json.paths[0].points.coordinates[j+1][0],
-                                 json.paths[0].points.coordinates[j+1][1],
-                                 'K');
+                                 json.paths[0].points.coordinates[j+1][1]);
           }
           if ((i < name.length - 1) && (name[i+1][2][0] == '!')) {
             // Add distance and time from milestone item
             len = len + distance(json.paths[0].points.coordinates[j+1][0],
                                  json.paths[0].points.coordinates[j+1][1],
                                  json.paths[0].points.coordinates[j+2][0],
-                                 json.paths[0].points.coordinates[j+2][1],
-                                 'K');
+                                 json.paths[0].points.coordinates[j+2][1]);
             k = k + 1;
             sek = sek + Math.trunc(time[k][2] / 1000);
             if (sek > 60) {
@@ -242,7 +249,13 @@ function onDragEnd(m) {
         document.getElementById("instr").innerHTML=instr;
       })
       .catch(function(err) {
-        console.error(err.message);
+        if (err.message.startsWith('Cannot find point 0')) {
+          alert('Pradžios taškas per toli nuo upės. Paslinkite tašką arčiau upės.');
+        } else if (err.message.startsWith('Cannot find point 1')) {
+          alert('Pabaigos taškas per toli nuo upės. Paslinkite tašką arčiau upės.');
+        } else {
+          console.error(err.message);
+        }
       });
   }
 } // onDragEnd
