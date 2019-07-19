@@ -12,7 +12,8 @@ create table gen_building as
         ,''::text AS status
         ,ST_CollectionExtract(unnest(ST_ClusterWithin(way, 10.00)), 3)::geometry(MultiPolygon, 3857) as way
     from planet_osm_polygon
-   where building is not null;
+   where building is not null
+     and building != 'ruins';
 
 create index gen_buildings_gix on gen_building using gist(way);
 

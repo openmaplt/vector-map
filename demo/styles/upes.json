@@ -1156,12 +1156,51 @@
       }
     },
     {
+      "id": "buildings-ruins",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "buildings",
+      "minzoom": 12,
+      "maxzoom": 20,
+      "filter": [
+        "all",
+        [
+          "==",
+          "kind",
+          "ruins"
+        ]
+      ],
+      "paint": {
+        "line-color": "rgba(68, 68, 68, 1)",
+        "line-width": {
+          "stops": [
+            [
+              14,
+              0.5
+            ],
+            [
+              16,
+              2
+            ]
+          ]
+        }
+      }
+    },
+    {
       "id": "buildings",
       "type": "fill",
       "source": "tilezen",
       "source-layer": "buildings",
       "minzoom": 12,
       "maxzoom": 20,
+      "filter": [
+        "all",
+        [
+          "!=",
+          "kind",
+          "ruins"
+        ]
+      ],
       "paint": {
         "fill-color": "#444444"
       }
@@ -2154,37 +2193,6 @@
         "symbol-placement": "line"
       },
       "paint": {}
-    },
-    {
-      "id": "label-national-park",
-      "type": "symbol",
-      "source": "tilezen",
-      "source-layer": "protected",
-      "minzoom": 0,
-      "maxzoom": 20,
-      "filter": [
-        "all",
-        [
-          "==",
-          "kind",
-          "national_park"
-        ]
-      ],
-      "layout": {
-        "visibility": "none",
-        "symbol-placement": "line",
-        "text-field": "{name}",
-        "text-font": [
-          "Roboto Regular"
-        ],
-        "text-size": 13,
-        "text-anchor": "top"
-      },
-      "paint": {
-        "text-color": "rgba(11, 119, 14, 1)",
-        "text-halo-color": "rgba(255, 255, 255, 1)",
-        "text-halo-width": 1.5
-      }
     },
     {
       "id": "label-park",

@@ -83,9 +83,6 @@
           "forest"
         ]
       ],
-      "layout": {
-        "visibility": "visible"
-      },
       "paint": {
         "fill-color": {
           "stops": [
@@ -116,9 +113,6 @@
           "cemetery"
         ]
       ],
-      "layout": {
-        "visibility": "visible"
-      },
       "paint": {
         "fill-color": "rgba(121, 185, 150, 1)",
         "fill-opacity": 1
@@ -158,9 +152,6 @@
           "sand"
         ]
       ],
-      "layout": {
-        "visibility": "visible"
-      },
       "paint": {
         "fill-color": "rgba(242, 232, 141, 1)",
         "fill-opacity": 1
@@ -754,12 +745,63 @@
       }
     },
     {
+      "id": "buildings-ruins",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "buildings",
+      "minzoom": 13,
+      "maxzoom": 20,
+      "filter": [
+        "all",
+        [
+          "==",
+          "kind",
+          "ruins"
+        ]
+      ],
+      "layout": {},
+      "paint": {
+        "line-color": {
+          "stops": [
+            [
+              13,
+              "rgba(221, 221, 221, 1)"
+            ],
+            [
+              20,
+              "#888888"
+            ]
+          ]
+        },
+        "line-width": {
+          "stops": [
+            [
+              14,
+              0.5
+            ],
+            [
+              16,
+              2
+            ]
+          ]
+        }
+      }
+    },
+    {
       "id": "buildings",
       "type": "fill",
       "source": "tilezen",
       "source-layer": "buildings",
       "minzoom": 13,
       "maxzoom": 20,
+      "filter": [
+        "all",
+        [
+          "!=",
+          "kind",
+          "ruins"
+        ]
+      ],
       "paint": {
         "fill-outline-color": {
           "stops": [
@@ -794,6 +836,14 @@
       "source-layer": "buildings",
       "minzoom": 17,
       "maxzoom": 20,
+      "filter": [
+        "all",
+        [
+          "!=",
+          "kind",
+          "ruins"
+        ]
+      ],
       "layout": {},
       "paint": {
         "fill-extrusion-height": {
