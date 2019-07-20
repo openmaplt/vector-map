@@ -6,7 +6,7 @@ SELECT
   name,
   (
     CASE
-    WHEN aeroway = 'aerodrome'
+    WHEN aeroway in ('aerodrome', 'airstrip')
       THEN 'airport'
     WHEN amenity = 'place_of_worship' and building = 'chapel'
       THEN 'chapel'

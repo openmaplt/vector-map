@@ -37,7 +37,7 @@ create materialized view poi_topo (
         ,voltage
         ,way
     from planet_osm_point
-   where aeroway in ('aerodrome', 'helipad')
+   where aeroway in ('aerodrome', 'airstrip', 'helipad')
       or amenity = 'place_of_worship'
       or man_made in ('chimney', 'windmill', 'watermill', 'tower', 'communications_tower', 'lighthouse', 'water_tower', 'mast')
       or amenity = 'fuel'
@@ -64,7 +64,7 @@ create materialized view poi_topo (
         ,voltage
         ,st_centroid(way)
     from planet_osm_polygon
-   where aeroway in ('aerodrome', 'helipad')
+   where aeroway in ('aerodrome', 'airstrip', 'helipad')
       or amenity = 'place_of_worship'
       or man_made in ('chimney', 'windmill', 'watermill', 'tower', 'communications_tower', 'lighthouse', 'water_tower', 'mast')
       or amenity = 'fuel'
