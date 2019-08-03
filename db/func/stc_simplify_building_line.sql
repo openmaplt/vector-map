@@ -25,7 +25,7 @@ l1 geometry;     -- first new point search line
 l2 geometry;     -- second new point search line
 np geometry;     -- new point (points will be moved to this position for simplification)
 np2 geometry;    -- new point2 (for some calculations 2 new point positions are calculated)
-ex geometry=ST_GeomFromText('LINESTRING EMPTY'); -- excluded edges
+ex geometry=ST_GeomFromText('LINESTRING EMPTY', 3857); -- excluded edges
 ig geometry;     -- initial iteration geometry
 dg boolean = d;  -- debug (insert debug geomeries)
 edge geometry;   -- shortest edge
@@ -429,8 +429,8 @@ begin
       fg = stc_simplify_turbo(ig);
     --raise notice '% / % = %', st_area(st_makepolygon(fg)), st_area(st_makepolygon(r)), st_area(st_makepolygon(fg)) * 1.0 / st_area(st_makepolygon(r));
     --if (st_area(st_makepolygon(fg)) * 1.0 / st_area(st_makepolygon(r)) < 0.67) or
-    elseif (st_area(st_makepolygon(fg)) < 100) then
-      raise notice 'EXCEPTION. FINAL AREA < 100';
+    elseif (st_area(st_makepolygon(fg)) < t ^ 2) then
+      raise notice 'EXCEPTION. FINAL AREA < %', t ^ 2;
       ex = st_union(ex, edge);
       if dg then insert into temp values (9, ex); end if;
       fg = stc_simplify_turbo(ig);
