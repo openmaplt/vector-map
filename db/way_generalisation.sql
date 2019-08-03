@@ -38,7 +38,6 @@ insert into gen_ways_tmp (id, way)
     from planet_osm_line
    where railway = 'rail'
      and service is null;
-update gen_buffers set way = st_buffer(way, -5);
 
 select process('rail', 'rail');
 
@@ -77,3 +76,4 @@ $$;
 -- Susitvarkymas
 ------------------
 drop table gen_ways_tmp;
+create index gen_ways_gix on gen_ways using gist(way);

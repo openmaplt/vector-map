@@ -8,4 +8,5 @@ FROM
   gen_building
 WHERE
   way && !BBOX! AND
-  way_area > 320
+  way_area > 320 AND
+  res = 10
