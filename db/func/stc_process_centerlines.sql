@@ -147,7 +147,7 @@ begin
       if big_enough_centroid then
         l = greatest((st_xmax(c.way) - st_xmin(c.way)) / pixelsize,
                      (st_ymax(c.way) - st_ymin(c.way)) / pixelsize);
-        if l > 50 then
+        if l > 40 then
           raise notice 'Big enough for centroid label';
           s = cast(l as float) / c.l * 28;
           raise notice '% / % * 28 = %', l, c.l, s;
