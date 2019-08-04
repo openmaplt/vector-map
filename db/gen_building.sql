@@ -123,6 +123,6 @@ delete from gen_building where res = 10 and st_area(way) < 1;
 ----------------
 -- Update area
 ----------------
-update gen_building set way_area = st_area(way) where res = 10;
+update gen_building set way_area = st_area(way);
 
 drop function gen_building_temp;
