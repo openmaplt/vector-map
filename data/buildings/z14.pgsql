@@ -8,5 +8,5 @@ FROM
   gen_building
 WHERE
   way && !BBOX! AND
-  way_area > 80 AND
+  way_area > 50 AND
   res = 5
