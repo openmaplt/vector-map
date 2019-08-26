@@ -133,6 +133,28 @@ if (!mapboxgl.supported()) {
   ;
 }
 
+if (typeof searchEngine !== 'undefined') {
+  var searchMarker = null;
+  $(searchEngine).bind('addresspicker:selected', function (event, selectedPlace) {
+    if (!searchMarker) {
+      searchMarker = new mapboxgl.Marker();
+    }
+    searchMarker
+        .setLngLat([selectedPlace.geometry.coordinates[0], selectedPlace.geometry.coordinates[1]])
+        .addTo(map);
+
+    if (selectedPlace.properties.extent) {
+      const extent = selectedPlace.properties.extent;
+      map.fitBounds([[extent[0], extent[3]], [extent[2], extent[1]]]);
+    } else {
+      map.flyTo({
+        zoom: 16,
+        center: searchMarker.getLngLat()
+      });
+    }
+  });
+}
+
 $('#layers button').on('click', function (e) {
   if ($(this).hasClass('active')) {
     return false;

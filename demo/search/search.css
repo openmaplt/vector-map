@@ -1,0 +1,9 @@
+#searchInput {
+    width: 300px;
+}
+
+#search {
+    position: absolute;
+    top: 10px;
+    left: 50px;
+}
