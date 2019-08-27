@@ -245,9 +245,13 @@ begin
                  );
             np = st_intersection(l1, l2);
             if not st_isempty(np) then
-              fg = st_setpoint(fg, sn-2, np);
-              fg = st_setpoint(fg, sn-3, np);
-              --fg = st_setpoint(fg, sn-3, np);
+              if st_distance(np, fg) > t then
+                ex = st_union(ex, edge);
+              else
+                fg = st_setpoint(fg, sn-2, np);
+                fg = st_setpoint(fg, sn-3, np);
+                --fg = st_setpoint(fg, sn-3, np);
+              end if;
             else
               raise notice 'TODO A';
               ex = st_union(ex, edge);
@@ -389,9 +393,9 @@ begin
         ex = st_union(ex, edge);
       end if;
 
-    -----------------
-    -- UNPOCESSABLE
-    -----------------
+    ------------------
+    -- UNPROCESSABLE
+    ------------------
     elseif (ac between -160 and -110) or
            (ac between -50 and -40) or
            (ac between 40 and 50) or
@@ -408,12 +412,14 @@ begin
     fg = stc_simplify_turbo(fg);
 
     -- debug
-    if dg then insert into temp values (2, l1); end if;
-    if dg then insert into temp values (2, l2); end if;
-    if dg then insert into temp values (3, np); end if;
-    if dg then insert into temp values (3, np2); end if;
-    if dg then insert into temp values (4, fg); end if;
-    if dg then insert into temp values (9, ex); end if;
+    if dg then
+      insert into temp values (2, l1);
+      insert into temp values (2, l2);
+      insert into temp values (3, np);
+      insert into temp values (3, np2);
+      insert into temp values (4, fg);
+      insert into temp values (9, ex);
+    end if;
 
     fg = stc_remove_spike(fg);
     fg = stc_simplify_angle(fg);

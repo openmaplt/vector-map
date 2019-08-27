@@ -20,7 +20,7 @@ begin
   azimuth = 100;
   for c in (select st_closestpoint(way, bgc) closest
               from planet_osm_line
-             where highway is not null
+             where highway in ('motorway', 'trunk', 'primary', 'secondary', 'tertiary', 'unclassified', 'residential', 'living_street', 'track')
                and st_dwithin(bgc, way, bw * 100)
             order by st_distance(way, bgc)
             limit 1) loop
@@ -119,6 +119,68 @@ end$$;
 
 update gen_building set way = gen_building_temp(way, 10, 10, id), status = 'TYP' where res = 10 and status = '';
 delete from gen_building where res = 10 and st_area(way) < 1;
+
+-------
+-- 20
+-------
+select 'resolution 20';
+insert into gen_building
+  select nextval('gen_building_seq') AS id
+        ,0 AS way_area
+        ,20 AS res
+        ,''::text AS status
+        ,way as way
+    from gen_building
+   where res = 10
+  order by st_area(way) desc, id;
+
+-- Aggregation/Simplification
+update gen_building set status = 'DONE', way = st_multi(stc_simplify_building(way, 20)) where res = 20 and st_area(way) >= 400;
+
+-- Fix invalid geometries
+-- (This should eventually be done properly in simplification algorithm)
+do $$declare
+c record;
+begin
+  for c in (select id from gen_building where not st_isvalid(way) and res = 20 and st_area(way) >= 400) loop
+    raise notice '=== Invalid geometry for gen_building.id=%', c.id;
+    update gen_building set way = st_makevalid(way) where id = c.id;
+  end loop;
+end$$;
+
+update gen_building set way = gen_building_temp(way, 20, 20, id), status = 'TYP' where res = 20 and status = '';
+delete from gen_building where res = 20 and st_area(way) < 1;
+
+-------
+-- 40
+-------
+select 'resolution 40';
+insert into gen_building
+  select nextval('gen_building_seq') AS id
+        ,0 AS way_area
+        ,40 AS res
+        ,''::text AS status
+        ,way as way
+    from gen_building
+   where res = 20
+  order by st_area(way) desc, id;
+
+-- Aggregation/Simplification
+update gen_building set status = 'DONE', way = st_multi(stc_simplify_building(way, 40)) where res = 40 and st_area(way) >= 1600;
+
+-- Fix invalid geometries
+-- (This should eventually be done properly in simplification algorithm)
+do $$declare
+c record;
+begin
+  for c in (select id from gen_building where not st_isvalid(way) and res = 40 and st_area(way) >= 1600) loop
+    raise notice '=== Invalid geometry for gen_building.id=%', c.id;
+    update gen_building set way = st_makevalid(way) where id = c.id;
+  end loop;
+end$$;
+
+update gen_building set way = gen_building_temp(way, 40, 40, id), status = 'TYP' where res = 40 and status = '';
+delete from gen_building where res = 40 and st_area(way) < 1;
 
 ----------------
 -- Update area

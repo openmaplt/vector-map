@@ -8,4 +8,4 @@ FROM
   gen_building
 WHERE
   way && !BBOX! AND
-  res = 10
+  res = 20
