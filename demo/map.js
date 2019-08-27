@@ -145,10 +145,13 @@ if (typeof searchEngine !== 'undefined') {
 
     if (selectedPlace.properties.extent) {
       const extent = selectedPlace.properties.extent;
-      map.fitBounds([[extent[0], extent[3]], [extent[2], extent[1]]]);
+      map.fitBounds([[extent[0], extent[3]], [extent[2], extent[1]]], {
+          speed: 2
+      });
     } else {
       map.flyTo({
         zoom: 16,
+        speed: 2,
         center: searchMarker.getLngLat()
       });
     }

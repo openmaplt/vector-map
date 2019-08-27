@@ -1,9 +1,16 @@
-#searchInput {
-    width: 300px;
+.search-container {
+    margin-top: 10px;
+    padding-left: 50px;
 }
 
-#search {
-    position: absolute;
-    top: 10px;
-    left: 50px;
+.search-container span.twitter-typeahead .tt-suggestion {
+    white-space: normal;
+    padding: 3px 10px 3px 40px;
+}
+
+.search-container span.twitter-typeahead .tt-suggestion img {
+    margin-left: -26px;
+    margin-right: 5px;
+    width: 21px;
+    height: 21px;
 }
