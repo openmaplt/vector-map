@@ -9,8 +9,9 @@ SELECT
   osm_id,
   ST_AsBinary(way),
   way,
-  leisure AS kind
+  coalesce(leisure, landcover) AS kind
 FROM
   planet_osm_polygon
 WHERE
-  leisure in ('stadium', 'pitch');
+  leisure in ('stadium', 'pitch') or
+  landcover in ('grass', 'trees');

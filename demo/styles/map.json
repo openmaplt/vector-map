@@ -382,6 +382,44 @@
       }
     },
     {
+      "id": "landcover-trees",
+      "type": "fill",
+      "source": "detail",
+      "source-layer": "detail_poly",
+      "minzoom": 16,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "trees"
+        ]
+      ],
+      "paint": {
+        "fill-color": "rgba(136, 220, 122, 1)",
+        "fill-opacity": 1
+      }
+    },
+    {
+      "id": "landcover-grass",
+      "type": "fill",
+      "source": "detail",
+      "source-layer": "detail_poly",
+      "minzoom": 16,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "grass"
+        ]
+      ],
+      "paint": {
+        "fill-color": "rgba(205, 235, 176, 1)",
+        "fill-opacity": 1
+      }
+    },
+    {
       "id": "detail-stadium",
       "type": "fill",
       "source": "detail",
