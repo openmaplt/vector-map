@@ -1,0 +1,72 @@
+.sw_container {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.9);
+  bottom: 2px;
+  height: 90px;
+  right: 2px;
+  width: 130px;
+  border: 1px solid #cccccc;
+  box-shadow: #cccccc 2px 2px 2px;
+  transition: width 0.5s;
+  font-size: small;
+}
+.sw_container_extended {
+  width: 427px;
+  max-width: 100%;
+}
+#sw_extend {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 24px;
+  height: 90px;
+  background: #cccccc;
+  padding: 1px;
+}
+.sw_list {
+  position: absolute;
+  right: 0px;
+  height: 90px;
+  width: 103px;
+  top: 0px;
+  padding: 1px;
+  text-align: center;
+  transition: width 0.5s;
+  white-space: nowrap;
+  overflow-x: hidden;
+  cursor: pointer;
+}
+.sw_list_extended {
+  width: 400px;
+  max-width: 95%;
+}
+.sw_map {
+  display: inline-block;
+  margin-left: 1px;
+  margin-right: 1px;
+  position: relative;
+  top: 0px;
+}
+.sw_map1 {
+  transition: top 0.5s;
+  transition-delay: 0.0s;
+}
+.sw_map2 {
+  transition: top 0.5s;
+  transition-delay: 0.1s;
+}
+.sw_map3 {
+  transition: top 0.5s;
+  transition-delay: 0.2s;
+}
+.sw_map4 {
+  transition: top 0.5s;
+  transition-delay: 0.3s;
+}
+.sw_map5 {
+  transition: top 0.5s;
+  transition-delay: 0.4s;
+}
+.sw_map_hidden {
+  top: -100px;
+}

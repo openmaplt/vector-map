@@ -14,6 +14,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.js'></script>
     <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='switch.js'></script>
+    <link href='switch.css' rel='stylesheet' />
     <style>
         body { margin:0; padding:0; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
@@ -26,12 +28,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 <div id='map'></div>
+<div id='sw_container'></div>
 
 <script>
   var defaultType = 'topo';
   var mapTypes = {
     topo: 't'
   };
+function toMap() {
+  map.setStyle('styles/topo.json');
+} // toMap
+function toOrto() {
+  map.setStyle('styles/orto.json');
+} // toOrto
+document.addEventListener("DOMContentLoaded", function(e) { sw_init(4, toMap, toOrto); } );
 </script>
 <script src="map.js"></script>
 
