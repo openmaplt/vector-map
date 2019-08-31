@@ -44,7 +44,6 @@ function sw_toggle() {
       isDown = false;
       e.addEventListener('mousedown', (ev) => {
         ev.preventDefault();
-        //console.log('down');
         isDown = true;
         moved = false;
         startX = ev.pageX - e.offsetLeft;
@@ -53,27 +52,22 @@ function sw_toggle() {
       e.addEventListener('touchstart', (ev) => {
         //ev.preventDefault();
         touch = ev.changedTouches[0];
-        //console.log('tdown' + touch.pageX);
         isDown = true;
         startX = touch.pageX - e.offsetLeft;
         scrollLeft = e.scrollLeft;
       });
       e.addEventListener('mouseleave', () => {
-        //console.log('leave');
         isDown = false;
         moved = true;
       });
       e.addEventListener('mouseup', () => {
-        //console.log('up');
         isDown = false;
       });
       e.addEventListener('touchend', () => {
-        //console.log('tup');
         isDown = false;
       });
       e.addEventListener('touchmove', (ev) => {
         if (!isDown) return;
-        //console.log('move');
         ev.preventDefault();
         touch = ev.changedTouches[0];
         const x = touch.pageX - e.offsetLeft;
@@ -83,7 +77,6 @@ function sw_toggle() {
       e.addEventListener('mousemove', (ev) => {
         if (!isDown) return;
         ev.preventDefault();
-        //console.log('tmove' + ev.pageX);
         const x = ev.pageX - e.offsetLeft;
         const walk = (x - startX);
         e.scrollLeft = scrollLeft - walk;
@@ -101,7 +94,6 @@ function sw_toggle() {
 } // sw_toggle
 function sw_switch_to_map(m) {
   if (!moved) {
-    console.log('switch to ' + m);
     var zoom = map.getZoom();
     var cent = map.getCenter();
     var website = "https://";
