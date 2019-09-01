@@ -14,7 +14,7 @@ var moved = false;
 var orto = false;
 var img_orto = 'map_orto.png';
 var img_map = 'map_upes.png';
-function sw_init(m, toMap, toOrto) {
+function sw_init(m) {
   switch (m) {
     case 1: img_map = 'map_general.png'; break;
     case 2: img_map = 'map.png'; break;
