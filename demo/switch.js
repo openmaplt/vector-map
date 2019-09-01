@@ -13,15 +13,9 @@ var scrollLeft;
 var moved = false;
 var orto = false;
 var img_orto = 'map_orto.png';
-var img_map = 'map_upes.png';
+var img_map;
 function sw_init(m) {
-  switch (m) {
-    case 1: img_map = 'map_general.png'; break;
-    case 2: img_map = 'map.png'; break;
-    case 3: img_map = 'map_bicycle.png'; break;
-    case 4: img_map = 'map_topo.png'; break;
-    case 5: img_map = 'map_upes.png'; break;
-  }
+  img_map = m + '.png';
   c = document.getElementById('sw_container');
   c.classList.add('sw_container');
   c.innerHTML = '<div id="sw_extend" onClick="sw_toggle()"><img id="sw_button" src="expand_button.png"></div><div id="sw_list" class="sw_list"></div>';
@@ -119,13 +113,11 @@ function sw_switch_to_map(m) {
   }
 } // sw_switch_to_map
 function sw_toggle_map() {
+  document.getElementById('sw_orto').src = orto ? img_orto : img_map;
   if (orto) {
-    orto = false;
-    document.getElementById('sw_orto').src = img_orto;
     toMap();
   } else {
-    orto = true;
-    document.getElementById('sw_orto').src = img_map;
     toOrto();
   }
+  orto = !orto;
 } // sw_toggle_map
