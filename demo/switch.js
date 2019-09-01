@@ -1,7 +1,7 @@
 var extended = false;
 var c;
 var e;
-var s_initial = '<img id="sw_orto" src="map_orto.png" onClick="sw_toggle_map()"><br>Orto';
+var s_initial = '<img id="sw_orto" src="map_orto.png" onClick="sw_toggle_map()"><br><span id="sw_base_title">Orto</span>';
 var s_extended = '<div id="sw1" class="sw_map sw_map1 sw_map_hidden" onClick="sw_switch_to_map(\'-\')"><img src="map_general.png"><br>Bendras</div>' +
                  '<div id="sw2" class="sw_map sw_map2 sw_map_hidden" onClick="sw_switch_to_map(\'places\')"><img src="map.png"><br>Lankytinos</div>' +
                  '<div id="sw3" class="sw_map sw_map3 sw_map_hidden" onClick="sw_switch_to_map(\'dviraciai\')"><img src="map_bicycle.png"><br>Dviračiai</div>' +
@@ -14,8 +14,16 @@ var moved = false;
 var orto = false;
 var img_orto = 'map_orto.png';
 var img_map;
+var base_title;
 function sw_init(m) {
   img_map = m + '.png';
+  switch (m) {
+    case "map_general": base_title = "Bendras"; break;
+    case "map": base_title = "Lankytinos"; break;
+    case "map_bicycle": base_title = "Dviračiai"; break;
+    case "map_topo": base_title = "Topografinis"; break;
+    case "map_upes": base_title = "Upės (baidarės)"; break;
+  }
   c = document.getElementById('sw_container');
   c.classList.add('sw_container');
   c.innerHTML = '<div id="sw_extend" onClick="sw_toggle()"><img id="sw_button" src="expand_button.png"></div><div id="sw_list" class="sw_list"></div>';
@@ -113,6 +121,7 @@ function sw_switch_to_map(m) {
 } // sw_switch_to_map
 function sw_toggle_map() {
   document.getElementById('sw_orto').src = orto ? img_orto : img_map;
+  document.getElementById('sw_base_title').innerHTML = orto ? "Orto" : base_title;
   if (orto) {
     toMap();
   } else {
