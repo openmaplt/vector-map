@@ -1,4 +1,4 @@
-var extended = 0;
+var extended = false;
 var c;
 var e;
 var s_initial = '<img id="sw_orto" src="map_orto.png" onClick="sw_toggle_map()"><br>Orto';
@@ -24,8 +24,7 @@ function sw_init(m) {
 } // init
 
 function sw_toggle() {
-  if (extended == 0) {
-    extended = 1;
+  if (!extended) {
     c.classList.add("sw_container_extended");
     e.classList.add("sw_list_extended");
     e.innerHTML = s_extended;
@@ -79,12 +78,12 @@ function sw_toggle() {
       document.getElementById('sw_button').src = 'contract_button.png';
     }, 0);
   } else {
-    extended = 0;
     c.classList.remove("sw_container_extended");
     e.classList.remove("sw_list_extended");
     e.innerHTML = s_initial;
     document.getElementById('sw_button').src = 'expand_button.png';
   }
+  extended = !extended;
 } // sw_toggle
 function sw_switch_to_map(m) {
   if (!moved) {
