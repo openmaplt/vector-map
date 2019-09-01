@@ -8,7 +8,6 @@ var s_ex3 = '<div id="sw3" class="sw_map sw_map3 sw_map_hidden" onClick="sw_swit
 var s_ex4 = '<div id="sw4" class="sw_map sw_map4 sw_map_hidden" onClick="sw_switch_to_map(\'topo\')"><img src="map_topo.png"><br>Topografinis</div>';
 var s_ex5 = '<div id="sw5" class="sw_map sw_map5 sw_map_hidden" onClick="sw_switch_to_map(\'upes\')"><img src="map_upes.png"><br>Upės (baidarės)</div>';
 var s_extended = '';
-var s_extra;
 var isDown = false;
 var startX;
 var scrollLeft;
