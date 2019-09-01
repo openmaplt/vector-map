@@ -2,11 +2,13 @@ var extended = false;
 var c;
 var e;
 var s_initial = '<img id="sw_orto" src="map_orto.png" onClick="sw_toggle_map()"><br><span id="sw_base_title">Orto</span>';
-var s_extended = '<div id="sw1" class="sw_map sw_map1 sw_map_hidden" onClick="sw_switch_to_map(\'-\')"><img src="map_general.png"><br>Bendras</div>' +
-                 '<div id="sw2" class="sw_map sw_map2 sw_map_hidden" onClick="sw_switch_to_map(\'places\')"><img src="map.png"><br>Lankytinos</div>' +
-                 '<div id="sw3" class="sw_map sw_map3 sw_map_hidden" onClick="sw_switch_to_map(\'dviraciai\')"><img src="map_bicycle.png"><br>Dviračiai</div>' +
-                 '<div id="sw4" class="sw_map sw_map4 sw_map_hidden" onClick="sw_switch_to_map(\'topo\')"><img src="map_topo.png"><br>Topografinis</div>' +
-                 '<div id="sw5" class="sw_map sw_map5 sw_map_hidden" onClick="sw_switch_to_map(\'upes\')"><img src="map_upes.png"><br>Upės (baidarės)</div>';
+var s_ex1 = '<div id="sw1" class="sw_map sw_map1 sw_map_hidden" onClick="sw_switch_to_map(\'-\')"><img src="map_general.png"><br>Bendras</div>';
+var s_ex2 = '<div id="sw2" class="sw_map sw_map2 sw_map_hidden" onClick="sw_switch_to_map(\'places\')"><img src="map.png"><br>Lankytinos</div>';
+var s_ex3 = '<div id="sw3" class="sw_map sw_map3 sw_map_hidden" onClick="sw_switch_to_map(\'dviraciai\')"><img src="map_bicycle.png"><br>Dviračiai</div>';
+var s_ex4 = '<div id="sw4" class="sw_map sw_map4 sw_map_hidden" onClick="sw_switch_to_map(\'topo\')"><img src="map_topo.png"><br>Topografinis</div>';
+var s_ex5 = '<div id="sw5" class="sw_map sw_map5 sw_map_hidden" onClick="sw_switch_to_map(\'upes\')"><img src="map_upes.png"><br>Upės (baidarės)</div>';
+var s_extended = '';
+var s_extra;
 var isDown = false;
 var startX;
 var scrollLeft;
@@ -17,18 +19,23 @@ var img_map;
 var base_title;
 function sw_init(m) {
   img_map = m + '.png';
-  switch (m) {
-    case "map_general": base_title = "Bendras"; break;
-    case "map": base_title = "Lankytinos"; break;
-    case "map_bicycle": base_title = "Dviračiai"; break;
-    case "map_topo": base_title = "Topografinis"; break;
-    case "map_upes": base_title = "Upės (baidarės)"; break;
-  }
   c = document.getElementById('sw_container');
   c.classList.add('sw_container');
   c.innerHTML = '<div id="sw_extend" onClick="sw_toggle()"><img id="sw_button" src="expand_button.png"></div><div id="sw_list" class="sw_list"></div>';
   e = document.getElementById('sw_list');
   e.innerHTML = s_initial;
+  switch (m) {
+    case "map_general": base_title = "Bendras"; break;
+    case "map":         base_title = "Lankytinos"; break;
+    case "map_bicycle": base_title = "Dviračiai"; break;
+    case "map_topo":    base_title = "Topografinis"; break;
+    case "map_upes":    base_title = "Upės (baidarės)"; break;
+  }
+  if (m != 'map_general') { s_extended += s_ex1; }
+  if (m != 'map')         { s_extended += s_ex2; }
+  if (m != 'map_bicycle') { s_extended += s_ex3; }
+  if (m != 'map_topo')    { s_extended += s_ex4; }
+  if (m != 'map_upes')    { s_extended += s_ex5; }
 } // init
 
 function sw_toggle() {
@@ -37,11 +44,10 @@ function sw_toggle() {
     e.classList.add("sw_list_extended");
     e.innerHTML = s_extended;
     setTimeout(function() {
-      document.getElementById('sw1').classList.remove('sw_map_hidden');
-      document.getElementById('sw2').classList.remove('sw_map_hidden');
-      document.getElementById('sw3').classList.remove('sw_map_hidden');
-      document.getElementById('sw4').classList.remove('sw_map_hidden');
-      document.getElementById('sw5').classList.remove('sw_map_hidden');
+      var x = document.getElementsByClassName('sw_map_hidden');
+      while (x[0]) {
+        x[0].classList.remove('sw_map_hidden');
+      }
       isDown = false;
       e.addEventListener('mousedown', (ev) => {
         ev.preventDefault();
@@ -113,6 +119,8 @@ function sw_switch_to_map(m) {
     }
     if (m == 'places') {
       website = website + 'openmap.lt/#m=' + Math.trunc(zoom) + '/' + cent.lng + '/' + cent.lat + '//T';
+    } else if (m == 'upes') {
+      website = website + 'openmap.lt/#' + zoom + '/' + cent.lat + '/' + cent.lng + '/0/0';
     } else {
       website = website + 'openmap.lt/#' + x + '/' + zoom + '/' + cent.lat + '/' + cent.lng + '/0/0';
     }
