@@ -136,6 +136,8 @@ function sw_switch_to_map(m) {
       x = '';
     } else if (m == 'dviraciai') {
       x = 'b';
+    } else if (m == 'craftbeer') {
+      x = 'c';
     }
     if (m == 'places') {
       website = website + 'openmap.lt/#m=' + Math.trunc(zoom) + '/' + cent.lng + '/' + cent.lat + '//T';
