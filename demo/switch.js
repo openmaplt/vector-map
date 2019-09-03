@@ -2,12 +2,37 @@ var extended = false;
 var c;
 var e;
 var s_initial = '<img id="sw_orto" src="map_orto.png" onClick="sw_toggle_map()"><br><span id="sw_base_title">Orto</span>';
-var s_ex1 = '<div id="sw1" class="sw_map sw_map1 sw_map_hidden" onClick="sw_switch_to_map(\'-\')"><img src="map_general.png"><br>Bendras</div>';
-var s_ex2 = '<div id="sw2" class="sw_map sw_map2 sw_map_hidden" onClick="sw_switch_to_map(\'places\')"><img src="map.png"><br>Lankytinos</div>';
-var s_ex3 = '<div id="sw3" class="sw_map sw_map3 sw_map_hidden" onClick="sw_switch_to_map(\'dviraciai\')"><img src="map_bicycle.png"><br>Dviračiai</div>';
-var s_ex4 = '<div id="sw4" class="sw_map sw_map4 sw_map_hidden" onClick="sw_switch_to_map(\'topo\')"><img src="map_topo.png"><br>Topografinis</div>';
-var s_ex5 = '<div id="sw5" class="sw_map sw_map5 sw_map_hidden" onClick="sw_switch_to_map(\'upes\')"><img src="map_upes.png"><br>Upės (baidarės)</div>';
-var s_extended = '';
+var s_ex = [{
+    name: 'map_general',
+    title: 'Bendras',
+    html: '<div id="sw1" class="sw_map sw_map1 sw_map_hidden" onClick="sw_switch_to_map(\'-\')"><img src="map_general.png"><br>Bendras</div>'
+  },
+  {
+    name: 'map',
+    title: 'Lankytinos',
+    html: '<div id="sw2" class="sw_map sw_map2 sw_map_hidden" onClick="sw_switch_to_map(\'places\')"><img src="map.png"><br>Lankytinos</div>'
+  },
+  {
+    name: 'map_bicycle',
+    title: 'Dviračiai',
+    html: '<div id="sw3" class="sw_map sw_map3 sw_map_hidden" onClick="sw_switch_to_map(\'dviraciai\')"><img src="map_bicycle.png"><br>Dviračiai</div>'
+  },
+  {
+    name: 'map_topo',
+    title: 'Topografinis',
+    html: '<div id="sw4" class="sw_map sw_map4 sw_map_hidden" onClick="sw_switch_to_map(\'topo\')"><img src="map_topo.png"><br>Topografinis</div>'
+  },
+  {
+    name: 'map_upes',
+    title: 'Upės (baidarės)',
+    html: '<div id="sw5" class="sw_map sw_map5 sw_map_hidden" onClick="sw_switch_to_map(\'upes\')"><img src="map_upes.png"><br>Upės (baidarės)</div>'
+  },
+  {
+    name: 'map_craftbeer',
+    title: 'Craft alus',
+    html: '<div id="sw6" class="sw_map sw_map6 sw_map_hidden" onClick="sw_switch_to_map(\'craftbeer\')"><img src="map_craftbeer.png"><br>Craft alus</div>'
+  }];
+var s_extended='';
 var isDown = false;
 var startX;
 var scrollLeft;
@@ -23,18 +48,14 @@ function sw_init(m) {
   c.innerHTML = '<div id="sw_extend" onClick="sw_toggle()"><img id="sw_button" src="expand_button.png"></div><div id="sw_list" class="sw_list"></div>';
   e = document.getElementById('sw_list');
   e.innerHTML = s_initial;
-  switch (m) {
-    case "map_general": base_title = "Bendras"; break;
-    case "map":         base_title = "Lankytinos"; break;
-    case "map_bicycle": base_title = "Dviračiai"; break;
-    case "map_topo":    base_title = "Topografinis"; break;
-    case "map_upes":    base_title = "Upės (baidarės)"; break;
+  for (var i=0; i<s_ex.length; i++) {
+    if (s_ex[i].name == m) {
+      base_title = s_ex[i].title;
+      layer_code = s_ex[i].code;
+    } else {
+      s_extended += s_ex[i].html;
+    }
   }
-  if (m != 'map_general') { s_extended += s_ex1; }
-  if (m != 'map')         { s_extended += s_ex2; }
-  if (m != 'map_bicycle') { s_extended += s_ex3; }
-  if (m != 'map_topo')    { s_extended += s_ex4; }
-  if (m != 'map_upes')    { s_extended += s_ex5; }
 } // init
 
 function sw_toggle() {
