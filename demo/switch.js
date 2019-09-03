@@ -51,7 +51,6 @@ function sw_init(m) {
   for (var i=0; i<s_ex.length; i++) {
     if (s_ex[i].name == m) {
       base_title = s_ex[i].title;
-      layer_code = s_ex[i].code;
     } else {
       s_extended += s_ex[i].html;
     }
