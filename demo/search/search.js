@@ -166,7 +166,6 @@ function imgSprite(name, value) {
     } else {
       icon = typeIcons.default;
     }
-    console.log(name + '=' + value + '=>' + icon);
     return '<img src="img_trans.gif" style="width: ' + sprite[icon].width +
            'px; height: ' + sprite[icon].height +
            'px; background: url(search/sprites/openmaplt.png) -' + sprite[icon].x + 'px -' + sprite[icon].y + 'px;">';
