@@ -156,15 +156,9 @@ xmlhttp.open("GET", "search/sprites/openmaplt.json", true);
 xmlhttp.send();
 
 function imgSprite(name, value) {
-    var icon;
+    var icon = typeIcons.default;
     if (typeIcons[name]) {
-      if (typeIcons[name][value]) {
-        icon = typeIcons[name][value];
-      } else {
-        icon = typeIcons[name].default;
-      }
-    } else {
-      icon = typeIcons.default;
+      icon = typeIcons[name][value] || typeIcons[name].default;
     }
     return '<img src="img_trans.gif" style="width: ' + sprite[icon].width +
            'px; height: ' + sprite[icon].height +
