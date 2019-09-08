@@ -15,6 +15,7 @@ var typeIcons = {
      compressed_air: 'compressed_air',
      dentist: 'dentist',
      doctors: 'doctor',
+     embassy: 'embassy',
      fast_food: 'fast-food',
      ferry_terminal: 'ferry',
      fire_station: 'fire-station',
@@ -49,6 +50,7 @@ var typeIcons = {
      hostel: 'home',
      motel: 'home',
      guest_house: 'home',
+     apartment: 'home',
      hotel: 'lodging',
      museum: 'museum',
      picnic_site: 'picnic-site',
@@ -92,8 +94,26 @@ var typeIcons = {
    },
    office: {
      government: 'town-hall',
-     notary: 'marker',
-     lawyer: 'marker',
+     notary: 'suitcase',
+     lawyer: 'suitcase',
+     default: 'suitcase'
+   },
+   natural: {
+     peak: 'mountain',
+     default: 'triangle-stroked'
+   },
+   highway: {
+     default: 'square-stroked'
+   },
+   place: {
+     default: 'town'
+   },
+   leisure: {
+     park: 'park',
+     default: 'marker'
+   },
+   landuse: {
+     cemetery: 'cemetery',
      default: 'marker'
    },
    default: 'marker'
@@ -102,8 +122,12 @@ var typeIcons = {
 var formatResult = function () {
     return function (feature) {
         var formatted = '';
+        if (feature.properties.osm_key == 'waterway') {
+            formatted = 'Upė ';
+        }
+
         if (feature.properties.name) {
-            formatted = feature.properties.name;
+            formatted += feature.properties.name;
         }
 
         if (feature.properties.street) {
@@ -128,10 +152,12 @@ var formatResult = function () {
         }
 
         if (feature.properties.postcode) {
-            if (formatted.length) {
+            if (feature.properties.osm_key != 'highway') {
+              if (formatted.length) {
                 formatted += ' ';
+              }
+              formatted += 'LT-' + feature.properties.postcode;
             }
-            formatted += 'LT-' + feature.properties.postcode;
         }
 
         return formatted;
