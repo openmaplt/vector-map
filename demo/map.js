@@ -312,6 +312,7 @@ function poiOnClick(e) {
   popupPoi
       .setLngLat(poi.geometry.coordinates)
       .setHTML(lines.join('<br />'))
+      .setMaxWidth('70vw')
       .addTo(map)
       .once('close', onPoiPopupClose);
   try {
@@ -364,7 +365,7 @@ function getFomatedValue(attribute, properties) {
     case 'kvr_link':
       return '<a href="https://kvr.kpd.lt/heritage/Pages/KVRDetail.aspx?lang=lt&MC=' + value + '" target="_blank">Kultūros vertybių registras</a>';
     case 'image':
-      return '<img src="' + value + '" />';
+      return '<a href="' + value + '" target="_blank"><img src="' + value + '" /></a>';
     case 'address':
       return getAddress(properties);
     case 'phone':
