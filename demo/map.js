@@ -1,5 +1,8 @@
 var interactiveLayerId = 'label-amenity';
 var defaultType = defaultType || 'map';
+var defaultLat = defaultLat || 55.19114;
+var defaultLng = defaultLng || 23.87100;
+var defaultZoom = defaultZoom || 7;
 var cookieName = defaultType + 'Data';
 var popupPoi = null;
 var pMaxBounds;
@@ -15,9 +18,9 @@ var mapTypes = mapTypes || {
 };
 var mapData = {
   type: defaultType,
-  zoom: 7,
-  lat: 55.19114,
-  lng: 23.87100,
+  zoom: defaultZoom,
+  lat: defaultLat,
+  lng: defaultLng,
   bearing: 0,
   pitch: 0
 };
@@ -312,6 +315,7 @@ function poiOnClick(e) {
   popupPoi
       .setLngLat(poi.geometry.coordinates)
       .setHTML(lines.join('<br />'))
+      .setMaxWidth('70vw')
       .addTo(map)
       .once('close', onPoiPopupClose);
   try {
@@ -364,7 +368,7 @@ function getFomatedValue(attribute, properties) {
     case 'kvr_link':
       return '<a href="https://kvr.kpd.lt/heritage/Pages/KVRDetail.aspx?lang=lt&MC=' + value + '" target="_blank">Kultūros vertybių registras</a>';
     case 'image':
-      return '<img src="' + value + '" />';
+      return '<a href="' + value + '" target="_blank"><img src="' + value + '" /></a>';
     case 'address':
       return getAddress(properties);
     case 'phone':

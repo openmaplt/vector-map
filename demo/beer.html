@@ -16,7 +16,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <style>
-        body { margin:0; padding:0; }
+        body { margin:0; padding:0; overflow: hidden; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
         #layers {right: 5px; top: 5px;}
         .mapboxgl-popup-content img {max-width: 400px; max-height: 400px;}
@@ -33,29 +33,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       right: 7px;
       padding: 4px;
       width: 120px;
+      transition: right 0.5s;
     }
     .menu input[type=checkbox] {
-        display: none;
+      display: none;
     }
     .menu input[type=checkbox] + label {
-        background-color: #333333;
-        display: block;
-        cursor: pointer;
-        padding: 7px;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-        margin-bottom: 0px;
+      background-color: #333333;
+      display: block;
+      cursor: pointer;
+      padding: 7px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+      margin-bottom: 0px;
     }
     .menu input[type=checkbox] + label {
-        background-color: #333333;
-        text-transform: capitalize;
+      background-color: #333333;
+      text-transform: capitalize;
     }
     .menu input[type=checkbox]:checked + label {
-        background-color: #fff480;
-        color: #000;
+      background-color: #fff480;
+      color: #000;
     }
     .menu input[type=checkbox]:checked + label:before {
-        content: '✔';
-        margin-right: 5px;
+      content: '✔';
+      margin-right: 5px;
     }
     .menu2 {
       display: flex;
@@ -63,6 +64,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .menu2 input[type=checkbox] + label {
       width: 56px;
+    }
+    .mapboxgl-popup-content {
+      max-width: 100%;
+    }
+    .menu-control {
+      font: 11px/18px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+      font-weight: 700;
+      background-color: #fff480;
+      color: #000;
+      position: absolute;
+      right: 11px;
+      top: 285px;
+      width: 112px;
+      height: 32px;
+      border-radius: 7px;
+      padding: 7px;
+      cursor: pointer;
+      transition: top 0.5s;
+    }
+    .menu-control-top {
+      top: 7px;
+      transition: top 0.5s;
+    }
+    .menu-hidden {
+      right: -200px;
+      transition: right 0.5s;
     }
     </style>
 </head>
@@ -72,7 +99,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 <div id="map"></div>
-<div class="menu" style="border-radius: 7px;">
+<div id="menu" class="menu" style="border-radius: 7px;">
   <div><input type="checkbox" id="label-lager" checked="true"  onChange="change()"><label style="border-radius: 7px 7px 0 0;" for="label-lager">Lageris</label></div>
   <div><input type="checkbox" id="label-ale"   checked="true"  onChange="change()"><label for="label-ale"  >Elis</label></div>
   <div><input type="checkbox" id="label-wheat" checked="true"  onChange="change()"><label for="label-wheat">Kvietinis</label></div>
@@ -85,16 +112,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div><input type="checkbox" id="label-drink" checked="true"  onChange="changeType('drink')"><label style="border-radius: 7px 7px 0 0;" for="label-drink">Gerti</label></div>
   <div><input type="checkbox" id="label-shop"   onChange="changeType('shop')"><label style="border-radius: 0 0 7px 7px;" for="label-shop">Išsinešti</label></div>
 </div>
+<div id="menu-control" class="menu-control" onClick="showHide()">Slėpti meniu</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.0/mapbox-gl.js'></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-supported/v1.3.0/mapbox-gl-supported.js'></script>
 <script>
   var defaultType = 'beer_dark';
+  var defaultZoom = 13;
+  var defaultLat = 54.6805;
+  var defaultLng = 25.2811;
   var mapTypes = {
     beer_dark: 'c'
   };
   var filterCond = 'any';
   var filterPlace = 'drink';
+  var menuShown = true;
   function change() {
     var filters = [filterCond];
     if (document.getElementById("label-lager").checked) {
@@ -142,6 +174,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       document.getElementById("label-shop").checked = true;
     }
     change();
+  }
+  function showHide() {
+    if (menuShown) {
+      document.getElementById('menu').classList.add('menu-hidden');
+      document.getElementById('menu-control').classList.add('menu-control-top');
+      document.getElementById('menu-control').innerHTML = 'Rodyti meniu';
+    } else {
+      document.getElementById('menu').classList.remove('menu-hidden');
+      document.getElementById('menu-control').classList.remove('menu-control-top');
+      document.getElementById('menu-control').innerHTML = 'Slėpti meniu';
+    }
+    menuShown = !menuShown;
   }
 </script>
 <script src="map.js"></script>
