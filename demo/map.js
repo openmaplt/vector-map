@@ -1,5 +1,8 @@
 var interactiveLayerId = 'label-amenity';
 var defaultType = defaultType || 'map';
+var defaultLat = defaultLat || 55.19114;
+var defaultLng = defaultLng || 23.87100;
+var defaultZoom = defaultZoom || 7;
 var cookieName = defaultType + 'Data';
 var popupPoi = null;
 var pMaxBounds;
@@ -15,9 +18,9 @@ var mapTypes = mapTypes || {
 };
 var mapData = {
   type: defaultType,
-  zoom: 7,
-  lat: 55.19114,
-  lng: 23.87100,
+  zoom: defaultZoom,
+  lat: defaultLat,
+  lng: defaultLng,
   bearing: 0,
   pitch: 0
 };
