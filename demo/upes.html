@@ -17,6 +17,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <script src="https://cdn.jsdelivr.net/npm/graphhopper-js-api-client/dist/graphhopper-client.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="https://openmap.lt/style.css">
+  <link rel="stylesheet" href="switch.css">
+  <script src="switch.js"></script>
   <style>
     .info {
       position: absolute;
@@ -31,7 +33,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     #instr {
       position: absolute;
-      top: 50px;
+      top: 2px;
       right: 2px;
       max-height: 50%;
       overflow-y: auto;
@@ -58,12 +60,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 <div id='map'></div>
-<div id="layers" class="pull-right btn-group">
-  <button type="button" class="btn btn-default active" data-style="upes">Žemėlapis</button>
-  <button type="button" class="btn btn-default" data-style="hybrid_upes">Ortofoto</button>
-</div>
 
 <div id='instr' style="max-width: 50%;" onClick="reset()"></div>
+<div id='sw_container'></div>
 
 <script>
 var startMarker;
@@ -90,9 +89,7 @@ function distance(lat1, lon1, lat2, lon2) {
     if (dist > 1) {
       dist = 1;
     }
-    dist = Math.acos(dist);
-    dist = dist * 180/Math.PI;
-    return dist * 82.0;
+    return Math.acos(dist) * 6371;
   }
 } // distance
 
@@ -187,17 +184,17 @@ function onDragEnd(m) {
           len = 0;
           total_time = total_time + tim;
           for (j = name[i][0]; j < name[i][1]; j++) {
-            len = len + distance(json.paths[0].points.coordinates[j][0],
-                                 json.paths[0].points.coordinates[j][1],
-                                 json.paths[0].points.coordinates[j+1][0],
-                                 json.paths[0].points.coordinates[j+1][1]);
+            len = len + distance(json.paths[0].points.coordinates[j][1],
+                                 json.paths[0].points.coordinates[j][0],
+                                 json.paths[0].points.coordinates[j+1][1],
+                                 json.paths[0].points.coordinates[j+1][0]);
           }
           if ((i < name.length - 1) && (name[i+1][2][0] == '!')) {
             // Add distance and time from milestone item
-            len = len + distance(json.paths[0].points.coordinates[j+1][0],
-                                 json.paths[0].points.coordinates[j+1][1],
-                                 json.paths[0].points.coordinates[j+2][0],
-                                 json.paths[0].points.coordinates[j+2][1]);
+            len = len + distance(json.paths[0].points.coordinates[j+1][1],
+                                 json.paths[0].points.coordinates[j+1][0],
+                                 json.paths[0].points.coordinates[j+2][1],
+                                 json.paths[0].points.coordinates[j+2][0]);
             k = k + 1;
             sek = sek + Math.trunc(time[k][2] / 1000);
             if (sek > 60) {
@@ -268,8 +265,10 @@ var map = new mapboxgl.Map({
   minZoom: 7,
   maxZoom: 18,
   center: [24.07, 54.96],
-  hash: true
+  hash: true,
+  attributionControl: false
 });
+map.addControl(new mapboxgl.AttributionControl(), 'bottom-left');
 var ghRouting = new GraphHopper.Routing({
   host: "https://openmap.lt",
   vehicle: "river",
@@ -307,28 +306,6 @@ map.on('contextmenu', (e) => {
     onDragEnd('S');
   }
 })
-$('#layers button').on('click', function (e) {
-  if ($(this).hasClass('active')) {
-    return false;
-  }
-  $('#layers button').removeClass('active');
-  $(this).addClass('active');
-
-  var selectLayer = $(e.target).data('style');
-  map.setStyle('styles/' + selectLayer + '.json');
-  if (selectLayer == 'upes') {
-    routeAfter = 'topo_sym';
-  } else {
-    routeAfter = 'label-road';
-  }
-  if ((start_set == 'Y') && (end_set == 'Y')) {
-    onDragEnd('S');
-  }
-
-  mapData.type = selectLayer;
-  mapData.id = null;
-  changeHashUrl(mapData);
-});
 var xmlhttp = new XMLHttpRequest();
 xmlhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
@@ -337,6 +314,29 @@ xmlhttp.onreadystatechange = function() {
 };
 xmlhttp.open("GET", "https://openmap.lt/sprites/river.json", true);
 xmlhttp.send();
+
+function switchTo(e, s) {
+  map.setStyle('styles/' + s + '.json');
+  if (s == 'upes') {
+    routeAfter = 'topo_sym';
+  } else {
+    routeAfter = 'label-road';
+  }
+  if ((start_set == 'Y') && (end_set == 'Y')) {
+    onDragEnd('S');
+  }
+
+  /*mapData.type = s;
+  mapData.id = null;
+  changeHashUrl(mapData);*/
+} // switchTo
+function toMap() {
+  switchTo(document.getElementById('b_map'), 'upes');
+} // toMap
+function toOrto() {
+  switchTo(document.getElementById('b_orto'), 'hybrid_upes');
+} // toOrto
+document.addEventListener("DOMContentLoaded", function(e) { sw_init('map_upes'); } );
 </script>
 </body>
 </html>
