@@ -53,8 +53,8 @@ cat dirty_tiles >> dirty_tiles_weekly
 
 # update generalisation on Saturday
 if [[ $(date +%u) -eq 6 ]] ; then
-# NOTE: IŠJUNGTA, KOL SERVERIS NETURI PAKANKAMAI ATMINTIES APDOROTI
-#  psql -d osm -U postgres < gen_way.sql
+  echo "way generalisation" `date`
+  psql -d osm -U postgres < gen_way.sql
   echo "water generalisation" `date`
   psql -d osm -U osm < gen_water.sql
   echo "building generalisation" `date`
