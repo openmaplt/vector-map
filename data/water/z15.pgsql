@@ -42,6 +42,6 @@ WHERE
     amenity = 'swimming_pool' OR
     leisure = 'swimming_pool'
   ) AND
-  way_area >= 1000
+  way_area >= 200
 GROUP BY
   kind

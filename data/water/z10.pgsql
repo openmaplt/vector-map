@@ -32,7 +32,7 @@ FROM
 WHERE
   way && !BBOX! AND
   waterway = 'riverbank' AND
-  way_area >= 500000
+  way_area >= 204800
 
 UNION ALL
 
@@ -47,4 +47,4 @@ FROM
 WHERE
   way && !BBOX! AND
   res = 150 AND
-  way_area >= 500000
+  way_area >= 204800

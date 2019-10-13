@@ -32,7 +32,7 @@ WHERE
     OR "natural" in ('wetland', 'sand', 'beach', 'scrub', 'heath')
     OR aeroway in ('runway')
   ) AND
-  way_area >= 10000
+  way_area >= 3200
 
 UNION ALL
 
@@ -45,4 +45,4 @@ FROM
 WHERE
   way && !BBOX! AND
   res = 10 AND
-  way_area >= 10000
+  way_area >= 3200

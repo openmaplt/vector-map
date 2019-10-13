@@ -3,14 +3,10 @@ SELECT
   st_asbinary(way) AS geom,
   (
     CASE
-      WHEN landuse = 'residential'
-        THEN 'residential'
       WHEN landuse = 'meadow' or "natural" = 'heath'
         THEN 'meadow'
-      WHEN landuse = 'farmland'
-        THEN 'farmland'
-      WHEN landuse = 'allotments'
-        THEN 'allotments'
+      WHEN landuse is not null
+        THEN landuse
       WHEN "natural" = 'wetland' AND "wetland" = 'marsh'
         THEN 'marsh'
       WHEN "natural" = 'wetland' AND "wetland" = 'swamp'
@@ -25,7 +21,7 @@ WHERE
     landuse IN ('residential', 'meadow', 'farmland', 'allotments', 'industrial', 'farmyard', 'industrial') OR
    "natural" in ('wetland', 'heath')
   ) AND
-  way_area >= 100000
+  way_area >= 51200
 
 UNION ALL
 
@@ -38,4 +34,4 @@ FROM
 WHERE
   way && !BBOX! AND
   res = 10 AND
-  way_area >= 100000
+  way_area >= 51200
