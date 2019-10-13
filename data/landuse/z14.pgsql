@@ -7,6 +7,8 @@ SELECT
         THEN 'meadow'
       WHEN landuse = 'retail'
         THEN 'commercial'
+      WHEN landuse = 'railway'
+        THEN 'railway'
       WHEN landuse is not null
         THEN landuse
       WHEN "natural" = 'wetland' AND "wetland" = 'marsh'
@@ -28,11 +30,11 @@ FROM
 WHERE
   way && !BBOX! AND
   (
-    landuse in ('residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages', 'orchard', 'farmyard', 'retail')
+    landuse in ('residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages', 'orchard', 'farmyard', 'retail', 'railway')
     OR "natural" in ('wetland', 'sand', 'beach', 'scrub', 'heath')
     OR aeroway in ('apron', 'runway')
   ) AND
-  way_area >= 5000
+  way_area >= 800
 
 UNION ALL
 
@@ -45,4 +47,4 @@ FROM
 WHERE
   way && !BBOX! AND
   res = 10 AND
-  way_area >= 5000
+  way_area >= 800

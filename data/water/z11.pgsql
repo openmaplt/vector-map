@@ -34,7 +34,7 @@ FROM
 WHERE
   way && !BBOX! AND
   waterway = 'riverbank' AND
-  way_area >= 100000
+  way_area >= 51200
 GROUP BY
   kind
 
@@ -51,4 +51,4 @@ FROM
 WHERE
   way && !BBOX! AND
   res = 10 AND
-  way_area >= 100000
+  way_area >= 51200

@@ -28,6 +28,6 @@ FROM
 WHERE
   way && !BBOX! AND
   res = 600 AND
-  way_area >= 5000000
+  way_area >= 3276800
 GROUP BY
   kind
