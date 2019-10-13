@@ -8,7 +8,7 @@ SELECT
       WHEN landuse = 'retail'
         THEN 'commercial'
       WHEN landuse = 'railway'
-        THEN 'railway'
+        THEN 'industrial'
       WHEN landuse is not null
         THEN landuse
       WHEN "natural" = 'wetland' AND "wetland" = 'marsh'
