@@ -5,6 +5,8 @@ SELECT
     CASE
       WHEN landuse = 'meadow' or "natural" = 'heath'
         THEN 'meadow'
+      WHEN landuse = 'railway'
+        THEN 'industrial'
       WHEN landuse is not null
         THEN landuse
       WHEN "natural" = 'wetland' AND "wetland" = 'marsh'
@@ -18,7 +20,7 @@ FROM
 WHERE
   way && !BBOX! AND
   (
-    landuse IN ('residential', 'meadow', 'farmland', 'allotments', 'industrial', 'farmyard', 'industrial') OR
+    landuse IN ('residential', 'meadow', 'farmland', 'allotments', 'industrial', 'farmyard', 'industrial', 'railway') OR
    "natural" in ('wetland', 'heath')
   ) AND
   way_area >= 51200
