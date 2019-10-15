@@ -48,3 +48,8 @@ FROM
   poi_topo
 WHERE
   way && !BBOX!
+ORDER BY
+  CASE WHEN amenity = 'place_of_worship' THEN 1
+       WHEN man_made = 'lighthouse' THEN 2
+       ELSE 99
+  END

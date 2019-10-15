@@ -49,3 +49,8 @@ FROM
 WHERE
   way && !BBOX!
   AND (coalesce(power, '!@#') != 'substation' OR coalesce(voltage, '0') in ('110000', '35000'))
+ORDER BY
+  CASE WHEN amenity = 'place_of_worship' THEN 1
+       WHEN man_made = 'lighthouse' THEN 2
+       ELSE 99
+  END
