@@ -10,6 +10,14 @@
   transition: width 0.5s;
   font-size: small;
 }
+@media screen and (max-width: 640px) {
+  .sw_container {
+    bottom: 5px;
+  }
+  .mapboxgl-ctrl-bottom-right {
+    bottom: 90px;
+  }
+}
 .sw_container_extended {
   width: 427px;
   max-width: 100%;
