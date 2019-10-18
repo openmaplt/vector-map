@@ -108,7 +108,8 @@ if (!mapboxgl.supported()) {
     hash: false,
     maxBounds: pMaxBounds || [20.700, 53.700, 27.050, 56.650],
     bearing: mapData.bearing,
-    pitch: mapData.pitch
+    pitch: mapData.pitch,
+    attributionControl: false
   })
     .addControl(new mapboxgl.NavigationControl(), 'top-left')
     .addControl(new mapboxgl.GeolocateControl({
@@ -117,6 +118,7 @@ if (!mapboxgl.supported()) {
       },
       trackUserLocation: true
     }), 'top-left')
+    .addControl(new mapboxgl.AttributionControl(), 'bottom-left')
     .on('sourcedata', function () {
       if (map.isStyleLoaded()) {
         poiInteractive();

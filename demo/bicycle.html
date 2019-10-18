@@ -25,6 +25,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="bicycle_legend.css">
+    <script src='switch.js'></script>
+    <link href='switch.css' rel='stylesheet' />
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -32,11 +34,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 <div id="map" role="main"></div>
-<div id="layers" class="pull-right btn-group hidden">
-    <button type="button" class="btn btn-default" data-style="bicycle">Žemėlapis</button>
-    <button type="button" class="btn btn-default" data-style="orto">Ortofoto</button>
-    <button type="button" class="btn btn-default" data-style="bicycle_hybrid">Mišrus</button>
-</div>
+<div id='sw_container'></div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.0/mapbox-gl.js'></script>
 <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-supported/v1.3.0/mapbox-gl-supported.js'></script>
@@ -59,6 +57,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     leg9: {label: 'Dviračių nuomos punktas', type: 'icon'}
   }
   var legendTechUrl = '/doc/bicycle_doc.html';
+  document.addEventListener("DOMContentLoaded", function(e) { sw_init('map_bicycle'); } );
+function toMap() {
+  map.setStyle('styles/bicycle.json');
+} // toMap
+function toOrto() {
+  map.setStyle('styles/bicycle_hybrid.json');
+} // toOrto
 </script>
 <script src="map.js"></script>
 <script type="text/javascript">

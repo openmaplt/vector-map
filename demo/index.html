@@ -27,18 +27,14 @@
     <link rel="stylesheet" href="search/typeahead.css">
     <link rel="stylesheet" href="search/search.css">
     <link rel="stylesheet" href="style.css">
+    <script src='switch.js'></script>
+    <link href='switch.css' rel='stylesheet' />
 </head>
 <body>
 <div id="map" role="main"></div>
+<div id='sw_container'></div>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xs-12 col-sm-5 text-right layers-container">
-            <div id="layers" class="btn-group hidden">
-                <button type="button" class="btn btn-default" data-style="map">Žemėlapis</button>
-                <button type="button" class="btn btn-default" data-style="orto">Ortofoto</button>
-                <button type="button" class="btn btn-default" data-style="hybrid">Mišrus</button>
-            </div>
-        </div>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 search-container">
             <div class="form-group">
                 <input id="searchInput" type="search" placeholder="Paieška..." class="form-control"/>
@@ -57,6 +53,13 @@
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js');
   }
+  document.addEventListener("DOMContentLoaded", function(e) { sw_init('map_general'); } );
+function toMap() {
+  map.setStyle('styles/map.json');
+} // toMap
+function toOrto() {
+  map.setStyle('styles/hybrid.json');
+} // toOrto
 </script>
 </body>
 </html>
