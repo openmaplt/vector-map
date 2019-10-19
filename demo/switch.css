@@ -1,14 +1,16 @@
 .sw_container {
   position: absolute;
   background: rgba(255, 255, 255, 0.9);
-  bottom: 2px;
-  height: 90px;
+  bottom: 1px;
+  height: 92px;
   right: 2px;
   width: 130px;
   border: 1px solid #cccccc;
-  box-shadow: #cccccc 2px 2px 2px;
   transition: width 0.5s;
   font-size: small;
+  font-family: sans serif;
+  line-height: 1.1em;
+  color: #333;
 }
 @media screen and (max-width: 640px) {
   .sw_container {
@@ -27,9 +29,6 @@
   left: 0px;
   top: 0px;
   width: 24px;
-  height: 90px;
-  background: #cccccc;
-  padding: 1px;
 }
 .sw_list {
   position: absolute;
@@ -37,12 +36,15 @@
   height: 90px;
   width: 103px;
   top: 0px;
-  padding: 1px;
+  padding: 2px;
   text-align: center;
   transition: width 0.5s;
   white-space: nowrap;
   overflow-x: hidden;
   cursor: pointer;
+}
+.sw_list img {
+  vertical-align: middle;
 }
 .sw_list_extended {
   width: 400px;
