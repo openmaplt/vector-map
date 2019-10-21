@@ -420,6 +420,50 @@
       }
     },
     {
+      "id": "rapids",
+      "type": "line",
+      "source": "detail",
+      "source-layer": "detail_line",
+      "minzoom": 13,
+      "maxzoom": 24,
+      "filter": ["all", ["==", "kind", "rapid"]],
+      "paint": {
+        "line-width": {"stops": [[13, 5], [18, 20]]},
+        "line-pattern": "rapids"
+      }
+    },
+    {
+      "id": "weir-teeth",
+      "type": "line",
+      "source": "detail",
+      "source-layer": "detail_line",
+      "minzoom": 13,
+      "maxzoom": 24,
+      "filter": ["all", ["==", "kind", "weir"]],
+      "paint": {
+        "line-width": 4,
+        "line-offset": 3,
+        "line-opacity": 1,
+        "line-dasharray": [0.4, 0.7],
+        "line-color": "#49a5dd"
+      }
+    },
+    {
+      "id": "weir",
+      "type": "line",
+      "source": "detail",
+      "source-layer": "detail_line",
+      "minzoom": 13,
+      "maxzoom": 24,
+      "filter": ["all", ["==", "kind", "weir"]],
+      "paint": {
+        "line-width": {"stops": [[13, 1], [15, 3]]},
+        "line-offset": 0,
+        "line-opacity": 1,
+        "line-color": "#49a5dd"
+      }
+    },
+    {
       "id": "boundary-national-park-outline",
       "type": "line",
       "source": "tilezen",
@@ -1317,6 +1361,61 @@
         "icon-halo-width": 2,
         "icon-halo-color": "rgba(255, 255, 255, 1)",
         "icon-color": "rgba(255, 255, 255, 1)"
+      }
+    },
+    {
+      "id": "heritage-halo",
+      "type": "circle",
+      "source": "topo",
+      "source-layer": "topo_sym",
+      "minzoom": 12,
+      "maxzoom": 18,
+      "filter": ["all", ["in", "kind", "hillfort", "manor"]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-opacity": 0,
+        "circle-stroke-width": 3,
+        "circle-stroke-color": "rgba(255, 255, 255, 0.9)",
+        "circle-radius": 2
+      }
+    },
+    {
+      "id": "heritage",
+      "type": "circle",
+      "source": "topo",
+      "source-layer": "topo_sym",
+      "minzoom": 12,
+      "maxzoom": 18,
+      "filter": ["all", ["in", "kind", "hillfort", "manor"]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "circle-opacity": 0,
+        "circle-stroke-width": 1,
+        "circle-stroke-color": "#777777",
+        "circle-radius": 3
+      }
+    },
+    {
+      "id": "heritage-label",
+      "type": "symbol",
+      "source": "topo",
+      "source-layer": "topo_sym",
+      "minzoom": 12,
+      "maxzoom": 18,
+      "filter": ["all", ["in", "kind", "hillfort", "manor"]],
+      "layout": {
+        "text-field": "{name}",
+        "text-font": ["Roboto Condensed Italic"],
+        "text-size": 12,
+        "text-variable-anchor": ["left", "top", "bottom", "right"],
+        "text-radial-offset": 0.6,
+        "text-justify": "auto",
+        "text-padding": 2
+      },
+      "paint": {
+        "text-color": "#333333",
+        "text-halo-width": 1,
+        "text-halo-color": "rgba(255, 255, 255, 0.9)"
       }
     }
   ],

@@ -21,11 +21,17 @@ create materialized view poi_topo (
   select
         osm_id
         ,'n' -- always node
-        ,name
+        ,case when site_type = 'fortification' then replace(replace(replace(name, 'piliakalnis', 'plk.'), 'alkakalnis', 'alk.'), 'piliavietė', 'plv.')
+              when historic = 'manor' then replace(replace(replace(replace(name, 'dvaro sodybos fragmentai', 'dvr. frg.'), 'dvaro sodyba', 'dvr.'), 'dvaras', 'dvr.'), 'dvaro fragmentai', 'dvr. frg.')
+              else name
+         end as name
         ,amenity
         ,man_made
         ,"tower:type"
-        ,tourism
+        ,case when site_type = 'fortification' then 'hillfort'
+              when historic = 'manor' then 'manor'
+              else tourism
+         end as tourism
         ,"attraction:type"
         ,access
         ,"generator:source"
@@ -44,15 +50,21 @@ create materialized view poi_topo (
       or power = 'substation'
       or (power = 'generator' and "generator:source" in ('hydro', 'wind'))
       or tourism = 'camp_site'
+      or site_type = 'fortification'
+      or historic = 'manor'
   union
   select
         ABS(osm_id)
         ,CASE WHEN osm_id < 0 THEN 'r' ELSE 'w' END  -- r relation, w way
-        ,name
+        ,case when historic = 'manor' then replace(replace(replace(replace(name, 'dvaro sodybos fragmentai', 'dvr. frg.'), 'dvaro sodyba', 'dvr.'), 'dvaras', 'dvr.'), 'dvaro fragmentai', 'dvr. frg.')
+              else name
+         end as name
         ,amenity
         ,man_made
         ,"tower:type"
-        ,tourism
+        ,case when historic = 'manor' then 'manor'
+              else tourism
+         end as tourism
         ,null --"attraction:type"
         ,access
         ,"generator:source"
@@ -71,4 +83,5 @@ create materialized view poi_topo (
       or landuse = 'quary'
       or power = 'substation'
       or (power = 'generator' and "generator:source" in ('hydro', 'wind'))
-      or tourism = 'camp_site';
+      or tourism = 'camp_site'
+      or historic = 'manor';
