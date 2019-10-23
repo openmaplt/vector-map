@@ -45,7 +45,7 @@
     "height": 9,
     "pixelRatio": 1,
     "width": 12,
-    "x": 166,
+    "x": 188,
     "y": 148
   },
   "communication_tower": {
@@ -76,6 +76,13 @@
     "x": 168,
     "y": 64
   },
+  "hillfort": {
+    "height": 11,
+    "pixelRatio": 1,
+    "width": 11,
+    "x": 36,
+    "y": 148
+  },
   "hydro": {
     "height": 21,
     "pixelRatio": 1,
@@ -89,6 +96,13 @@
     "width": 20,
     "x": 188,
     "y": 64
+  },
+  "manor": {
+    "height": 11,
+    "pixelRatio": 1,
+    "width": 11,
+    "x": 47,
+    "y": 148
   },
   "marsh": {
     "height": 64,
@@ -111,7 +125,7 @@
     "x": 14,
     "y": 148
   },
-  "quary": {
+  "quarry": {
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
@@ -122,7 +136,7 @@
     "height": 11,
     "pixelRatio": 1,
     "width": 20,
-    "x": 39,
+    "x": 61,
     "y": 148
   },
   "reedbed": {
@@ -136,7 +150,7 @@
     "height": 10,
     "pixelRatio": 1,
     "width": 104,
-    "x": 61,
+    "x": 83,
     "y": 148
   },
   "stream": {

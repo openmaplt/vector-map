@@ -1,6 +1,7 @@
 SELECT
   osm_id AS gid,
   st_asbinary(way) AS geom,
+  round(st_area(way)/1000) AS area,
   (
     CASE
       WHEN landuse = 'meadow' or "natural" = 'heath'
@@ -32,7 +33,7 @@ FROM
 WHERE
   way && !BBOX! AND
   (
-    landuse in ('forest', 'residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages', 'orchard', 'farmyard', 'retail', 'railway')
+    landuse in ('forest', 'residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages', 'orchard', 'farmyard', 'retail', 'railway', 'quarry')
     OR "natural" in ('wetland', 'sand', 'beach', 'scrub', 'heath')
     OR leisure = 'park'
     OR aeroway in ('apron', 'runway')
