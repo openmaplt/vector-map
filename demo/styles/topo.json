@@ -130,6 +130,21 @@
       }
     },
     {
+      "id": "landuse-quarry",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "landuse",
+      "minzoom": 6,
+      "filter": ["all", ["in", "kind", "quarry"]],
+      "layout": {},
+      "paint": {
+        "line-pattern": "cliff",
+        "line-width": 5,
+        "line-opacity": {"stops": [[11, 0.2], [15, 1]]},
+        "line-color": "#333333"
+      }
+    },
+    {
       "id": "hillshading",
       "type": "hillshade",
       "source": "dem",
@@ -1364,38 +1379,6 @@
       }
     },
     {
-      "id": "heritage-halo",
-      "type": "circle",
-      "source": "topo",
-      "source-layer": "topo_sym",
-      "minzoom": 12,
-      "maxzoom": 18,
-      "filter": ["all", ["in", "kind", "hillfort", "manor"]],
-      "layout": {"visibility": "visible"},
-      "paint": {
-        "circle-opacity": 0,
-        "circle-stroke-width": 3,
-        "circle-stroke-color": "rgba(255, 255, 255, 0.9)",
-        "circle-radius": 2
-      }
-    },
-    {
-      "id": "heritage",
-      "type": "circle",
-      "source": "topo",
-      "source-layer": "topo_sym",
-      "minzoom": 12,
-      "maxzoom": 18,
-      "filter": ["all", ["in", "kind", "hillfort", "manor"]],
-      "layout": {"visibility": "visible"},
-      "paint": {
-        "circle-opacity": 0,
-        "circle-stroke-width": 1,
-        "circle-stroke-color": "#777777",
-        "circle-radius": 3
-      }
-    },
-    {
       "id": "heritage-label",
       "type": "symbol",
       "source": "topo",
@@ -1408,7 +1391,7 @@
         "text-font": ["Roboto Condensed Italic"],
         "text-size": 12,
         "text-variable-anchor": ["left", "top", "bottom", "right"],
-        "text-radial-offset": 0.6,
+        "text-radial-offset": 0.7,
         "text-justify": "auto",
         "text-padding": 2
       },

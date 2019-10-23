@@ -80,7 +80,7 @@ create materialized view poi_topo (
       or amenity = 'place_of_worship'
       or man_made in ('chimney', 'windmill', 'watermill', 'tower', 'communications_tower', 'lighthouse', 'water_tower', 'mast')
       or amenity = 'fuel'
-      or landuse = 'quary'
+      or landuse = 'quarry'
       or power = 'substation'
       or (power = 'generator' and "generator:source" in ('hydro', 'wind'))
       or tourism = 'camp_site'
