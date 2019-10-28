@@ -1,6 +1,7 @@
 var extended = false;
 var c;
 var e;
+var initial_map;
 var s_initial = '<img id="sw_orto" src="map_orto.png" onClick="sw_toggle_map()"><br><span id="sw_base_title">Orto</span>';
 var s_ex = [{
     name: 'map_general',
@@ -42,6 +43,7 @@ var img_orto = 'map_orto.png';
 var img_map;
 var base_title;
 function sw_init(m) {
+  initial_map = m;
   img_map = m + '.png';
   c = document.getElementById('sw_container');
   c.classList.add('sw_container');
@@ -120,8 +122,17 @@ function sw_toggle() {
 } // sw_toggle
 function sw_switch_to_map(m) {
   if (!moved) {
-    var zoom = map.getZoom();
-    var cent = map.getCenter();
+    var zoom;
+    var cent;
+    if (initial_map == 'map') {
+      zoom = map.getView().getZoom() - 1;
+      cent = ol.proj.transform(map.getView().getCenter(), 'EPSG:102100', 'EPSG:4326');
+      cent.lat = cent[1];
+      cent.lng = cent[0];
+    } else {
+      zoom = map.getZoom();
+      cent = map.getCenter();
+    }
     var website = "https://";
     var x;
     if (m != '-') {
@@ -139,7 +150,7 @@ function sw_switch_to_map(m) {
       x = 'c';
     }
     if (m == 'places') {
-      website = website + 'openmap.lt/#m=' + Math.trunc(zoom) + '/' + cent.lng + '/' + cent.lat + '//T';
+      website = website + 'openmap.lt/#m=' + Math.trunc(zoom + 1) + '/' + cent.lng + '/' + cent.lat + '//T';
     } else if (m == 'upes') {
       website = website + 'openmap.lt/#' + zoom + '/' + cent.lat + '/' + cent.lng + '/0/0';
     } else {

@@ -33,15 +33,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>
   var defaultType = 'topo';
   var mapTypes = {
-    topo: 't'
+    topo: 't',
+    hybrid: 'h'
   };
 function toMap() {
-  map.setStyle('styles/topo.json');
+  switchTo('topo');
 } // toMap
 function toOrto() {
-  map.setStyle('styles/orto.json');
+  switchTo('hybrid');
 } // toOrto
-document.addEventListener("DOMContentLoaded", function(e) { sw_init('map_topo'); } );
+function switchTo(m) {
+  map.setStyle('styles/' + m + '.json');
+  mapData.type = m;
+  mapData.id = null;
+  changeHashUrl(mapData);
+}
+document.addEventListener("DOMContentLoaded", function(e) {
+  sw_init('map_topo');
+  if (mapData.type == 'hybrid') {
+    sw_toggle_map();
+  }
+} );
 </script>
 <script src="map.js"></script>
 
