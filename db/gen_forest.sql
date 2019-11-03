@@ -41,13 +41,13 @@ insert into gen_forest
   select nextval('gen_forest_seq') AS id,
          0,
          600,
-         ST_CollectionExtract(unnest(ST_ClusterWithin(way, 300)), 3)::geometry(MultiPolygon, 3857)
+         ST_CollectionExtract(unnest(ST_ClusterWithin(way, 295)), 3)::geometry(MultiPolygon, 3857)
     from gen_forest
    where res = 150;
 
-delete from gen_forest where st_area(st_buffer(way, -300)) < 600 and res = 600;
+delete from gen_forest where st_area(st_buffer(way, -295)) < 590 and res = 600;
 
-update gen_forest set way = st_makevalid(st_multi(st_simplifypreservetopology(st_buffer(st_buffer(way, 300, 'quad_segs=1'), -300, 'quad_segs=1'), 400))) where res = 600;
+update gen_forest set way = st_makevalid(st_multi(st_simplifypreservetopology(st_buffer(st_buffer(way, 295, 'quad_segs=1'), -295, 'quad_segs=1'), 295))) where res = 600;
 update gen_forest set way_area = st_area(way) where res = 600;
 
 create index gen_forest_10_gix ON gen_forest using gist (way) where res = 10;
