@@ -27,7 +27,8 @@ SELECT
        WHEN highway = 'track' THEN tracktype
        ELSE null
   END AS tracktype,
-  length(ref) AS ref_length
+  length(ref) AS ref_length,
+  layer
 FROM
   planet_osm_line
 WHERE
@@ -47,5 +48,5 @@ WHERE
    OR (railway = 'rail' AND service IS NULL)
    OR aeroway IN ('runway', 'taxiway', 'parking_position')
   )
-GROUP BY kind, surface, name, priority, ref, highway, tracktype
+GROUP BY kind, surface, name, priority, ref, highway, tracktype, layer
 ORDER BY priority

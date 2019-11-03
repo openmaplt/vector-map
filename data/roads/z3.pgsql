@@ -42,7 +42,8 @@ SELECT
       ELSE 'no'
     END
   ) as is_bridge,
-  coalesce(oneway, 'no') AS oneway
+  coalesce(oneway, 'no') AS oneway,
+  layer
 FROM
   planet_osm_line
 WHERE
@@ -69,5 +70,5 @@ WHERE
    railway = 'rail' OR
    aeroway IN ('runway', 'taxiway', 'parking_position')
   )
-GROUP BY kind, surface, name, priority, ref, is_tunnel, is_bridge, oneway, highway, tracktype
+GROUP BY kind, surface, name, priority, ref, is_tunnel, is_bridge, oneway, highway, tracktype, layer
 ORDER BY priority
