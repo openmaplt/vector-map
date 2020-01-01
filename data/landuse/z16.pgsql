@@ -26,6 +26,8 @@ SELECT
         THEN leisure
       WHEN aeroway is not null
         THEN aeroway
+      WHEN amenity = 'grave_yard'
+        THEN 'cemetery'
     END
   ) AS kind
 FROM
@@ -37,4 +39,5 @@ WHERE
     OR "natural" in ('wetland', 'sand', 'beach', 'scrub', 'heath')
     OR leisure = 'park'
     OR aeroway in ('apron', 'runway')
+    OR amenity = 'grave_yard'
   )
