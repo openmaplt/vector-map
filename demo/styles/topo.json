@@ -288,7 +288,7 @@
       "source-layer": "detail_poly",
       "minzoom": 13,
       "maxzoom": 24,
-      "filter": ["all", ["==", "kind", "stadium"]],
+      "filter": ["all", ["in", "kind", "stadium", "pitch"]],
       "paint": {
         "line-width": 0.5,
         "line-dasharray": [12, 6],
