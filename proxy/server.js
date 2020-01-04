@@ -30,7 +30,8 @@ app.use('/styles/*\.json', function (req, res, next) {
         continue;
       }
       if (!('tiles' in source)) {
-        return;
+        // return makes it stuck. Call next handler;
+        return next();
       }
       source.tiles = [tilesUrl];
     };
