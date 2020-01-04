@@ -2,7 +2,7 @@ version: "2"
 
 services:
   tegola:
-    image: docker.pkg.github.com/xor22h/vector-map/tegola:4d2c9b6edfc94e88ced057bba503146abba382b0
+    image: xor22h/tegola:v0.10.2
     links: ["db"]
     environment:
       PGHOST: db

@@ -13,11 +13,11 @@ jobs:
     - name: Log in to registry
       uses: azure/docker-login@v1
       with:
-        login-server: docker.pkg.github.com
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        login-server: docker.io
+        username: xor22h
+        password: ${{ secrets.DOCKERHUB_PWD }}
       if: github.event_name == 'push'
     - name: Build custom Tegola image
       run: |
-        docker build . --file Dockerfile.tegola --tag docker.pkg.github.com/${{ github.repository}}/tegola:${{ github.sha }}
-        docker push docker.pkg.github.com/${{ github.repository}}/tegola:${{ github.sha }}
+        docker build . --file Dockerfile.tegola --tag xor22h/tegola:v0.10.2
+        docker push xor22h/tegola:v0.10.2
