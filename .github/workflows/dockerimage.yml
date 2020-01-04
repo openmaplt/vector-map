@@ -10,13 +10,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: Log in to registry
-      uses: azure/docker-login@v1
-      with:
-        login-server: docker.io
-        username: xor22h
-        password: ${{ secrets.DOCKERHUB_PWD }}
-      if: github.event_name == 'push'
+    - run: echo '${{ secrets.DOCKERHUB_PWD }}' | docker login --username xor22h --password-stdin
     - name: Build custom Tegola image
       run: |
         docker build . --file Dockerfile.tegola --tag xor22h/tegola:v0.10.2
