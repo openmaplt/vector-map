@@ -1,4 +1,3 @@
 #!/usr/bin/env sh
-
-npm install express
+yarn install --production
 node ./server.js
