@@ -7,9 +7,10 @@ services:
     environment:
       PGHOST: db
     working_dir: /src
-    entrypoint: /bin/sh -c "/src/generate_config.sh && tegola serve --config /src/config.toml"
+    entrypoint: /bin/sh -c "/src/generate_config.sh && /opt/tegola serve --config /src/config.toml"
     volumes:
       - ".:/src"
+
   db:
     image: kartoza/postgis:9.6-2.4
     environment:
