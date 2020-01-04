@@ -6,6 +6,7 @@ services:
     links: ["db"]
     environment:
       PGHOST: db
+    working_dir: /src
     entrypoint: /bin/sh -c "/src/generate_config.sh && tegola serve --config /src/config.toml"
     volumes:
       - ".:/src"
