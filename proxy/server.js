@@ -20,6 +20,7 @@ app.all('*', (req, res, next) => {
 
 // rewrite source path to local webservice
 app.use('/styles/*\.json', function (req, res, next) {
+  logger.info(`requesting file: ${req.baseUrl} => ${path.join(public, req.baseUrl)}`);
   var filename = path.join(public, req.baseUrl);
   var style = JSON.parse(fs.readFileSync(filename, 'utf8'));
   if ('sources' in style) {
