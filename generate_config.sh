@@ -20,4 +20,5 @@ done < $CONFIG_TEMP
 
 sed -i "s|##|\&\&|g" $CONFIG_TEMP
 
-mv $CONFIG_TEMP $CONFIG_FILE
+PGHOST=${PGHOST:-"localhost"} envsubst < $CONFIG_TEMP > $CONFIG_FILE
+rm $CONFIG_TEMP
