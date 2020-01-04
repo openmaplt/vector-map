@@ -1,17 +1,18 @@
 version: "2"
 
 services:
-  tiles:
-    image: pauliusm/tilestache
+  tegola:
+    image: gospatial/tegola:v0.10.2
     ports: ["8080:8080"]
     links: ["db"]
     environment:
       PGHOST: db
+    command: 
+      - serve
+      - --config 
+      - /src/config.toml
     volumes:
-      - "./tiles.cfg:/etc/tilestache/tilestache.cfg"
-      - "./queries:/etc/tilestache/queries"
-      - "/var/tilestache/cache"
-
+      - ".:/src"
   db:
     image: kartoza/postgis:9.6-2.4
     ports: ["5432:5432"]
