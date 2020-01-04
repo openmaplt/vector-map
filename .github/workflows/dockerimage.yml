@@ -1,0 +1,23 @@
+name: Docker Image CI
+
+on: [push]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Log in to registry
+      uses: azure/docker-login@v1
+      with:
+        login-server: docker.pkg.github.com
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+      if: github.event_name == 'push'
+    - name: Build custom Tegola image
+      run: |
+        docker build . --file Dockerfile.tegola --tag docker.pkg.github.com/${{ github.repository}}/tegola:${{ github.sha }}
+        docker push docker.pkg.github.com/${{ github.repository}}/tegola:${{ github.sha }}
