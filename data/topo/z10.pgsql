@@ -10,10 +10,6 @@ SELECT
       THEN 'airport'
     WHEN amenity = 'place_of_worship' and building = 'chapel'
       THEN 'chapel'
-    WHEN man_made = 'chimney'
-      THEN 'chimney'
-    WHEN man_made = 'communications_tower'
-      THEN 'communication_tower'
     WHEN man_made = 'tower' and "tower:type" in ('observation', 'communication')
       THEN 'light_tower'
     WHEN man_made = 'mast'
@@ -34,8 +30,6 @@ SELECT
       THEN 'hydro'
     WHEN power = 'generator' and "generator:source" = 'wind'
       THEN 'windpower'
-    WHEN man_made = 'windmill'
-      THEN 'windmill'
     WHEN amenity = 'place_of_worship' and religion = 'christian'
       THEN 'worship_christian'
     WHEN amenity = 'place_of_worship' and religion != 'christian'
@@ -46,6 +40,8 @@ SELECT
       THEN 'hillfort'
     WHEN tourism = 'manor'
       THEN 'manor'
+    WHEN man_made is not null
+      THEN man_made
     END
   ) AS kind
 FROM
