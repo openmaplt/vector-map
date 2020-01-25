@@ -1379,6 +1379,29 @@
       }
     },
     {
+      "id": "heritage-label2",
+      "type": "symbol",
+      "source": "topo",
+      "source-layer": "topo_sym",
+      "minzoom": 12,
+      "maxzoom": 18,
+      "filter": ["all", ["in", "kind", "watermill", "worship_christian"]],
+      "layout": {
+        "text-field": "{name}",
+        "text-font": ["Roboto Condensed Italic"],
+        "text-size": 12,
+        "text-variable-anchor": ["left", "top", "bottom", "right"],
+        "text-radial-offset": 1.1,
+        "text-justify": "auto",
+        "text-padding": 1
+      },
+      "paint": {
+        "text-color": "#333333",
+        "text-halo-width": 1,
+        "text-halo-color": "rgba(255, 255, 255, 0.9)"
+      }
+    },
+    {
       "id": "heritage-label",
       "type": "symbol",
       "source": "topo",
@@ -1393,7 +1416,7 @@
         "text-variable-anchor": ["left", "top", "bottom", "right"],
         "text-radial-offset": 0.7,
         "text-justify": "auto",
-        "text-padding": 2
+        "text-padding": 1
       },
       "paint": {
         "text-color": "#333333",

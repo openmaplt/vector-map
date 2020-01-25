@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   viewBox="0 0 15 15"
+   height="15"
+   width="15"
+   id="svg3836"
+   version="1.1">
+  <metadata
+     id="metadata3842">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs3840" />
+  <path
+     style="fill:#000000;fill-opacity:1;stroke-width:0.46640301"
+     id="path5641"
+     d="m 7.5094558,4 c 4.6593922,-10e-8 4.6593922,7.003006 0,7.003006 -4.6582785,-0.0011 -4.6582785,-7.0041215 0,-7.003006 z m 0,1 c -3.2596061,0 -3.2387853,5 0,5 3.2198732,0 3.2406942,-5 0,-5 z" />
+  <path
+     id="path6285"
+     d="M 7,4.4622652 V 0 h 1 v 4.4414444 z"
+     style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  <path
+     id="path6285-3"
+     d="M 7,15.020821 V 10.558556 H 8 V 15 Z"
+     style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  <path
+     id="path6285-1"
+     d="M 0.97055492,3.5794104 5,5.6508766 4.5705396,6.7438843 0.4741852,4.622426 Z"
+     style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.14381433px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  <path
+     id="path6285-1-2"
+     d="M 1,11.461631 5,9.4892167 4.5705396,8.3962087 0.4741852,10.418615 Z"
+     style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.14381433px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  <path
+     id="path6285-1-7"
+     d="M 14.014723,3.6296766 10,5.6447786 10.42946,6.7377863 14.540537,4.6432471 Z"
+     style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.14381433px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+  <path
+     id="path6285-1-2-0"
+     d="m 14,11.453006 -4,-2.0729451 0.42946,-1.093008 4.111077,2.1523821 z"
+     style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.14381433px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+</svg>
