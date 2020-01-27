@@ -996,33 +996,6 @@
       "paint": {}
     },
     {
-      "id": "topo_sym",
-      "type": "symbol",
-      "source": "topo",
-      "source-layer": "topo_sym",
-      "minzoom": 12,
-      "layout": {"icon-image": "{kind}"},
-      "paint": {
-        "icon-halo-width": 2,
-        "icon-halo-color": "rgba(255, 255, 255, 1)",
-        "icon-color": "rgba(255, 255, 255, 1)"
-      }
-    },
-    {
-      "id": "river_sym",
-      "type": "symbol",
-      "source": "upes",
-      "source-layer": "point",
-      "minzoom": 12,
-      "filter": ["all"],
-      "layout": {"icon-image": "{kind}"},
-      "paint": {
-        "icon-halo-width": 2,
-        "icon-halo-color": "rgba(255, 255, 255, 1)",
-        "icon-color": "rgba(255, 255, 255, 1)"
-      }
-    },
-    {
       "id": "label-park",
       "type": "symbol",
       "source": "tilezen",
@@ -1393,6 +1366,32 @@
       }
     },
     {
+      "id": "label-heritage2",
+      "type": "symbol",
+      "source": "topo",
+      "source-layer": "topo_sym",
+      "minzoom": 12,
+      "maxzoom": 18,
+      "filter": [
+        "all",
+        ["in", "kind", "watermill", "worship_christian", "camp"]
+      ],
+      "layout": {
+        "text-field": "{name}",
+        "text-font": ["Roboto Condensed Italic"],
+        "text-size": 12,
+        "text-variable-anchor": ["left", "top", "bottom", "right"],
+        "text-radial-offset": 1.2,
+        "text-justify": "auto",
+        "text-padding": 2
+      },
+      "paint": {
+        "text-color": "#333333",
+        "text-halo-width": 1,
+        "text-halo-color": "rgba(255, 255, 255, 0.9)"
+      }
+    },
+    {
       "id": "label-heritage",
       "type": "symbol",
       "source": "topo",
@@ -1458,6 +1457,33 @@
         "text-color": "rgba(20, 20, 20, 1)",
         "text-halo-width": 1.5,
         "text-halo-color": "rgba(255, 255, 255, 0.7)"
+      }
+    },
+    {
+      "id": "topo_sym",
+      "type": "symbol",
+      "source": "topo",
+      "source-layer": "topo_sym",
+      "minzoom": 12,
+      "layout": {"icon-image": "{kind}"},
+      "paint": {
+        "icon-halo-width": 2,
+        "icon-halo-color": "rgba(255, 255, 255, 1)",
+        "icon-color": "rgba(255, 255, 255, 1)"
+      }
+    },
+    {
+      "id": "river_sym",
+      "type": "symbol",
+      "source": "upes",
+      "source-layer": "point",
+      "minzoom": 12,
+      "filter": ["all"],
+      "layout": {"icon-image": "{kind}"},
+      "paint": {
+        "icon-halo-width": 2,
+        "icon-halo-color": "rgba(255, 255, 255, 1)",
+        "icon-color": "rgba(255, 255, 255, 1)"
       }
     }
   ],

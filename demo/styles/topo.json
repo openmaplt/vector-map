@@ -1366,19 +1366,6 @@
       }
     },
     {
-      "id": "topo_sym",
-      "type": "symbol",
-      "source": "topo",
-      "source-layer": "topo_sym",
-      "minzoom": 12,
-      "layout": {"icon-image": "{kind}"},
-      "paint": {
-        "icon-halo-width": 2,
-        "icon-halo-color": "rgba(255, 255, 255, 1)",
-        "icon-color": "rgba(255, 255, 255, 1)"
-      }
-    },
-    {
       "id": "heritage-label2",
       "type": "symbol",
       "source": "topo",
@@ -1422,6 +1409,19 @@
         "text-color": "#333333",
         "text-halo-width": 1,
         "text-halo-color": "rgba(255, 255, 255, 0.9)"
+      }
+    },
+    {
+      "id": "topo_sym",
+      "type": "symbol",
+      "source": "topo",
+      "source-layer": "topo_sym",
+      "minzoom": 12,
+      "layout": {"icon-image": "{kind}"},
+      "paint": {
+        "icon-halo-width": 2,
+        "icon-halo-color": "rgba(255, 255, 255, 1)",
+        "icon-color": "rgba(255, 255, 255, 1)"
       }
     }
   ],
