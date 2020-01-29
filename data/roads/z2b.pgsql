@@ -47,7 +47,7 @@ WHERE
                'path')
    OR (highway = 'service' AND service = 'long_distance')
    OR (highway = 'track' AND coalesce(track, '!@#') != 'driveway')
-   OR (highway = 'footway' AND coalesce(footway, '!@#') != 'sidewalk')
+   OR (highway = 'footway' AND coalesce(footway, '!@#') not in ('sidewalk', 'crossing'))
    OR (railway = 'rail' AND service IS NULL)
    OR aeroway IN ('runway', 'taxiway', 'parking_position')
   )
