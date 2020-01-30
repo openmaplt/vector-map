@@ -32,14 +32,14 @@ SELECT
     CASE
       WHEN tunnel IS NOT NULL
         THEN 'yes'
-      ELSE 'no'
+      ELSE null
     END
   ) as is_tunnel,
   (
     CASE
       WHEN bridge IS NOT NULL
         THEN 'yes'
-      ELSE 'no'
+      ELSE null
     END
   ) as is_bridge,
   coalesce(oneway, 'no') AS oneway,
