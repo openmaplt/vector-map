@@ -44,8 +44,8 @@
   "cliff": {
     "height": 9,
     "pixelRatio": 1,
-    "width": 15,
-    "x": 219,
+    "width": 12,
+    "x": 220,
     "y": 148
   },
   "communication_tower": {
@@ -142,8 +142,8 @@
   "rapids": {
     "height": 11,
     "pixelRatio": 1,
-    "width": 25,
-    "x": 90,
+    "width": 20,
+    "x": 93,
     "y": 148
   },
   "reedbed": {

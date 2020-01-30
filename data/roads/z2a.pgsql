@@ -28,6 +28,20 @@ SELECT
        ELSE null
   END AS tracktype,
   length(ref) AS ref_length,
+  (
+    CASE
+      WHEN tunnel IS NOT NULL
+        THEN 'yes'
+      ELSE null
+    END
+  ) as is_tunnel,
+  (
+    CASE
+      WHEN bridge IS NOT NULL
+        THEN 'yes'
+      ELSE null
+    END
+  ) as is_bridge,
   layer
 FROM
   planet_osm_line
@@ -48,5 +62,5 @@ WHERE
    OR (railway = 'rail' AND service IS NULL)
    OR aeroway IN ('runway', 'taxiway', 'parking_position')
   )
-GROUP BY kind, surface, name, priority, ref, highway, tracktype, layer
+GROUP BY kind, surface, name, priority, ref, highway, tracktype, is_tunnel, is_bridge, layer
 ORDER BY priority
