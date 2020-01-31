@@ -25,5 +25,5 @@ Visais kitais kartais:
 * http://localhost žemėlapio puslapis
 * http://localhost:8888 [Maputnik stiliaus redaktorius](http://github.com/maputnik/editor)
 * localhost:5432 PostgreSQL duomenų bazė, user: osm, password: osm
-* http://localhost:8080 TileStache vektorinių kaladėlių servisas
+* http://localhost:8080 Tegola vektorinių kaladėlių servisas
 

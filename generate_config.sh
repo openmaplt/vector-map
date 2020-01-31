@@ -20,4 +20,8 @@ done < $CONFIG_TEMP
 
 sed -i "s|##|\&\&|g" $CONFIG_TEMP
 
-mv $CONFIG_TEMP $CONFIG_FILE
+DBHOST=${PGHOST:-"localhost"}
+# somehow `db` was not resolving properly from tegola container
+HOSTIP=`getent hosts db | awk '{ print $1 }'`
+PGHOST=${HOSTIP} envsubst < $CONFIG_TEMP > $CONFIG_FILE
+rm $CONFIG_TEMP

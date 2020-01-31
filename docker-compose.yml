@@ -1,20 +1,18 @@
 version: "2"
 
 services:
-  tiles:
-    image: pauliusm/tilestache
-    ports: ["8080:8080"]
+  tegola:
+    image: xor22h/tegola:v0.10.2
     links: ["db"]
     environment:
       PGHOST: db
+    working_dir: /src
+    entrypoint: /bin/sh -c "/src/generate_config.sh && /opt/tegola serve --config /src/config.toml"
     volumes:
-      - "./tiles.cfg:/etc/tilestache/tilestache.cfg"
-      - "./queries:/etc/tilestache/queries"
-      - "/var/tilestache/cache"
+      - ".:/src"
 
   db:
     image: kartoza/postgis:9.6-2.4
-    ports: ["5432:5432"]
     environment:
       POSTGRES_DBNAME: osm
       POSTGRES_USER: osm
@@ -27,8 +25,10 @@ services:
   web:
     image: node:alpine
     ports: ["80:8000"]
+    links: ["tegola"]
     environment:
       PUBLIC_PATH: "/var/www"
+      TILES_URL: "http://tegola:8082/all/{z}/{x}/{y}.pbf"
     working_dir: "/srv/proxy"
     volumes:
       - "./demo:/var/www"
