@@ -584,7 +584,7 @@
       }
     },
     {
-      "id": "casingt-motorway-bridge",
+      "id": "casingt-motorway",
       "type": "line",
       "source": "tilezen",
       "source-layer": "roads",
