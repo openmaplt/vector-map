@@ -522,19 +522,6 @@
       }
     },
     {
-      "id": "link-tunnel",
-      "type": "line",
-      "source": "tilezen",
-      "source-layer": "roads",
-      "filter": ["any", ["==", "is_tunnel", "yes"]],
-      "layout": {"line-join": "round", "line-cap": "round"},
-      "paint": {
-        "line-color": "#afd3d3",
-        "line-width": {"base": 1.55, "stops": [[4, 0.25], [20, 30]]},
-        "line-dasharray": [1, 2]
-      }
-    },
-    {
       "id": "buildings-ruins",
       "type": "line",
       "source": "tilezen",
@@ -569,6 +556,90 @@
       "paint": {
         "line-color": "rgba(255, 255, 255, 0.4)",
         "line-width": {"base": 1.8, "stops": [[10, 3], [20, 60]]}
+      }
+    },
+    {
+      "id": "casingt-primary",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "minzoom": 0,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "primary",
+          "primary_link",
+          "secondary",
+          "secondary_link"
+        ],
+        ["has", "is_tunnel"]
+      ],
+      "layout": {"line-join": "round", "line-cap": "butt"},
+      "paint": {
+        "line-color": "#111111",
+        "line-width": {"base": 1.55, "stops": [[5, 1.5], [20, 40]]},
+        "line-opacity": 0.3
+      }
+    },
+    {
+      "id": "casingt-motorway",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "filter": [
+        "all",
+        ["in", "kind", "motorway", "motorway_link", "trunk", "trunk_link"],
+        ["has", "is_tunnel"]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "butt",
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-color": "rgba(187, 187, 187, 0.3)",
+        "line-width": {"base": 1.55, "stops": [[5, 2.3], [20, 40]]},
+        "line-opacity": 1
+      }
+    },
+    {
+      "id": "roadt-primary",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "filter": [
+        "all",
+        ["in", "kind", "primary", "primary_link"],
+        ["has", "is_tunnel"]
+      ],
+      "layout": {"line-join": "round", "line-cap": "butt"},
+      "paint": {
+        "line-color": "#882a30",
+        "line-width": {"base": 1.55, "stops": [[5, 1], [20, 34]]}
+      }
+    },
+    {
+      "id": "roadt-motorway",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "filter": [
+        "all",
+        ["in", "kind", "motorway", "motorway_link", "trunk", "trunk_link"],
+        ["has", "is_tunnel"]
+      ],
+      "layout": {
+        "line-join": "miter",
+        "line-cap": "butt",
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-color": "#882a30",
+        "line-width": {"base": 1.55, "stops": [[5, 1], [20, 8]]},
+        "line-dasharray": [3, 2],
+        "line-gap-width": 1.5
       }
     },
     {
@@ -654,7 +725,16 @@
       "minzoom": 0,
       "filter": [
         "all",
-        ["in", "kind", "primary", "primary_link", "secondary", "secondary_link"]
+        [
+          "in",
+          "kind",
+          "primary",
+          "primary_link",
+          "secondary",
+          "secondary_link"
+        ],
+        ["!has", "is_bridge"],
+        ["!has", "is_tunnel"]
       ],
       "layout": {"line-join": "round", "line-cap": "butt"},
       "paint": {
@@ -669,12 +749,14 @@
       "source-layer": "roads",
       "filter": [
         "all",
-        ["in", "kind", "motorway", "motorway_link", "trunk", "trunk_link"]
+        ["in", "kind", "motorway", "motorway_link", "trunk", "trunk_link"],
+        ["!has", "is_bridge"],
+        ["!has", "is_tunnel"]
       ],
       "layout": {"line-join": "round", "line-cap": "round"},
       "paint": {
         "line-color": "#111111",
-        "line-width": {"base": 1.55, "stops": [[5, 2.3], [20, 40]]}
+        "line-width": {"base": 1.55, "stops": [[5, 2.5], [20, 42]]}
       }
     },
     {
@@ -821,6 +903,23 @@
       }
     },
     {
+      "id": "road-motorway-link",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "filter": [
+        "all",
+        ["in", "kind", "motorway_link", "trunk_link"],
+        ["!has", "is_bridge"],
+        ["!has", "is_tunnel"]
+      ],
+      "layout": {"line-join": "round", "line-cap": "round"},
+      "paint": {
+        "line-color": "#882a30",
+        "line-width": {"base": 1.55, "stops": [[5, 2], [20, 34]]}
+      }
+    },
+    {
       "id": "road-tertiary-paved",
       "type": "line",
       "source": "tilezen",
@@ -857,7 +956,12 @@
       "type": "line",
       "source": "tilezen",
       "source-layer": "roads",
-      "filter": ["all", ["in", "kind", "secondary", "secondary_link"]],
+      "filter": [
+        "all",
+        ["in", "kind", "secondary", "secondary_link"],
+        ["!has", "is_tunnel"],
+        ["!has", "is_bridge"]
+      ],
       "layout": {"line-join": "round", "line-cap": "round"},
       "paint": {
         "line-color": "#d7b7ad",
@@ -869,8 +973,13 @@
       "type": "line",
       "source": "tilezen",
       "source-layer": "roads",
-      "filter": ["all", ["in", "kind", "primary", "primary_link"]],
-      "layout": {"line-join": "round", "line-cap": "butt"},
+      "filter": [
+        "all",
+        ["in", "kind", "primary", "primary_link"],
+        ["!has", "is_bridge"],
+        ["!has", "is_tunnel"]
+      ],
+      "layout": {"line-join": "round", "line-cap": "round"},
       "paint": {
         "line-color": "#882a30",
         "line-width": {"base": 1.55, "stops": [[5, 1], [20, 34]]}
@@ -883,7 +992,9 @@
       "source-layer": "roads",
       "filter": [
         "all",
-        ["in", "kind", "motorway", "motorway_link", "trunk", "trunk_link"]
+        ["in", "kind", "motorway", "trunk"],
+        ["!has", "is_bridge"],
+        ["!has", "is_tunnel"]
       ],
       "layout": {"line-join": "round", "line-cap": "round"},
       "paint": {
@@ -901,6 +1012,183 @@
       "filter": ["all"],
       "layout": {"line-join": "round", "line-cap": "round"},
       "paint": {"line-color": "rgba(141, 36, 119, 0.3)", "line-width": 8}
+    },
+    {
+      "id": "casing1-primary-bridge",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "minzoom": 0,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "primary",
+          "primary_link",
+          "secondary",
+          "secondary_link"
+        ],
+        ["has", "is_bridge"],
+        ["==", "layer", "1"]
+      ],
+      "layout": {"line-join": "round", "line-cap": "butt"},
+      "paint": {
+        "line-color": "#111111",
+        "line-width": {"base": 1.55, "stops": [[5, 2.3], [20, 38]]}
+      }
+    },
+    {
+      "id": "casing1-motorway-bridge",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "filter": [
+        "all",
+        ["in", "kind", "motorway", "motorway_link", "trunk", "trunk_link"],
+        ["has", "is_bridge"],
+        ["==", "layer", "1"]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "butt",
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-color": "#111111",
+        "line-width": {"base": 1.55, "stops": [[5, 2.3], [20, 40]]}
+      }
+    },
+    {
+      "id": "road1-secondary-bridge",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "filter": [
+        "all",
+        ["in", "kind", "secondary", "secondary_link"],
+        ["has", "is_bridge"],
+        ["==", "layer", "1"]
+      ],
+      "layout": {"line-join": "round", "line-cap": "round"},
+      "paint": {
+        "line-color": "#d7b7ad",
+        "line-width": {"base": 1.55, "stops": [[5, 1], [20, 28]]}
+      }
+    },
+    {
+      "id": "road1-primary-bridge",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "filter": [
+        "all",
+        ["in", "kind", "primary", "primary_link"],
+        ["has", "is_bridge"],
+        ["==", "layer", "1"]
+      ],
+      "layout": {"line-join": "round", "line-cap": "square"},
+      "paint": {
+        "line-color": "#882a30",
+        "line-width": {"base": 1.55, "stops": [[5, 0.8], [20, 32]]}
+      }
+    },
+    {
+      "id": "road1-motorway-bridge",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "filter": [
+        "all",
+        ["in", "kind", "motorway", "motorway_link", "trunk", "trunk_link"],
+        ["has", "is_bridge"],
+        ["==", "layer", "1"]
+      ],
+      "layout": {"line-join": "round", "line-cap": "round"},
+      "paint": {
+        "line-color": "rgba(136, 42, 48, 1)",
+        "line-width": {"base": 1.55, "stops": [[5, 1.5], [20, 25]]}
+      }
+    },
+    {
+      "id": "casing2-primary-bridge",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "minzoom": 0,
+      "filter": [
+        "all",
+        [
+          "in",
+          "kind",
+          "primary",
+          "primary_link",
+          "secondary",
+          "secondary_link"
+        ],
+        ["has", "is_bridge"],
+        ["==", "layer", "2"]
+      ],
+      "layout": {"line-join": "round", "line-cap": "butt"},
+      "paint": {
+        "line-color": "#111111",
+        "line-width": {"base": 1.55, "stops": [[5, 2.3], [20, 38]]}
+      }
+    },
+    {
+      "id": "casing2-motorway-bridge",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "filter": [
+        "all",
+        ["in", "kind", "motorway", "motorway_link", "trunk", "trunk_link"],
+        ["has", "is_bridge"],
+        ["==", "layer", "2"]
+      ],
+      "layout": {
+        "line-join": "round",
+        "line-cap": "butt",
+        "visibility": "visible"
+      },
+      "paint": {
+        "line-color": "#111111",
+        "line-width": {"base": 1.55, "stops": [[5, 2.3], [20, 40]]}
+      }
+    },
+    {
+      "id": "road2-primary-bridge",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "filter": [
+        "all",
+        ["in", "kind", "primary", "primary_link"],
+        ["has", "is_bridge"],
+        ["==", "layer", "2"]
+      ],
+      "layout": {"line-join": "round", "line-cap": "butt"},
+      "paint": {
+        "line-color": "#882a30",
+        "line-width": {"base": 1.55, "stops": [[5, 0.8], [20, 20]]}
+      }
+    },
+    {
+      "id": "road2-motorway-bridge",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "filter": [
+        "all",
+        ["in", "kind", "motorway", "motorway_link", "trunk", "trunk_link"],
+        ["has", "is_bridge"],
+        ["==", "layer", "2"]
+      ],
+      "layout": {"line-join": "round", "line-cap": "round"},
+      "paint": {
+        "line-color": "#882a30",
+        "line-width": {"base": 1.55, "stops": [[5, 1.5], [20, 25]]}
+      }
     },
     {
       "id": "railway-minor-casing",
