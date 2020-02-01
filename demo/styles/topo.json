@@ -1591,7 +1591,7 @@
       "source-layer": "roads",
       "minzoom": 10,
       "maxzoom": 20,
-      "filter": ["all", ["!=", "kind", "proposed"]],
+      "filter": ["all", ["!in", "kind", "proposed", "construction"]],
       "layout": {
         "text-field": "{name}",
         "symbol-placement": "line",
