@@ -559,6 +559,23 @@
       }
     },
     {
+      "id": "casingt-tertiary",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "filter": [
+        "all",
+        ["in", "kind", "tertiary", "tertiary_link"],
+        ["has", "is_tunnel"]
+      ],
+      "layout": {"line-join": "round", "line-cap": "butt"},
+      "paint": {
+        "line-color": "#111111",
+        "line-width": {"base": 1.55, "stops": [[5, 2], [20, 25]]},
+        "line-opacity": 0.5
+      }
+    },
+    {
       "id": "casingt-primary",
       "type": "line",
       "source": "tilezen",
@@ -605,6 +622,44 @@
       }
     },
     {
+      "id": "roadt-tertiary-unpaved",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "filter": [
+        "all",
+        ["in", "kind", "tertiary", "tertiary_link"],
+        ["==", "surface", "unpaved"],
+        ["has", "is_tunnel"]
+      ],
+      "layout": {"line-join": "round", "line-cap": "butt"},
+      "paint": {
+        "line-color": "rgba(230, 220, 0, 1)",
+        "line-width": {"base": 1.55, "stops": [[5, 1], [20, 8]]},
+        "line-gap-width": 1.5,
+        "line-dasharray": [3, 2]
+      }
+    },
+    {
+      "id": "roadt-tertiary-paved",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "filter": [
+        "all",
+        ["in", "kind", "tertiary", "tertiary_link"],
+        ["==", "surface", "paved"],
+        ["has", "is_tunnel"]
+      ],
+      "layout": {"line-join": "round", "line-cap": "butt"},
+      "paint": {
+        "line-color": "#d7b7ad",
+        "line-width": {"base": 1.55, "stops": [[5, 1], [20, 8]]},
+        "line-gap-width": 1.5,
+        "line-dasharray": [3, 2]
+      }
+    },
+    {
       "id": "roadt-primary",
       "type": "line",
       "source": "tilezen",
@@ -617,7 +672,9 @@
       "layout": {"line-join": "round", "line-cap": "butt"},
       "paint": {
         "line-color": "#882a30",
-        "line-width": {"base": 1.55, "stops": [[5, 1], [20, 34]]}
+        "line-width": {"base": 1.55, "stops": [[5, 1], [20, 8]]},
+        "line-gap-width": 1.5,
+        "line-dasharray": [3, 2]
       }
     },
     {
@@ -681,7 +738,9 @@
       "filter": [
         "all",
         ["in", "kind", "tertiary", "tertiary_link"],
-        ["==", "surface", "unpaved"]
+        ["==", "surface", "unpaved"],
+        ["!has", "is_tunnel"],
+        ["!has", "is_bridge"]
       ],
       "layout": {"line-join": "round", "line-cap": "round"},
       "paint": {
@@ -697,7 +756,9 @@
       "filter": [
         "all",
         ["in", "kind", "tertiary", "tertiary_link"],
-        ["==", "surface", "paved"]
+        ["==", "surface", "paved"],
+        ["!has", "is_tunnel"],
+        ["!has", "is_bridge"]
       ],
       "layout": {"line-join": "round", "line-cap": "round"},
       "paint": {
@@ -710,7 +771,12 @@
       "type": "line",
       "source": "tilezen",
       "source-layer": "roads",
-      "filter": ["all", ["in", "kind", "secondary", "secondary_link"]],
+      "filter": [
+        "all",
+        ["in", "kind", "secondary", "secondary_link"],
+        ["!has", "is_bridge"],
+        ["!has", "is_tunnel"]
+      ],
       "layout": {"line-join": "round", "line-cap": "round"},
       "paint": {
         "line-color": "#111111",
@@ -838,18 +904,44 @@
       }
     },
     {
-      "id": "road-track",
+      "id": "road-track5",
       "type": "line",
       "source": "tilezen",
       "source-layer": "roads",
       "minzoom": 12,
       "maxzoom": 24,
-      "filter": [
-        "all",
-        ["in", "kind", "track"],
-        ["!in", "tracktype", "grade1", "grade2"]
-      ],
-      "layout": {"line-join": "round", "line-cap": "round"},
+      "filter": ["all", ["in", "kind", "track"], ["==", "tracktype", "grade5"]],
+      "layout": {"line-join": "round", "line-cap": "butt"},
+      "paint": {
+        "line-color": "#110f0d",
+        "line-width": {"base": 1.8, "stops": [[10, 0.3], [20, 15]]},
+        "line-dasharray": [5, 7]
+      }
+    },
+    {
+      "id": "road-track4",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "minzoom": 12,
+      "maxzoom": 24,
+      "filter": ["all", ["in", "kind", "track"], ["==", "tracktype", "grade4"]],
+      "layout": {"line-join": "round", "line-cap": "butt"},
+      "paint": {
+        "line-color": "#110f0d",
+        "line-width": {"base": 1.8, "stops": [[10, 0.3], [20, 15]]},
+        "line-dasharray": [15, 7]
+      }
+    },
+    {
+      "id": "road-track3",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "minzoom": 12,
+      "maxzoom": 24,
+      "filter": ["all", ["in", "kind", "track"], ["==", "tracktype", "grade3"]],
+      "layout": {"line-join": "round", "line-cap": "butt"},
       "paint": {
         "line-color": "#110f0d",
         "line-width": {"base": 1.8, "stops": [[10, 0.3], [20, 15]]},
@@ -886,7 +978,7 @@
       "layout": {"line-join": "round", "line-cap": "round"},
       "paint": {
         "line-color": "rgba(238, 238, 238, 1)",
-        "line-width": {"base": 1.55, "stops": [[4, 0.25], [20, 30]]}
+        "line-width": {"base": 1.55, "stops": [[4, 0.25], [20, 25]]}
       }
     },
     {
@@ -899,7 +991,7 @@
       "layout": {"line-join": "round", "line-cap": "round"},
       "paint": {
         "line-color": "#fffbb3",
-        "line-width": {"base": 1.55, "stops": [[4, 0.25], [20, 30]]}
+        "line-width": {"base": 1.55, "stops": [[4, 0.25], [20, 25]]}
       }
     },
     {
@@ -927,7 +1019,9 @@
       "filter": [
         "all",
         ["in", "kind", "tertiary", "tertiary_link"],
-        ["==", "surface", "paved"]
+        ["==", "surface", "paved"],
+        ["!has", "is_tunnel"],
+        ["!has", "is_bridge"]
       ],
       "layout": {"line-join": "round", "line-cap": "round"},
       "paint": {
@@ -943,7 +1037,9 @@
       "filter": [
         "all",
         ["in", "kind", "tertiary", "tertiary_link"],
-        ["==", "surface", "unpaved"]
+        ["==", "surface", "unpaved"],
+        ["!has", "is_tunnel"],
+        ["!has", "is_bridge"]
       ],
       "layout": {"line-join": "round", "line-cap": "round"},
       "paint": {
@@ -1014,6 +1110,24 @@
       "paint": {"line-color": "rgba(141, 36, 119, 0.3)", "line-width": 8}
     },
     {
+      "id": "casing1-tertiary",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "filter": [
+        "all",
+        ["in", "kind", "tertiary", "tertiary_link"],
+        ["==", "surface", "paved"],
+        ["has", "is_bridge"],
+        ["==", "layer", "1"]
+      ],
+      "layout": {"line-join": "round", "line-cap": "butt"},
+      "paint": {
+        "line-color": "#111111",
+        "line-width": {"base": 1.55, "stops": [[5, 2], [20, 25]]}
+      }
+    },
+    {
       "id": "casing1-primary-bridge",
       "type": "line",
       "source": "tilezen",
@@ -1035,7 +1149,7 @@
       "layout": {"line-join": "round", "line-cap": "butt"},
       "paint": {
         "line-color": "#111111",
-        "line-width": {"base": 1.55, "stops": [[5, 2.3], [20, 38]]}
+        "line-width": {"base": 1.55, "stops": [[5, 2.3], [20, 40]]}
       }
     },
     {
@@ -1056,7 +1170,43 @@
       },
       "paint": {
         "line-color": "#111111",
-        "line-width": {"base": 1.55, "stops": [[5, 2.3], [20, 40]]}
+        "line-width": {"base": 1.55, "stops": [[5, 2.3], [20, 42]]}
+      }
+    },
+    {
+      "id": "road1-tertiary-paved",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "filter": [
+        "all",
+        ["in", "kind", "tertiary", "tertiary_link"],
+        ["==", "surface", "paved"],
+        ["has", "is_bridge"],
+        ["==", "layer", "1"]
+      ],
+      "layout": {"line-join": "round", "line-cap": "round"},
+      "paint": {
+        "line-color": "#d7b7ad",
+        "line-width": {"base": 1.55, "stops": [[5, 1], [20, 15]]}
+      }
+    },
+    {
+      "id": "road1-tertiary-unpaved",
+      "type": "line",
+      "source": "tilezen",
+      "source-layer": "roads",
+      "filter": [
+        "all",
+        ["in", "kind", "tertiary", "tertiary_link"],
+        ["==", "surface", "unpaved"],
+        ["has", "is_bridge"],
+        ["==", "layer", "1"]
+      ],
+      "layout": {"line-join": "round", "line-cap": "round"},
+      "paint": {
+        "line-color": "rgba(230, 220, 0, 1)",
+        "line-width": {"base": 1.55, "stops": [[5, 1], [20, 15]]}
       }
     },
     {
