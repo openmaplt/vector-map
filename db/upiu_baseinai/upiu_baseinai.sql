@@ -12,3 +12,10 @@ waterway text
 --way geometry
 );
 select addgeometrycolumn('upiu_baseinai', 'way', 3857, 'LINESTRING', 2);
+
+drop table if exists upiu_baseinai_plot;
+create table upiu_baseinai_plot (
+id bigint,
+basin int
+);
+select addgeometrycolumn('upiu_baseinai_plot', 'way', 3857, 'MULTIPOLYGON', 2);
