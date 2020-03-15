@@ -10,10 +10,14 @@ begin
   update upiu_baseinai set basin = -101, wave = 0 where name = 'Danė';
   update upiu_baseinai set basin = -102, wave = 0 where name = 'Šventoji' and wikipedia = 'lt:Šventoji';
   update upiu_baseinai set basin = -103, wave = 0 where name = 'Venta';
-  update upiu_baseinai set basin = -104, wave = 0 where name in ('Mūša', 'Maučiuvis', 'Viršytis', 'Beržtalis', 'Marčiupys',
-    'Plonė', 'Švitinys', 'Šešėvėlė', 'Vilkija', 'Platonis', 'Sidabra', 'Audruvė', 'Virčiuvis', 'Švėtė', 'Lanka', 'Šešvelė', 'Yslykis');
+  update upiu_baseinai set basin = -104, wave = 0 where name in ('Mūša', 'Maučiuvis', 'Viršytis', 'Beržtalis',
+    'Plonė', 'Švitinys', 'Šešėvėlė', 'Vilkija', 'Platonis', 'Sidabra', 'Audruvė', 'Virčiuvis', 'Švėtė', 'Šešvelė', 'Yslykis');
+  -- Marčiupiai yra du, tai reikia aiškesnių parinkimo sąlygų
+  update upiu_baseinai set basin = -104, wave = 0 where name = 'Marčiupys' and st_length(way) > 8000;
   -- Alėjos yra dvi, tai reikia aiškesnių parinkimo sąlygų
   update upiu_baseinai set basin = -104, wave = 0 where name = 'Alėja' and st_length(way) < 15000;
+  -- Lankos yra dvi, tai reikia aiškesnių parinkimo sąlygų
+  update upiu_baseinai set basin = -104, wave = 0 where name = 'Lanka' and st_length(way) > 10000;
   update upiu_baseinai set basin = -105, wave = 0 where name = 'Nemunėlis';
   update upiu_baseinai set basin = -106, wave = 0 where name = 'Neris';
   update upiu_baseinai set basin = -107, wave = 0 where name = 'Nevėžis';
