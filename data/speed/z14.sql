@@ -21,7 +21,7 @@ WHERE
    OR (highway = 'track' AND coalesce(track, '!@#') != 'driveway')
   ) AND
   (maxspeed is not null or
-   "maxspeed:forward" is not null
+   "maxspeed:forward" is not null or
    "maxspeed:backward" is not null
   )
 GROUP BY maxspeed, "maxspeed:forward", "maxspeed:backward"
