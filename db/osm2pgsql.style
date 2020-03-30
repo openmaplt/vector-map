@@ -173,4 +173,6 @@ way        way_area     real                # This is calculated during import
 node,way   osm_timestamp timestamptz(0)
 way        embankment:type text
 way        waterway:speed text       linear
-
+way        maxspeed     text         linear
+way        maxspeed:forward text     linear
+way        maxspeed:backward text    linear

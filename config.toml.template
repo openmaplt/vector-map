@@ -322,6 +322,21 @@ max_connections = 4
   sql = """%./data/contour/z14.sql%"""
   geometry_type = "LineString"
 
+  [[providers.layers]]
+  name = "speed13"
+  sql = """%./data/speed/z13.sql%"""
+  geometry_type = "LineString"
+
+  [[providers.layers]]
+  name = "speed14"
+  sql = """%./data/speed/z14.sql%"""
+  geometry_type = "LineString"
+
+  [[providers.layers]]
+  name = "speed15"
+  sql = """%./data/speed/z15.sql%"""
+  geometry_type = "LineString"
+
 [[maps]]
 name = "all"
 attribution = "© OpenStreetMap contributors"
@@ -831,4 +846,27 @@ center = [23.871, 55.191, 7.0]
   name = "isoline"
   provider_layer = "osm.isoline_sym14"
   min_zoom = 13
+  max_zoom = 18
+
+[[maps]]
+name = "speed"
+attribution = "© OpenStreetMap contributors"
+center = [23.871, 55.191, 7.0]
+
+  [[maps.layers]]
+  name = "speed"
+  provider_layer = "osm.speed13"
+  min_zoom = 12
+  max_zoom = 13
+
+  [[maps.layers]]
+  name = "speed"
+  provider_layer = "osm.speed14"
+  min_zoom = 14
+  max_zoom = 14
+
+  [[maps.layers]]
+  name = "speed"
+  provider_layer = "osm.speed15"
+  min_zoom = 15
   max_zoom = 18
