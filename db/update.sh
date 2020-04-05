@@ -85,10 +85,19 @@ if [ -s dirty_tiles ]; then
     echo "Preparing tile lists " `date`
 
     grep -E "^(10|11|12|13|14)" dirty_tiles > generate_bicycle_$DIRTY_FILE
-    grep -E "^(10|11|12|13|14)" dirty_tiles > generate_craftbeer_$DIRTY_FILE
 
-    echo "OpenMap.lt delete expired tiles large scale tiles in layer 'all' " `date`
+    echo "OpenMap.lt delete expired large scale tiles in layer 'all' " `date`
     rm -rf ../cache/all/1[6-8] || true
+
+    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="detail"    tile-list dirty_tiles > /dev/null
+    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="topo"      tile-list dirty_tiles > /dev/null
+    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="river"     tile-list dirty_tiles > /dev/null
+    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="craftbeer" tile-list dirty_tiles > /dev/null
+    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="speed"     tile-list dirty_tiles > /dev/null
+
+    echo "Bicycle regenerate expired " `date`
+    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="bicycle" tile-list dirty_tiles > /dev/null
+    $TEGOLA_SEED --map="bicycle" tile-list generate_bicycle_$DIRTY_FILE > /dev/null
 
     for ZOOM in $(seq 15 -1 7); do
         echo "OpenMap.lt regenerate expired $ZOOM " `date`
@@ -97,19 +106,9 @@ if [ -s dirty_tiles ]; then
     done
     rm generate_openmap_*_$DIRTY_FILE
 
-    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="detail"    tile-list dirty_tiles > /dev/null
-    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="topo"      tile-list dirty_tiles > /dev/null
-    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="river"     tile-list dirty_tiles > /dev/null
-    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="craftbeer" tile-list dirty_tiles > /dev/null
-
-    echo "Bicycle regenerate expired " `date`
-    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="bicycle" tile-list dirty_tiles > /dev/null
-    $TEGOLA_SEED --map="bicycle" tile-list generate_bicycle_$DIRTY_FILE > /dev/null
-
     echo "Done " `date`
 
     rm generate_bicycle_$DIRTY_FILE
-    rm generate_craftbeer_$DIRTY_FILE
 fi
 
 echo "Update end: `date +%c`"
