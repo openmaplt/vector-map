@@ -32,6 +32,11 @@ var s_ex = [{
     name: 'map_craftbeer',
     title: 'Craft alus',
     html: '<div id="sw6" class="sw_map sw_map6 sw_map_hidden" onClick="sw_switch_to_map(\'craftbeer\')"><img src="map_craftbeer.png"><br>Craft alus</div>'
+  },
+  {
+    name: 'map_speed',
+    title: 'Greičiai',
+    html: '<div id="sw7" class="sw_map sw_map7 sw_map_hidden" onClick="sw_switch_to_map(\'speed\')"><img src="map_speed.png"><br>Greičiai</div>'
   }];
 var s_extended='';
 var isDown = false;
@@ -148,6 +153,8 @@ function sw_switch_to_map(m) {
       x = 'b';
     } else if (m == 'craftbeer') {
       x = 'c';
+    } else if (m == 'speed') {
+      x = 's';
     }
     if (m == 'places') {
       website = website + 'openmap.lt/#m=' + Math.trunc(zoom + 1) + '/' + cent.lng + '/' + cent.lat + '//T';
