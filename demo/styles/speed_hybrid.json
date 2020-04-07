@@ -569,6 +569,32 @@
       }
     },
     {
+      "id": "speed90-backward",
+      "type": "line",
+      "source": "speed",
+      "source-layer": "speed",
+      "filter": ["all", ["==", "backward", "90"]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-color": "rgba(230, 245, 152, 0.6)",
+        "line-offset": {"stops": [[12, -2], [14, -5]]}
+      }
+    },
+    {
+      "id": "speed90-forward",
+      "type": "line",
+      "source": "speed",
+      "source-layer": "speed",
+      "filter": ["all", ["==", "forward", "90"]],
+      "layout": {"visibility": "visible"},
+      "paint": {
+        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-color": "rgba(230, 245, 152, 0.6)",
+        "line-offset": {"stops": [[12, 2], [14, 5]]}
+      }
+    },
+    {
       "id": "speed90",
       "type": "line",
       "source": "speed",
@@ -591,6 +617,30 @@
       }
     },
     {
+      "id": "speed70-forward",
+      "type": "line",
+      "source": "speed",
+      "source-layer": "speed",
+      "filter": ["all", ["==", "forward", "70"]],
+      "paint": {
+        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-color": "rgba(253, 174, 97, 0.8)",
+        "line-offset": {"stops": [[12, 2], [14, 5]]}
+      }
+    },
+    {
+      "id": "speed70-backward",
+      "type": "line",
+      "source": "speed",
+      "source-layer": "speed",
+      "filter": ["all", ["==", "backward", "70"]],
+      "paint": {
+        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-color": "rgba(253, 174, 97, 0.8)",
+        "line-offset": {"stops": [[12, -2], [14, -5]]}
+      }
+    },
+    {
       "id": "speed70",
       "type": "line",
       "source": "speed",
@@ -599,6 +649,30 @@
       "paint": {
         "line-width": {"stops": [[12, 4], [14, 10]]},
         "line-color": "rgba(253, 174, 97, 0.6)"
+      }
+    },
+    {
+      "id": "speed60-backward",
+      "type": "line",
+      "source": "speed",
+      "source-layer": "speed",
+      "filter": ["all", ["==", "backward", "60"]],
+      "paint": {
+        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-color": "rgba(244, 109, 67, 0.6)",
+        "line-offset": {"stops": [[12, -2], [14, -5]]}
+      }
+    },
+    {
+      "id": "speed60-forward",
+      "type": "line",
+      "source": "speed",
+      "source-layer": "speed",
+      "filter": ["all", ["==", "forward", "60"]],
+      "paint": {
+        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-color": "rgba(244, 109, 67, 0.6)",
+        "line-offset": {"stops": [[12, 2], [14, 5]]}
       }
     },
     {
@@ -625,6 +699,30 @@
       }
     },
     {
+      "id": "speed50-backward",
+      "type": "line",
+      "source": "speed",
+      "source-layer": "speed",
+      "filter": ["all", ["==", "backward", "50"]],
+      "paint": {
+        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-color": "rgba(213, 62, 79, 0.6)",
+        "line-offset": {"stops": [[12, -2], [14, -5]]}
+      }
+    },
+    {
+      "id": "speed50-forward",
+      "type": "line",
+      "source": "speed",
+      "source-layer": "speed",
+      "filter": ["all", ["==", "forward", "50"]],
+      "paint": {
+        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-color": "rgba(213, 62, 79, 0.6)",
+        "line-offset": {"stops": [[12, 2], [14, 5]]}
+      }
+    },
+    {
       "id": "speed50",
       "type": "line",
       "source": "speed",
@@ -647,10 +745,29 @@
       }
     },
     {
+      "id": "speed-backward-forward",
+      "type": "symbol",
+      "source": "speed",
+      "source-layer": "speed",
+      "filter": ["all", ["has", "backward"], ["has", "forward"]],
+      "layout": {
+        "text-field": "{backward}/{forward}",
+        "text-font": ["Playfair Regular"],
+        "text-anchor": "center",
+        "symbol-placement": "line",
+        "text-line-height": 2
+      },
+      "paint": {
+        "text-halo-color": "rgba(255, 255, 255, 1)",
+        "text-halo-width": 2
+      }
+    },
+    {
       "id": "speed",
       "type": "symbol",
       "source": "speed",
       "source-layer": "speed",
+      "filter": ["all", ["has", "maxspeed"]],
       "layout": {
         "text-field": "{maxspeed}",
         "text-font": ["Playfair Regular"],
