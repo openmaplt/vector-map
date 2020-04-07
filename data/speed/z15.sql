@@ -2,8 +2,8 @@ SELECT
   row_number() over() AS gid,
   st_asbinary(st_linemerge(st_collect(way))) AS geom,
   maxspeed,
-  "maxspeed:forward" forward,
-  "maxspeed:backward" backward
+  "maxspeed:forward" as forward,
+  "maxspeed:backward" as backward
 FROM
   planet_osm_line
 WHERE
@@ -24,4 +24,4 @@ WHERE
    "maxspeed:forward" is not null or
    "maxspeed:backward" is not null
   )
-GROUP BY maxspeed, "maxspeed:forward", "maxspeed:backward"
+GROUP BY "maxspeed:forward", "maxspeed:backward", maxspeed

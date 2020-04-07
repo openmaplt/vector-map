@@ -33,14 +33,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script>
   var defaultType = 'speed';
   var mapTypes = {
-    topo: 's',
-    hybrid: 'h'
+    speed: 's',
+    speed_hybrid: 'h'
   };
 function toMap() {
   switchTo('speed');
 } // toMap
 function toOrto() {
-  switchTo('hybrid_speed');
+  switchTo('speed_hybrid');
 } // toOrto
 function switchTo(m) {
   map.setStyle('styles/' + m + '.json');
@@ -50,7 +50,7 @@ function switchTo(m) {
 }
 document.addEventListener("DOMContentLoaded", function(e) {
   sw_init('map_speed');
-  if (mapData.type == 'hybrid_speed') {
+  if (mapData.type == 'speed_hybrid') {
     sw_toggle_map();
   }
 } );
