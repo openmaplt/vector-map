@@ -856,7 +856,7 @@ center = [23.871, 55.191, 7.0]
   [[maps.layers]]
   name = "speed"
   provider_layer = "osm.speed13"
-  min_zoom = 12
+  min_zoom = 11
   max_zoom = 13
 
   [[maps.layers]]

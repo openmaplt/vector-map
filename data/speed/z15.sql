@@ -1,7 +1,7 @@
 SELECT
   row_number() over() AS gid,
   st_asbinary(st_linemerge(st_collect(way))) AS geom,
-  maxspeed,
+  case when highway = 'living_street' then coalesce(maxspeed, '20') else maxspeed end as maxspeed,
   "maxspeed:forward" as forward,
   "maxspeed:backward" as backward
 FROM
@@ -22,6 +22,7 @@ WHERE
   ) AND
   (maxspeed is not null or
    "maxspeed:forward" is not null or
-   "maxspeed:backward" is not null
+   "maxspeed:backward" is not null or
+   highway = 'living_street'
   )
-GROUP BY "maxspeed:forward", "maxspeed:backward", maxspeed
+GROUP BY "maxspeed:forward", "maxspeed:backward", maxspeed, highway

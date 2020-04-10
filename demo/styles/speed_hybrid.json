@@ -519,7 +519,7 @@
       "source-layer": "speed",
       "filter": ["all", ["==", "maxspeed", "130"]],
       "paint": {
-        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-width": {"stops": [[11, 3], [14, 8]]},
         "line-color": "rgba(94, 79, 162, 0.6)"
       }
     },
@@ -530,7 +530,7 @@
       "source-layer": "speed",
       "filter": ["all", ["==", "maxspeed", "120"]],
       "paint": {
-        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-width": {"stops": [[11, 3], [14, 8]]},
         "line-color": "rgba(50, 136, 189, 0.6)"
       }
     },
@@ -541,7 +541,7 @@
       "source-layer": "speed",
       "filter": ["all", ["==", "maxspeed", "110"]],
       "paint": {
-        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-width": {"stops": [[11, 3], [14, 8]]},
         "line-color": "rgba(102, 194, 165, 0.6)"
       }
     },
@@ -552,7 +552,7 @@
       "source-layer": "speed",
       "filter": ["all", ["==", "maxspeed", "100"]],
       "paint": {
-        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-width": {"stops": [[11, 3], [14, 8]]},
         "line-color": "rgba(171, 221, 164, 0.6)"
       }
     },
@@ -563,7 +563,7 @@
       "source-layer": "speed",
       "filter": ["all", ["==", "maxspeed", "LT:rural"]],
       "paint": {
-        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-width": {"stops": [[11, 3], [14, 8]]},
         "line-color": "rgba(230, 245, 152, 0.6)",
         "line-dasharray": [2, 2]
       }
@@ -576,7 +576,7 @@
       "filter": ["all", ["==", "backward", "90"]],
       "layout": {"visibility": "visible"},
       "paint": {
-        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-width": {"stops": [[11, 3], [14, 8]]},
         "line-color": "rgba(230, 245, 152, 0.6)",
         "line-offset": {"stops": [[12, -2], [14, -5]]}
       }
@@ -589,7 +589,7 @@
       "filter": ["all", ["==", "forward", "90"]],
       "layout": {"visibility": "visible"},
       "paint": {
-        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-width": {"stops": [[11, 3], [14, 8]]},
         "line-color": "rgba(230, 245, 152, 0.6)",
         "line-offset": {"stops": [[12, 2], [14, 5]]}
       }
@@ -601,7 +601,7 @@
       "source-layer": "speed",
       "filter": ["all", ["==", "maxspeed", "90"]],
       "paint": {
-        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-width": {"stops": [[11, 3], [14, 8]]},
         "line-color": "rgba(230, 245, 152, 0.6)"
       }
     },
@@ -612,7 +612,7 @@
       "source-layer": "speed",
       "filter": ["all", ["==", "maxspeed", "80"]],
       "paint": {
-        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-width": {"stops": [[11, 3], [14, 8]]},
         "line-color": "rgba(254, 224, 139, 0.6)"
       }
     },
@@ -623,7 +623,7 @@
       "source-layer": "speed",
       "filter": ["all", ["==", "forward", "70"]],
       "paint": {
-        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-width": {"stops": [[11, 3], [14, 8]]},
         "line-color": "rgba(253, 174, 97, 0.8)",
         "line-offset": {"stops": [[12, 2], [14, 5]]}
       }
@@ -635,7 +635,7 @@
       "source-layer": "speed",
       "filter": ["all", ["==", "backward", "70"]],
       "paint": {
-        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-width": {"stops": [[11, 3], [14, 8]]},
         "line-color": "rgba(253, 174, 97, 0.8)",
         "line-offset": {"stops": [[12, -2], [14, -5]]}
       }
@@ -647,7 +647,7 @@
       "source-layer": "speed",
       "filter": ["all", ["==", "maxspeed", "70"]],
       "paint": {
-        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-width": {"stops": [[11, 3], [14, 8]]},
         "line-color": "rgba(253, 174, 97, 0.6)"
       }
     },
@@ -658,7 +658,7 @@
       "source-layer": "speed",
       "filter": ["all", ["==", "backward", "60"]],
       "paint": {
-        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-width": {"stops": [[11, 3], [14, 8]]},
         "line-color": "rgba(244, 109, 67, 0.6)",
         "line-offset": {"stops": [[12, -2], [14, -5]]}
       }
@@ -670,7 +670,7 @@
       "source-layer": "speed",
       "filter": ["all", ["==", "forward", "60"]],
       "paint": {
-        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-width": {"stops": [[11, 3], [14, 8]]},
         "line-color": "rgba(244, 109, 67, 0.6)",
         "line-offset": {"stops": [[12, 2], [14, 5]]}
       }
@@ -682,7 +682,7 @@
       "source-layer": "speed",
       "filter": ["all", ["==", "maxspeed", "60"]],
       "paint": {
-        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-width": {"stops": [[11, 3], [14, 8]]},
         "line-color": "rgba(244, 109, 67, 0.6)"
       }
     },
@@ -693,7 +693,7 @@
       "source-layer": "speed",
       "filter": ["all", ["==", "maxspeed", "LT:urban"]],
       "paint": {
-        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-width": {"stops": [[11, 3], [14, 8]]},
         "line-color": "rgba(213, 62, 79, 0.6)",
         "line-dasharray": [2, 2]
       }
@@ -705,7 +705,7 @@
       "source-layer": "speed",
       "filter": ["all", ["==", "backward", "50"]],
       "paint": {
-        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-width": {"stops": [[11, 3], [14, 8]]},
         "line-color": "rgba(213, 62, 79, 0.6)",
         "line-offset": {"stops": [[12, -2], [14, -5]]}
       }
@@ -717,7 +717,7 @@
       "source-layer": "speed",
       "filter": ["all", ["==", "forward", "50"]],
       "paint": {
-        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-width": {"stops": [[11, 3], [14, 8]]},
         "line-color": "rgba(213, 62, 79, 0.6)",
         "line-offset": {"stops": [[12, 2], [14, 5]]}
       }
@@ -729,7 +729,7 @@
       "source-layer": "speed",
       "filter": ["all", ["==", "maxspeed", "50"]],
       "paint": {
-        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-width": {"stops": [[11, 3], [14, 8]]},
         "line-color": "rgba(213, 62, 79, 0.6)"
       }
     },
@@ -740,7 +740,7 @@
       "source-layer": "speed",
       "filter": ["all", ["in", "maxspeed", "40", "30", "20"]],
       "paint": {
-        "line-width": {"stops": [[12, 4], [14, 10]]},
+        "line-width": {"stops": [[11, 3], [14, 8]]},
         "line-color": "rgba(158, 1, 66, 0.6)"
       }
     },
