@@ -113,7 +113,7 @@ function reset() {
 ***************************************************/
 function imgSprite(name) {
   return '<img src="https://openmap.lt/img_trans.gif" style="width: ' + sprite[name].width +
-    'px; height: ' + sprite[name].height + 
+    'px; height: ' + sprite[name].height +
     'px; background: url(https://openmap.lt/sprites/river.png) -' + sprite[name].x + 'px -' + sprite[name].y + 'px;">';
 }
 /***************************************************
@@ -271,6 +271,7 @@ var map = new mapboxgl.Map({
 map.addControl(new mapboxgl.AttributionControl(), 'bottom-left');
 var ghRouting = new GraphHopper.Routing({
   host: "https://openmap.lt",
+  basePath: "/river_route",
   vehicle: "river",
   elevation: false,
   points_encoded: true,
