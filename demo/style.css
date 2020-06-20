@@ -79,10 +79,6 @@ body {
     display: none;
 }
 @media screen and (max-width: 640px) {
-    #legend {
-        margin-bottom: 100px;
-        margin-right: 10px;
-    }
     #legend.active {
         background: rgba(255, 255, 255, 1);
     }
