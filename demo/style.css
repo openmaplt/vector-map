@@ -80,7 +80,7 @@ body {
 }
 @media screen and (max-width: 640px) {
     #legend {
-        margin-bottom: 34px;
+        margin-bottom: 100px;
         margin-right: 10px;
     }
     #legend.active {
