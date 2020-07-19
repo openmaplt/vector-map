@@ -278,6 +278,10 @@ var ghRouting = new GraphHopper.Routing({
   details: ["time", "street_name"]
 });
 map.addControl(new mapboxgl.NavigationControl(), 'top-left');
+map.addControl(new mapboxgl.GeolocateControl({
+      positionOptions: { enableHighAccuracy: true },
+      trackUserLocation: true
+    }), 'top-left');
 /*map.showTileBoundaries = true;*/
 /*map.showCollisionBoxes = true;*/
 map.on('contextmenu', (e) => {
