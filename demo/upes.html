@@ -269,6 +269,7 @@ var map = new mapboxgl.Map({
   attributionControl: false
 });
 map.addControl(new mapboxgl.AttributionControl(), 'bottom-left');
+
 var ghRouting = new GraphHopper.Routing({
   host: "https://openmap.lt",
   basePath: "/river_route",
@@ -278,6 +279,10 @@ var ghRouting = new GraphHopper.Routing({
   details: ["time", "street_name"]
 });
 map.addControl(new mapboxgl.NavigationControl(), 'top-left');
+map.addControl(new mapboxgl.GeolocateControl({
+      positionOptions: { enableHighAccuracy: true },
+      trackUserLocation: true
+    }), 'top-left');
 /*map.showTileBoundaries = true;*/
 /*map.showCollisionBoxes = true;*/
 map.on('contextmenu', (e) => {
