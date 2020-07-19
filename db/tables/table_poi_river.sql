@@ -6,7 +6,7 @@ create materialized view poi_river (
  ,way
 ) as
   select osm_id
-        ,coalesce("waterway:milestone", name)
+        ,coalesce(distance, "waterway:milestone", name)
         ,(
           CASE
             WHEN whitewater in ('put_in;egress', 'egress', 'put_in')
@@ -31,10 +31,13 @@ create materialized view poi_river (
               THEN 'dam2'
             WHEN "waterway:milestone" is not null
               THEN 'milestone'
+            WHEN waterway = 'milestone'
+              THEN 'milestone'
             ELSE whitewater
             END
          )
         ,way
     from planet_osm_point
    where whitewater is not null
-      or "waterway:milestone" is not null;
+      or "waterway:milestone" is not null
+      or waterway = 'milestone';
