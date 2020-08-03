@@ -17,9 +17,9 @@ create materialized view poi_river (
               THEN 'dam_inout'
             WHEN whitewater = 'bridge;dam;put_in'
               THEN 'bridge_dam_inout'
-            WHEN whitewater in ('bridge;put_in', 'bridge;egress', 'bridge;egress;put_in')
+            WHEN whitewater in ('bridge;put_in', 'bridge;egress', 'bridge;egress;put_in', 'bridge;put_in;egress')
               THEN 'bridge_inout'
-            WHEN whitewater in ('put_in;bridge', 'egress;bridge', 'egress;put_in;bridge')
+            WHEN whitewater in ('put_in;bridge', 'egress;bridge', 'egress;put_in;bridge', 'put_in;egress;bridge')
               THEN 'inout_bridge'
             WHEN whitewater = 'egress;put_in;bridge;hazard'
               THEN 'inout_bridge_hazard'
