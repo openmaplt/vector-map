@@ -570,7 +570,7 @@ function getOSMLink(feature) {
       throw new Error('Unknown object type ' + properties.__type__);
   }
 
-  var link = '<span class="icon"><i class="fa fa-database"></i></span>&nbsp;<a href="' + base + '/' + type + '/' + properties.id + '" target="_blank">OSM</a>';
+  var link = '<span class="icon"><i class="fa fa-database"></i></span>&nbsp;<a href="' + base + type + '/' + properties.id + '" target="_blank">OSM</a>';
   link += '&nbsp;<span class="icon"><i class="fa fa-edit"></i></span>&nbsp;<a href="' + base + 'edit?' + type + '=' + properties.id + '#map=18/' + mapData.lat + '/' + mapData.lng + '" target="_blank">Edit</a>';
 
   return link;
