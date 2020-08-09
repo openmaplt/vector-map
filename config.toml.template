@@ -318,6 +318,11 @@ max_connections = 4
   geometry_type = "Point"
 
   [[providers.layers]]
+  name = "river_sym15"
+  sql = """%./data/river/z15.sql%"""
+  geometry_type = "Point"
+
+  [[providers.layers]]
   name = "isoline_sym14"
   sql = """%./data/contour/z14.sql%"""
   geometry_type = "LineString"
@@ -835,6 +840,12 @@ center = [23.871, 55.191, 7.0]
   name = "point"
   provider_layer = "osm.river_sym14"
   min_zoom = 14
+  max_zoom = 14
+
+  [[maps.layers]]
+  name = "point"
+  provider_layer = "osm.river_sym15"
+  min_zoom = 15
   max_zoom = 18
 
 [[maps]]
