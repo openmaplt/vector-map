@@ -5,7 +5,7 @@ SELECT
   name,
   kind
 FROM
-  poi_river
+  poi_river_gen
 WHERE
   way && !BBOX!
   AND kind != 'milestone'

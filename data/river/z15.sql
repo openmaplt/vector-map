@@ -5,6 +5,6 @@ SELECT
   name,
   kind
 FROM
-  poi_river_gen
+  poi_river
 WHERE
   way && !BBOX!
