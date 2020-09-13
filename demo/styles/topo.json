@@ -1536,7 +1536,8 @@
           "type": "identity"
         },
         "text-size": {"property": "font_size", "type": "identity"},
-        "text-max-angle": 80
+        "text-max-angle": 80,
+        "text-allow-overlap": true
       },
       "paint": {
         "text-color": "#49a5dd",
@@ -1586,7 +1587,7 @@
         "text-size": 11
       },
       "paint": {
-        "text-color": "#384646",
+        "text-color": "#333333",
         "text-halo-color": "rgba(255,255,255,1)",
         "icon-halo-width": 0,
         "icon-halo-color": "rgba(0, 0, 0, 0)",
@@ -1609,7 +1610,7 @@
         "text-size": {"stops": [[8, 8], [14, 13]]}
       },
       "paint": {
-        "text-color": "#384646",
+        "text-color": "#333333",
         "text-halo-color": "rgba(255,255,255,1)",
         "icon-halo-width": 0,
         "icon-halo-color": "rgba(0, 0, 0, 0)",
@@ -1630,11 +1631,10 @@
         "text-max-width": 10,
         "text-letter-spacing": 0.1,
         "text-size": {"stops": [[8, 8], [14, 13]]},
-        "symbol-spacing": 250,
-        "text-padding": 5
+        "symbol-spacing": 250
       },
       "paint": {
-        "text-color": "#384646",
+        "text-color": "#333333",
         "text-halo-color": "rgba(255,255,255,1)",
         "icon-halo-width": 0,
         "icon-halo-color": "rgba(0, 0, 0, 0)",
