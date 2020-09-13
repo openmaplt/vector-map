@@ -109,7 +109,7 @@ begin
                   prop = 0.7;
                 elseif lm / font_coef < 1.73 then
                   prop = 0.8;
-                elseif lm / font_coef < 1.81 then
+                elseif lm / font_coef < 1.87 then
                   prop = 0.9;
                 else
                   prop = 1.0;
