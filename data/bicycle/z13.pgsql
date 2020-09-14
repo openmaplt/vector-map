@@ -9,7 +9,7 @@ FROM
   planet_osm_line
 WHERE
   way && !BBOX! AND
-  route IN ('bicycle')
+  route IN ('bicycle', 'mtb')
 GROUP BY
   route, network, name, distance
 
