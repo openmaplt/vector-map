@@ -22,4 +22,5 @@ docker exec -u postgres $CONTAINER_DB sh -c 'psql osm -f /src/db/gen_building.sq
 docker exec -u postgres $CONTAINER_DB sh -c 'psql osm -f /src/db/gen_forest.sql'
 docker exec -u postgres $CONTAINER_DB sh -c 'psql osm -f /src/db/gen_protected.sql'
 
-#docker exec -u postgres $CONTAINER_DB sh -c 'bunzip2 -ck /src/queries/coastline/coastline.sql.bz2 | psql osm'
+docker exec -u postgres $CONTAINER_DB sh -c 'bzip2 -cd /src/data/coastline/coastline.sql.bz2 | psql osm'
+docker exec -u postgres -w /src/db/upiu_baseinai $CONTAINER_DB ./go.sh
