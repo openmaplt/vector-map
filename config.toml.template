@@ -1,5 +1,10 @@
 [webserver]
-port = ":8082"
+port = ":8080"
+
+[webserver.headers]
+Access-Control-Allow-Origin = "*"
+Access-Control-Allow-Methods = "GET,HEAD"
+Access-Control-Allow-Headers = "X-Requested-With,Content-Type,Authorization"
 
 [cache]
 type = "file"

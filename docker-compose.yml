@@ -3,6 +3,7 @@ version: "2"
 services:
   tegola:
     image: xor22h/tegola:v0.10.2
+    ports: ["8080:8080"]
     links: ["db"]
     environment:
       PGHOST: db
@@ -20,19 +21,6 @@ services:
     volumes:
       - ".:/src"
       - "/var/lib/postgresql"
-
-  web:
-    image: node:alpine
-    ports: ["80:8000"]
-    links: ["tegola"]
-    environment:
-      PUBLIC_PATH: "/var/www"
-      TILES_URL: "http://tegola:8082/all/{z}/{x}/{y}.pbf"
-    working_dir: "/srv/proxy"
-    volumes:
-      - "./demo:/var/www"
-      - "./proxy:/srv/proxy"
-    command: ["/srv/proxy/server.sh"]
 
   maputnik:
     image: maputnik/editor:latest
