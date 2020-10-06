@@ -73,7 +73,8 @@ var attributeType = {
   height: 'height',
   fee: 'fee',
   phone: 'phone',
-  style_lager: 'beer_styles'
+  style_lager: 'beer_styles',
+  opening_hours: 'opening_hours'
 };
 var legendData = legendData || {};
 var legendTechUrl = legendTechUrl || null;
@@ -396,6 +397,19 @@ function getFomatedValue(attribute, properties) {
         styles.push('kvietinis');
       }
       return '<b>Stiliai:</b> ' + styles.join(', ');
+    case 'opening_hours':
+      var parts = value
+        .replace(/(\d)\s*,\s*(\w)/g, "$1;$2")
+        .replace('Mo', 'Pr')
+        .replace('Tu', 'An')
+        .replace('We', 'Tr')
+        .replace('Th', 'Kt')
+        .replace('Fr', 'Pt')
+        .replace('Sa', 'Št')
+        .replace('Su', 'Sk')
+        .split(';');
+
+      return parts.join('<br><span class="icon"></span> ');
   }
 
   return value;
