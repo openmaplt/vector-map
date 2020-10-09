@@ -41,12 +41,12 @@ if [ $? -ne 0 ]; then
 fi
 
 # remove outside objects
-psql -d osm -U postgres < remove_outside_objects.sql
+psql -d osm -U osm < remove_outside_objects.sql
 
 echo "Refreshing materialized views " `date`
-psql -d osm -U postgres < update_mv.sql
+psql -d osm -U osm < update_mv.sql
 echo "Refreshing waterbody labels " `date`
-psql -d osm -U postgres < update_water_labels.sql
+psql -d osm -U osm < update_water_labels.sql
 
 # atsiminti dienos kaladėles savaitgaliui (šeštadieniui)
 cat dirty_tiles >> dirty_tiles_weekly
@@ -54,7 +54,7 @@ cat dirty_tiles >> dirty_tiles_weekly
 # update generalisation on Saturday
 if [[ $(date +%u) -eq 6 ]] ; then
   echo "way generalisation" `date`
-  psql -d osm -U postgres < gen_way.sql
+  psql -d osm -U osm < gen_way.sql
   echo "water generalisation" `date`
   psql -d osm -U osm < gen_water.sql
   echo "building generalisation" `date`
