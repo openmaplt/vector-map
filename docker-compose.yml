@@ -3,7 +3,7 @@ version: "2"
 services:
   tegola:
     image: xor22h/tegola:v0.10.2
-    ports: ["8080:8080"]
+    ports: ["8080:8082"]
     links: ["db"]
     environment:
       PGHOST: db
