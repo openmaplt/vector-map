@@ -6,8 +6,6 @@ if [ ! -e data.pbf ]; then
 fi
 
 CONTAINER_DB=$(docker-compose ps -q db)
-# install shp2pgsql
-docker exec "$CONTAINER_DB" sh -c 'apt update -qy && apt install -qy postgis'
 
 # load data
 docker run --rm -it \
@@ -22,6 +20,9 @@ docker run --rm -it \
         -H db \
         data.pbf
 
+# aktyvuojame postgis_sfcgal; jei neaktyvuojamas, neranda funkcijų
+docker exec -i "$CONTAINER_DB" psql osm -U osm -c 'CREATE EXTENSION postgis_sfcgal;'
+
 # dbfunc yra masyvas (array) iš visų db/func/*.sql failų
 dbfunc=(db/func/*.sql)
 # dbfuncfiles yra dbfunc failai su '-f' prefix'u.
@@ -29,9 +30,10 @@ dbfunc=(db/func/*.sql)
 # nes, jei įvyksta klaida, psql gali pasakyti failo pavadinimą
 # ir eilutės numerį, kur įvyko klaida.
 dbfuncfiles=("${dbfunc[@]/#/-f }")
-docker exec -w /src "$CONTAINER_DB" psql osm -U osm \
+# shellcheck disable=SC2068
+docker exec -i -w /src "$CONTAINER_DB" psql osm -U osm \
     -f db/index.sql \
-    "${dbfuncfiles[@]}" \
+    ${dbfuncfiles[@]} \
     -f db/tables/table_poi.sql \
     -f db/tables/table_gen_ways.sql \
     -f db/gen_way.sql \
