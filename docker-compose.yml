@@ -2,12 +2,12 @@ version: "2"
 
 services:
   tegola:
-    image: xor22h/tegola:v0.10.2
+    image: debian:stable-slim
     links: ["db"]
     environment:
       PGHOST: db
     working_dir: /src
-    entrypoint: /bin/sh -c "/src/generate_config.sh && /opt/tegola serve --config /src/config.toml"
+    entrypoint: /bin/sh -c "/src/generate_config.sh && /src/tegola serve --config /src/config.toml"
     volumes:
       - ".:/src"
 
