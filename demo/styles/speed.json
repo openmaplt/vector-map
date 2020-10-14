@@ -5,15 +5,15 @@
   "sources": {
     "tilezen": {
       "type": "vector",
-      "url": "https://openmap.lt/capabilities/all.json"
+      "url": "/capabilities/all.json"
     },
     "topo": {
       "type": "vector",
-      "url": "https://openmap.lt/capabilities/topo.json"
+      "url": "/capabilities/topo.json"
     },
     "detail": {
       "type": "vector",
-      "url": "https://openmap.lt/capabilities/detail.json"
+      "url": "/capabilities/detail.json"
     },
     "dem": {
       "type": "raster-dem",
@@ -21,7 +21,7 @@
     },
     "speed": {
       "type": "vector",
-      "url": "https://openmap.lt/capabilities/speed.json"
+      "url": "/capabilities/speed.json"
     }
   },
   "sprite": "https://openmap.lt/sprites/topo",

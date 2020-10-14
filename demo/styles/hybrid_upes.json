@@ -15,11 +15,11 @@
     },
     "osm": {
       "type": "vector",
-      "url": "https://openmap.lt/capabilities/all.json"
+      "url": "/capabilities/all.json"
     },
     "river": {
       "type": "vector",
-      "url": "https://openmap.lt/capabilities/river.json"
+      "url": "/capabilities/river.json"
     }
   },
   "sprite": "https://openmap.lt/sprites/river",
