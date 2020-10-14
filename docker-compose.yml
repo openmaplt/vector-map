@@ -3,38 +3,43 @@ version: "2"
 services:
   tegola:
     image: debian:stable-slim
-    links: ["db"]
-    environment:
-      PGHOST: db
+    network_mode: service:net
     working_dir: /src
     entrypoint: /bin/sh -c "/src/generate_config.sh && /src/tegola serve --config /src/config.toml"
     volumes:
-      - ".:/src"
+      - ".:/src" # for tegola binary and config.toml
 
   db:
     image: postgis/postgis:13-3.0
+    network_mode: service:net
     environment:
       POSTGRES_DBNAME: osm
       POSTGRES_USER: osm
       POSTGRES_PASSWORD: osm
     volumes:
-      - ".:/src"
+      - ".:/src:ro"
       - "/var/lib/postgresql"
 
   web:
     image: node:alpine
-    ports: ["80:8000"]
-    links: ["tegola"]
+    network_mode: service:net
     environment:
       PUBLIC_PATH: "/var/www"
       TILES_URL: "http://tegola:8082/all/{z}/{x}/{y}.pbf"
     working_dir: "/srv/proxy"
     volumes:
-      - "./demo:/var/www"
-      - "./proxy:/srv/proxy"
+      - "./demo:/var/www:ro"
+      - "./proxy:/srv/proxy:ro"
     command: ["/srv/proxy/server.sh"]
 
   maputnik:
     image: maputnik/editor:latest
-    ports: ["8888:8888"]
+    network_mode: service:net
 
+  net:
+    image: debian:stable-slim
+    entrypoint: ["tail", "-f", "/dev/null"]
+    ports:
+      - "5432:5432" # postgresql
+      - "8888:8888" # tegola
+      - "8080:80"   # proxy

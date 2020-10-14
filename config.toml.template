@@ -8,7 +8,7 @@ basepath = "/home/openmap/cache"
 [[providers]]
 name = "osm"
 type = "postgis"
-host = "${PGHOST}"
+host = "127.0.0.1"
 port = 5432
 database = "osm"
 user = "osm"
