@@ -25,7 +25,7 @@ services:
     network_mode: service:net
     environment:
       PUBLIC_PATH: "/var/www"
-      TILES_URL: "http://tegola:8082/all/{z}/{x}/{y}.pbf"
+      TILES_URL: "http://localhost:8082/all/{z}/{x}/{y}.pbf"
     working_dir: "/srv/proxy"
     volumes:
       - "./demo:/var/www:ro"
