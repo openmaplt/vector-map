@@ -1,9 +1,10 @@
 #!/bin/bash
-set -eu
+set -xeu
 here=$(dirname "$0")
 
-psql osm -U osm < "${here}/upiu_baseinai.sql"
-psql osm -U osm < "${here}/merge_water.sql"
-psql osm -U osm < "${here}/touch.sql"
-psql osm -U osm < "${here}/process.sql"
-psql osm -U osm < "${here}/process_plot.sql"
+exec psql osm -U osm \
+    -f "${here}/upiu_baseinai.sql" \
+    -f "${here}/merge_water.sql" \
+    -f "${here}/touch.sql" \
+    -f "${here}/process.sql" \
+    -f "${here}/process_plot.sql"

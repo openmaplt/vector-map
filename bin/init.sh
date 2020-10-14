@@ -11,7 +11,7 @@ export PGPASSWORD=osm
 
 if ! command -v osm2pgsql > /dev/null; then
     apt-get update
-    apt-get install -y osm2pgsql bzip2
+    apt-get install -y osm2pgsql
 fi
 
 # aktyvuojame postgis_sfcgal; jei neaktyvuojamas, neranda funkcijų
@@ -41,9 +41,7 @@ docker-compose exec db psql osm -U osm \
     -f /src/db/gen_water.sql \
     -f /src/db/gen_building.sql \
     -f /src/db/gen_forest.sql \
-    -f /src/db/gen_protected.sql
+    -f /src/db/gen_protected.sql \
+    -f /src/data/coastline/coastline.sql
 
-docker-compose exec -T db bash -xeuo pipefail <<-EOF
-bzip2 -cd /src/data/coastline/coastline.sql.bz2 | psql -U osm osm
-/src/db/upiu_baseinai/go.sh
-EOF
+docker-compose exec -T db /src/db/upiu_baseinai/go.sh
