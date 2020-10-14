@@ -5,5 +5,3 @@ shp2pgsql -s 3857 -dDI water-polygons-split-3857/water_polygons.shp coastline_tm
 rm -rf water-polygons-split-3857*
 psql gis < recreate_coastline.sql
 pg_dump gis -t coastline -c > coastline.sql
-rm coastline.sql.bz2
-bzip2 coastline.sql
