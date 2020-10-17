@@ -17,8 +17,6 @@ declare
   i integer;
   s bigint := 1;
 begin
-  delete from gen_ways where type = p_type and coalesce(subtype, '!@#') = coalesce(p_subtype, '!@#');
-
   for c in (select id, st_linemerge(way) as way from gen_ways_tmp) loop
     for i in 1..st_numgeometries(c.way) loop
       insert into gen_ways (id, type, subtype, way) values (s, p_type, p_subtype, st_simplifypreservetopology(st_geometryn(c.way, i), 20));
@@ -29,6 +27,8 @@ begin
   return 'Tvarka';
 end
 $$ language plpgsql;
+
+truncate table gen_ways;
 
 ------------------
 -- Geležinkeliai
@@ -61,7 +61,7 @@ begin
     insert into gen_ways_tmp (id, way)
       select 1, st_approximatemedialaxis(st_simplifypreservetopology(st_union(st_buffer(way, 40, 'quad_segs=2 join=bevel')), 5))
         from planet_osm_line
-       where highway in ('motorway', 'trunk', 'primary')
+       where highway = c.highway
          and coalesce(ref, '!@#') = c.ref;
 
     t := process(c.highway, c.ref);
@@ -76,4 +76,3 @@ $$;
 -- Susitvarkymas
 ------------------
 drop table gen_ways_tmp;
-create index gen_ways_gix on gen_ways using gist(way);
