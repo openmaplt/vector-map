@@ -21,16 +21,11 @@ services:
       - "/var/lib/postgresql"
 
   web:
-    image: node:alpine
+    image: nginx:stable
     network_mode: service:net
-    environment:
-      PUBLIC_PATH: "/var/www"
-      TILES_URL: "http://localhost:8082/all/{z}/{x}/{y}.pbf"
-    working_dir: "/srv/proxy"
     volumes:
-      - "./demo:/var/www:ro"
-      - "./proxy:/srv/proxy:ro"
-    command: ["/srv/proxy/server.sh"]
+      - ".:/src:ro"
+      - "./nginx.conf:/etc/nginx/conf.d/openmap.conf:ro"
 
   maputnik:
     image: maputnik/editor:latest
@@ -42,4 +37,4 @@ services:
     ports:
       - "5432:5432" # postgresql
       - "8888:8888" # tegola
-      - "8080:80"   # proxy
+      - "8080:8080" # web -- nginx

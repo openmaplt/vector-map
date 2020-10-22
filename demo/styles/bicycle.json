@@ -5,11 +5,11 @@
   "sources": {
     "tilezen": {
       "type": "vector",
-      "url": "https://openmap.lt/capabilities/all.json"
+      "url": "/capabilities/all.json"
     },
     "bicycle": {
       "type": "vector",
-      "url": "https://openmap.lt/capabilities/bicycle.json"
+      "url": "/capabilities/bicycle.json"
     },
     "dem": {
       "type": "raster-dem",

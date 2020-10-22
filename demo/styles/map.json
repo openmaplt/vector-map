@@ -11,11 +11,11 @@
   "sources": {
     "tilezen": {
       "type": "vector",
-      "url": "https://openmap.lt/capabilities/all.json"
+      "url": "/capabilities/all.json"
     },
     "detail": {
       "type": "vector",
-      "url": "https://openmap.lt/capabilities/detail.json"
+      "url": "/capabilities/detail.json"
     }
   },
   "sprite": "https://openmap.lt/sprites/openmaplt",
