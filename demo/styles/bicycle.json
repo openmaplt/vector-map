@@ -13,7 +13,7 @@
     },
     "dem": {
       "type": "raster-dem",
-      "url": "https://openmap.lt/styles/hillshade.json"
+      "url": "/styles/hillshade.json"
     }
   },
   "sprite": "https://openmap.lt/sprites/openmapcycle",

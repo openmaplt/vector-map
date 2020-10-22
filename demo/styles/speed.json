@@ -17,7 +17,7 @@
     },
     "dem": {
       "type": "raster-dem",
-      "url": "https://openmap.lt/styles/hillshade.json"
+      "url": "/styles/hillshade.json"
     },
     "speed": {
       "type": "vector",

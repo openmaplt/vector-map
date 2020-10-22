@@ -16,7 +16,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/graphhopper-js-api-client/dist/graphhopper-client.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://openmap.lt/style.css">
+  <link rel="stylesheet" href="/style.css">
   <link rel="stylesheet" href="switch.css">
   <script src="switch.js"></script>
   <style>
@@ -112,9 +112,9 @@ function reset() {
 * Create <img> tag for sprite with a given name
 ***************************************************/
 function imgSprite(name) {
-  return '<img src="https://openmap.lt/img_trans.gif" style="width: ' + sprite[name].width +
+  return '<img src="/img_trans.gif" style="width: ' + sprite[name].width +
     'px; height: ' + sprite[name].height +
-    'px; background: url(https://openmap.lt/sprites/river.png) -' + sprite[name].x + 'px -' + sprite[name].y + 'px;">';
+    'px; background: url(/sprites/river.png) -' + sprite[name].x + 'px -' + sprite[name].y + 'px;">';
 }
 /***************************************************
 * Set/update start/end point position and calculate
@@ -317,7 +317,7 @@ xmlhttp.onreadystatechange = function() {
     sprite = JSON.parse(this.responseText);
   }
 };
-xmlhttp.open("GET", "https://openmap.lt/sprites/river.json", true);
+xmlhttp.open("GET", "/sprites/river.json", true);
 xmlhttp.send();
 
 function switchTo(e, s) {
