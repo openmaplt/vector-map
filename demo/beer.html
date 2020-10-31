@@ -12,9 +12,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <title>Craft alaus žemėlapis</title>
     <meta name="description" content="Vietos, kur Lietuvoje galima paragauti arba įsigyti Craft alaus: parduotuvėlės, aludės, restoranai ir pan."</meta>
     <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
-    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/3rdparty/mapbox-gl-v1.12.0.css" integrity="UZ+LVvoKDw3Z1M+G8PTJnK15pz8bkHYawBRgjnu8G6HOF6m1Sswa8NmgIRHBwl6W" />
+    <link rel="stylesheet" href="/3rdparty/bootstrap-3.4.1.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" />
+    <link rel="stylesheet" href="/3rdparty/font-awesome-4.7.0.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" />
     <style>
         body { margin:0; padding:0; overflow: hidden; }
         #map { position:absolute; top:0; bottom:0; width:100%; }
@@ -113,9 +113,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div><input type="checkbox" id="label-shop"   onChange="changeType('shop')"><label style="border-radius: 0 0 7px 7px;" for="label-shop">Išsinešti</label></div>
 </div>
 <div id="menu-control" class="menu-control" onClick="showHide()">Slėpti meniu</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
-<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-supported/v1.3.0/mapbox-gl-supported.js'></script>
+<script src="/3rdparty/jquery-3.4.1.min.js" integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh"></script>
+<script src="/3rdparty/mapbox-gl-v1.12.0.js" integrity="sha384-DhY0JzHtRSi6hVlkcl8pnYDFxtpFPLFknTwdYcCP0K3mDvN9AOIAcEdhU/1OFCPl"></script>
+<script src="/3rdparty/mapbox-gl-supported-v1.4.1.js" integrity="sha384-hkaiLI3qWm+IvWhTurXB7aIuqFl8moxjeF3lc17EPw0Q0fgxrLDWZPHrYxipE8+D"></script>
 <script>
   var defaultType = 'beer_dark';
   var defaultZoom = 13;
