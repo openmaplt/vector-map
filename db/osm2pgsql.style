@@ -177,4 +177,4 @@ way        waterway:speed text       linear
 way        maxspeed     text         linear
 way        maxspeed:forward text     linear
 way        maxspeed:backward text    linear
-way        description  text         linear
+node,way   description  text         linear
