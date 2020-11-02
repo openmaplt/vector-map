@@ -81,6 +81,7 @@ node,way   addr:housename      text  linear
 node,way   addr:housenumber    text  linear
 node,way   addr:postcode       text  linear
 node,way   addr:contact        text  linear
+node,way   addr:unit           text  linear
 node,way   admin_level  text         linear
 node,way   aerialway    text         linear
 node,way   aeroway      text         polygon
@@ -176,3 +177,4 @@ way        waterway:speed text       linear
 way        maxspeed     text         linear
 way        maxspeed:forward text     linear
 way        maxspeed:backward text    linear
+way        description  text         linear
