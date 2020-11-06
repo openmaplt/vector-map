@@ -1,0 +1,15 @@
+#!/bin/bash
+set -euo pipefail
+
+# Jei nėra nei vienos Špunkos, kažkas blogai su duomenų importu.
+curl -XGET localhost:9200/osm/_search --silent --fail \
+    --header 'Content-Type: application/json' --data '
+{
+  "query": {
+    "match": {
+      "name": "Špunka"
+    }
+  }
+}' | jq -e '.hits.total.value > 0'
+
+# TODO: daugiau testų. Čia yra nebloga vieta prasitestuoti ES užklausas.

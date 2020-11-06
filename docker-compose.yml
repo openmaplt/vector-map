@@ -20,6 +20,14 @@ services:
       - ".:/src:ro"
       - "/var/lib/postgresql"
 
+  es:
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.9.3-amd64
+    network_mode: service:net
+    environment:
+      discovery.type: single-node
+    volumes:
+      - "/usr/share/elasticsearch/data"
+
   web:
     image: nginx:stable
     network_mode: service:net
@@ -36,5 +44,6 @@ services:
     entrypoint: ["tail", "-f", "/dev/null"]
     ports:
       - "5432:5432" # postgresql
-      - "8888:8888" # tegola
       - "8080:8080" # web -- nginx
+      - "8888:8888" # maputnik
+      - "9200:9200" # elastic

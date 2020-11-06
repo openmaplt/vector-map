@@ -11,7 +11,7 @@ export PGPASSWORD=osm
 
 if ! command -v osm2pgsql > /dev/null; then
     apt-get update
-    apt-get install -y osm2pgsql
+    apt-get install -y osm2pgsql jq curl
 fi
 
 # aktyvuojame postgis_sfcgal; jei neaktyvuojamas, neranda funkcijų
@@ -22,6 +22,9 @@ osm2pgsql \
     -S /src/db/osm2pgsql.style \
     -d osm -U osm \
     /src/data.pbf
+
+/src/db/db2es
+/src/db/db2es-test
 EOF
 
 # dbfunc yra masyvas (array) iš visų db/func/*.sql failų

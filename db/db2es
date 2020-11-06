@@ -1,0 +1,57 @@
+#!/bin/bash
+set -euo pipefail
+here=$(dirname "$0")
+
+for cmd in curl jq psql split; do
+    if ! command -v "$cmd" >/dev/null; then
+        echo "ERROR: missing $cmd in \$PATH"
+        exit 1
+    fi
+done
+
+# laikina direktorija išvesčiai į ES
+tmpdir=$(mktemp -d)
+# Pabaidoje ištrinsim direktoriją su laikinais failais.
+# Jei reikia debuginti, užkomentuok eilutę.
+trap 'echo Deleting $tmpdir; rm -fr $tmpdir' EXIT
+
+echo -n "Deleting index osm if exists: "
+curl -XDELETE "localhost:9200/osm" --silent
+echo
+
+echo -n "Creating index osm: "
+curl -XPUT "localhost:9200/osm" --silent --fail \
+    --header 'Content-Type: application/json' \
+    --data-binary "@$here/es-schema.json"
+echo
+
+# Imame įrašus iš duombazės ir formuojame JSON ES bulk įvesčiai:
+# - vienas įrašas DB - viena eilutė JSON.
+# - kiekvienas įrašas gauna naują {"index": {"_id": <id>}} eilutę. Žr. [1].
+# - po jos seka tas pats įrašas be "id" lauko.
+# tada įrašus skeliame į atskirus failus. kadangi dvi eilutės yra vienas
+# įrašas, `--lines` visada turi būti lyginis.
+#
+# [1]: https://elastic.co/guide/en/elasticsearch/reference/7.9/docs-bulk.html
+PGPASSWORD=osm psql -h127.0.0.1 -U osm osm --tuples-only --no-align \
+    -f "$here/db2es.sql" | \
+  jq --compact-output '{index:{_id:.id|tostring}} , (.|del(.id))' | \
+  split --verbose --lines=200000 - "$tmpdir/es-"
+
+# siunčiame ES po vieną failą
+for f in "$tmpdir"/es-*; do
+  echo -n "Posting $f with $(($(wc -l <"$f")/2)) records: "
+  output=$(curl "localhost:9200/osm/_bulk?filter_path=took,errors,items.*.error" \
+      --silent --fail \
+      --header "Content-Type: application/x-ndjson" \
+      --data-binary "@$f")
+    if [[ $(jq .errors <<<"$output") == true ]]; then
+        echo "failed: $output"
+        exit 1
+    else
+        echo "ok, took $(jq .took <<<"$output")ms"
+    fi
+done
+
+# fsync: iš karto galima siųsti klausimus ES ir tikėtis teisingų atsakymų.
+curl -XPOST "localhost:9200/osm/_flush" --silent --fail -o/dev/null

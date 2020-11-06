@@ -1,0 +1,15 @@
+{
+  "mappings": {
+    "properties": {
+      "city":          { "type": "keyword" },
+      "street":        { "type": "keyword" },
+      "housenumber":   { "type": "keyword" },
+      "unit":          { "type": "keyword" },
+      "name":          { "type": "text" },
+      "alt_name":      { "type": "text" },
+      "official_name": { "type": "text" },
+      "description":   { "type": "text"},
+      "location":      { "type": "geo_point"}
+    }
+  }
+}
