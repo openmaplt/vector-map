@@ -1,6 +1,6 @@
 WITH t1 AS (
     SELECT
-        osm_id AS id,
+        't' || osm_id AS id,
         "addr:city" AS city,
         "addr:street" AS street,
         "addr:housenumber" AS housenumber,
@@ -23,7 +23,7 @@ WITH t1 AS (
         OR "addr:city" IS NOT NULL
     UNION
     SELECT
-        osm_id AS id,
+        'd' || osm_id AS id,
         "addr:city" AS city,
         "addr:street" AS street,
         "addr:housenumber" AS housenumber,

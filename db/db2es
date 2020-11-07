@@ -33,7 +33,7 @@ echo
 # įrašas, `--lines` visada turi būti lyginis.
 #
 # [1]: https://elastic.co/guide/en/elasticsearch/reference/7.9/docs-bulk.html
-PGPASSWORD=osm psql -h127.0.0.1 -U osm osm --tuples-only --no-align \
+PGPASSWORD=osm psql -h127.0.0.1 --no-psqlrc --tuples-only --no-align -U osm osm \
     -f "$here/db2es.sql" | \
   jq --compact-output '{index:{_id:.id|tostring}} , (.|del(.id))' | \
   split --verbose --lines=200000 - "$tmpdir/es-"
