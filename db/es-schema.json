@@ -4,6 +4,7 @@
       "city":          { "type": "keyword" },
       "street":        { "type": "keyword" },
       "housenumber":   { "type": "keyword" },
+      "postcode":      { "type": "keyword" },
       "unit":          { "type": "keyword" },
       "name":          { "type": "text" },
       "alt_name":      { "type": "text" },

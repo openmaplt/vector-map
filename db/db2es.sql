@@ -1,11 +1,10 @@
-SELECT
-    json_strip_nulls (row_to_json(t))
-FROM (
+WITH t1 AS (
     SELECT
         osm_id AS id,
         "addr:city" AS city,
         "addr:street" AS street,
         "addr:housenumber" AS housenumber,
+        "addr:postcode" AS postcode,
         "addr:unit" AS unit,
         name AS name,
         alt_name AS alt_name,
@@ -17,7 +16,7 @@ FROM (
     WHERE
         historic IS NOT NULL
         OR tourism IN ('hotel', 'motel', 'hostel', 'guest_house', 'camp_site', 'caravan_site')
-        OR amenity IN ('restaurant', 'cafe', 'bar')
+        OR amenity IN ('restaurant', 'cafe', 'bar', 'pub')
         OR tourism IN ('museum', 'attraction', 'viewpoint')
         OR waterway IN ('river', 'stream', 'canal')
         OR admin_level IS NOT NULL
@@ -28,6 +27,7 @@ FROM (
         "addr:city" AS city,
         "addr:street" AS street,
         "addr:housenumber" AS housenumber,
+        "addr:postcode" AS postcode,
         "addr:unit" AS unit,
         name AS name,
         alt_name AS alt_name,
@@ -39,8 +39,26 @@ FROM (
     WHERE
         historic IS NOT NULL
         OR tourism IN ('hotel', 'motel', 'hostel', 'guest_house', 'camp_site', 'caravan_site')
-        OR amenity IN ('restaurant', 'cafe', 'bar')
+        OR amenity IN ('restaurant', 'cafe', 'bar', 'pub')
         OR tourism IN ('museum', 'attraction', 'viewpoint')
         OR waterway IN ('river', 'stream', 'canal')
         OR admin_level IS NOT NULL
-        OR "addr:city" IS NOT NULL) AS t
+        OR "addr:city" IS NOT NULL
+)
+SELECT
+    json_strip_nulls (row_to_json(t2))
+FROM (
+    SELECT
+        id,
+        city,
+        street,
+        housenumber,
+        postcode,
+        unit,
+        name,
+        alt_name,
+        official_name,
+        description,
+        ARRAY[ST_Y (location), ST_X (location)] AS location
+    FROM
+        t1) AS t2
