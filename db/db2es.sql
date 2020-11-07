@@ -1,6 +1,4 @@
-SELECT
-    json_strip_nulls (row_to_json(t))
-FROM (
+WITH t1 AS (
     SELECT
         osm_id AS id,
         "addr:city" AS city,
@@ -45,4 +43,22 @@ FROM (
         OR tourism IN ('museum', 'attraction', 'viewpoint')
         OR waterway IN ('river', 'stream', 'canal')
         OR admin_level IS NOT NULL
-        OR "addr:city" IS NOT NULL) AS t
+        OR "addr:city" IS NOT NULL
+)
+SELECT
+    json_strip_nulls (row_to_json(t2))
+FROM (
+    SELECT
+        id,
+        city,
+        street,
+        housenumber,
+        postcode,
+        unit,
+        name,
+        alt_name,
+        official_name,
+        description,
+        ARRAY[ST_Y (location), ST_X (location)] AS location
+    FROM
+        t1) AS t2
