@@ -6,6 +6,7 @@ FROM (
         "addr:city" AS city,
         "addr:street" AS street,
         "addr:housenumber" AS housenumber,
+        "addr:postcode" AS postcode,
         "addr:unit" AS unit,
         name AS name,
         alt_name AS alt_name,
@@ -17,7 +18,7 @@ FROM (
     WHERE
         historic IS NOT NULL
         OR tourism IN ('hotel', 'motel', 'hostel', 'guest_house', 'camp_site', 'caravan_site')
-        OR amenity IN ('restaurant', 'cafe', 'bar')
+        OR amenity IN ('restaurant', 'cafe', 'bar', 'pub')
         OR tourism IN ('museum', 'attraction', 'viewpoint')
         OR waterway IN ('river', 'stream', 'canal')
         OR admin_level IS NOT NULL
@@ -28,6 +29,7 @@ FROM (
         "addr:city" AS city,
         "addr:street" AS street,
         "addr:housenumber" AS housenumber,
+        "addr:postcode" AS postcode,
         "addr:unit" AS unit,
         name AS name,
         alt_name AS alt_name,
@@ -39,7 +41,7 @@ FROM (
     WHERE
         historic IS NOT NULL
         OR tourism IN ('hotel', 'motel', 'hostel', 'guest_house', 'camp_site', 'caravan_site')
-        OR amenity IN ('restaurant', 'cafe', 'bar')
+        OR amenity IN ('restaurant', 'cafe', 'bar', 'pub')
         OR tourism IN ('museum', 'attraction', 'viewpoint')
         OR waterway IN ('river', 'stream', 'canal')
         OR admin_level IS NOT NULL
