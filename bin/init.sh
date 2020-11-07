@@ -23,8 +23,8 @@ osm2pgsql \
     -d osm -U osm \
     /src/data.pbf
 
-/src/db/db2es
-/src/db/db2es-test
+/src/es/db2es
+/src/es/db2es-test
 EOF
 
 # dbfunc yra masyvas (array) iš visų db/func/*.sql failų
