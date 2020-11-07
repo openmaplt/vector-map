@@ -1,6 +1,7 @@
 {
   "mappings": {
     "properties": {
+      "osm_id":        { "type": "keyword" },
       "city":          { "type": "keyword" },
       "street":        { "type": "keyword" },
       "housenumber":   { "type": "keyword" },

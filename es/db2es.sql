@@ -1,6 +1,7 @@
 WITH t1 AS (
     SELECT
         't' || osm_id AS id,
+        osm_id AS osm_id,
         "addr:city" AS city,
         "addr:street" AS street,
         "addr:housenumber" AS housenumber,
@@ -24,6 +25,7 @@ WITH t1 AS (
     UNION
     SELECT
         'd' || osm_id AS id,
+        osm_id AS osm_id,
         "addr:city" AS city,
         "addr:street" AS street,
         "addr:housenumber" AS housenumber,
@@ -50,6 +52,7 @@ SELECT
 FROM (
     SELECT
         id,
+        osm_id,
         city,
         street,
         housenumber,
