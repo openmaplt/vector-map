@@ -13,15 +13,15 @@
     },
     "osm": {
       "type": "vector",
-      "url": "/capabilities/all.json"
+      "url": "https://openmap.lt/capabilities/all.json"
     },
     "topo": {
       "type": "vector",
-      "url": "/capabilities/topo.json"
+      "url": "https://openmap.lt/capabilities/topo.json"
     },
     "speed": {
       "type": "vector",
-      "url": "/capabilities/speed.json"
+      "url": "https://openmap.lt/capabilities/speed.json"
     }
   },
   "sprite": "https://openmap.lt/sprites/topo",

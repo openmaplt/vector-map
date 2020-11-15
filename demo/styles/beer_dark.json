@@ -7,11 +7,11 @@
   "sources": {
     "tilezen": {
       "type": "vector",
-      "url": "/capabilities/all.json"
+      "url": "https://openmap.lt/capabilities/all.json"
     },
     "beer": {
       "type": "vector",
-      "url": "/capabilities/craftbeer.json"
+      "url": "https://openmap.lt/capabilities/craftbeer.json"
     }
   },
   "sprite": "https://openmap.lt/sprites/craftbeer",

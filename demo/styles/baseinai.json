@@ -5,11 +5,11 @@
   "sources": {
     "basins": {
       "type": "vector",
-      "url": "/capabilities/basins.json"
+      "url": "https://openmap.lt/capabilities/basins.json"
     },
     "all": {
       "type": "vector",
-      "url": "/capabilities/all.json"
+      "url": "https://openmap.lt/capabilities/all.json"
     },
     "hillshade": {
       "type": "raster-dem",
