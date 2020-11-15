@@ -110,13 +110,7 @@ if (!mapboxgl.supported()) {
     maxBounds: pMaxBounds || [20.700, 53.700, 27.050, 56.650],
     bearing: mapData.bearing,
     pitch: mapData.pitch,
-    attributionControl: false,
-    transformRequest: function(url) {
-        if (url.startsWith('/')) {
-            return {url: window.location.origin + url}
-        }
-        return
-    }
+    attributionControl: false
   })
     .addControl(new mapboxgl.NavigationControl(), 'top-left')
     .addControl(new mapboxgl.GeolocateControl({

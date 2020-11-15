@@ -15,7 +15,7 @@
     },
     "osm": {
       "type": "vector",
-      "url": "/capabilities/all.json"
+      "url": "https://openmap.lt/capabilities/all.json"
     }
   },
   "sprite": "https://openmap.lt/sprites/openmaplt",

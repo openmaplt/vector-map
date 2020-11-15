@@ -11,11 +11,11 @@
     },
     "osm": {
       "type": "vector",
-      "url": "/capabilities/all.json"
+      "url": "https://openmap.lt/capabilities/all.json"
     },
     "bicycle": {
       "type": "vector",
-      "url": "/capabilities/bicycle.json"
+      "url": "https://openmap.lt/capabilities/bicycle.json"
     }
   },
   "sprite": "https://openmap.lt/sprites/openmaplt",
