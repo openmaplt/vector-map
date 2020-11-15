@@ -19,7 +19,7 @@
     }
   },
   "sprite": "https://openmap.lt/sprites/openmaplt",
-  "glyphs": "/glyphs/{fontstack}/{range}.pbf",
+  "glyphs": "https://openmap.lt/glyphs/{fontstack}/{range}.pbf",
   "layers": [
     {
       "id": "background",

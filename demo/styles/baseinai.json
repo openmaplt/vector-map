@@ -13,10 +13,10 @@
     },
     "hillshade": {
       "type": "raster-dem",
-      "url": "/styles/hillshade.json"
+      "url": "https://openmap.lt/styles/hillshade.json"
     }
   },
-  "glyphs": "/glyphs/{fontstack}/{range}.pbf",
+  "glyphs": "https://openmap.lt/glyphs/{fontstack}/{range}.pbf",
   "layers": [
     {
       "id": "background",
