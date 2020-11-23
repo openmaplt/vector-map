@@ -1,16 +1,65 @@
 {
   "mappings": {
     "properties": {
-      "city":          { "type": "keyword" },
-      "street":        { "type": "keyword" },
-      "housenumber":   { "type": "keyword" },
-      "postcode":      { "type": "keyword" },
-      "unit":          { "type": "keyword" },
-      "name":          { "type": "text" },
-      "alt_name":      { "type": "text" },
-      "official_name": { "type": "text" },
-      "description":   { "type": "text"},
-      "location":      { "type": "geo_point"}
+      "city": {
+        "type": "keyword"
+      },
+      "street": {
+        "type": "keyword"
+      },
+      "housenumber": {
+        "type": "keyword"
+      },
+      "postcode": {
+        "type": "keyword"
+      },
+      "unit": {
+        "type": "keyword"
+      },
+      "name": {
+        "type": "text",
+        "analyzer": "autocomplete"
+      },
+      "alt_name": {
+        "type": "text"
+      },
+      "official_name": {
+        "type": "text"
+      },
+      "description": {
+        "type": "text"
+      },
+      "location": {
+        "type": "geo_point"
+      }
+    }
+  },
+  "settings": {
+    "number_of_shards": 1,
+    "analysis": {
+      "filter": {
+        "lithuanian_stemmer": {
+          "type": "stemmer",
+          "language": "lithuanian"
+        },
+        "autocomplete_filter": {
+          "type": "edge_ngram",
+          "min_gram": 1,
+          "max_gram": 20
+        }
+      },
+      "analyzer": {
+        "autocomplete": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": [
+            "lowercase",
+            "asciifolding",
+            "lithuanian_stemmer",
+            "autocomplete_filter"
+          ]
+        }
+      }
     }
   }
 }
