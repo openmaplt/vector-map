@@ -1,8 +1,31 @@
 #!/usr/bin/env bash
-set -xeuo pipefail
+set -euo pipefail
 
-if [ ! -e data.pbf ]; then
-	wget -O data.pbf http://download.geofabrik.de/europe/lithuania-latest.osm.pbf
+usage() {
+    >&2 "Usage: $(basename "$0") [CLIP]"
+    >&2 echo
+    >&2 echo "Downloads data and initializes the databases"
+    >&2 echo "[CLIP] is either 'small' or 'medium'; it will clip dataset for testing"
+}
+
+if [ ! -e lithuania-latest.osm.pbf ]; then
+	wget http://download.geofabrik.de/europe/lithuania-latest.osm.pbf
+fi
+
+case ${1:-} in
+    small) clip=24.7,56.15,24.8,54.25;; # Biržai
+    medium) clip=25.05,54.55,25.5,54.8;; # Vilnius
+    "") clip="";;
+    *) usage; exit 1;;
+esac
+
+set -x
+
+rm -f data.pbf
+if [[ $clip != "" ]]; then
+    osmium extract -b "$clip" lithuania-latest.osm.pbf -o data.pbf
+else
+    ln -s lithuania-latest.osm.pbf data.pbf
 fi
 
 # load data
