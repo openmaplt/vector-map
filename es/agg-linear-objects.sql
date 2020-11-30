@@ -13,7 +13,7 @@ begin
   if p_type = 'rivers' then
     insert into agg_tmp_objects
       select p.osm_id, coalesce(p."name:lt", p.name), p.alt_name, p.way from planet_osm_line p
-        where waterway in ('river', 'stream') and p.name is not null;
+        where waterway in ('river', 'stream', 'canal') and p.name is not null;
   elsif p_type = 'streets' then
     insert into agg_tmp_objects
       select p.osm_id, coalesce(p."name:lt", p.name), p.alt_name, p.way from planet_osm_line p
