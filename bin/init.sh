@@ -22,9 +22,6 @@ osm2pgsql \
     -S /src/db/osm2pgsql.style \
     -d osm -U osm \
     /src/data.pbf
-
-/src/es/db2es
-/src/es/db2es-test
 EOF
 
 # dbfunc yra masyvas (array) iš visų db/func/*.sql failų
@@ -38,6 +35,7 @@ dbfuncfiles=("${dbfunc[@]/#/-f /src/}")
 docker-compose exec db psql osm -U osm \
     -f /src/db/index.sql \
     ${dbfuncfiles[@]} \
+    -f /src/es/agg-linear-objects.sql \
     -f /src/db/tables/table_poi.sql \
     -f /src/db/tables/table_gen_ways.sql \
     -f /src/db/gen_way.sql \
@@ -46,5 +44,10 @@ docker-compose exec db psql osm -U osm \
     -f /src/db/gen_forest.sql \
     -f /src/db/gen_protected.sql \
     -f /src/data/coastline/coastline.sql
+
+docker-compose exec db bash -xeuo pipefail <<-EOF
+/src/es/db2es
+/src/es/db2es-test
+EOF
 
 docker-compose exec -T db /src/db/upiu_baseinai/go.sh
