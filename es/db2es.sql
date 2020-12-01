@@ -54,7 +54,7 @@ WITH t1 AS (
         null AS alt_name,
         null AS official_name,
         null AS description,
-        ST_Transform(ST_Centroid(ao.way), 4326) AS location
+        ST_Transform(ST_ClosestPoint(ao.way, ST_Centroid(ao.way)), 4326) AS location
     FROM
         agg_objects ao
 )
