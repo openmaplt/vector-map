@@ -45,9 +45,8 @@ docker-compose exec db psql osm -U osm \
     -f /src/db/gen_protected.sql \
     -f /src/data/coastline/coastline.sql
 
-docker-compose exec db bash -xeuo pipefail <<-EOF
+docker-compose exec -T db bash -xeuo pipefail <<-EOF
 /src/es/db2es
 /src/es/db2es-test
+/src/db/upiu_baseinai/go.sh
 EOF
-
-docker-compose exec -T db /src/db/upiu_baseinai/go.sh
