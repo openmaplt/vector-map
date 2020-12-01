@@ -121,54 +121,51 @@ var typeIcons = {
 
 var formatResult = function () {
     return function (feature) {
-        var formatted = '';
-        if (feature.properties.osm_key == 'waterway') {
-            formatted = 'Upė ';
-        }
+      var formatted = '';
+      /*if (feature.osm_key == 'waterway') {
+          formatted = 'Upė ';
+      }*/
 
-        if (feature.properties.name) {
-            formatted += feature.properties.name;
-        }
+      if (feature.name) {
+          formatted += feature.name;
+      }
 
-        if (feature.properties.street) {
+      if (feature.street) {
+          if (formatted.length) {
+              formatted += ', ';
+          }
+          formatted += feature.street;
+      }
+
+      if (feature.housenumber) {
+          if (formatted.length) {
+              formatted += ' ';
+          }
+          formatted += feature.housenumber;
+      }
+
+      if (feature.city) {
+          if (formatted.length) {
+              formatted += ', ';
+          }
+          formatted += feature.city;
+      }
+
+      if (feature.postcode) {
+          // if (feature.osm_key != 'highway') {
             if (formatted.length) {
-                formatted += ', ';
+              formatted += ' ';
             }
-            formatted += feature.properties.street;
-        }
+            formatted += 'LT-' + feature.postcode;
+          // }
+      }
 
-        if (feature.properties.housenumber) {
-            if (formatted.length) {
-                formatted += ' ';
-            }
-            formatted += feature.properties.housenumber;
-        }
-
-        if (feature.properties.city) {
-            if (formatted.length) {
-                formatted += ', ';
-            }
-            formatted += feature.properties.city;
-        }
-
-        if (feature.properties.postcode) {
-            if (feature.properties.osm_key != 'highway') {
-              if (formatted.length) {
-                formatted += ' ';
-              }
-              formatted += 'LT-' + feature.properties.postcode;
-            }
-        }
-
-        return formatted;
+      return formatted;
     };
 };
 
-var searchEngine = new PhotonAddressEngine({
-    url: 'https://openmap.lt',
-    limit: 10,
-    lang: 'lt',
-    formatResult: formatResult()
+var searchEngine = new OpenMapSearchEngine({
+    formatResult: formatResult(),
 });
 
 var sprite;
@@ -197,13 +194,12 @@ $('#searchInput').typeahead({
     highlight: true,
 }, {
     limit: 10,
-    display: 'description',
+    display: '_description',
     source: searchEngine.ttAdapter(),
     templates: {
-        suggestion: function (context) {
-         console.log(context);
-         return '<div>' + imgSprite(context.properties.osm_key, context.properties.osm_value) + context.description + '</div>';
-        }
+      suggestion: function (context) {
+        return '<div>' + imgSprite(context.properties.osm_key, context.properties.osm_value) + context._description + '</div>';
+      }
     }
 });
 
