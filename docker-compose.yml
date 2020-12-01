@@ -10,7 +10,7 @@ services:
       - ".:/src" # for tegola binary and config.toml
 
   db:
-    image: postgis/postgis:13-3.0
+    image: postgis/postgis:11-2.5
     network_mode: service:net
     environment:
       POSTGRES_DBNAME: osm
