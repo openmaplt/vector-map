@@ -1,4 +1,12 @@
-WITH t1 AS (
+WITH aggregates AS (
+    SELECT 'r' as prefix, osm_id -- rivers
+    FROM agg_rivers
+    UNION
+    SELECT 's' as prefix, osm_id -- streets
+    FROM agg_streets
+),
+
+t1 AS (
     SELECT
         't' || osm_id AS id, -- point, "taškas"
         "addr:city" AS city,
@@ -44,7 +52,7 @@ WITH t1 AS (
         OR "addr:city" IS NOT NULL
     UNION
     SELECT
-        's' || s.osm_id AS id, -- street
+        prefix || o.osm_id AS id,
         o."addr:city" AS city,
         o."addr:street" AS street,
         o."addr:housenumber" AS housenumber,
@@ -56,24 +64,8 @@ WITH t1 AS (
         o.description AS description,
         ST_LineInterpolatePoint(ST_Transform(o.way, 4326), 0.5) AS location
     FROM
-        agg_streets s, planet_osm_line o
-    WHERE s.osm_id = o.osm_id
-    UNION
-    SELECT
-        'r' || r.osm_id AS id, -- rivers
-        o."addr:city" AS city,
-        o."addr:street" AS street,
-        o."addr:housenumber" AS housenumber,
-        o."addr:postcode" AS postcode,
-        o."addr:unit" AS unit,
-        COALESCE(o."name:lt", o.name) AS name,
-        o.alt_name AS alt_name,
-        o.official_name AS official_name,
-        o.description AS description,
-        ST_LineInterpolatePoint(ST_Transform(o.way, 4326), 0.5) AS location
-    FROM
-        agg_rivers r, planet_osm_line o
-    WHERE r.osm_id = o.osm_id
+        aggregates a, planet_osm_line o
+    WHERE a.osm_id = o.osm_id
 )
 SELECT
     json_strip_nulls (row_to_json(t2))
