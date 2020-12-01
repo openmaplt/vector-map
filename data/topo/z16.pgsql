@@ -36,7 +36,7 @@ SELECT
       THEN 'worship_other'
     WHEN tourism = 'camp_site'
       THEN 'camp'
-    WHEN tourism = 'hillfort'
+    WHEN tourism in ('hillfort', 'tumulus')
       THEN 'hillfort'
     WHEN tourism = 'manor'
       THEN 'manor'
