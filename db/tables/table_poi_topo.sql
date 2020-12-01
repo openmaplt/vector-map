@@ -22,6 +22,7 @@ create materialized view poi_topo (
         osm_id
         ,'n' -- always node
         ,case when site_type = 'fortification' then replace(replace(replace(name, 'piliakalnis', 'plk.'), 'alkakalnis', 'alk.'), 'piliavietė', 'plv.')
+              when site_type = 'tumulus' then replace(name, 'pilkapiai', 'plkp.')
               when historic = 'manor' then replace(replace(replace(replace(name, 'dvaro sodybos fragmentai', 'dvr. frg.'), 'dvaro sodyba', 'dvr.'), 'dvaras', 'dvr.'), 'dvaro fragmentai', 'dvr. frg.')
               else name
          end as name
@@ -29,6 +30,7 @@ create materialized view poi_topo (
         ,man_made
         ,"tower:type"
         ,case when site_type = 'fortification' then 'hillfort'
+              when site_type = 'tumulus' then 'tumulus'
               when historic = 'manor' then 'manor'
               else tourism
          end as tourism
@@ -50,7 +52,7 @@ create materialized view poi_topo (
       or power = 'substation'
       or (power = 'generator' and "generator:source" in ('hydro', 'wind'))
       or tourism = 'camp_site'
-      or site_type = 'fortification'
+      or site_type in ('fortification', 'tumulus')
       or historic = 'manor'
   union
   select
