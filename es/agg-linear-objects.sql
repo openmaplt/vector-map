@@ -8,19 +8,19 @@ declare
 begin
   create temporary table agg_tmp_objects (osm_id bigint, name text, way geometry);
   create index agg_tmp_objects_id on agg_tmp_objects(osm_id);
-  create index agg_tmp_objects_gix on agg_tmp_objects using gist(way) include(name);
+  create index agg_tmp_objects_gix on agg_tmp_objects using gist(way);
 
-  if p_type = 'rivers' then
+  if p_type = 'r' then
     insert into agg_tmp_objects
       select p.osm_id, p.name, p.way from planet_osm_line p
         where waterway in ('river', 'stream', 'canal') and p.name is not null;
-  elsif p_type = 'streets' then
+  elsif p_type = 's' then
     insert into agg_tmp_objects
       select p.osm_id, p.name, p.way from planet_osm_line p
         where highway in ('motorway', 'trunk', 'primary', 'secondary', 'tertiary',
           'unclassified', 'residential', 'track', 'living_street') and p.name is not null;
   else
-    raise 'p_type can only be "rivers" or "streets"';
+    raise 'p_type can only be "r" or "s"';
   end if;
 
   while (select count(1) from agg_tmp_objects) > 0 loop
@@ -35,14 +35,13 @@ begin
         changed = true;
       end loop;
     end loop; -- while changed
-    return query select c.osm_id, c.name, c.way;
+    insert into agg_objects (object_type, osm_id, name, way) values (p_type, c.osm_id, c.name, c.way);
   end loop; -- count(1) from agg_tmp_objects > 0
   drop table agg_tmp_objects;
-  return;
 end
 $$ language plpgsql;
 
-drop table if exists agg_streets;
-drop table if exists agg_rivers;
-create table agg_streets as (select * from agg_linear_objects('streets'));
-create table agg_rivers as (select * from agg_linear_objects('rivers'));
+drop table if exists agg_objects;
+create table agg_objects (id serial primary key, object_type text, osm_id bigint, name text, way geometry);
+select agg_linear_objects('r');
+select agg_linear_objects('s');
