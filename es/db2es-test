@@ -10,7 +10,7 @@ curl -XGET localhost:9500/osm/_search --silent --fail \
       "name": "Špunka"
     }
   }
-}' | jq -e '.hits.total.value > 0'
+}' | jq -e '.hits.total > 0'
 
 # Turime rasti Atokraščio upelį
 curl -XGET localhost:9500/osm/_search --silent --fail \
@@ -21,4 +21,4 @@ curl -XGET localhost:9500/osm/_search --silent --fail \
       "name": "Atokraščio upelis"
     }
   }
-}' | jq -e '.hits.total.value > 0'
+}' | jq -e '.hits.total > 0'
