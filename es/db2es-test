@@ -12,4 +12,13 @@ curl -XGET localhost:9200/osm/_search --silent --fail \
   }
 }' | jq -e '.hits.total.value > 0'
 
-# TODO: daugiau testų. Čia yra nebloga vieta prasitestuoti ES užklausas.
+# Turime rasti Atokraščio upelį
+curl -XGET localhost:9200/osm/_search --silent --fail \
+    --header 'Content-Type: application/json' --data '
+{
+  "query": {
+    "match": {
+      "name": "Atokraščio upelis"
+    }
+  }
+}' | jq -e '.hits.total.value > 0'
