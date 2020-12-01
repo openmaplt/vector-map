@@ -1,9 +1,7 @@
 WITH aggregates AS (
-    SELECT 'r' as prefix, osm_id -- rivers
-    FROM agg_rivers
+    SELECT 'r' as prefix, osm_id FROM agg_rivers -- rivers
     UNION
-    SELECT 's' as prefix, osm_id -- streets
-    FROM agg_streets
+    SELECT 's' as prefix, osm_id FROM agg_streets -- streets
 ),
 
 t1 AS (
