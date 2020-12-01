@@ -198,7 +198,8 @@ $('#searchInput').typeahead({
     source: searchEngine.ttAdapter(),
     templates: {
       suggestion: function (context) {
-        return '<div>' + imgSprite(context.properties.osm_key, context.properties.osm_value) + context._description + '</div>';
+        // return '<div>' + imgSprite(context.properties.osm_key, context.properties.osm_value) + context._description + '</div>';
+        return '<div>' + imgSprite('', '') + context._description + '</div>';
       }
     }
 });
