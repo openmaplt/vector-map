@@ -16,11 +16,11 @@ tmpdir=$(mktemp -d)
 trap 'echo Deleting $tmpdir; rm -fr $tmpdir' EXIT
 
 echo -n "Deleting index osm if exists: "
-curl -XDELETE "localhost:9200/osm" --silent
+curl -XDELETE "localhost:9500/osm" --silent
 echo
 
 echo -n "Creating index osm: "
-curl -XPUT "localhost:9200/osm" --silent --fail \
+curl -XPUT "localhost:9500/osm" --silent --fail \
     --header 'Content-Type: application/json' \
     --data-binary "@$here/es-schema.json"
 echo
@@ -41,7 +41,7 @@ PGPASSWORD=osm psql -h127.0.0.1 --no-psqlrc --tuples-only --no-align -U osm osm 
 # siunčiame ES po vieną failą
 for f in "$tmpdir"/es-*; do
   echo -n "Posting $f with $(($(wc -l <"$f")/2)) records: "
-  output=$(curl "localhost:9200/osm/_bulk?filter_path=took,errors,items.*.error" \
+  output=$(curl "localhost:9500/osm/_bulk?filter_path=took,errors,items.*.error" \
       --silent --fail \
       --header "Content-Type: application/x-ndjson" \
       --data-binary "@$f")
@@ -54,4 +54,4 @@ for f in "$tmpdir"/es-*; do
 done
 
 # fsync: iš karto galima siųsti klausimus ES ir tikėtis teisingų atsakymų.
-curl -XPOST "localhost:9200/osm/_flush" --silent --fail -o/dev/null
+curl -XPOST "localhost:9500/osm/_flush" --silent --fail -o/dev/null
