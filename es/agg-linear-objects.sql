@@ -1,22 +1,22 @@
 /* Aggregates streets or rivers by name and proximity. */
 drop function if exists agg_linear_objects;
-create or replace function agg_linear_objects(p_type text) returns table(osm_id bigint, name text, alt_name text, way geometry) as $$
+create or replace function agg_linear_objects(p_type text) returns table(osm_id bigint, name text, way geometry) as $$
 declare
   c record;
   cc record;
   changed boolean;
 begin
-  create temporary table agg_tmp_objects (osm_id bigint, name text, alt_name text, way geometry);
+  create temporary table agg_tmp_objects (osm_id bigint, name text, way geometry);
   create index agg_tmp_objects_id on agg_tmp_objects(osm_id);
   create index agg_tmp_objects_gix on agg_tmp_objects using gist(way) include(name);
 
   if p_type = 'rivers' then
     insert into agg_tmp_objects
-      select p.osm_id, coalesce(p."name:lt", p.name), p.alt_name, p.way from planet_osm_line p
+      select p.osm_id, p.name, p.way from planet_osm_line p
         where waterway in ('river', 'stream', 'canal') and p.name is not null;
   elsif p_type = 'streets' then
     insert into agg_tmp_objects
-      select p.osm_id, coalesce(p."name:lt", p.name), p.alt_name, p.way from planet_osm_line p
+      select p.osm_id, p.name, p.way from planet_osm_line p
         where highway in ('motorway', 'trunk', 'primary', 'secondary', 'tertiary',
           'unclassified', 'residential', 'track', 'living_street') and p.name is not null;
   else
@@ -35,7 +35,7 @@ begin
         changed = true;
       end loop;
     end loop; -- while changed
-    return query select c.osm_id, c.name, c.alt_name, c.way;
+    return query select c.osm_id, c.name, c.way;
   end loop; -- count(1) from agg_tmp_objects > 0
   drop table agg_tmp_objects;
   return;
