@@ -21,7 +21,7 @@ services:
       - "/var/lib/postgresql"
 
   es:
-    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.9.3-amd64
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.8.9
     network_mode: service:net
     environment:
       discovery.type: single-node
