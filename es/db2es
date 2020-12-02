@@ -15,6 +15,20 @@ tmpdir=$(mktemp -d)
 # Jei reikia debuginti, užkomentuok eilutę.
 trap 'echo Deleting $tmpdir; rm -fr $tmpdir' EXIT
 
+# Imame įrašus iš duombazės ir formuojame JSON ES bulk įvesčiai:
+# - vienas įrašas DB - viena eilutė JSON.
+# - kiekvienas įrašas gauna naują {"index": {"_id": <id>}} eilutę. Žr. [1].
+# - po jos seka tas pats įrašas be "id" lauko.
+# tada įrašus skeliame į atskirus failus. kadangi dvi eilutės yra vienas
+# įrašas, `--lines` visada turi būti lyginis.
+#
+# [1]: https://elastic.co/guide/en/elasticsearch/reference/7.9/docs-bulk.html
+echo Traukiami duomenys iš OpenStreetMap duombazės
+PGPASSWORD=osm psql -h127.0.0.1 --no-psqlrc --tuples-only --no-align -U osm osm \
+    -f "$here/db2es.sql" | \
+  jq --compact-output '{index:{_id:.id|tostring}} , (.|del(.id))' | \
+  split --verbose --lines=200000 - "$tmpdir/es-"
+
 echo -n "Deleting index osm if exists: "
 curl -XDELETE "localhost:9500/osm" --silent
 echo
@@ -24,19 +38,6 @@ curl -XPUT "localhost:9500/osm?include_type_name=false" --silent --fail \
     --header 'Content-Type: application/json' \
     --data-binary "@$here/es-schema.json"
 echo
-
-# Imame įrašus iš duombazės ir formuojame JSON ES bulk įvesčiai:
-# - vienas įrašas DB - viena eilutė JSON.
-# - kiekvienas įrašas gauna naują {"index": {"_id": <id>}} eilutę. Žr. [1].
-# - po jos seka tas pats įrašas be "id" lauko.
-# tada įrašus skeliame į atskirus failus. kadangi dvi eilutės yra vienas
-# įrašas, `--lines` visada turi būti lyginis.
-#
-# [1]: https://elastic.co/guide/en/elasticsearch/reference/7.9/docs-bulk.html
-PGPASSWORD=osm psql -h127.0.0.1 --no-psqlrc --tuples-only --no-align -U osm osm \
-    -f "$here/db2es.sql" | \
-  jq --compact-output '{index:{_id:.id|tostring}} , (.|del(.id))' | \
-  split --verbose --lines=200000 - "$tmpdir/es-"
 
 # siunčiame ES po vieną failą
 for f in "$tmpdir"/es-*; do
