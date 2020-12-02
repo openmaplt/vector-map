@@ -10,7 +10,7 @@ services:
       - ".:/src" # for tegola binary and config.toml
 
   db:
-    image: postgis/postgis:13-3.0
+    image: postgis/postgis:11-2.5
     network_mode: service:net
     environment:
       POSTGRES_DBNAME: osm
@@ -21,10 +21,11 @@ services:
       - "/var/lib/postgresql"
 
   es:
-    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.9.3-amd64
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.8.9
     network_mode: service:net
     environment:
       discovery.type: single-node
+      http.port: 9500
     volumes:
       - "/usr/share/elasticsearch/data"
 
@@ -46,4 +47,4 @@ services:
       - "5432:5432" # postgresql
       - "8080:8080" # web -- nginx
       - "8888:8888" # maputnik
-      - "9200:9200" # elastic
+      - "9500:9500" # elastic

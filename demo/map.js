@@ -146,21 +146,21 @@ if (typeof searchEngine !== 'undefined') {
       searchMarker = new mapboxgl.Marker();
     }
     searchMarker
-        .setLngLat([selectedPlace.geometry.coordinates[0], selectedPlace.geometry.coordinates[1]])
+        .setLngLat([selectedPlace.location[1], selectedPlace.location[0]])
         .addTo(map);
 
-    if (selectedPlace.properties.extent) {
+    /*if (selectedPlace.properties.extent) {
       const extent = selectedPlace.properties.extent;
       map.fitBounds([[extent[0], extent[3]], [extent[2], extent[1]]], {
           speed: 2
       });
-    } else {
+    } else {*/
       map.flyTo({
         zoom: 16,
         speed: 2,
         center: searchMarker.getLngLat()
       });
-    }
+    // }
   });
 }
 

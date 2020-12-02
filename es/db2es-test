@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Jei nėra nei vienos Špunkos, kažkas blogai su duomenų importu.
-curl -XGET localhost:9200/osm/_search --silent --fail \
+curl -XGET localhost:9500/osm/_search --silent --fail \
     --header 'Content-Type: application/json' --data '
 {
   "query": {
@@ -10,10 +10,10 @@ curl -XGET localhost:9200/osm/_search --silent --fail \
       "name": "Špunka"
     }
   }
-}' | jq -e '.hits.total.value > 0'
+}' | jq -e '.hits.total > 0'
 
 # Turime rasti Atokraščio upelį
-curl -XGET localhost:9200/osm/_search --silent --fail \
+curl -XGET localhost:9500/osm/_search --silent --fail \
     --header 'Content-Type: application/json' --data '
 {
   "query": {
@@ -21,4 +21,4 @@ curl -XGET localhost:9200/osm/_search --silent --fail \
       "name": "Atokraščio upelis"
     }
   }
-}' | jq -e '.hits.total.value > 0'
+}' | jq -e '.hits.total > 0'
