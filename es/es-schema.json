@@ -1,6 +1,9 @@
 {
   "mappings": {
     "properties": {
+      "obj_type": {
+        "type": "keyword"
+      },
       "city": {
         "type": "keyword"
       },

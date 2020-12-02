@@ -1,4 +1,55 @@
 var typeIcons = {
+  HIL: 'hillfort',
+  TUM: 'tumulus', // pilkapiai
+  MAN: 'marker', // dvaras
+  MNS: 'marker', // vienuolynas
+  MON: 'memorial', // memorialas
+  HIS: 'marker', // kiti istoriniai
+  HER: 'marker', // paveldas
+  //TOW: '', // bokštas
+  //ATT: '', // lankytina vieta
+  //VIE: '', // vaizdinga vieta
+  //MUS: '', // muziejus
+  //PIF: '', // poilsiavietė
+  //CAM: '', // stovyklavietė
+  //GUE: '', // nakvynė
+  //FUE: '', // degalinė
+  //CAF: '', // kavinė
+  //FAS: '', // greitas maistas
+  RES: 'restaurant', // restoranas
+  PUB: 'bar', // aludė
+  //HOT: '', // viešbutis
+  //THE: '', // teatras
+  //CIN: '', // kinoteatras
+  //DEN: '', // odontologas
+  //DOC: '', // daktaras
+  //PHA: '', // vaistinė
+  //SUP: '', // parduotuvė
+  //CON: '', // parduotuvė
+  //CAR: '', // servisas
+  //KIO: '', // kioskas
+  //DIY: '', // pasidaryk pats
+  //CHU: '', // bažnyčia (katalikų)
+  //LUT: '', // bažnyčia (liuteronų)
+  //ORT: '', // cerkvė
+  //ORA: '', // kitų tikėjimų maldos namai
+  //GOV: '', // valstybės įstaiga
+  //COU: '', // teismas
+  //NOT: '', // notaras
+  //INS: '', // draudimas
+  //COM: '', // įmonė
+  //OSH: '', // kita parduotuvė
+  //POS: '', // paštas
+  //WAS: '', // mašinų plovykla
+  //BAN: '', // bankas
+  //ATM: '', // bankomatas
+  //STO: '', // akmuo
+  //TRE: '', // medis
+  //SPR: '', // šaltinis
+  OSH: 'shop',
+  default: 'marker'
+}
+/*var typeIcons = {
    amenity: {
      arts_centre: 'arg-gallery',
      atm: 'marker',
@@ -35,11 +86,9 @@ var typeIcons = {
      townhall: 'town-hall',
      college: 'college',
      university: 'college',
-     default: 'marker'
    },
    man_made: {
      tower: 'marker',
-     default: 'marker'
    },
    tourism: {
      attraction: 'attraction',
@@ -57,24 +106,19 @@ var typeIcons = {
      viewpoint: 'viewpoint',
      zoo: 'zoo',
      theme_park: 'theme_park',
-     default: 'marker'
    },
    historic: {
-     archaeological_site: 'hillfort',
      memorial: 'memorial',
      manor: 'marker',
      monastery: 'marker',
-     default: 'marker'
    },
    railway: {
      station: 'rail',
-     default: 'marker'
    },
    aeroway: {
      terminal: 'airport',
      helipad: 'heliport',
      aerodrome: 'airfield',
-     default: 'marker'
    },
    shop: {
      alcohol: 'alcohol-shop',
@@ -90,17 +134,14 @@ var typeIcons = {
      florist: 'florist',
      music: 'music',
      butcher: 'slaughterhouse',
-     default: 'shop'
    },
    office: {
      government: 'town-hall',
      notary: 'suitcase',
      lawyer: 'suitcase',
-     default: 'suitcase'
    },
    natural: {
      peak: 'mountain',
-     default: 'triangle-stroked'
    },
    highway: {
      default: 'square-stroked'
@@ -117,14 +158,11 @@ var typeIcons = {
      default: 'marker'
    },
    default: 'marker'
-};
+};*/
 
 var formatResult = function () {
     return function (feature) {
       var formatted = '';
-      /*if (feature.osm_key == 'waterway') {
-          formatted = 'Upė ';
-      }*/
 
       if (feature.name) {
           formatted += feature.name;
@@ -178,10 +216,10 @@ xmlhttp.onreadystatechange = function() {
 xmlhttp.open("GET", "search/sprites/openmaplt.json", true);
 xmlhttp.send();
 
-function imgSprite(name, value) {
+function imgSprite(type) {
     var icon = typeIcons.default;
-    if (typeIcons[name]) {
-      icon = typeIcons[name][value] || typeIcons[name].default;
+    if (typeIcons[type]) {
+      icon = typeIcons[type];
     }
     return '<img src="img_trans.gif" style="width: ' + sprite[icon].width +
            'px; height: ' + sprite[icon].height +
@@ -198,8 +236,7 @@ $('#searchInput').typeahead({
     source: searchEngine.ttAdapter(),
     templates: {
       suggestion: function (context) {
-        // return '<div>' + imgSprite(context.properties.osm_key, context.properties.osm_value) + context._description + '</div>';
-        return '<div>' + imgSprite('', '') + context._description + '</div>';
+        return '<div>' + imgSprite(context.obj_type) + context._description + '</div>';
       }
     }
 });
