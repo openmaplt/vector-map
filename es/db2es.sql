@@ -54,16 +54,21 @@ WITH t1 AS (
              when "natural" = 'stone' then 'STO'
              when "natural" = 'tree' then 'TRE'
              when "natural" = 'spring' then 'SPR'
-             else 'DEF' end AS obj_type,
+             when "addr:city" is not null then 'ADD'
+             else 'DF1' end AS obj_type,
         "addr:city" AS city,
         "addr:street" AS street,
-        "addr:housenumber" AS housenumber,
+        lpad("addr:housenumber", 3, '0') AS housenumber,
         "addr:postcode" AS postcode,
         "addr:unit" AS unit,
         COALESCE("name:lt", name) AS name,
         alt_name AS alt_name,
         official_name AS official_name,
         description AS description,
+        coalesce(name, '') || ' ' ||
+        coalesce("addr:city", '') || ' ' ||
+        coalesce("addr:street") || ' ' ||
+        coalesce(lpad("addr:housenumber", 3, '0'), '') AS full_text,
         ST_Transform (way, 4326) AS location
     FROM
         planet_osm_point
@@ -130,16 +135,21 @@ WITH t1 AS (
              when "natural" = 'stone' then 'STO'
              when "natural" = 'tree' then 'TRE'
              when "natural" = 'spring' then 'SPR'
-             else 'DEF' end AS obj_type,
+             when "addr:city" is not null then 'ADD'
+             else 'DF2' end AS obj_type,
         "addr:city" AS city,
         "addr:street" AS street,
-        "addr:housenumber" AS housenumber,
+        lpad("addr:housenumber", 3, '0') AS housenumber,
         "addr:postcode" AS postcode,
         "addr:unit" AS unit,
         COALESCE("name:lt", name) AS name,
         alt_name AS alt_name,
         official_name AS official_name,
         description AS description,
+        coalesce(name, '') || ' ' ||
+        coalesce("addr:city", '') || ' ' ||
+        coalesce("addr:street", '') || ' ' ||
+        coalesce(lpad("addr:housenumber", 3, '0'), '') AS full_text,
         ST_Transform (ST_PointOnSurface (way), 4326) AS location
     FROM
         planet_osm_polygon
@@ -157,7 +167,7 @@ WITH t1 AS (
         end AS id,
         case when object_type = 'r' then 'RIV'
              when object_type = 's' then 'STR'
-             else 'DEF'
+             else 'DF3'
         end AS obj_type,
         null AS city,
         null AS street,
@@ -168,6 +178,7 @@ WITH t1 AS (
         null AS alt_name,
         null AS official_name,
         null AS description,
+        ao.name AS full_text,
         ST_Transform(ST_ClosestPoint(ao.way, ST_Centroid(ao.way)), 4326) AS location
     FROM
         agg_objects ao
@@ -187,6 +198,7 @@ FROM (
         alt_name,
         official_name,
         description,
+        full_text,
         ARRAY[ST_Y (location), ST_X (location)] AS location
     FROM
         t1) AS t2

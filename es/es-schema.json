@@ -5,10 +5,14 @@
         "type": "keyword"
       },
       "city": {
-        "type": "keyword"
+        "type": "text",
+        "analyzer": "customAnalyser",
+        "search_analyzer": "customSearchAnalyser"
       },
       "street": {
-        "type": "keyword"
+        "type": "text",
+        "analyzer": "customAnalyser",
+        "search_analyzer": "customSearchAnalyser"
       },
       "housenumber": {
         "type": "keyword"
@@ -17,20 +21,34 @@
         "type": "keyword"
       },
       "unit": {
-        "type": "keyword"
+        "type": "text",
+        "analyzer": "customAnalyser",
+        "search_analyzer": "customSearchAnalyser"
       },
       "name": {
         "type": "text",
-        "analyzer": "autocomplete"
+        "analyzer": "customAnalyser",
+        "search_analyzer": "customSearchAnalyser"
       },
       "alt_name": {
-        "type": "text"
+        "type": "text",
+        "analyzer": "customAnalyser",
+        "search_analyzer": "customSearchAnalyser"
       },
       "official_name": {
-        "type": "text"
+        "type": "text",
+        "analyzer": "customAnalyser",
+        "search_analyzer": "customSearchAnalyser"
       },
       "description": {
-        "type": "text"
+        "type": "text",
+        "analyzer": "customAnalyser",
+        "search_analyzer": "customSearchAnalyser"
+      },
+      "full_text": {
+        "type": "text",
+        "analyzer": "customAnalyser",
+        "search_analyzer": "customSearchAnalyser"
       },
       "location": {
         "type": "geo_point"
@@ -39,6 +57,9 @@
   },
   "settings": {
     "number_of_shards": 1,
+    "index": {
+      "max_ngram_diff": 8
+    },
     "analysis": {
       "filter": {
         "lithuanian_stemmer": {
@@ -47,8 +68,17 @@
         },
         "autocomplete_filter": {
           "type": "edge_ngram",
-          "min_gram": 1,
+          "min_gram": 2,
           "max_gram": 20
+        },
+        "no_stop": {
+          "type": "stop",
+          "stopwords": "_none_"
+        },
+        "ngram_filter": {
+          "type": "ngram",
+          "min_gram": "3",
+          "max_gram": "10"
         }
       },
       "analyzer": {
@@ -61,6 +91,17 @@
             "lithuanian_stemmer",
             "autocomplete_filter"
           ]
+        },
+        "customSearchAnalyser": {
+         "type": "custom",
+         "stopwords": "_none_",
+         "filter": ["lowercase", "asciifolding", "no_stop"],
+         "tokenizer": "whitespace"
+        },
+        "customAnalyser": {
+          "type": "custom",
+          "filter": ["lowercase", "asciifolding", "no_stop", "ngram_filter"],
+          "tokenizer": "whitespace"
         }
       }
     }
