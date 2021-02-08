@@ -11,6 +11,7 @@ SELECT cid
         WHEN '' THEN 'milestone'
         WHEN 'put_in;egress;bridge' THEN 'inout_bridge'
         WHEN 'bridge;egress' THEN 'bridge_inout'
+        WHEN 'bridge;put_in' THEN 'bridge_inout'
         WHEN 'bridge;put_in;egress' THEN 'bridge_inout'
         WHEN 'put_in;egress' THEN 'inout'
         ELSE array_to_string(array_agg(whitewater order by distance desc),';')
