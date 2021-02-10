@@ -9,6 +9,7 @@ SELECT cid
       ,min(distance) distance
       ,CASE array_to_string(array_agg(whitewater order by distance desc),';')
         WHEN '' THEN 'milestone'
+        WHEN 'egress;bridge' THEN 'inout_bridge'
         WHEN 'put_in;egress;bridge' THEN 'inout_bridge'
         WHEN 'bridge;egress' THEN 'bridge_inout'
         WHEN 'bridge;put_in' THEN 'bridge_inout'

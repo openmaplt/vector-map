@@ -265,6 +265,13 @@
     "x": 208,
     "y": 256
   },
+  "hazard": {
+    "height": 44,
+    "pixelRatio": 2,
+    "width": 44,
+    "x": 208,
+    "y": 256
+  },
   "windmill": {
     "height": 40,
     "pixelRatio": 2,
