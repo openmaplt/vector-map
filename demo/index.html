@@ -29,11 +29,31 @@
     <link rel="stylesheet" href="style.css">
     <script src='switch.js'></script>
     <link href='switch.css' rel='stylesheet' />
+    <style>
+      em { background: #ffff66; text-style: normal; }
+      .highlight { font-size: x-small; color: gray; background: lightgray; }
+      #i_search_results {
+        position: absolute;
+        top: 50px;
+        left: 50px;
+        background: #ffffffc0;
+        padding: 5px;
+        border-radius: 5px;
+        display: none;
+        cursor: pointer;
+      }
+      #i_search {
+        position: absolute;
+        top: 8px;
+        left: 50px;
+      }
+      .search_result:hover { background: #66ff66c0; }
+    </style>
 </head>
 <body>
 <div id="map" role="main"></div>
 <div id='sw_container'></div>
-<div class="container-fluid">
+<div class="container-fluid" style="display: none">
     <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 search-container">
             <div class="form-group">
@@ -42,13 +62,18 @@
         </div>
     </div>
 </div>
+<div id="i_search">
+<input id="i_search_text" type="text" onkeyup="searchKey()">
+</div>
+<div id="i_search_results"></div>
+
 <script src="/vendor/jquery-3.4.1.min.js" integrity="sha384-vk5WoKIaW/vJyUAd9n/wmopsmNhiy+L2Z+SBxGYnUkunIxVxAv/UtMOhba/xskxh"></script>
 <script src="/vendor/mapbox-gl-v1.12.0.js" integrity="sha384-DhY0JzHtRSi6hVlkcl8pnYDFxtpFPLFknTwdYcCP0K3mDvN9AOIAcEdhU/1OFCPl"></script>
 <script src="/vendor/mapbox-gl-supported-v1.4.1.js" integrity="sha384-hkaiLI3qWm+IvWhTurXB7aIuqFl8moxjeF3lc17EPw0Q0fgxrLDWZPHrYxipE8+D"></script>
 <script src='search/typeahead.bundle.js'></script>
 <script src='search/typeahead-openmap.js'></script>
 <script src='search/search.js'></script>
-<script src="map.js"></script>
+<script src="map_test.js"></script>
 <script type="text/javascript">
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js');

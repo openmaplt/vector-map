@@ -590,3 +590,153 @@ function getOSMLink(feature) {
   return link;
 }
 
+var nowSending = false; // is currently query sent to the server and we're awaiting for result?
+var searchChanges; // has the query text changed after the last query was sent to the server?
+var sentText = ''; // the last query text sent to the server
+function lpad000(n) {
+  var words = n.split(' ');
+  words.forEach((w, idx) => {
+    if (/^\d$/.test(w)) {
+      words[idx] = '00' + w;
+    } else if (/^\d\d$/.test(w)) {
+      words[idx] = '0' + w;
+    }
+  });
+  return words.join(' ');
+}
+function unlpad000(n) {
+  var words = n.split(' ');
+  words.forEach((w, idx) => {
+    if (/^00\d$/.test(w)) {
+      words[idx] = w.substring(2);
+    } else if (/^0\d\d$/.test(w)) {
+      words[idx] = w.substring(1);
+    }
+  });
+  return words.join(' ');
+}
+var searchResults = [];
+function searchKey() {
+  if (!nowSending && i_search_text.value != sentText) {
+    // Number are lpadded with zeros so that it would be possible to find housenumber 1
+    // as separate, not in 10, 17 or 571. The same is done on server side.
+    const searchText = lpad000(i_search_text.value);
+    console.log('Sending query! ' + searchText);
+    sentText = i_search_text.value;
+    const data = {
+        "explain": true,
+        "query": {
+          "bool": {
+            "should": [
+              {
+                "multi_match": {
+                    "query": `${searchText}`,
+                    "fields": ["full_text", "city", "housenumber^25", "street^15"],
+                    "type": "cross_fields",
+                    "boost": 20
+                }
+              },
+              {
+                "multi_match": {
+                    "query": `${searchText}`,
+                    "fuzziness": "AUTO"
+                }
+              }
+            ]
+          }
+        },
+        "highlight": {
+          "fields": {
+            "full_text": {},
+            "housenumber": {},
+            "street": {},
+            "city": {}
+          }
+        },
+        "sort": [
+          "_score",
+          {
+            "_geo_distance": {
+              "location": {
+                "lat": map.getCenter().lat,
+                "lon": map.getCenter().lng
+              },
+              "order": "asc",
+              "unit": "km",
+              "distance_type": "plane"
+            }
+          }
+        ]
+    }
+    searchChanges = false;
+    nowSending = true;
+    /*fetch('https://openmap.lt/api/search', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })*/
+    fetch('https://openmap.lt/api/search?source=' + encodeURI(JSON.stringify(data)) + '&source_content_type=' + encodeURI('application/json'))
+      .then(response => response.json())
+      .then(data => {
+        i_search_results.innerHTML = '';
+        searchResults = data.hits.hits;
+        searchResults.forEach((el, idx) => {
+          console.log(el);
+          var searchResult = document.createElement('div');
+          searchResult.classList.add('search_result');
+          searchResult.setAttribute('idx', idx);
+          searchResult.onclick = actionSearchClick;
+          const i = el._source;
+          var desc = i.obj_type;
+          if (i.hasOwnProperty('name')) { desc += ' ' + i.name; }
+          if (i.hasOwnProperty('city')) { desc += ' ' + i.city; }
+          if (i.hasOwnProperty('street')) { desc += ' ' + i.street; }
+          if (i.hasOwnProperty('housenumber')) { desc += ' ' + unlpad000(i.housenumber); }
+          desc += ' (score: ' + el._score + ')';
+          if (el.hasOwnProperty('highlight')) {
+            if (el.highlight.hasOwnProperty('full_text')) {
+              searchResult.innerHTML = unlpad000(el.highlight.full_text[0]);
+              i_search_results.appendChild(searchResult);
+            } else {
+              searchResult.innerHTML = desc;
+              i_search_results.appendChild(searchResult);
+            }
+            if (el.highlight.hasOwnProperty('street')) {
+              var highlight = document.createElement('div');
+              highlight.classList.add('highlight');
+              highlight.innerHTML = el.highlight.street[0];
+              i_search_results.appendChild(highlight);
+            }
+            if (el.highlight.hasOwnProperty('housenumber')) {
+              var highlight = document.createElement('div');
+              highlight.classList.add('highlight');
+              highlight.innerHTML = el.highlight.housenumber[0];
+              i_search_results.appendChild(highlight);
+            }
+            if (el.highlight.hasOwnProperty('city')) {
+              var highlight = document.createElement('div');
+              highlight.classList.add('highlight');
+              highlight.innerHTML = el.highlight.city[0];
+              i_search_results.appendChild(highlight);
+            }
+          } else {
+            searchResult.innerHTML = desc;
+            i_search_results.appendChild(searchResult);
+          }
+        });
+        nowSending = false;
+        if (searchChanges) {
+          searchKey();
+        }
+        i_search_results.style.display = 'block';
+      });
+  } else {
+    if (i_search_text.value != sentText) {
+      console.log('Busy. Waiting...');
+      searchChanges = true;
+    }
+  }
+}
+
+function actionSearchClick(e) {
+  var idx = Number(e.srcElement.getAttribute('idx'));
+  i_search_results.style.display = 'none';
+  var coords = searchResults[idx]._source.location;
+  map.flyTo({ center: [coords[1], coords[0]], zoom: 16 });
+} // actionSearchClick
