@@ -24,6 +24,8 @@ SELECT
         THEN 'scrub'
       WHEN aeroway is not null
         THEN aeroway
+      WHEN "area:aeroway" is not null
+        THEN "area:aeroway"
     END
   ) AS kind
 FROM
@@ -34,6 +36,7 @@ WHERE
     landuse in ('residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages', 'orchard', 'farmyard', 'retail', 'railway', 'quarry')
     OR "natural" in ('wetland', 'sand', 'beach', 'scrub', 'heath')
     OR aeroway in ('runway')
+    OR "area:aeroway" = 'runway'
   ) AND
   way_area >= 3200
 
