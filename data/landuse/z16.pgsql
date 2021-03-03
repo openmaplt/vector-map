@@ -26,6 +26,8 @@ SELECT
         THEN leisure
       WHEN aeroway is not null
         THEN aeroway
+      WHEN "area:aeroway" is not null
+        THEN "area:aeroway"
       WHEN amenity = 'grave_yard'
         THEN 'cemetery'
     END
@@ -39,5 +41,6 @@ WHERE
     OR "natural" in ('wetland', 'sand', 'beach', 'scrub', 'heath')
     OR leisure = 'park'
     OR aeroway in ('apron', 'runway')
+    OR "area:aeroway" = 'runway'
     OR amenity = 'grave_yard'
   )

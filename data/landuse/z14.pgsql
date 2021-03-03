@@ -24,6 +24,8 @@ SELECT
         THEN 'scrub'
       WHEN aeroway is not null
         THEN aeroway
+      WHEN "area:aeroway" is not null
+        THEN "area:aeroway"
       WHEN amenity = 'grave_yard'
         THEN 'cemetery'
     END
@@ -36,6 +38,7 @@ WHERE
     landuse in ('residential', 'commercial', 'industrial', 'meadow', 'farmland', 'allotments', 'cemetery', 'garages', 'orchard', 'farmyard', 'retail', 'railway', 'quarry')
     OR "natural" in ('wetland', 'sand', 'beach', 'scrub', 'heath')
     OR aeroway in ('apron', 'runway')
+    OR "area:aeroway" = 'runway'
     OR amenity = 'grave_yard'
   ) AND
   way_area >= 800
