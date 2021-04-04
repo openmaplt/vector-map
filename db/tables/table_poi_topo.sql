@@ -3,6 +3,7 @@ create materialized view poi_topo (
   id
  ,__type__
  ,name
+ ,short_name
  ,amenity
  ,man_made
  ,"tower:type"
@@ -26,6 +27,11 @@ create materialized view poi_topo (
               when historic = 'manor' then replace(replace(replace(replace(name, 'dvaro sodybos fragmentai', 'dvr. frg.'), 'dvaro sodyba', 'dvr.'), 'dvaras', 'dvr.'), 'dvaro fragmentai', 'dvr. frg.')
               else name
          end as name
+        ,case when site_type = 'fortification' then replace(replace(replace(short_name, 'piliakalnis', 'plk.'), 'alkakalnis', 'alk.'), 'piliavietė', 'plv.')
+              when site_type = 'tumulus' then replace(short_name, 'pilkapiai', 'plkp.')
+              when historic = 'manor' then replace(replace(replace(replace(short_name, 'dvaro sodybos fragmentai', 'dvr. frg.'), 'dvaro sodyba', 'dvr.'), 'dvaras', 'dvr.'), 'dvaro fragmentai', 'dvr. frg.')
+              else short_name
+         end as short_name
         ,amenity
         ,man_made
         ,"tower:type"
@@ -61,6 +67,9 @@ create materialized view poi_topo (
         ,case when historic = 'manor' then replace(replace(replace(replace(name, 'dvaro sodybos fragmentai', 'dvr. frg.'), 'dvaro sodyba', 'dvr.'), 'dvaras', 'dvr.'), 'dvaro fragmentai', 'dvr. frg.')
               else name
          end as name
+        ,case when historic = 'manor' then replace(replace(replace(replace(short_name, 'dvaro sodybos fragmentai', 'dvr. frg.'), 'dvaro sodyba', 'dvr.'), 'dvaras', 'dvr.'), 'dvaro fragmentai', 'dvr. frg.')
+              else short_name
+         end as short_name
         ,amenity
         ,man_made
         ,"tower:type"

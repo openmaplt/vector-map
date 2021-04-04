@@ -3,7 +3,7 @@ SELECT
   ST_AsBinary(way) AS geom,
   id,
   __type__,
-  name,
+  coalesce(short_name, name) AS name,
   (
     CASE
     WHEN aeroway in ('aerodrome', 'airstrip')

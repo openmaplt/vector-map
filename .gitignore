@@ -7,3 +7,4 @@
 /share
 pip-selfcheck.json
 *.pbf
+config.toml
