@@ -1,6 +1,6 @@
 drop table if exists car_centerline;
 create table car_centerline (
-id bigint,
+id serial,
 osm_id bigint,
 name text,
 zoom integer,

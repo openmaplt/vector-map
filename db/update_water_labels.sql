@@ -2,6 +2,8 @@ delete from car_requests where osm_id not in (select osm_id
                                                from planet_osm_polygon
                                               where name is not null
                                                 and ("natural" in ('water', 'bay') or landuse = 'reservoir'));
+delete from car_centerline where osm_id not in (select osm_id from car_requests);
+delete from car_labels where osm_id not in (select osm_id from car_requests);
 insert into car_requests (id, osm_id, type, dirty, last_update)
   select nextval('car_request_seq')
         ,osm_id

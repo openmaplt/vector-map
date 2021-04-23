@@ -121,14 +121,14 @@ begin
                   while tl > 4 loop
                     raise notice 'splitting at % (length %)', 2.0 / tl, st_length(g);
                     g = st_split(g, st_buffer(st_LineInterpolatePoint(g, 2.0 / tl), 10));
-                    insert into car_centerline (id, osm_id, name, zoom, size, spacing, way) values (1, c.osm_id, c.name, z, s, prop, st_geometryn(g, 1));
+                    insert into car_centerline (osm_id, name, zoom, size, spacing, way) values (c.osm_id, c.name, z, s, prop, st_geometryn(g, 1));
                     -- note: 2nd geometry is a buffer zone between two parts
                     g = st_geometryn(g, 3);
                     tl = tl - 2;
                   end loop;
-                  insert into car_centerline (id, osm_id, name, zoom, size, spacing, way) values (1, c.osm_id, c.name, z, s, prop, g);
+                  insert into car_centerline (osm_id, name, zoom, size, spacing, way) values (c.osm_id, c.name, z, s, prop, g);
                 else
-                  insert into car_centerline (id, osm_id, name, zoom, size, spacing, way) values (1, c.osm_id, c.name, z, s, prop, g);
+                  insert into car_centerline (osm_id, name, zoom, size, spacing, way) values (c.osm_id, c.name, z, s, prop, g);
                 end if;
               else
                 g = null;
