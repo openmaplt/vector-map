@@ -42,6 +42,8 @@ SELECT
       THEN 'manor'
     WHEN man_made is not null
       THEN man_made
+    WHEN "natural" = 'spring'
+      THEN 'spring'
     END
   ) AS kind
 FROM

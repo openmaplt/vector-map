@@ -17,6 +17,7 @@ create materialized view poi_topo (
  ,landuse
  ,building
  ,voltage
+ ,"natural"
  ,way
 ) as
   select
@@ -49,6 +50,7 @@ create materialized view poi_topo (
         ,landuse
         ,building
         ,voltage
+        ,"natural"
         ,way
     from planet_osm_point
    where aeroway in ('aerodrome', 'airstrip', 'helipad')
@@ -60,6 +62,7 @@ create materialized view poi_topo (
       or tourism = 'camp_site'
       or site_type in ('fortification', 'tumulus')
       or historic = 'manor'
+      or "natural" = 'spring'
   union
   select
         ABS(osm_id)
@@ -85,6 +88,7 @@ create materialized view poi_topo (
         ,landuse
         ,building
         ,voltage
+        ,"natural"
         ,st_centroid(way)
     from planet_osm_polygon
    where aeroway in ('aerodrome', 'airstrip', 'helipad')
