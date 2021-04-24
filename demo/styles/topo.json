@@ -1536,8 +1536,7 @@
           "type": "identity"
         },
         "text-size": {"property": "font_size", "type": "identity"},
-        "text-max-angle": 80,
-        "text-allow-overlap": true
+        "text-max-angle": 80
       },
       "paint": {
         "text-color": "#49a5dd",
@@ -1782,6 +1781,29 @@
       }
     },
     {
+      "id": "label-spring",
+      "type": "symbol",
+      "source": "topo",
+      "source-layer": "topo_sym",
+      "minzoom": 9,
+      "maxzoom": 20,
+      "filter": ["all", ["==", "kind", "spring"]],
+      "layout": {
+        "text-field": "{name}",
+        "text-font": ["Roboto Condensed Italic"],
+        "text-size": 12,
+        "text-max-width": 100,
+        "text-radial-offset": 0.5,
+        "text-variable-anchor": ["left", "top", "bottom", "right"]
+      },
+      "paint": {
+        "text-color": "#49a5dd",
+        "text-halo-color": "rgba(245, 241, 241, 1)",
+        "text-halo-width": 1,
+        "text-halo-blur": 2
+      }
+    },
+    {
       "id": "label-cemetery",
       "type": "symbol",
       "source": "tilezen",
@@ -1855,11 +1877,26 @@
       "source": "topo",
       "source-layer": "topo_sym",
       "minzoom": 12,
+      "filter": ["all", ["!=", "kind", "spring"]],
       "layout": {"icon-image": "{kind}"},
       "paint": {
         "icon-halo-width": 2,
         "icon-halo-color": "rgba(255, 255, 255, 1)",
         "icon-color": "rgba(255, 255, 255, 1)"
+      }
+    },
+    {
+      "id": "topo_sym_spring",
+      "type": "circle",
+      "source": "topo",
+      "source-layer": "topo_sym",
+      "minzoom": 15,
+      "filter": ["all", ["==", "kind", "spring"]],
+      "paint": {
+        "circle-stroke-color": "rgba(73, 165, 221, 1)",
+        "circle-stroke-width": {"stops": [[16, 1.5], [18, 2]]},
+        "circle-color": "rgba(190, 215, 240, 1)",
+        "circle-radius": {"stops": [[16, 3], [18, 6]]}
       }
     }
   ],
