@@ -41,7 +41,7 @@ insert into gen_forest
   select nextval('gen_forest_seq') AS id,
          0,
          600,
-         ST_CollectionExtract(unnest(ST_ClusterWithin(way, 295)), 3)::geometry(MultiPolygon, 3857)
+         ST_CollectionExtract(unnest(ST_ClusterWithin(way, 250)), 3)::geometry(MultiPolygon, 3857)
     from gen_forest
    where res = 150;
 
