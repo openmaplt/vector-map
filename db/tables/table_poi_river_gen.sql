@@ -11,10 +11,12 @@ SELECT cid
         WHEN '' THEN 'milestone'
         WHEN 'egress;bridge' THEN 'inout_bridge'
         WHEN 'put_in;egress;bridge' THEN 'inout_bridge'
+        WHEN 'put_in;bridge' THEN 'inout_bridge'
         WHEN 'bridge;egress' THEN 'bridge_inout'
         WHEN 'bridge;put_in' THEN 'bridge_inout'
         WHEN 'bridge;put_in;egress' THEN 'bridge_inout'
         WHEN 'put_in;egress' THEN 'inout'
+        WHEN 'dam' THEN 'dam2'
         ELSE array_to_string(array_agg(whitewater order by distance desc),';')
        END AS kind
       ,ST_Centroid(ST_Collect(way)) AS geom

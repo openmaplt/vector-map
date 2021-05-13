@@ -52,7 +52,7 @@
     "height": 32,
     "pixelRatio": 2,
     "width": 28,
-    "x": 238,
+    "x": 318,
     "y": 340
   },
   "chapel": {
@@ -122,7 +122,7 @@
     "height": 22,
     "pixelRatio": 2,
     "width": 22,
-    "x": 296,
+    "x": 376,
     "y": 340
   },
   "hydro": {
@@ -164,7 +164,7 @@
     "height": 22,
     "pixelRatio": 2,
     "width": 22,
-    "x": 318,
+    "x": 398,
     "y": 340
   },
   "marsh": {
@@ -185,7 +185,7 @@
     "height": 30,
     "pixelRatio": 2,
     "width": 30,
-    "x": 266,
+    "x": 346,
     "y": 340
   },
   "quarry": {
@@ -193,6 +193,13 @@
     "pixelRatio": 2,
     "width": 40,
     "x": 160,
+    "y": 300
+  },
+  "quary": {
+    "height": 40,
+    "pixelRatio": 2,
+    "width": 40,
+    "x": 200,
     "y": 300
   },
   "rapids": {
@@ -220,14 +227,14 @@
     "height": 40,
     "pixelRatio": 2,
     "width": 208,
-    "x": 200,
+    "x": 240,
     "y": 300
   },
   "substation": {
     "height": 40,
     "pixelRatio": 2,
     "width": 40,
-    "x": 408,
+    "x": 448,
     "y": 300
   },
   "swamp": {
@@ -241,21 +248,21 @@
     "height": 40,
     "pixelRatio": 2,
     "width": 40,
-    "x": 448,
-    "y": 300
+    "x": 0,
+    "y": 340
   },
   "turf": {
     "height": 40,
     "pixelRatio": 2,
     "width": 40,
-    "x": 0,
+    "x": 40,
     "y": 340
   },
   "unesco": {
     "height": 38,
     "pixelRatio": 2,
     "width": 38,
-    "x": 200,
+    "x": 280,
     "y": 340
   },
   "warning": {
@@ -265,39 +272,39 @@
     "x": 208,
     "y": 256
   },
-  "hazard": {
-    "height": 44,
-    "pixelRatio": 2,
-    "width": 44,
-    "x": 208,
-    "y": 256
-  },
-  "windmill": {
-    "height": 40,
-    "pixelRatio": 2,
-    "width": 40,
-    "x": 40,
-    "y": 340
-  },
-  "windpower": {
+  "watermill": {
     "height": 40,
     "pixelRatio": 2,
     "width": 40,
     "x": 80,
     "y": 340
   },
-  "worship_christian": {
+  "windmill": {
     "height": 40,
     "pixelRatio": 2,
     "width": 40,
     "x": 120,
     "y": 340
   },
-  "worship_other": {
+  "windpower": {
     "height": 40,
     "pixelRatio": 2,
     "width": 40,
     "x": 160,
+    "y": 340
+  },
+  "worship_christian": {
+    "height": 40,
+    "pixelRatio": 2,
+    "width": 40,
+    "x": 200,
+    "y": 340
+  },
+  "worship_other": {
+    "height": 40,
+    "pixelRatio": 2,
+    "width": 40,
+    "x": 240,
     "y": 340
   }
 }
