@@ -22,7 +22,7 @@ begin
               from planet_osm_line
              where highway in ('motorway', 'trunk', 'primary', 'secondary', 'tertiary', 'unclassified', 'residential', 'living_street', 'track')
                and st_dwithin(bgc, way, bw * 100)
-            order by st_distance(way, bgc)
+            order by way <-> bgc
             limit 1) loop
     azimuth = st_azimuth(bgc, c.closest);
   end loop;
