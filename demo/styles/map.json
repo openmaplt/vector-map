@@ -107,7 +107,7 @@
       "source-layer": "landuse",
       "minzoom": 6,
       "filter": ["all", ["in", "kind", "farmland"]],
-      "paint": {"fill-color": "rgba(251, 236, 215, 1)", "fill-opacity": 1}
+      "paint": {"fill-color": "rgba(253, 239, 225, 1)", "fill-opacity": 1}
     },
     {
       "id": "landuse-marsh-symbol",
