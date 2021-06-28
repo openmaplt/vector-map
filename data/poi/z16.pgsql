@@ -122,6 +122,8 @@ SELECT
       THEN 'alcohol-shop'
     WHEN shop = 'car_repair'
       THEN 'marker' /* TODO car repair */
+    WHEN shop = 'tyres'
+      THEN 'marker' /* TODO tyres */
     WHEN shop = 'bakery'
       THEN 'bakery'
     WHEN shop = 'bicycle'
@@ -225,6 +227,7 @@ WHERE
              'hairdresser',
              'mall',
              'supermarket',
+             'tyres',
              'department_store',
              'music',
              'butcher') OR
