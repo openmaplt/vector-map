@@ -3,15 +3,15 @@
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 189,
-    "y": 128
+    "x": 234,
+    "y": 64
   },
   "beacon": {
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 209,
-    "y": 128
+    "x": 0,
+    "y": 150
   },
   "bridge": {
     "height": 22,
@@ -20,33 +20,40 @@
     "x": 128,
     "y": 0
   },
+  "bridge_dam": {
+    "height": 22,
+    "pixelRatio": 1,
+    "width": 42,
+    "x": 150,
+    "y": 0
+  },
   "bridge_dam_inout": {
     "height": 22,
     "pixelRatio": 1,
     "width": 62,
-    "x": 150,
+    "x": 192,
     "y": 0
   },
   "bridge_inout": {
     "height": 22,
     "pixelRatio": 1,
     "width": 42,
-    "x": 212,
-    "y": 0
+    "x": 128,
+    "y": 64
   },
   "bridge_warning": {
     "height": 22,
     "pixelRatio": 1,
     "width": 42,
-    "x": 128,
+    "x": 170,
     "y": 64
   },
   "camp": {
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 229,
-    "y": 128
+    "x": 20,
+    "y": 150
   },
   "cemetery": {
     "height": 16,
@@ -59,120 +66,120 @@
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 0,
+    "x": 40,
     "y": 150
   },
   "chimney": {
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 20,
+    "x": 60,
     "y": 150
   },
   "cliff": {
     "height": 9,
     "pixelRatio": 1,
     "width": 12,
-    "x": 105,
+    "x": 149,
     "y": 190
   },
   "communication_tower": {
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 40,
+    "x": 80,
     "y": 150
   },
   "dam": {
     "height": 11,
     "pixelRatio": 1,
     "width": 7,
-    "x": 218,
-    "y": 170
+    "x": 15,
+    "y": 190
   },
   "dam2": {
     "height": 22,
     "pixelRatio": 1,
     "width": 22,
-    "x": 170,
+    "x": 212,
     "y": 64
   },
   "dam_inout": {
     "height": 22,
     "pixelRatio": 1,
     "width": 42,
-    "x": 192,
-    "y": 64
-  },
-  "fuel": {
-    "height": 20,
-    "pixelRatio": 1,
-    "width": 20,
-    "x": 60,
-    "y": 150
-  },
-  "helipad": {
-    "height": 20,
-    "pixelRatio": 1,
-    "width": 20,
-    "x": 80,
-    "y": 150
-  },
-  "hillfort": {
-    "height": 11,
-    "pixelRatio": 1,
-    "width": 11,
-    "x": 225,
-    "y": 170
-  },
-  "hydro": {
-    "height": 21,
-    "pixelRatio": 1,
-    "width": 21,
-    "x": 168,
-    "y": 128
-  },
-  "inout": {
-    "height": 22,
-    "pixelRatio": 1,
-    "width": 22,
-    "x": 234,
-    "y": 64
-  },
-  "inout_bridge": {
-    "height": 22,
-    "pixelRatio": 1,
-    "width": 42,
     "x": 0,
     "y": 128
   },
-  "inout_bridge_hazard": {
-    "height": 22,
-    "pixelRatio": 1,
-    "width": 62,
-    "x": 42,
-    "y": 128
-  },
-  "inout_hazard": {
-    "height": 22,
-    "pixelRatio": 1,
-    "width": 42,
-    "x": 104,
-    "y": 128
-  },
-  "light_tower": {
+  "fuel": {
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
     "x": 100,
     "y": 150
   },
+  "helipad": {
+    "height": 20,
+    "pixelRatio": 1,
+    "width": 20,
+    "x": 120,
+    "y": 150
+  },
+  "hillfort": {
+    "height": 11,
+    "pixelRatio": 1,
+    "width": 11,
+    "x": 22,
+    "y": 190
+  },
+  "hydro": {
+    "height": 21,
+    "pixelRatio": 1,
+    "width": 21,
+    "x": 232,
+    "y": 128
+  },
+  "inout": {
+    "height": 22,
+    "pixelRatio": 1,
+    "width": 22,
+    "x": 42,
+    "y": 128
+  },
+  "inout_bridge": {
+    "height": 22,
+    "pixelRatio": 1,
+    "width": 42,
+    "x": 64,
+    "y": 128
+  },
+  "inout_bridge_hazard": {
+    "height": 22,
+    "pixelRatio": 1,
+    "width": 62,
+    "x": 106,
+    "y": 128
+  },
+  "inout_hazard": {
+    "height": 22,
+    "pixelRatio": 1,
+    "width": 42,
+    "x": 168,
+    "y": 128
+  },
+  "light_tower": {
+    "height": 20,
+    "pixelRatio": 1,
+    "width": 20,
+    "x": 140,
+    "y": 150
+  },
   "manor": {
     "height": 11,
     "pixelRatio": 1,
     "width": 11,
-    "x": 236,
-    "y": 170
+    "x": 33,
+    "y": 190
   },
   "marsh": {
     "height": 64,
@@ -192,28 +199,28 @@
     "height": 15,
     "pixelRatio": 1,
     "width": 15,
-    "x": 203,
-    "y": 170
+    "x": 0,
+    "y": 190
   },
   "quarry": {
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 120,
+    "x": 160,
     "y": 150
   },
   "quary": {
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 140,
+    "x": 180,
     "y": 150
   },
   "rapids": {
     "height": 9,
     "pixelRatio": 1,
     "width": 18,
-    "x": 122,
+    "x": 166,
     "y": 190
   },
   "reedbed": {
@@ -227,7 +234,7 @@
     "height": 10,
     "pixelRatio": 1,
     "width": 104,
-    "x": 0,
+    "x": 44,
     "y": 190
   },
   "stream": {
@@ -241,7 +248,7 @@
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 160,
+    "x": 200,
     "y": 150
   },
   "swamp": {
@@ -255,63 +262,63 @@
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 180,
+    "x": 220,
     "y": 150
   },
   "turf": {
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 200,
-    "y": 150
+    "x": 104,
+    "y": 170
   },
   "unesco": {
     "height": 19,
     "pixelRatio": 1,
     "width": 19,
-    "x": 184,
+    "x": 224,
     "y": 170
   },
   "warning": {
     "height": 22,
     "pixelRatio": 1,
     "width": 22,
-    "x": 146,
+    "x": 210,
     "y": 128
   },
   "watermill": {
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
-    "x": 220,
-    "y": 150
-  },
-  "windmill": {
-    "height": 20,
-    "pixelRatio": 1,
-    "width": 20,
-    "x": 104,
-    "y": 170
-  },
-  "windpower": {
-    "height": 20,
-    "pixelRatio": 1,
-    "width": 20,
     "x": 124,
     "y": 170
   },
-  "worship_christian": {
+  "windmill": {
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
     "x": 144,
     "y": 170
   },
-  "worship_other": {
+  "windpower": {
     "height": 20,
     "pixelRatio": 1,
     "width": 20,
     "x": 164,
+    "y": 170
+  },
+  "worship_christian": {
+    "height": 20,
+    "pixelRatio": 1,
+    "width": 20,
+    "x": 184,
+    "y": 170
+  },
+  "worship_other": {
+    "height": 20,
+    "pixelRatio": 1,
+    "width": 20,
+    "x": 204,
     "y": 170
   }
 }
