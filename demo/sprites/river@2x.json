@@ -3,15 +3,15 @@
     "height": 40,
     "pixelRatio": 2,
     "width": 40,
-    "x": 378,
-    "y": 256
+    "x": 468,
+    "y": 128
   },
   "beacon": {
     "height": 40,
     "pixelRatio": 2,
     "width": 40,
-    "x": 418,
-    "y": 256
+    "x": 0,
+    "y": 300
   },
   "bridge": {
     "height": 44,
@@ -20,33 +20,40 @@
     "x": 256,
     "y": 0
   },
+  "bridge_dam": {
+    "height": 44,
+    "pixelRatio": 2,
+    "width": 84,
+    "x": 300,
+    "y": 0
+  },
   "bridge_dam_inout": {
     "height": 44,
     "pixelRatio": 2,
     "width": 124,
-    "x": 300,
+    "x": 384,
     "y": 0
   },
   "bridge_inout": {
     "height": 44,
     "pixelRatio": 2,
     "width": 84,
-    "x": 424,
-    "y": 0
+    "x": 256,
+    "y": 128
   },
   "bridge_warning": {
     "height": 44,
     "pixelRatio": 2,
     "width": 84,
-    "x": 256,
+    "x": 340,
     "y": 128
   },
   "camp": {
     "height": 40,
     "pixelRatio": 2,
     "width": 40,
-    "x": 458,
-    "y": 256
+    "x": 40,
+    "y": 300
   },
   "cemetery": {
     "height": 32,
@@ -59,120 +66,120 @@
     "height": 40,
     "pixelRatio": 2,
     "width": 40,
-    "x": 0,
+    "x": 80,
     "y": 300
   },
   "chimney": {
     "height": 40,
     "pixelRatio": 2,
     "width": 40,
-    "x": 40,
+    "x": 120,
     "y": 300
   },
   "cliff": {
     "height": 18,
     "pixelRatio": 2,
     "width": 24,
-    "x": 210,
+    "x": 298,
     "y": 380
   },
   "communication_tower": {
     "height": 40,
     "pixelRatio": 2,
     "width": 40,
-    "x": 80,
+    "x": 160,
     "y": 300
   },
   "dam": {
     "height": 22,
     "pixelRatio": 2,
     "width": 14,
-    "x": 436,
-    "y": 340
+    "x": 30,
+    "y": 380
   },
   "dam2": {
     "height": 44,
     "pixelRatio": 2,
     "width": 44,
-    "x": 340,
+    "x": 424,
     "y": 128
   },
   "dam_inout": {
     "height": 44,
     "pixelRatio": 2,
     "width": 84,
-    "x": 384,
-    "y": 128
-  },
-  "fuel": {
-    "height": 40,
-    "pixelRatio": 2,
-    "width": 40,
-    "x": 120,
-    "y": 300
-  },
-  "helipad": {
-    "height": 40,
-    "pixelRatio": 2,
-    "width": 40,
-    "x": 160,
-    "y": 300
-  },
-  "hillfort": {
-    "height": 22,
-    "pixelRatio": 2,
-    "width": 22,
-    "x": 450,
-    "y": 340
-  },
-  "hydro": {
-    "height": 42,
-    "pixelRatio": 2,
-    "width": 42,
-    "x": 336,
-    "y": 256
-  },
-  "inout": {
-    "height": 44,
-    "pixelRatio": 2,
-    "width": 44,
-    "x": 468,
-    "y": 128
-  },
-  "inout_bridge": {
-    "height": 44,
-    "pixelRatio": 2,
-    "width": 84,
     "x": 0,
     "y": 256
   },
-  "inout_bridge_hazard": {
-    "height": 44,
-    "pixelRatio": 2,
-    "width": 124,
-    "x": 84,
-    "y": 256
-  },
-  "inout_hazard": {
-    "height": 44,
-    "pixelRatio": 2,
-    "width": 84,
-    "x": 208,
-    "y": 256
-  },
-  "light_tower": {
+  "fuel": {
     "height": 40,
     "pixelRatio": 2,
     "width": 40,
     "x": 200,
     "y": 300
   },
+  "helipad": {
+    "height": 40,
+    "pixelRatio": 2,
+    "width": 40,
+    "x": 240,
+    "y": 300
+  },
+  "hillfort": {
+    "height": 22,
+    "pixelRatio": 2,
+    "width": 22,
+    "x": 44,
+    "y": 380
+  },
+  "hydro": {
+    "height": 42,
+    "pixelRatio": 2,
+    "width": 42,
+    "x": 464,
+    "y": 256
+  },
+  "inout": {
+    "height": 44,
+    "pixelRatio": 2,
+    "width": 44,
+    "x": 84,
+    "y": 256
+  },
+  "inout_bridge": {
+    "height": 44,
+    "pixelRatio": 2,
+    "width": 84,
+    "x": 128,
+    "y": 256
+  },
+  "inout_bridge_hazard": {
+    "height": 44,
+    "pixelRatio": 2,
+    "width": 124,
+    "x": 212,
+    "y": 256
+  },
+  "inout_hazard": {
+    "height": 44,
+    "pixelRatio": 2,
+    "width": 84,
+    "x": 336,
+    "y": 256
+  },
+  "light_tower": {
+    "height": 40,
+    "pixelRatio": 2,
+    "width": 40,
+    "x": 280,
+    "y": 300
+  },
   "manor": {
     "height": 22,
     "pixelRatio": 2,
     "width": 22,
-    "x": 472,
-    "y": 340
+    "x": 66,
+    "y": 380
   },
   "marsh": {
     "height": 128,
@@ -192,28 +199,28 @@
     "height": 30,
     "pixelRatio": 2,
     "width": 30,
-    "x": 406,
-    "y": 340
+    "x": 0,
+    "y": 380
   },
   "quarry": {
     "height": 40,
     "pixelRatio": 2,
     "width": 40,
-    "x": 240,
+    "x": 320,
     "y": 300
   },
   "quary": {
     "height": 40,
     "pixelRatio": 2,
     "width": 40,
-    "x": 280,
+    "x": 360,
     "y": 300
   },
   "rapids": {
     "height": 18,
     "pixelRatio": 2,
     "width": 36,
-    "x": 244,
+    "x": 332,
     "y": 380
   },
   "reedbed": {
@@ -227,7 +234,7 @@
     "height": 20,
     "pixelRatio": 2,
     "width": 208,
-    "x": 0,
+    "x": 88,
     "y": 380
   },
   "stream": {
@@ -241,7 +248,7 @@
     "height": 40,
     "pixelRatio": 2,
     "width": 40,
-    "x": 320,
+    "x": 400,
     "y": 300
   },
   "swamp": {
@@ -255,63 +262,63 @@
     "height": 40,
     "pixelRatio": 2,
     "width": 40,
-    "x": 360,
+    "x": 440,
     "y": 300
   },
   "turf": {
     "height": 40,
     "pixelRatio": 2,
     "width": 40,
-    "x": 400,
-    "y": 300
+    "x": 208,
+    "y": 340
   },
   "unesco": {
     "height": 38,
     "pixelRatio": 2,
     "width": 38,
-    "x": 368,
+    "x": 448,
     "y": 340
   },
   "warning": {
     "height": 44,
     "pixelRatio": 2,
     "width": 44,
-    "x": 292,
+    "x": 420,
     "y": 256
   },
   "watermill": {
     "height": 40,
     "pixelRatio": 2,
     "width": 40,
-    "x": 440,
-    "y": 300
-  },
-  "windmill": {
-    "height": 40,
-    "pixelRatio": 2,
-    "width": 40,
-    "x": 208,
-    "y": 340
-  },
-  "windpower": {
-    "height": 40,
-    "pixelRatio": 2,
-    "width": 40,
     "x": 248,
     "y": 340
   },
-  "worship_christian": {
+  "windmill": {
     "height": 40,
     "pixelRatio": 2,
     "width": 40,
     "x": 288,
     "y": 340
   },
-  "worship_other": {
+  "windpower": {
     "height": 40,
     "pixelRatio": 2,
     "width": 40,
     "x": 328,
+    "y": 340
+  },
+  "worship_christian": {
+    "height": 40,
+    "pixelRatio": 2,
+    "width": 40,
+    "x": 368,
+    "y": 340
+  },
+  "worship_other": {
+    "height": 40,
+    "pixelRatio": 2,
+    "width": 40,
+    "x": 408,
     "y": 340
   }
 }

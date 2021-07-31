@@ -19,6 +19,7 @@ SELECT cid
         WHEN 'put_in;egress' THEN 'inout'
         WHEN 'dam' THEN 'dam2'
         WHEN 'bridge;dam;put_in' THEN 'bridge_dam_inout'
+        WHEN 'bridge;dam' THEN 'bridge_dam'
         WHEN 'bridge;hazard' THEN 'bridge_warning'
         WHEN 'dam;put_in' THEN 'dam_inout'
         WHEN 'egress;put_in;bridge;hazard' THEN 'inout_bridge_hazard'
