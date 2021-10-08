@@ -3,7 +3,7 @@ port = ":8082"
 
 [cache]
 type = "file"
-basepath = "/home/openmap/cache"
+basepath = "/home/openmap/tegola_cache"
 
 [[providers]]
 name = "osm"
