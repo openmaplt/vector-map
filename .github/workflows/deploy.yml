@@ -1,36 +1,20 @@
 name: Deploy
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
-  # workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+  workflow_dispatch:
 jobs:
-  # This workflow contains a single job called "build"
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
       - name: ssh deploy
-        uses: easingthemes/ssh-deploy@v2.2.11
-        with:
-          # Private Key
+        uses: easingthemes/ssh-deploy@main
+        env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          # Remote host
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          # Remote user
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          # Target directory
           TARGET: ${{ secrets.REMOTE_TARGET }}
-          # Arguments to pass to rsync
           ARGS: -rlgoDzvc
