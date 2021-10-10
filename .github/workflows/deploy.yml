@@ -21,7 +21,7 @@ jobs:
           EXCLUDE: "/.git, /.github, /.gitignore"
       - name: run after release script
         uses: appleboy/ssh-action@master
-        env:
+        with:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
