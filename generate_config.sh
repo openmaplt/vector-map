@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
 GLOBIGNORE="*"
 CONFIG_TEMPLATE='./config.toml.template'
-CONFIG_FILE=${1:-./config.toml}
+CONFIG_FILE='./config.toml'
 CONFIG_TEMP=$CONFIG_FILE'_temp'
-CACHE_DIR=${2:-/home/openmap/cache}
 REGEX='%(.*?)%'
 
 cp $CONFIG_TEMPLATE $CONFIG_TEMP
@@ -20,4 +19,3 @@ do
 done < $CONFIG_TEMP
 
 sed "s|##|\&\&|g" $CONFIG_TEMP > $CONFIG_FILE
-sed "s|__CACHE_DIR__|$CACHE_DIR|g" $CONFIG_TEMP > $CONFIG_FILE
