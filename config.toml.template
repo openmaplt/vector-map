@@ -3,7 +3,7 @@ port = ":8082"
 
 [cache]
 type = "file"
-basepath = "__CACHE_DIR__"
+basepath = "/var/cache/tegola"
 
 [[providers]]
 name = "osm"
