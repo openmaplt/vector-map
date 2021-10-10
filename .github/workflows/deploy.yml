@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: ssh deploy
+      - name: deploy
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
@@ -19,3 +19,10 @@ jobs:
           TARGET: ${{ secrets.REMOTE_TARGET }}
           ARGS: -rlgoDzvc
           EXCLUDE: "/.git, /.github, /.gitignore"
+      - name: run after release script
+        uses: appleboy/ssh-action@master
+        env:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: after_release
