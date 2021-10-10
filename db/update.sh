@@ -2,7 +2,7 @@
 DATAFILE=${DATAFILE:=data.pbf}
 DIRTY_FILE=dirty_tiles_`date +%s`
 TEGOLA_CONFIG_FILE=$(readlink -f ./../config.toml)
-TEGOLA_SEED="../tegola cache seed --config $TEGOLA_CONFIG_FILE --overwrite --concurrency 3"
+TEGOLA_SEED="tegola cache seed --config $TEGOLA_CONFIG_FILE --overwrite --concurrency 3"
 LOCK_FILE=/tmp/openmap_update
 
 if [ -f $LOCK_FILE ]; then
@@ -34,7 +34,7 @@ fi
 
 #apply diff
 rm dirty_tiles
-./osm2pgsql --username postgres --database osm --style ./osm2pgsql.style -x --multi-geometry --number-processes 4 --slim --cache 100 --proj 3857 --expire-tiles 7-18 --append change.osc > /dev/null
+osm2pgsql --username osm --database osm --style ./osm2pgsql.style -x --multi-geometry --number-processes 4 --slim --cache 100 --proj 3857 --expire-tiles 7-18 --append change.osc > /dev/null
 
 if [ $? -ne 0 ]; then
 	exit
@@ -87,16 +87,16 @@ if [ -s dirty_tiles ]; then
     grep -E "^(10|11|12|13|14)" dirty_tiles > generate_bicycle_$DIRTY_FILE
 
     echo "OpenMap.lt delete expired large scale tiles in layer 'all' " `date`
-    rm -rf ../cache/all/1[6-8] || true
+    rm -rf /var/cache/tegola/all/1[6-8] || true
 
-    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="detail"    tile-list dirty_tiles > /dev/null
-    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="topo"      tile-list dirty_tiles > /dev/null
-    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="river"     tile-list dirty_tiles > /dev/null
-    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="craftbeer" tile-list dirty_tiles > /dev/null
-    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="speed"     tile-list dirty_tiles > /dev/null
+    tegola cache purge --config $TEGOLA_CONFIG_FILE --map="detail"    tile-list dirty_tiles > /dev/null
+    tegola cache purge --config $TEGOLA_CONFIG_FILE --map="topo"      tile-list dirty_tiles > /dev/null
+    tegola cache purge --config $TEGOLA_CONFIG_FILE --map="river"     tile-list dirty_tiles > /dev/null
+    tegola cache purge --config $TEGOLA_CONFIG_FILE --map="craftbeer" tile-list dirty_tiles > /dev/null
+    tegola cache purge --config $TEGOLA_CONFIG_FILE --map="speed"     tile-list dirty_tiles > /dev/null
 
     echo "Bicycle regenerate expired " `date`
-    ../tegola cache purge --config $TEGOLA_CONFIG_FILE --map="bicycle" tile-list dirty_tiles > /dev/null
+    tegola cache purge --config $TEGOLA_CONFIG_FILE --map="bicycle" tile-list dirty_tiles > /dev/null
     $TEGOLA_SEED --map="bicycle" tile-list generate_bicycle_$DIRTY_FILE > /dev/null
 
     for ZOOM in $(seq 15 -1 7); do
