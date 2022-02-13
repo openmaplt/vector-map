@@ -1,6 +1,6 @@
 SELECT
   id AS gid,
-  ST_AsBinary(way) AS geom,
+  ST_AsMVTGeom(way,!BBOX!) AS geom,
   id,
   __type__,
   coalesce(short_name, name) AS name,

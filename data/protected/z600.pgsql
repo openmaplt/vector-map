@@ -1,6 +1,6 @@
 SELECT
   id AS gid,
-  ST_AsBinary(way) AS geom,
+  ST_AsMVTGeom(way,!BBOX!) AS geom,
   'national_park' AS kind,
   name
 FROM

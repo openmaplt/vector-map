@@ -1,6 +1,6 @@
 SELECT
   osm_id AS gid,
-  ST_AsBinary(ST_PointOnSurface(way)) AS geom,
+  ST_AsMVTGeom(ST_PointOnSurface(way),!BBOX!) AS geom,
   (
     CASE
       WHEN landuse = 'cemetery'

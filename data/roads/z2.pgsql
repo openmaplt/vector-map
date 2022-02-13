@@ -1,6 +1,6 @@
 SELECT
   row_number() over() AS gid,
-  st_asbinary(r.geom) AS geom,
+  st_asmvtgeom(r.geom,!BBOX!) AS geom,
   r.kind,
   r.surface,
   r.priority,

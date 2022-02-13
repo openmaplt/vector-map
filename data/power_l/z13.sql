@@ -1,5 +1,5 @@
 select osm_id as gid
-      ,st_asbinary(way) as geom
+      ,st_asmvtgeom(way,!BBOX!) as geom
       ,case when voltage = '330000' then '330'
             when voltage = '110000' then '110'
             when voltage = '35000' then '35'

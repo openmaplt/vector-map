@@ -1,6 +1,6 @@
 SELECT
   gid AS gid,
-  wkb AS geom,
+  ST_AsMVTGeom(geom, !BBOX!) AS geom,
   kind AS kind
 FROM
   details_poly

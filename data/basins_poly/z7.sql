@@ -1,6 +1,6 @@
 SELECT
   id AS gid,
-  st_asbinary(way) AS geom,
+  st_asmvtgeom(way,!BBOX!) AS geom,
   coalesce(basin, 0) as basin
 FROM
   upiu_baseinai_plot

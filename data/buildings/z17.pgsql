@@ -1,6 +1,6 @@
 SELECT
   osm_id AS gid,
-  st_asbinary(way) AS geom,
+  st_asmvtgeom(way,!BBOX!) AS geom,
   building AS kind,
   coalesce(name, "addr:housename") AS name,
   coalesce(cast(split_part(height, '.', 1) as integer), coalesce(cast("building:levels" as integer), 2) * 3) AS height

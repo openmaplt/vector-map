@@ -1,6 +1,6 @@
 SELECT
   row_number() over() AS gid,
-  st_asbinary(st_linemerge(st_collect(way))) AS geom,
+  st_asmvtgeom(st_linemerge(st_collect(way)),!BBOX!) AS geom,
   (
     CASE
       WHEN highway IS NOT NULL

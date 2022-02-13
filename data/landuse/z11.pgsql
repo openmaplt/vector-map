@@ -1,6 +1,6 @@
 SELECT
   osm_id AS gid,
-  st_asbinary(way) AS geom,
+  st_asmvtgeom(way,!BBOX!) AS geom,
   (
     CASE
       WHEN landuse = 'meadow' or "natural" = 'heath'
@@ -29,7 +29,7 @@ UNION ALL
 
 SELECT
   id,
-  st_asbinary(way) AS geometry,
+  st_asmvtgeom(way,!BBOX!) AS geometry,
   'forest' AS kind
 FROM
   gen_forest
