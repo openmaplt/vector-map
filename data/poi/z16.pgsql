@@ -2,7 +2,7 @@ SELECT
   id,
   id AS gid,
   __type__,
-  st_asbinary(way) AS geom,
+  st_asmvtgeom(way,!BBOX!) AS geom,
   name,
   (
     CASE

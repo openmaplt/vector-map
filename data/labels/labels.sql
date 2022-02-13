@@ -1,5 +1,5 @@
 select id as gid
-      ,st_asbinary(way) as geom
+      ,st_asmvtgeom(way,!BBOX!) as geom
       ,name
       ,size as font_size
       ,spacing as letter_spacing

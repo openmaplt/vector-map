@@ -1,6 +1,6 @@
 SELECT
   id AS gid,
-  st_asbinary(way) AS geom,
+  st_asmvtgeom(way,!BBOX!) AS geom,
   'yes' AS kind,
   null AS name,
   null AS height

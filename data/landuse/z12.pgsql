@@ -1,6 +1,6 @@
 SELECT
   osm_id AS gid,
-  st_asbinary(way) AS geom,
+  st_asmvtgeom(way,!BBOX!) AS geom,
   round(st_area(way)/1000) AS area,
   (
     CASE
@@ -44,7 +44,7 @@ UNION ALL
 
 SELECT
   id,
-  st_asbinary(way),
+  st_asmvtgeom(way,!BBOX!),
   round(st_area(way)/1000) AS area,
   'forest' AS kind
 FROM

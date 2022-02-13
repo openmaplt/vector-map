@@ -1,6 +1,6 @@
 SELECT
   max(osm_id) AS gid,
-  ST_AsBinary(ST_LineMerge(ST_Collect(way))) AS geom,
+  ST_AsMVTGeom(ST_LineMerge(ST_Collect(way)),!BBOX!) AS geom,
   route AS kind,
   network,
   name,
@@ -17,7 +17,7 @@ UNION ALL
 
 SELECT
   max(osm_id),
-  ST_AsBinary(ST_LineMerge(ST_Collect(way))),
+  ST_AsMVTGeom(ST_LineMerge(ST_Collect(way)),!BBOX!),
   (
   CASE
     WHEN (highway = 'cycleway') or (highway = 'path' and bicycle = 'designated')

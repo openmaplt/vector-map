@@ -1,6 +1,6 @@
 SELECT
   osm_id AS gid,
-  ST_AsBinary(way) AS geom,
+  ST_AsMVTGeom(way,!BBOX!) AS geom,
   boundary AS kind,
   name
 FROM

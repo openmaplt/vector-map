@@ -1,6 +1,6 @@
 SELECT
   place.gid AS gid,
-  ST_AsBinary(place.geom) AS geom,
+  ST_AsMVTGeom(place.geom,!BBOX!) AS geom,
   place.name,
   place.kind
 FROM
@@ -32,7 +32,7 @@ UNION ALL
 
 SELECT
   osm_id AS gid,
-  ST_AsBinary(ST_PointOnSurface(way)) AS geom,
+  ST_AsMVTGeom(ST_PointOnSurface(way),!BBOX!) AS geom,
   coalesce("name:lt", name) AS name,
   'water' AS kind
 FROM

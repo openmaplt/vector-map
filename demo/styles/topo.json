@@ -5,15 +5,15 @@
   "sources": {
     "tilezen": {
       "type": "vector",
-      "url": "https://openmap.lt/capabilities/all.json"
+      "url": "https://tiles.openmap.lt/capabilities/all.json"
     },
     "topo": {
       "type": "vector",
-      "url": "https://openmap.lt/capabilities/topo.json"
+      "url": "https://tiles.openmap.lt/capabilities/topo.json"
     },
     "detail": {
       "type": "vector",
-      "url": "https://openmap.lt/capabilities/detail.json"
+      "url": "https://tiles.openmap.lt/capabilities/detail.json"
     },
     "dem": {
       "type": "raster-dem",
@@ -155,7 +155,7 @@
       "id": "waterway-other",
       "type": "line",
       "source": "tilezen",
-      "source-layer": "water",
+      "source-layer": "water_l",
       "minzoom": 14,
       "filter": ["all", ["==", "$type", "LineString"], ["in", "kind", "ditch"]],
       "paint": {
@@ -167,7 +167,7 @@
       "id": "waterway-river",
       "type": "line",
       "source": "tilezen",
-      "source-layer": "water",
+      "source-layer": "water_l",
       "minzoom": 6,
       "filter": ["all", ["==", "$type", "LineString"], ["==", "kind", "river"]],
       "layout": {"line-cap": "round", "line-join": "round"},
@@ -180,7 +180,7 @@
       "id": "waterway-stream-etc",
       "type": "line",
       "source": "tilezen",
-      "source-layer": "water",
+      "source-layer": "water_l",
       "minzoom": 11,
       "filter": [
         "all",
@@ -200,7 +200,7 @@
       "id": "waterway-stream-etc-fill",
       "type": "line",
       "source": "tilezen",
-      "source-layer": "water",
+      "source-layer": "water_l",
       "minzoom": 15,
       "filter": [
         "all",
@@ -217,7 +217,7 @@
       "id": "waterway-stream-direction",
       "type": "line",
       "source": "tilezen",
-      "source-layer": "water",
+      "source-layer": "water_l",
       "minzoom": 16,
       "maxzoom": 24,
       "filter": ["all", ["in", "kind", "stream", "canal"]],
@@ -256,7 +256,7 @@
       "id": "waterway-river-fill",
       "type": "line",
       "source": "tilezen",
-      "source-layer": "water",
+      "source-layer": "water_l",
       "minzoom": 12,
       "maxzoom": 20,
       "filter": ["all", ["==", "$type", "LineString"], ["in", "kind", "river"]],
@@ -270,7 +270,7 @@
       "id": "waterway-river-direction",
       "type": "line",
       "source": "tilezen",
-      "source-layer": "water",
+      "source-layer": "water_l",
       "minzoom": 15,
       "maxzoom": 24,
       "filter": ["all", ["==", "kind", "river"], ["==", "virtual", "N"]],
@@ -1712,7 +1712,7 @@
       "id": "label-water",
       "type": "symbol",
       "source": "tilezen",
-      "source-layer": "water",
+      "source-layer": "water_l",
       "minzoom": 8,
       "maxzoom": 18,
       "filter": ["all", ["==", "$type", "LineString"], ["==", "virtual", "N"]],

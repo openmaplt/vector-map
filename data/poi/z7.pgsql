@@ -1,6 +1,6 @@
 SELECT
   osm_id AS gid,
-  ST_AsBinary(ST_PointOnSurface(way)) AS geom,
+  ST_AsMVTGeom(ST_PointOnSurface(way),!BBOX!) AS geom,
   coalesce("name:lt", name) AS name,
   'park' AS kind,
   website,

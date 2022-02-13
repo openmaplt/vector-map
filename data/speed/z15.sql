@@ -1,6 +1,6 @@
 SELECT
   row_number() over() AS gid,
-  st_asbinary(st_linemerge(st_collect(way))) AS geom,
+  st_asmvtgeom(st_linemerge(st_collect(way)),!BBOX!) AS geom,
   case when highway = 'living_street' then coalesce(maxspeed, '20') else maxspeed end as maxspeed,
   "maxspeed:forward" as forward,
   "maxspeed:backward" as backward

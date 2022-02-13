@@ -1,7 +1,7 @@
 SELECT
   ABS(osm_id) AS gid,
   CASE WHEN osm_id < 0 THEN 'r' ELSE 'w' END AS __type__,
-  st_asbinary(ST_PointOnSurface(way)) AS geom,
+  st_asmvtgeom(ST_PointOnSurface(way),!BBOX!) AS geom,
   "addr:housenumber" as housenumber,
   "addr:housename" as name,
   "addr:street" as street,
@@ -16,7 +16,7 @@ UNION
 SELECT
   osm_id AS gid,
   'n' AS __type__,
-  st_asbinary(way) as geom,
+  st_asmvtgeom(way,!BBOX!) as geom,
   "addr:housenumber" as housenumber,
   "addr:housename" as name,
   "addr:street" as street,

@@ -1,6 +1,6 @@
 SELECT
   osm_id AS gid,
-  st_asbinary(st_union(way)) AS geom,
+  st_asmvtgeom(st_union(way),!BBOX!) AS geom,
   admin_level,
   (
     CASE

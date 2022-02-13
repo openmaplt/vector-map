@@ -1,6 +1,6 @@
 SELECT
   id AS gid,
-  st_asbinary(way) AS geom,
+  st_asmvtgeom(way,!BBOX!) AS geom,
   'forest' AS kind
 FROM
   gen_forest
