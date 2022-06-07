@@ -8,7 +8,7 @@ FROM
   planet_osm_polygon
 WHERE
   way && !BBOX! AND
-  waterway = 'riverbank' AND
+  water = 'riverbank' AND
   way_area >= 51200
 GROUP BY
   kind

@@ -12,6 +12,7 @@ insert into car_requests (id, osm_id, type, dirty, last_update)
         ,null
     from planet_osm_polygon
    where ("natural" in ('water', 'bay') or landuse = 'reservoir')
+     and (water is null or water != 'riverbank')
      and name is not null
      and osm_id not in (select osm_id from car_requests);
 update car_requests r

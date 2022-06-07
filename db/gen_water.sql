@@ -8,7 +8,8 @@ create table gen_water as
         ,10 AS res
         ,ST_CollectionExtract(unnest(ST_ClusterWithin(way, 10)), 3)::geometry(MultiPolygon, 3857) as way
     from planet_osm_polygon
-   where "natural" = 'water' or landuse = 'reservoir';
+   where "natural" = 'water' or landuse = 'reservoir'
+     amd (water is null or water != 'riverbank');
 
 delete from gen_water where st_area(st_buffer(way, -10)) < 10 and res = 10;
 
