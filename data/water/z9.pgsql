@@ -3,7 +3,7 @@ SELECT
   st_asmvtgeom(st_union(way),!BBOX!) AS geom,
   (
     CASE
-      WHEN waterway = 'riverbank'
+      WHEN water = 'riverbank'
         THEN 'water'
       WHEN landuse = 'basin'
         THEN 'basin'
@@ -15,7 +15,7 @@ FROM
   planet_osm_polygon
 WHERE
   way && !BBOX! AND
-  waterway = 'riverbank' AND
+  water = 'riverbank' AND
   way_area >= 819200
 GROUP BY
   kind

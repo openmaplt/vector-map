@@ -3,8 +3,6 @@ SELECT
   st_asmvtgeom(st_union(way),!BBOX!) AS geom,
   (
     CASE
-      WHEN waterway = 'riverbank'
-        THEN 'water'
       WHEN "natural" = 'water'
         THEN 'water'
       WHEN landuse = 'basin'
@@ -22,7 +20,6 @@ FROM
 WHERE
   way && !BBOX! AND
   (
-    waterway = 'riverbank' OR
     "natural" = 'water' OR
     landuse IN ('basin', 'reservoir') OR
     amenity = 'swimming_pool' OR
