@@ -8,7 +8,7 @@ FROM
   planet_osm_polygon
 WHERE
   way && !BBOX! AND
-  water = 'riverbank' AND
+  water = 'river' AND
   way_area >= 204800
 
 UNION ALL
