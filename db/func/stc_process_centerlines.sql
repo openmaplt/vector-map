@@ -120,7 +120,6 @@ begin
                   sg = null;
                   while tl > 4 loop
                     raise notice 'splitting at % (length %)', 2.0 / tl, st_length(g);
-                    raise notice 'split to % - %', st_length(st_linesubstring(g, 0, 2 / tl)), st_length(st_linesubstring(g, 2 / tl, 1));
                     insert into car_centerline (osm_id, name, zoom, size, spacing, way) values (c.osm_id, c.name, z, s, prop, st_linesubstring(g, 0, 2 / tl));
                     g = st_linesubstring(g, 2 / tl, 1);
                     tl = tl - 2;
