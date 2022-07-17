@@ -24,8 +24,9 @@ fi
 rm change.osc.gz
 ./osmupdate $DATAFILE change.osc.gz
 if [ ! -s change.osc.gz ]; then
-	echo "Failed to update data"
-	exit
+  echo "Failed to update data"
+  rm $LOCK_FILE
+  exit
 fi
 
 # apply & clip
@@ -37,7 +38,8 @@ rm dirty_tiles
 osm2pgsql --username osm --database osm --style ./osm2pgsql.style -x --multi-geometry --number-processes 4 --slim --cache 100 --proj 3857 --expire-tiles 7-18 --append change.osc > /dev/null
 
 if [ $? -ne 0 ]; then
-	exit
+  rm $LOCK_FILE
+  exit
 fi
 
 # remove outside objects
@@ -74,7 +76,8 @@ fi
 mv temp.pbf data.pbf
 
 if [ $? -ne 0 ]; then
-	exit
+  rm $LOCK_FILE
+  exit
 fi
 
 rm temp.o5m
