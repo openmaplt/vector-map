@@ -1098,7 +1098,7 @@
       "source-layer": "places",
       "minzoom": 7,
       "maxzoom": 13,
-      "filter": ["all", ["in", "kind", "little_town", "railway_station"]],
+      "filter": ["all", ["in", "kind", "little_town"]],
       "layout": {
         "text-field": "{name}",
         "text-font": ["Roboto Medium"],

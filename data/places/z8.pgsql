@@ -9,7 +9,7 @@ SELECT
       WHEN place = 'town' AND rank = '10'
         THEN 'little_town'
       WHEN place = 'town' AND rank = '20'
-        THEN 'railway_station'
+        THEN 'village'
       ELSE place
     END
   ) AS kind

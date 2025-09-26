@@ -1068,8 +1068,7 @@
           "in",
           "kind",
           "town",
-          "little_town",
-          "railway_station"
+          "little_town"
         ]
       ],
       "layout": {

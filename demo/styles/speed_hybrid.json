@@ -300,7 +300,7 @@
       "maxzoom": 13,
       "filter": [
         "all",
-        ["in", "kind", "town", "little_town", "railway_station"]
+        ["in", "kind", "town", "little_town"]
       ],
       "layout": {
         "text-field": "{name}",
