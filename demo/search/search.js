@@ -226,19 +226,22 @@ function imgSprite(type) {
            'px; background: url(search/sprites/openmaplt.png) -' + sprite[icon].x + 'px -' + sprite[icon].y + 'px;">';
 }
 
-$('#searchInput').typeahead({
-    minLength: 3,
-    hint: false,
-    highlight: true,
-}, {
-    limit: 10,
-    display: '_description',
-    source: searchEngine.ttAdapter(),
-    templates: {
-      suggestion: function (context) {
-        return '<div>' + imgSprite(context.obj_type) + context._description + '</div>';
+// Initialize the autocomplete with vanilla JavaScript
+const searchInput = document.getElementById('searchInput');
+if (searchInput) {
+  const autocomplete = new SimpleAutocomplete(searchInput, {
+      minLength: 3,
+      limit: 10,
+      display: '_description',
+      source: (query, callback) => {
+        searchEngine.search(query, callback);
+      },
+      templates: {
+        suggestion: function (context) {
+          return '<div>' + imgSprite(context.obj_type) + context._description + '</div>';
+        }
       }
-    }
-});
+  });
 
-searchEngine.bindDefaultTypeaheadEvent($('#searchInput'));
+  searchEngine.bindSelectionEvent(searchInput);
+}
