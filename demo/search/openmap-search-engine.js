@@ -67,21 +67,6 @@ class OpenMapSearchEngine extends EventTarget {
       }));
     });
   }
-
-  /**
-   * Legacy compatibility method for existing code
-   */
-  bind(eventType, handler) {
-    if (eventType === 'addresspicker:selected') {
-      this.addEventListener('addresspicker:selected', (event) => {
-        handler(event, event.detail);
-      });
-    } else if (eventType === 'addresspicker:predictions') {
-      this.addEventListener('addresspicker:predictions', (event) => {
-        handler(event, event.detail);
-      });
-    }
-  }
 }
 
 // Export for use in other scripts

@@ -147,53 +147,28 @@ if (!mapboxgl.supported()) {
 
 if (typeof searchEngine !== 'undefined') {
   var searchMarker = null;
-  if (searchEngine.addEventListener) {
-    searchEngine.addEventListener('addresspicker:selected', function (event) {
-      const selectedPlace = event.detail;
-      if (!searchMarker) {
-        searchMarker = new mapboxgl.Marker();
-      }
-      searchMarker
-          .setLngLat([selectedPlace.location[1], selectedPlace.location[0]])
-          .addTo(map);
+  searchEngine.addEventListener('addresspicker:selected', function (event) {
+    const selectedPlace = event.detail;
+    if (!searchMarker) {
+      searchMarker = new mapboxgl.Marker();
+    }
+    searchMarker
+        .setLngLat([selectedPlace.location[1], selectedPlace.location[0]])
+        .addTo(map);
 
-      /*if (selectedPlace.properties.extent) {
-        const extent = selectedPlace.properties.extent;
-        map.fitBounds([[extent[0], extent[3]], [extent[2], extent[1]]], {
-            speed: 2
-        });
-      } else {*/
-        map.flyTo({
-          zoom: 16,
-          speed: 2,
-          center: searchMarker.getLngLat()
-        });
-      // }
-    });
-  } else if (searchEngine.bind) {
-    // Fallback for libraries that still use jQuery-style bind
-    searchEngine.bind('addresspicker:selected', function (event, selectedPlace) {
-      if (!searchMarker) {
-        searchMarker = new mapboxgl.Marker();
-      }
-      searchMarker
-          .setLngLat([selectedPlace.location[1], selectedPlace.location[0]])
-          .addTo(map);
-
-      /*if (selectedPlace.properties.extent) {
-        const extent = selectedPlace.properties.extent;
-        map.fitBounds([[extent[0], extent[3]], [extent[2], extent[1]]], {
-            speed: 2
-        });
-      } else {*/
-        map.flyTo({
-          zoom: 16,
-          speed: 2,
-          center: searchMarker.getLngLat()
-        });
-      // }
-    });
-  }
+    /*if (selectedPlace.properties.extent) {
+      const extent = selectedPlace.properties.extent;
+      map.fitBounds([[extent[0], extent[3]], [extent[2], extent[1]]], {
+          speed: 2
+      });
+    } else {*/
+      map.flyTo({
+        zoom: 16,
+        speed: 2,
+        center: searchMarker.getLngLat()
+      });
+    // }
+  });
 }
 
 document.querySelectorAll('#layers button').forEach(button => {
