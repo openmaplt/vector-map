@@ -3,6 +3,7 @@ create materialized view poi (
   id
  ,__type__
  ,name
+ ,description
  ,amenity
  ,man_made
  ,"tower:type"
@@ -18,10 +19,13 @@ create materialized view poi (
  ,alt_name
  ,opening_hours
  ,website
+ ,url
  ,image
  ,"ref:lt:kpd"
  ,height
  ,wikipedia
+ ,"wikipedia:lt"
+ ,"wikipedia:en"
  ,fee
  ,email
  ,phone
@@ -38,6 +42,7 @@ create materialized view poi (
         osm_id
         ,'n' -- always node
         ,name
+        ,description
         ,amenity
         ,man_made
         ,"tower:type"
@@ -53,10 +58,13 @@ create materialized view poi (
         ,alt_name
         ,opening_hours
         ,website
+        ,url
         ,image
         ,"ref:lt:kpd"
         ,height
         ,wikipedia
+        ,"wikipedia:lt"
+        ,"wikipedia:en"
         ,fee
         ,email
         ,phone
@@ -82,6 +90,7 @@ create materialized view poi (
         ABS(osm_id)
         ,CASE WHEN osm_id < 0 THEN 'r' ELSE 'w' END  -- r relation, w way
         ,name
+        ,description
         ,amenity
         ,man_made
         ,"tower:type"
@@ -97,10 +106,13 @@ create materialized view poi (
         ,alt_name
         ,opening_hours
         ,website
+        ,url
         ,image
         ,"ref:lt:kpd"
         ,height
         ,wikipedia
+        ,"wikipedia:lt"
+        ,"wikipedia:en"
         ,fee
         ,email
         ,phone
@@ -126,6 +138,7 @@ create materialized view poi (
         ABS(osm_id)
         ,'w'
         ,name
+        ,description
         ,amenity
         ,man_made
         ,"tower:type"
@@ -141,10 +154,13 @@ create materialized view poi (
         ,alt_name
         ,opening_hours
         ,website
+        ,url
         ,image
         ,"ref:lt:kpd"
         ,height
         ,wikipedia
+        ,"wikipedia:lt"
+        ,"wikipedia:en"
         ,fee
         ,email
         ,phone
