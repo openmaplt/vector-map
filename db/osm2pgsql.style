@@ -1,5 +1,3 @@
-# This is the default osm2pgsql .style file that comes with osm2pgsql.
-#
 # A .style file has 4 columns that define how OSM objects end up in tables in
 # the database and what columns are created. It interacts with the command-line
 # hstore options.
@@ -73,110 +71,130 @@
 # with both --hstore and --extra-attributes the meta-data will end up in the
 # tags hstore column regardless of the style file.
 
-# OsmType  Tag          DataType     Flags
-node,way   access       text         linear
-node,way   addr:city    text         linear
-node,way   addr:street  text         linear
-node,way   addr:housename      text  linear
-node,way   addr:housenumber    text  linear
-node,way   addr:postcode       text  linear
-node,way   addr:contact        text  linear
-node,way   addr:unit           text  linear
-node,way   admin_level  text         linear
-node,way   aerialway    text         linear
-node,way   aeroway      text         polygon
-way        area:aeroway text         polygon
-node,way   amenity      text         polygon
-node,way   area         text         # hard coded support for area=1/yes => polygon is in osm2pgsql
-node,way   barrier      text         linear
-node,way   bicycle      text
-node,way   brand        text         linear
-node,way   bridge       text         linear
-node,way   boundary     text         linear
-node,way   building     text         polygon
+# OsmType  Tag           DataType    Flags
+node,way   access        text        linear
+node,way   addr:city     text        linear
+node,way   addr:street   text        linear
+node,way   addr:housename text       linear
+node,way   addr:housenumber text     linear
+node,way   addr:postcode text        linear
+node,way   addr:contact  text        linear
+node,way   addr:unit     text        linear
+node,way   addr:nostreet text        linear
+node,way   addr:approximate text     linear
+node,way   addr:place    text        linear
+node,way   admin_level   text        linear
+node,way   aerialway     text        linear
+node,way   aeroway       text        polygon
+way        area:aeroway  text        polygon
+node,way   amenity       text        polygon
+node,way   area          text        # hard coded support for area=1/yes => polygon is in osm2pgsql
+node,way   barrier       text        linear
+node,way   bicycle       text
+node,way   brand         text        linear
+node,way   bridge        text        linear
+node,way   boundary      text        linear
+node,way   building      text        polygon
 node,way   building:levels text      polygon
-node       capital      text         linear
-node,way   construction text         linear
-node,way   denomination text         linear
-node       ele          text         linear
-node,way   foot         text         linear
-node,way   generator:source    text  linear
-node,way   harbour      text         polygon
-node,way   highway      text         linear
-node,way   historic     text         polygon
-node,way   junction     text         linear
-node,way   landuse      text         polygon
-node,way   layer        text         linear
-node,way   leisure      text         polygon
-node,way   lock         text         linear
-node,way   man_made     text         polygon
-node,way   military     text         polygon
-node,way   motorcar     text         linear
-node,way   name         text         linear
-node,way   short_name   text         linear
-node,way   name:lt      text         linear
-node,way   natural      text         polygon  # natural=coastline tags are discarded by a hard coded rule in osm2pgsql
-node,way   office       text         polygon
-node,way   oneway       text         linear
-node,way   operator     text         linear
-node,way   place        text         polygon
-node       poi          text
-node,way   population   text         linear
-node,way   power        text         polygon
-node,way   power_source text         linear
+node       capital       text        linear
+node,way   construction  text        linear
+node,way   denomination  text        linear
+node       ele           text        linear
+node,way   foot          text        linear
+node,way   generator:source text     linear
+node,way   harbour       text        polygon
+node,way   highway       text        linear
+node,way   historic      text        polygon
+node,way   junction      text        linear
+node,way   landuse       text        polygon
+node,way   layer         text        linear
+node,way   leisure       text        polygon
+node,way   lock          text        linear
+node,way   man_made      text        polygon
+node,way   military      text        polygon
+node,way   motorcar      text        linear
+node,way   name          text        linear
+node,way   short_name    text        linear
+node,way   name:lt       text        linear
+node,way   natural       text        polygon  # natural=coastline tags are discarded by a hard coded rule in osm2pgsql
+node,way   office        text        polygon
+node,way   oneway        text        linear
+node,way   operator      text        linear
+node,way   place         text        polygon
+node       poi           text
+node,way   population    text        linear
+node,way   power         text        polygon
+node,way   power_source  text        linear
 node,way   public_transport text     polygon
-node,way   railway      text         linear
-node,way   ref          text         linear
-node,way   religion     text         nocache
-node,way   route        text         linear
-node,way   service      text         linear
-node,way   shop         text         polygon
-node,way   sport        text         polygon
-node,way   surface      text         linear
-node,way   tourism      text         polygon
-node,way   tower:type   text         linear
-way        tracktype    text         linear
-node,way   tunnel       text         linear
-node,way   water        text         polygon
-node,way   waterway     text         polygon
-node,way   wetland      text         polygon
-node       rank         text         linear
+node,way   railway       text        linear
+node,way   ref           text        linear
+node,way   religion      text        nocache
+node,way   route         text        linear
+node,way   service       text        linear
+node,way   shop          text        polygon
+node,way   sport         text        polygon
+node,way   surface       text        linear
+node,way   tourism       text        polygon
+node,way   tower:type    text        linear
+way        tracktype     text        linear
+node,way   tunnel        text        linear
+node,way   water         text        polygon
+node,way   waterway      text        polygon
+node,way   wetland       text        polygon
+node       rank          text        linear
 node,way   opening_hours text        linear
 node,way   official_name text        linear
 node,way   website       text        linear
 node,way   image         text        linear
-way        proposed     text         linear
-node,way   information  text         linear
-node,way   phone        text         linear
-node,way   email        text         linear
-node,way   fee          text         linear
-node,way   wikipedia    text         linear
-node,way   height       text         linear
-node,way   alt_name     text         linear
-node,way   ref:lt:kpd   text         linear
-node,way   site_type    text         linear
-node,way   attraction:type   text    linear
-node,way   network      text         linear
-node,way   distance     text         linear
-node,way   cycleway     text         linear
+way        proposed      text        linear
+node,way   information   text        linear
+node,way   phone         text        linear
+node,way   email         text        linear
+node,way   fee           text        linear
+node,way   wikipedia     text        linear
+node,way   height        text        linear
+node,way   alt_name      text        linear
+node,way   ref:lt:kpd    text        linear
+node,way   site_type     text        linear
+node,way   attraction:type text      linear
+node,way   network       text        linear
+node,way   distance      text        linear
+node,way   cycleway      text        linear
 node,way   cycleway:left text        linear
 node,way   cycleway:right text       linear
 node,way   cycleway:both text        linear
-node,way   real_ale     text         linear
+node,way   real_ale      text        linear
 node,way   waterway:milestone text   linear
-node,way   whitewater   text         linear
+node,way   whitewater    text        linear
 way        waterway:name text        linear
-node,way   craft        text         polygon
-way        track        text         linear
-way        footway      text         linear
-node,way   voltage      text         linear
-way        landcover    text         linear
-node,way   z_order      int4         linear # This is calculated during import
-way        way_area     real                # This is calculated during import
+node,way   craft         text        polygon
+way        track         text        linear
+way        footway       text        linear
+node,way   voltage       text        linear
+way        landcover     text        linear
+node,way   z_order       int4        linear # This is calculated during import
+way        way_area      real               # This is calculated during import
 node,way   osm_timestamp timestamptz(0)
 way        embankment:type text
 way        waterway:speed text       linear
-way        maxspeed     text         linear
+way        maxspeed      text        linear
 way        maxspeed:forward text     linear
 way        maxspeed:backward text    linear
-node,way   description  text         linear
+node,way   description   text        linear
+node,way   archaeological_site text  linear
+node,way   building:height text      linear
+node,way   contact:email text        linear
+node,way   contact:phone text        linear
+node,way   contact:website text      linear
+node,way   exception     text        linear
+node,way   fireplace     text        linear
+node,way   location      text        linear
+node,way   maxspeed      text        linear
+node,way   memorial      text        linear
+node,way   shelter_type  text        linear
+node,way   sidewalk      text        linear
+node,way   subject:wikipedia text    linear
+node,way   subitem       text        linear
+node,way   url           text        linear
+node,way   wikipedia:en  text        linear
+node,way   wikipedia:lt  text        linear
