@@ -88,14 +88,20 @@ if (!mapboxgl.supported()) {
   alert('Jūsų naršyklė nepalaiko Mapbox GL. Prašome atsinaujinti naršyklę.');
 } else {
   if (hashData = getMapDataFromHashUrl()) {
-    $.extend(mapData, hashData);
+    Object.assign(mapData, hashData);
   }
 
   if (!hashData && (cookieData = readCookie(cookieName))) {
-    $.extend(mapData, cookieData);
+    Object.assign(mapData, cookieData);
   }
-  $("button[data-style='" + mapData.type + "']").addClass('active');
-  $('#layers').removeClass('hidden');
+  const activeButton = document.querySelector("button[data-style='" + mapData.type + "']");
+  if (activeButton) {
+    activeButton.classList.add('active');
+  }
+  const layersElement = document.getElementById('layers');
+  if (layersElement) {
+    layersElement.classList.remove('hidden');
+  }
 
   changeHashUrl();
 
@@ -141,7 +147,8 @@ if (!mapboxgl.supported()) {
 
 if (typeof searchEngine !== 'undefined') {
   var searchMarker = null;
-  $(searchEngine).bind('addresspicker:selected', function (event, selectedPlace) {
+  searchEngine.addEventListener('addresspicker:selected', function (event) {
+    const selectedPlace = event.detail;
     if (!searchMarker) {
       searchMarker = new mapboxgl.Marker();
     }
@@ -164,19 +171,21 @@ if (typeof searchEngine !== 'undefined') {
   });
 }
 
-$('#layers button').on('click', function (e) {
-  if ($(this).hasClass('active')) {
-    return false;
-  }
-  $('#layers button').removeClass('active');
-  $(this).addClass('active');
+document.querySelectorAll('#layers button').forEach(button => {
+  button.addEventListener('click', function (e) {
+    if (this.classList.contains('active')) {
+      return false;
+    }
+    document.querySelectorAll('#layers button').forEach(btn => btn.classList.remove('active'));
+    this.classList.add('active');
 
-  var selectLayer = $(e.target).data('style');
-  map.setStyle('styles/' + selectLayer + '.json');
+    var selectLayer = e.target.getAttribute('data-style');
+    map.setStyle('styles/' + selectLayer + '.json');
 
-  mapData.type = selectLayer;
-  mapData.id = null;
-  changeHashUrl(mapData);
+    mapData.type = selectLayer;
+    mapData.id = null;
+    changeHashUrl(mapData);
+  });
 });
 
 function getUrlHash(state) {
