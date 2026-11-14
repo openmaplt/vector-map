@@ -97,6 +97,7 @@ if [ -s dirty_tiles ]; then
     tegola cache purge --config $TEGOLA_CONFIG_FILE --map="river"     tile-list dirty_tiles > /dev/null
     tegola cache purge --config $TEGOLA_CONFIG_FILE --map="craftbeer" tile-list dirty_tiles > /dev/null
     tegola cache purge --config $TEGOLA_CONFIG_FILE --map="speed"     tile-list dirty_tiles > /dev/null
+    tegola cache purge --config $TEGOLA_CONFIG_FILE --map="3d_near"   tile-list dirty_tiles > /dev/null
 
     echo "Bicycle regenerate expired " `date`
     tegola cache purge --config $TEGOLA_CONFIG_FILE --map="bicycle" tile-list dirty_tiles > /dev/null
