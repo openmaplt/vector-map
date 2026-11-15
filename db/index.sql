@@ -18,6 +18,7 @@ CREATE INDEX planet_osm_point_tourism_index ON planet_osm_point (tourism);
 CREATE INDEX planet_osm_polygon_amenity_index ON planet_osm_polygon (amenity);
 CREATE INDEX planet_osm_polygon_boundary_index ON planet_osm_polygon (boundary);
 CREATE INDEX planet_osm_polygon_building_index ON planet_osm_polygon (building);
+CREATE INDEX planet_osm_polygon_building_part_gix ON planet_osm_polygon USING gist (way) WHERE "building:part" IS NOT NULL;
 CREATE INDEX planet_osm_polygon_landuse_way_area_index ON planet_osm_polygon (landuse, way_area);
 CREATE INDEX planet_osm_polygon_landuse_index ON planet_osm_polygon (landuse);
 CREATE INDEX planet_osm_polygon_leisure_index ON planet_osm_polygon (leisure);
