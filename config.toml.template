@@ -227,6 +227,11 @@ max_connections = 4
   geometry_type = "Polygon"
 
   [[providers.layers]]
+  name = "buildings3d"
+  sql = """%./data/buildings/3d.pgsql%"""
+  geometry_type = "Polygon"
+
+  [[providers.layers]]
   name = "poi7"
   sql = """%./data/poi/z7.pgsql%"""
   geometry_type = "Point"
@@ -1176,3 +1181,72 @@ center = [23.871, 55.191, 7.0]
   provider_layer = "osm.admin11-l"
   min_zoom = 10
   max_zoom = 18
+
+# Detailed tiles for the 3D map. Served at zoom 16 only, with just the layers
+# a 3D scene is built from. Each layer points at a provider layer that the
+# maps above already use, so no SQL is repeated here and the tiles of the
+# other maps stay exactly as they are.
+[[maps]]
+name = "3d_near"
+attribution = "© OpenStreetMap contributors"
+center = [23.871, 55.191, 16.0]
+
+  [[maps.layers]]
+  name = "buildings"
+  provider_layer = "osm.buildings3d"
+  min_zoom = 16
+  max_zoom = 16
+
+  [[maps.layers]]
+  name = "roads"
+  provider_layer = "osm.roads15"
+  min_zoom = 16
+  max_zoom = 16
+
+  [[maps.layers]]
+  name = "landuse"
+  provider_layer = "osm.landuse16"
+  min_zoom = 16
+  max_zoom = 16
+
+  [[maps.layers]]
+  name = "water"
+  provider_layer = "osm.water16"
+  min_zoom = 16
+  max_zoom = 16
+
+  [[maps.layers]]
+  name = "water_l"
+  provider_layer = "osm.water16_l"
+  min_zoom = 16
+  max_zoom = 16
+
+  [[maps.layers]]
+  name = "coastline"
+  provider_layer = "osm.coastline15"
+  min_zoom = 16
+  max_zoom = 16
+
+  [[maps.layers]]
+  name = "detail_poly"
+  provider_layer = "osm.detail_poly16"
+  min_zoom = 16
+  max_zoom = 16
+
+  [[maps.layers]]
+  name = "detail_line"
+  provider_layer = "osm.detail_line16"
+  min_zoom = 16
+  max_zoom = 16
+
+  [[maps.layers]]
+  name = "power_l"
+  provider_layer = "osm.power_l13"
+  min_zoom = 16
+  max_zoom = 16
+
+  [[maps.layers]]
+  name = "power_p"
+  provider_layer = "osm.power_p13"
+  min_zoom = 16
+  max_zoom = 16
