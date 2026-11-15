@@ -183,6 +183,16 @@ way        maxspeed:backward text    linear
 node,way   description   text        linear
 node,way   archaeological_site text  linear
 node,way   building:height text      linear
+way        building:part text        polygon
+way        building:min_level text   linear
+way        building:colour text      linear
+way        min_height    text        linear
+way        roof:shape    text        linear
+way        roof:height   text        linear
+way        roof:levels   text        linear
+way        roof:direction text       linear
+way        roof:orientation text     linear
+way        roof:colour   text        linear
 node,way   contact:email text        linear
 node,way   contact:phone text        linear
 node,way   contact:website text      linear
