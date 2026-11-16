@@ -237,6 +237,11 @@ max_connections = 4
   geometry_type = "Polygon"
 
   [[providers.layers]]
+  name = "trees3d"
+  sql = """%./data/trees/3d.pgsql%"""
+  geometry_type = "Point"
+
+  [[providers.layers]]
   name = "poi7"
   sql = """%./data/poi/z7.pgsql%"""
   geometry_type = "Point"
@@ -1259,5 +1264,11 @@ center = [23.871, 55.191, 16.0]
   [[maps.layers]]
   name = "power_p"
   provider_layer = "osm.power_p13"
+  min_zoom = 16
+  max_zoom = 16
+
+  [[maps.layers]]
+  name = "trees"
+  provider_layer = "osm.trees3d"
   min_zoom = 16
   max_zoom = 16
